@@ -1,0 +1,89 @@
+#navbar-menu a.nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #0a3961 !important;
+    height: 40px !important;
+    color: #0a3961 !important;
+}
+
+#booking-tab.nav-pills .nav-link.active {
+    background-color: #ff6100 !important;
+    color: #fff;
+    border-radius: 0;
+}
+#booking-tab.nav-pills .nav-link {
+    background-color: #fff !important;
+    color: #333;
+    border-radius: 0;
+}
+#booking-tab.nav-pills .nav-link:first-child {
+    border-radius: 5px 0 0 5px;
+}
+#booking-tab.nav-pills .nav-link:last-child {
+    border-radius: 0 5px 5px 0;;
+}
+
+/* Custom Css */
+.background-trans {
+    background-color: #ffffff6b !important;
+}
+.bg-transparent {
+    background-color: transparent;
+}
+.bg-main-color {
+    background-color: #ff6100 !important;
+}
+.bg-main-color-2 {
+    background-color: #0a3961 !important;
+}
+.text-main-color {
+    color: #0a3961;
+}
+.text-main-color-2 {
+    color: #ff6100;
+}
+.text-second-color {
+    color: #00bf63;
+}
+
+.button-green-bg {
+    background-color: #00bf63;
+    color: #fff;
+}
+.button-green-bg:hover {
+    background-color: #00bf63;
+    color: #fff;
+}
+.button-orange-bg {
+    background-color: #ff6100;
+    color: #fff;
+}
+.button-orange-bg:hover {
+    background-color: #d95402;
+    color: #fff;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+.border-radius-30 {
+    border-radius: 30px;
+}
+
+.visible-element {
+    visibility: visible;
+    opacity: 1;
+    /* transition: visibility 0s 0.5s, opacity 0.5s linear; */
+    transition: all 0.5s ease-in-out;
+}
+.hidden-element {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
+.top--9 {
+    top: 9px;
+}
+.end--9 {
+    right: 9px;
+}
