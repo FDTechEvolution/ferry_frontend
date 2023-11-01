@@ -19,5 +19,5 @@ use App\Http\Controllers\BookingController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(BookingController::class)->group(function() {
-    Route::post('booking/search', 'index')->name('booking-search');
+    Route::any('booking', 'index')->name('booking-index');
 });

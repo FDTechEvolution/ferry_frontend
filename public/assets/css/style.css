@@ -87,3 +87,20 @@
 .end--9 {
     right: 9px;
 }
+
+.mw--24 {
+    max-width: 24px;
+}
+.mw--48 {
+    max-width: 48px;
+}
+
+.booking-route-list:first-child {
+    background-color: lightblue;
+}
+.booking-route-list:first-child .station-name {
+    color: #fff;
+}
+.station-name {
+    color: blue;
+}

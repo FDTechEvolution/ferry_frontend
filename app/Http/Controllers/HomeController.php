@@ -8,23 +8,26 @@ use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
-    protected $API = 'http://127.0.0.1:8080/api/v2';
-    protected $Store = 'http://127.0.0.1:8080';
+    protected $ImageUrl;
+
+    public function __construct() {
+        $this->ImageUrl = config('services.store.image');
+    }
 
     public function index() {
         $stations = $this->getStation();
         $slide = $this->getSlide();
 
-        return view('home', ['stations' => $stations['data'], 'slides' => $slide['data'], 'store' => $this->Store]);
+        return view('home', ['stations' => $stations['data'], 'slides' => $slide['data'], 'store' => $this->ImageUrl]);
     }
 
     private function getStation() {
-        $response = Http::get($this->API.'/stations/get');
+        $response = Http::reqres()->get('/stations/get');
         return $response->json();
     }
 
     private function getSlide() {
-        $response = Http::get($this->API.'/slide/get');
+        $response = Http::reqres()->get('/slide/get');
         return $response->json();
     }
 }

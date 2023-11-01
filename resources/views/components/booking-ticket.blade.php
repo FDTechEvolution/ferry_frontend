@@ -8,7 +8,7 @@
 @endphp
 
 
-<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-search') }}">
+<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-index') }}">
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
@@ -44,7 +44,8 @@
                         data-clear-btn="false"
                         data-autoclose="true"
                         data-date-start="today"
-                        data-format="DD/MM/YYYY">
+                        data-format="DD/MM/YYYY"
+                        autocomplete="off">
                     <label>Travel Date</label>
                 </div>
             </div>

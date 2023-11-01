@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Http;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Http::macro('reqres', function() {
+            return Http::withHeaders([
+                'X-TKSCT' => config('services.api.secret_key')
+            ])->baseUrl(config('services.api.base_url'));
+        });
     }
 }

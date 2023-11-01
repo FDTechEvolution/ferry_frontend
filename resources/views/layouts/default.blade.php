@@ -17,7 +17,7 @@
             @yield('cover-content')
 			<!-- /COVER -->
 
-            <div class="section">
+            <div class="section pt-5">
 				<div class="container">
                     @yield('content')
                 </div>
