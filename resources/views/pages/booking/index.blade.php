@@ -24,7 +24,7 @@
 
 @section('content')
 <ol class="process-steps process-steps-primary text-muted mb-3">
-	<li class="process-step-item complete">{{ $isType }}</li>
+	<li class="process-step-item complete">{{ $isType != '' ? $isType : 'Booking' }}</li>
 	<li class="process-step-item text-primary active">Select</li>
 	<li class="process-step-item">Passenger info</li>
     <li class="process-step-item">Extra services</li>
@@ -34,21 +34,29 @@
 <div class="row">
     <div class="col-12">
         @if($isType != '')
-        <!-- Select -->
-        @include('pages.booking.booking-select')
+        <div class="procress-step d-none"></div>
+        <div class="procress-step d-none">
+            <!-- booking select -->
+            @include('pages.booking.booking-select')
+        </div>
+        <div class="procress-step d-none">
+            <!-- booking passenger -->
+            @include('pages.booking.booking-passenger')
+        </div>
+        <div class="procress-step d-none"><h1>Extra service</h1></div>
+        <div class="procress-step d-none"><h1>Payment</h1></div>
 
-        @include('pages.booking.booking-passenger')
-
-        <!-- Button -->
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-6">
-                <button class="btn btn-sm btn-secondary border-radius-10"><< Back</button>
+                <button class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
             </div>
             <div class="col-6 text-end">
                 <x-button-green
+                    id="progress-next"
                     class="btn-sm"
                     :type="_('button')"
                     :text="_('Continue >>')"
+                    disabled
                 />
             </div>
         </div>
@@ -58,5 +66,8 @@
 @stop
 
 @section('script')
-<script src="{{ asset('assets/js/app/booking.js') }}"></script>
+<script>
+    let isStep = {{ $isType == '' ? 0 : 1 }}
+</script>
+<script src="{{ asset('assets/js/app/progress_bar.js') }}"></script>
 @stop

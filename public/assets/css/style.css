@@ -46,12 +46,13 @@
 }
 
 .button-green-bg {
-    background-color: #00bf63;
-    color: #fff;
+    background-color: #00bf63 !important;
+    color: #fff !important;
 }
 .button-green-bg:hover {
-    background-color: #00bf63;
+    background-color: #01ad5a;
     color: #fff;
+    box-shadow: 0 4px 11px hsla(208,7%,46%,.35);
 }
 .button-orange-bg {
     background-color: #ff6100;
@@ -95,12 +96,15 @@
     max-width: 48px;
 }
 
-.booking-route-list:first-child {
+.booking-route-list.active {
     background-color: lightblue;
 }
-.booking-route-list:first-child .station-name {
+.booking-route-list.active .station-name {
     color: #fff;
 }
 .station-name {
     color: blue;
+}
+.route-hover:hover {
+    background-color: aliceblue;
 }
