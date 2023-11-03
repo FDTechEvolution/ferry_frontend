@@ -8,7 +8,7 @@
             <div class="col-7">
                 <p class="mb-1">{{ $is_station['from'] }}</p>
                 To
-                <p class="mb-1">{{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span></p>
+                <p class="mb-1">{{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
             <div class="col-2 py-2 border-start">
                 <p class="text-center mb-1">Adults</p>

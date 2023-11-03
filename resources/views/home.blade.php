@@ -7,10 +7,10 @@
     <div class="container"> 
         <div class="row text-center-md text-center d-middle justify-content-center">
             <div class="col-12 text-align-center text-center-md text-center" data-aos="fade-in" data-aos-delay="20" data-aos-offset="0">
-                <div class="d-inline-block bg-main-color-2 text-light shadow-primary-xs rounded p-4 w-100 text-align-center border">
+                <div class="d-inline-block bg-main-color-2 shadow-primary-xs rounded p-4 w-100 text-align-center border">
                     <div class="row mb-3">
                         <div class="col-2">
-                            <span class="d-block p-2">Booking</span>
+                            <span class="d-block p-2 text-light">Booking</span>
                         </div>
                         <div class="col-8">
                             <div class="nav flex nav-pills me-3" id="booking-tab" aria-orientation="horizontal">
@@ -38,7 +38,7 @@
                                         :stations="$stations"
                                     />
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                <div class="tab-pane fade text-light" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                                     333
                                 </div>
                             </div>

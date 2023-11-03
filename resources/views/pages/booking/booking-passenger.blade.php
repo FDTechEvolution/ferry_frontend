@@ -1,7 +1,7 @@
 <div id="booking-route-passenger">
     <h4 class="mb-0">Passengers</h4>
     <small>Enter passenger detail</mall>
-    <div class="row mt-2 border-radius-10 border border-primary">
+    <div class="row mt-2 mb-5 border-radius-10 border border-primary">
         <div class="col-12 py-3 bg-primary" style="border-radius: 10px 10px 0 0;">
             Passenger 1 <span class="text-light">(Lead passenger)</span>
         </div>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-5 position-relative">
-                    <label class="form-label position-absolute mt-n4">Thai telephone number (if any)<span class="text-danger">*</span></label>
+                    <label class="form-label position-absolute mt-n4">Thai telephone number (if any)</label>
                     <div class="row">
                         <div class="col-4">
                             <input type="text" class="form-control" name="th_code" value="+66" readonly>
@@ -108,4 +108,44 @@
             </div>
         </div>
     </div>
+
+    @php
+        $is_passenger = 2;
+    @endphp
+
+    @if($passenger[0] > 1)
+        @for($i = $is_passenger; $i <= $passenger[0]; $i++)
+            <x-set-passenger 
+                :passenger_num="$is_passenger"
+                :type="_('Adult')"
+            />
+            @php
+                $is_passenger++;
+            @endphp
+        @endfor
+    @endif
+
+    @if($passenger[1] > 0)
+        @for($i = 1; $i <= $passenger[1]; $i++)
+            <x-set-passenger 
+                :passenger_num="$is_passenger"
+                :type="_('Child')"
+            />
+            @php
+                $is_passenger++;
+            @endphp
+        @endfor
+    @endif
+
+    @if($passenger[2] > 0)
+        @for($i = 1; $i <= $passenger[2]; $i++)
+            <x-set-passenger 
+                :passenger_num="$is_passenger"
+                :type="_('Baby')"
+            />
+            @php
+                $is_passenger++;
+            @endphp
+        @endfor
+    @endif
 </div>

@@ -48,7 +48,7 @@ class BookingController extends Controller
         return view('pages.booking.index', 
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl, 
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
-                'country_list' => $country_list
+                'country_list' => $country_list, 'passenger' => $passenger
             ]);
     }
 

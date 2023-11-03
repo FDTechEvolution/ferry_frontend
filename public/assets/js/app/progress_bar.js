@@ -10,9 +10,12 @@ if(booking_route) {
                 item.classList.add('route-hover')
             })
             let _price = route.querySelector('.route-price')
+            let depart_time = route.querySelector('.depart-time')
+            let arraive_time = route.querySelector('.arrival-time')
             document.querySelector('#progress-next').disabled = false
 
             sum_price = parseToNumber(_price.innerText)
+            document.querySelector('.set-time-route-select').innerHTML = `${depart_time.innerText} - ${arraive_time.innerText}`
             document.querySelector('#sum-price').innerHTML = `${sum_price.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
             route.classList.add('active')
             route.classList.remove('route-hover')
@@ -84,3 +87,6 @@ function updateProgress() {
         progress_next.disabled = false;
     }
 }
+
+
+// Passenger

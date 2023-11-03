@@ -45,14 +45,15 @@
                         data-autoclose="true"
                         data-date-start="today"
                         data-format="DD/MM/YYYY"
-                        autocomplete="off">
-                    <label>Travel Date</label>
+                        autocomplete="off"
+                        placeholder="Travel Date">
+                    <label class="text-secondary">Travel Date</label>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 px-0">
                 <div class="form-floating mb-3 dropdown">
-                    <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown">
-                    <label for="pass-{{ $passenger_id }}">Passenger</label>
+                    <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown" placeholder="Passenger">
+                    <label class="text-secondary" for="pass-{{ $passenger_id }}">Passenger</label>
                 
                     <div class="dropdown-menu dropdown-click-ignore dropdown-md p-3">
                         <div class="row mb-2 border-bottom">
