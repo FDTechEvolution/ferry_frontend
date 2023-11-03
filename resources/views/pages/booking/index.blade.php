@@ -24,11 +24,11 @@
 
 @section('content')
 <ol class="process-steps process-steps-primary text-muted mb-3">
-	<li class="process-step-item complete">{{ $isType != '' ? $isType : 'Booking' }}</li>
-	<li class="process-step-item text-primary active">Select</li>
-	<li class="process-step-item">Passenger info</li>
-    <li class="process-step-item">Extra services</li>
-    <li class="process-step-item">Payment</li>
+	<li class="process-step-item complete" data-step="booking">{{ $isType != '' ? $isType : 'Booking' }}</li>
+	<li class="process-step-item text-primary active" data-step="select">Select</li>
+	<li class="process-step-item" data-step="passenger">Passenger info</li>
+    <li class="process-step-item" data-step="extra">Extra services</li>
+    <li class="process-step-item" data-step="payment">Payment</li>
 </ol>
 
 <div class="row">
@@ -43,7 +43,10 @@
             <!-- booking passenger -->
             @include('pages.booking.booking-passenger')
         </div>
-        <div class="procress-step d-none"><h1>Extra service</h1></div>
+        <div class="procress-step d-none">
+            <!-- booking extra -->
+            @include('pages.booking.booking-extra')
+        </div>
         <div class="procress-step d-none"><h1>Payment</h1></div>
 
         <div class="row mt-3">
@@ -56,6 +59,14 @@
                     class="btn-sm"
                     :type="_('button')"
                     :text="_('Continue >>')"
+                    disabled
+                />
+                <x-button-green
+                    id="progress-next-passenger"
+                    class="btn-sm d-none"
+                    :type="_('button')"
+                    :text="_('Continue >>')"
+                    onClick="progressPassenger()"
                     disabled
                 />
             </div>

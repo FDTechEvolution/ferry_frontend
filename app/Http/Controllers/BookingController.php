@@ -43,7 +43,7 @@ class BookingController extends Controller
 
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
-        // Log::debug($country_list);
+        // Log::debug($routes['data']);
 
         return view('pages.booking.index', 
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl, 

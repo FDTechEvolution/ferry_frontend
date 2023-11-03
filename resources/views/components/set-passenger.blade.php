@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-2 form-floating mb-3">
                 <select required class="form-select form-select-sm" id="passenger-title-{{ $title }}" aria-label="Floating label select example">
-                    <option selected disabled>Select Title</option>
+                    <option value="" selected disabled>Select Title</option>
                     <option value="mr">Mr.</option>
                     <option value="mrs">Mrs.</option>
                     <option value="ms">Ms.</option>

@@ -8,8 +8,8 @@
         <div class="col-12 mt-3">
             <div class="row">
                 <div class="col-2 form-floating mb-3">
-                    <select required class="form-select form-select-sm" id="passenger-title" aria-label="Floating label select example">
-                        <option selected disabled>Select Title</option>
+                    <select required class="form-select form-select-sm" name="title" id="passenger-title" aria-label="Floating label select example">
+                        <option value="" selected disabled>Select Title</option>
                         <option value="mr">Mr.</option>
                         <option value="mrs">Mrs.</option>
                         <option value="ms">Ms.</option>
@@ -18,11 +18,11 @@
                     <label for="passenger-title">Title<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-5 form-floating mb-3">
-                    <input required type="text" class="form-control form-control-sm" id="passenger-first-name" placeholder="First name & Middle name">
+                    <input required type="text" class="form-control form-control-sm" name="first_name" id="passenger-first-name" placeholder="First name & Middle name">
                     <label for="passenger-first-name" class="ms-2">First name & Middle name<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-5 form-floating mb-3">
-                    <input required type="text" class="form-control form-control-sm" id="passenger-last-name" placeholder="Last name">
+                    <input required type="text" class="form-control form-control-sm" name="last_name" id="passenger-last-name" placeholder="Last name">
                     <label for="passenger-last-name" class="ms-2">Last name<span class="text-danger">*</span></label>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col-7">
                     <label class="form-label">Contact Infomation</label>
                     <div class="form-floating mb-3">
-                        <input required type="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail">
+                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail">
                         <label for="passenger-email" class="ms-2">E-mail<span class="text-danger">*</span></label>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <label class="form-label">Telephone number<span class="text-danger">*</span></label>
                     <div class="row">
                         <div class="col-4">
-                            <select class="form-select" name="phone_code">
+                            <select required class="form-select" name="mobile_code">
                                 <option value="" selected disabled></option>
                                 @foreach($code_country as $code)
                                     <option value="{{ $code }}">+{{ $code }}</option>
@@ -61,7 +61,7 @@
                             </select>
                         </div>
                         <div class="col-8">
-                            <input type="number" class="form-control" name="phone">
+                            <input required type="number" class="form-control" name="mobile">
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col-7">
                     <div class="form-floating mb-3">
-                        <input required type="email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail">
+                        <input required type="email" name="confirm_email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail">
                         <label for="passenger-confirm-email" class="ms-2">Confirm E-mail<span class="text-danger">*</span></label>
                     </div>
                 </div>
@@ -77,17 +77,17 @@
                     <label class="form-label position-absolute mt-n4">Thai telephone number (if any)</label>
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" class="form-control" name="th_code" value="+66" readonly>
+                            <input type="text" name="th_code" class="form-control" value="+66" readonly>
                         </div>
                         <div class="col-8">
-                            <input type="number" class="form-control" name="th_phone">
+                            <input type="number" name="th_mobile" class="form-control">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-5 form-floating mb-3">
-                    <select required class="form-select form-select-sm" id="passenger-country" aria-label="Floating label select example">
+                    <select required class="form-select form-select-sm" name="country" id="passenger-country" aria-label="Floating label select example">
                         <option value="" selected disabled>Select Country</option>
                         @foreach($country_list as $country)
                             <option value="{{ $country }}">{{ $country }}</option>
@@ -96,13 +96,13 @@
                     <label for="passenger-country">Country<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-5 offset-2 form-floating mb-3">
-                    <input type="number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
+                    <input type="number" name="passport_number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
                     <label for="passenger-passport" class="ms-2">Passport Number</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 form-floating mb-3">
-                    <textarea class="form-control" placeholder="Address" id="passenger-address" name="passenger_address" style="height: 100px"></textarea>
+                    <textarea class="form-control" placeholder="Address" id="passenger-address" name="address" style="height: 100px"></textarea>
                     <label for="passenger-address" class="ms-2">Address</label>
                 </div>
             </div>
