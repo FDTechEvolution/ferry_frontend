@@ -27,13 +27,13 @@
                         <div class="col-12">
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    <x-booking-ticket 
+                                    <x-booking-round-ticket 
                                         :type="_('round')"
                                         :stations="$stations"
                                     />
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                    <x-booking-ticket 
+                                    <x-booking-one-ticket 
                                         :type="_('one')"
                                         :stations="$stations"
                                     />

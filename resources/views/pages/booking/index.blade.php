@@ -11,8 +11,15 @@
                 <p class="mb-1">{{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
             <div class="col-2 py-2 border-start">
-                <p class="text-center mb-1">Adults</p>
-                <p class="text-center mb-1">1</p>
+                @if($passenger[0] != 0)
+                    <p class="text-center mb-1">Adult(s) : <span id="passenger-adult">{{ $passenger[0] }}</span></p>
+                @endif
+                @if($passenger[1] != 0)
+                    <p class="text-center mb-1">Child(s) : <span id="passenger-child">{{ $passenger[1] }}</span></p>
+                @endif
+                @if($passenger[2] != 0)
+                    <p class="text-center mb-1">Infant(s) : <span id="passenger-infant">{{ $passenger[2] }}</span></p>
+                @endif
             </div>
             <div class="col-2 border-start d-flex align-items-center justify-content-center">
                 THB <span class="ms-2" id="sum-price">0.00</span>
@@ -47,7 +54,10 @@
             <!-- booking extra -->
             @include('pages.booking.booking-extra')
         </div>
-        <div class="procress-step d-none"><h1>Payment</h1></div>
+        <div class="procress-step d-none">
+            <!-- booking payment -->
+            @include('pages.booking.booking-payment')
+        </div>
 
         <div class="row mt-3">
             <div class="col-6">

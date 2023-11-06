@@ -25,7 +25,7 @@
                     <div class="d-flex me-2">
                         @foreach($route['icons'] as $icon)
                         <div class="mw--48">
-                            <img src="{{ $icon_url }}{{ $icon['path'] }}" class="me-1 w-100">
+                            <img src="{{ $icon_url }}{{ $icon['path'] }}" class="me-1 w-100 icon-selected">
                         </div>
                         @endforeach
                     </div>
@@ -41,6 +41,9 @@
                     <span class="bg-white py-1 px-3 rounded border border-warning route-price">{{ number_format($route['p_adult'] + $route['p_child'] + $route['p_infant']) }}</span>
                 </div>
             </div>
+            <input type="hidden" class="selected-adult-price" value="{{ $route['regular_price'] }}">
+            <input type="hidden" class="selected-child-price" value="{{ $route['child_price'] }}">
+            <input type="hidden" class="selected-infant-price" value="{{ $route['infant_price'] }}">
         </div>
     @endforeach
 </div>

@@ -30,6 +30,8 @@ class BookingController extends Controller
         $_station = ['from' => '', 'to' => ''];
         $booking_date = $request->date;
 
+        // Log::debug($request);
+
         foreach($routes['data'] as $index => $route) {
             if($_station['from'] == '') 
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -43,7 +45,7 @@ class BookingController extends Controller
 
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
-        // Log::debug($routes['data']);
+        // Log::debug($passenger);
 
         return view('pages.booking.index', 
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl, 
@@ -65,7 +67,7 @@ class BookingController extends Controller
             return array($request->round_adult, $request->round_child, $request->round_infant);
 
         if($request->_type == 'one')
-            return array($request->one_adult, $request->one_child, $request->one_infant);
+            return array($request->onedepart_adult, $request->onedepart_child, $request->onedepart_infant);
     }
 
     private function setStation($name, $pier) {
