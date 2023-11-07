@@ -54,6 +54,15 @@
         </div>
     </div>
 
+    <h4 class="mb-0">Extra services</h4>
+    <div class="row bg-warning-soft mx-3 p-3 mb-4">
+        <div class="col-12">
+            <div class="row text-dark">
+                <div class="col-4">Meal</div>
+            </div>
+        </div>
+    </div>
+
     <h4 class="mb-0">Passenger(s)</h4>
     <h4 class="mb-2">Passenger detail</h4>
     <div class="row bg-success-soft mx-3 p-3 mb-4">

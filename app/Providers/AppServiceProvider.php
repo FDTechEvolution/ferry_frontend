@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Http::macro('reqres', function() {
             return Http::withHeaders([
-                'X-TKSCT' => config('services.api.secret_key')
+                'Authorization' => config('services.token.secret_token').config('services.api.secret_key')
             ])->baseUrl(config('services.api.base_url'));
         });
     }

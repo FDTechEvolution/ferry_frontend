@@ -43,10 +43,6 @@ if(booking_route) {
     })
 }
 
-function setPassengerPayment() {
-
-}
-
 function parseToNumber(str) {
     return parseFloat(str.split(',').join(''));
 }
@@ -232,6 +228,11 @@ function progressPassenger() {
     })
 
     if(input_required === 0 && select_required === 0) progress_next.click()
+}
+
+let is_passenger = []
+function setPassengerPayment(payload, type, number) {
+    const booking_passenger = document.querySelector('#booking-route-passenger')
 }
 
 function inc(element, index) {

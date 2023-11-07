@@ -36,6 +36,10 @@ return [
         'secret_key' => env('API_SECRET_KEY'),
     ],
 
+    'token' => [
+        'secret_token' => env('API_SECRET_TOKEN'),
+    ],
+
     'store' => [
         'image' => env('STORE_URL'),
     ],
