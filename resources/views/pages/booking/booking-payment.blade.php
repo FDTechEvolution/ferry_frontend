@@ -54,22 +54,153 @@
         </div>
     </div>
 
-    <h4 class="mb-0">Extra services</h4>
-    <div class="row bg-warning-soft mx-3 p-3 mb-4">
-        <div class="col-12">
-            <div class="row text-dark">
-                <div class="col-4">Meal</div>
+    <div id="payment-extra-service">
+        <h4 class="mb-0">Extra services</h4>
+        <div class="row bg-warning-soft mx-3 p-3 mb-5">
+            <div class="col-12">
+                <div class="row mb-3" id="payment-extra-meal">
+                    
+                </div>
+                <div class="row mb-3" id="payment-extra-activity">
+                    
+                </div>
             </div>
         </div>
     </div>
 
     <h4 class="mb-0">Passenger(s)</h4>
-    <h4 class="mb-2">Passenger detail</h4>
-    <div class="row bg-success-soft mx-3 p-3 mb-4">
+    <p class="mb-2">Passenger detail</p>
+    <div class="row bg-success-soft mx-3 p-4 mb-5">
         <div class="col-12">
-            <div class="row">
-                <div class="col-4">Adult</div>
+            <div class="row" id="payment-passenger-detail">
+                
             </div>
         </div>
+    </div>
+
+    <h4 class="mb-0">Payment</h4>
+    <p class="mb-0">Select payment method</p>
+    <div class="accordion mx-3 mb-5 mt-2" id="accordionShadow">
+        <p class="mb-0">Select a payment to complete booking</p>
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingCreditCard">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#credit-debit-card" aria-expanded="false" aria-controls="shadowCollapseCreditCard">
+                        Credit Card / Debit Card
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="credit-debit-card" class="collapse" aria-labelledby="headingCreditCard" data-bs-parent="#shadowCollapseCreditCard">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingCounterPayment">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#counter-payment" aria-expanded="false" aria-controls="shadowCollapseCounterPayment">
+                        Counter payment
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="counter-payment" class="collapse" aria-labelledby="headingCounterPayment" data-bs-parent="#shadowCollapseCounterPayment">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingQrPayment">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qr-payment" aria-expanded="false" aria-controls="shadowCollapseQrPayment">
+                        QR Payment
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="qr-payment" class="collapse" aria-labelledby="headingQrPayment" data-bs-parent="#shadowCollapseQrPayment">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingUnionPay">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#union-pay" aria-expanded="false" aria-controls="shadowCollapseUnionPayment">
+                        Unionpay
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="union-pay" class="collapse" aria-labelledby="headingUnionPay" data-bs-parent="#shadowCollapseUnionPayment">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingLinePay">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#line-pay" aria-expanded="false" aria-controls="shadowCollapseLinePay">
+                        Line pay
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="line-pay" class="collapse" aria-labelledby="headingLinePay" data-bs-parent="#shadowCollapseLinePay">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="headingAirPay">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 btn-md text-align-start text-decoration-none text-dark bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#air-pay" aria-expanded="false" aria-controls="shadowCollapseAirPay">
+                        Airpay / Wechatpay
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-start-slim"></i>
+                            <i class="fi fi-arrow-down-slim"></i>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="air-pay" class="collapse" aria-labelledby="headingAirPay" data-bs-parent="#shadowCollapseAirPay">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit...
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

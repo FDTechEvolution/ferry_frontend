@@ -58,6 +58,12 @@ class BookingController extends Controller
         return view('pages.booking.index', ['isType' => '']);
     }
 
+    public function bookingConfirm(Request $request) {
+        Log::debug($request);
+
+        return redirect()->route('home');
+    }
+
     private function calPrice($num, $price) {
         return $num*$price;
     }

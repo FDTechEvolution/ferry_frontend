@@ -41,46 +41,56 @@
 <div class="row">
     <div class="col-12">
         @if($isType != '')
-        <div class="procress-step d-none"></div>
-        <div class="procress-step d-none">
-            <!-- booking select -->
-            @include('pages.booking.booking-select')
-        </div>
-        <div class="procress-step d-none">
-            <!-- booking passenger -->
-            @include('pages.booking.booking-passenger')
-        </div>
-        <div class="procress-step d-none">
-            <!-- booking extra -->
-            @include('pages.booking.booking-extra')
-        </div>
-        <div class="procress-step d-none">
-            <!-- booking payment -->
-            @include('pages.booking.booking-payment')
-        </div>
+        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-confirm') }}">
+            @csrf
+            <div class="procress-step d-none"></div>
+            <div class="procress-step d-none">
+                <!-- booking select -->
+                @include('pages.booking.booking-select')
+            </div>
+            <div class="procress-step d-none">
+                <!-- booking passenger -->
+                @include('pages.booking.booking-passenger')
+            </div>
+            <div class="procress-step d-none">
+                <!-- booking extra -->
+                @include('pages.booking.booking-extra')
+            </div>
+            <div class="procress-step d-none">
+                <!-- booking payment -->
+                @include('pages.booking.booking-payment')
+            </div>
 
-        <div class="row mt-3">
-            <div class="col-6">
-                <button class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <button class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
+                </div>
+                <div class="col-6 text-end">
+                    <x-button-green
+                        id="progress-next"
+                        class="btn-sm"
+                        :type="_('button')"
+                        :text="_('Continue >>')"
+                        disabled
+                    />
+                    <x-button-green
+                        id="progress-next-passenger"
+                        class="btn-sm d-none"
+                        :type="_('button')"
+                        :text="_('Continue >>')"
+                        onClick="progressPassenger()"
+                        disabled
+                    />
+                    <x-button-green
+                        id="progress-payment"
+                        class="btn-sm d-none"
+                        :type="_('submit')"
+                        :text="_('Payment')"
+                        disabled
+                    />
+                </div>
             </div>
-            <div class="col-6 text-end">
-                <x-button-green
-                    id="progress-next"
-                    class="btn-sm"
-                    :type="_('button')"
-                    :text="_('Continue >>')"
-                    disabled
-                />
-                <x-button-green
-                    id="progress-next-passenger"
-                    class="btn-sm d-none"
-                    :type="_('button')"
-                    :text="_('Continue >>')"
-                    onClick="progressPassenger()"
-                    disabled
-                />
-            </div>
-        </div>
+        </form>
         @endif
     </div>
 </div>

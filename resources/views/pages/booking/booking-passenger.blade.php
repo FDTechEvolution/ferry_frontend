@@ -5,10 +5,10 @@
         <div class="col-12 py-3 bg-primary" style="border-radius: 10px 10px 0 0;">
             Passenger 1 <span class="text-light">(Lead passenger)</span>
         </div>
-        <div class="col-12 mt-3">
+        <div class="col-12 mt-3" id="lead-passenger">
             <div class="row">
                 <div class="col-2 form-floating mb-3">
-                    <select required class="form-select form-select-sm" name="title" id="passenger-title" aria-label="Floating label select example">
+                    <select required class="form-select form-select-sm" name="title[]" id="passenger-title" aria-label="Floating label select example">
                         <option value="" selected disabled>Select Title</option>
                         <option value="mr">Mr.</option>
                         <option value="mrs">Mrs.</option>
@@ -18,17 +18,17 @@
                     <label for="passenger-title">Title<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-5 form-floating mb-3">
-                    <input required type="text" class="form-control form-control-sm" name="first_name" id="passenger-first-name" placeholder="First name & Middle name">
+                    <input required type="text" class="form-control form-control-sm" name="first_name[]" id="passenger-first-name" placeholder="First name & Middle name">
                     <label for="passenger-first-name" class="ms-2">First name & Middle name<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-5 form-floating mb-3">
-                    <input required type="text" class="form-control form-control-sm" name="last_name" id="passenger-last-name" placeholder="Last name">
+                    <input required type="text" class="form-control form-control-sm" name="last_name[]" id="passenger-last-name" placeholder="Last name">
                     <label for="passenger-last-name" class="ms-2">Last name<span class="text-danger">*</span></label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-7 form-floating mb-3">
-                    <input required type="text" name="birth_day" class="form-control form-control-sm datepicker"
+                    <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker"
                         data-show-weeks="true"
                         data-today-highlight="true"
                         data-today-btn="false"

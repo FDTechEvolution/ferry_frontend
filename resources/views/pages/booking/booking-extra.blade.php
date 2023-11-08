@@ -14,10 +14,10 @@
             <div class="col-12 mb-3 pb-2 border-bottom">
                 <div class="row">
                     <div class="col-1 d-flex justify-content-center align-items-center">
-                        <img src="{{$icon_url}}/icon/meal/icon/{{$meal['image_icon']}}" width="80">
+                        <img src="{{$icon_url}}/icon/meal/icon/{{$meal['image_icon']}}" width="80" id="extra-meal-img-{{ $key }}">
                     </div>
                     <div class="col-7">
-                        <h6 class="mb-1">{{ $meal['name'] }}</h6>
+                        <h6 class="mb-1" id="extra-meal-name-{{ $key }}">{{ $meal['name'] }}</h6>
                         <p class="mb-0">{{ $meal['description'] }}</p>
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
@@ -25,7 +25,8 @@
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('meal', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
-                        <input type="number" name="extra_meal_{{ $meal['id'] }}" id="extra-meal-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="number" name="meal_qty[]" id="extra-meal-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="hidden" name="meal_id[]" value="{{ $meal['id'] }}">
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('meal', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
@@ -43,10 +44,10 @@
             <div class="col-12 mb-3 pb-2 border-bottom">
                 <div class="row">
                     <div class="col-1 d-flex justify-content-center align-items-center">
-                        <img src="{{$icon_url}}{{$activity['icon']['path']}}" width="80">
+                        <img src="{{$icon_url}}{{$activity['icon']['path']}}" width="80" id="extra-activity-img-{{ $key }}">
                     </div>
                     <div class="col-7">
-                        <h6 class="mb-1">{{ $activity['name'] }}</h6>
+                        <h6 class="mb-1" id="extra-activity-name-{{ $key }}">{{ $activity['name'] }}</h6>
                         {!! $activity['detail'] !!}
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
@@ -54,7 +55,8 @@
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('activity', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
-                        <input type="number" name="extra_activity_{{ $activity['id'] }}" id="extra-activity-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="number" name="activity_qty[]" id="extra-activity-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="hidden" name="activity_id[]" value="{{ $activity['id'] }}">
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('activity', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
