@@ -1,4 +1,4 @@
-@props(['passenger_num' => '', 'type' => ''])
+@props(['passenger_num' => '', 'type' => '', 'color'])
 
 @php
     $title = uniqid();
@@ -6,8 +6,8 @@
     $last_name = uniqid();
 @endphp
 
-<div class="row mt-2 mb-5 border-radius-10 border border-primary normal-passenger">
-    <div class="col-12 py-3 bg-primary" style="border-radius: 10px 10px 0 0;">
+<div class="row mt-2 mb-5 border-radius-10 border border-{{ $color }} normal-passenger">
+    <div class="col-12 py-3 bg-{{ $color }}" style="border-radius: 10px 10px 0 0;">
         Passenger {{ $passenger_num }}
     </div>
     <div class="col-12 mt-3">

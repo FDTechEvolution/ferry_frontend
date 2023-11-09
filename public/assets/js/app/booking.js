@@ -14,9 +14,9 @@ function dec(element) {
 
 function updatePassenger(type) {
     let _type = type.split('_')[0]
-    const adult = document.querySelector(`[name="${_type}_adult"]`)
-    const child = document.querySelector(`[name="${_type}_child"]`)
-    const infant = document.querySelector(`[name="${_type}_infant"]`)
+    const adult = document.querySelector(`[name="${_type}_adult[]"]`)
+    const child = document.querySelector(`[name="${_type}_child[]"]`)
+    const infant = document.querySelector(`[name="${_type}_infant[]"]`)
     const passenger = document.querySelector(`[data-id="${_type}"]`)
 
     let _child = child.value != 0 ? `| Child : ${child.value}` : ''

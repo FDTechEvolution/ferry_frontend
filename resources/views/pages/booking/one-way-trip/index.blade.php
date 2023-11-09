@@ -5,21 +5,17 @@
     <div class="px-3 py-2 bg-primary lazy text-light">
         <div class="row">
             <div class="col-1 d-flex align-items-center justify-content-center">icon</div>
-            <div class="col-7">
-                <p class="mb-1">{{ $is_station['from'] }}</p>
-                To
-                <p class="mb-1">{{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
+            <div class="col-7 d-flex align-items-center">
+                <p class="mb-1">{{ $is_station['from'] }}
+                <span class="mx-2">To</span>
+                {{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
-            <div class="col-2 py-2 border-start">
-                @if($passenger[0] != 0)
-                    <p class="text-center mb-1">Adult(s) : <span id="passenger-adult">{{ $passenger[0] }}</span></p>
-                @endif
-                @if($passenger[1] != 0)
-                    <p class="text-center mb-1">Child(s) : <span id="passenger-child">{{ $passenger[1] }}</span></p>
-                @endif
-                @if($passenger[2] != 0)
-                    <p class="text-center mb-1">Infant(s) : <span id="passenger-infant">{{ $passenger[2] }}</span></p>
-                @endif
+            <div class="col-2 py-2 border-start d-flex align-items-center justify-content-center">
+                <a tabindex="0" class="btn btm-sm btn-primary popover-passenger" role="button" 
+                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
+                    data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
+                    <i class="fi fi-users me-2"></i> Passenger
+                </a>
             </div>
             <div class="col-2 border-start d-flex align-items-center justify-content-center">
                 THB <span class="ms-2" id="sum-price">0.00</span>
@@ -46,24 +42,24 @@
             <div class="procress-step d-none"></div>
             <div class="procress-step d-none">
                 <!-- booking select -->
-                @include('pages.booking.booking-select')
+                @include('pages.booking.one-way-trip.booking-select')
             </div>
             <div class="procress-step d-none">
                 <!-- booking passenger -->
-                @include('pages.booking.booking-passenger')
+                @include('pages.booking.one-way-trip.booking-passenger')
             </div>
             <div class="procress-step d-none">
                 <!-- booking extra -->
-                @include('pages.booking.booking-extra')
+                @include('pages.booking.one-way-trip.booking-extra')
             </div>
             <div class="procress-step d-none">
                 <!-- booking payment -->
-                @include('pages.booking.booking-payment')
+                @include('pages.booking.one-way-trip.booking-payment')
             </div>
 
             <div class="row mt-3">
                 <div class="col-6">
-                    <button class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
+                    <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
                 </div>
                 <div class="col-6 text-end">
                     <x-button-green

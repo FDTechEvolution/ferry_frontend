@@ -107,6 +107,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="passenger_type[]" value="Adult">
     </div>
 
     @php
@@ -118,6 +119,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Adult')"
+                :color="_('primary')"
             />
             @php
                 $is_passenger++;
@@ -130,6 +132,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Child')"
+                :color="_('primary')"
             />
             @php
                 $is_passenger++;
@@ -142,6 +145,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Baby')"
+                :color="_('primary')"
             />
             @php
                 $is_passenger++;

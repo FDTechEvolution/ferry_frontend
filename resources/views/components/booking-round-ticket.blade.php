@@ -7,7 +7,7 @@
     $passenger_id = uniqid();
 @endphp
 
-<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-index') }}">
+<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-round-trip') }}">
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-6 text-end">
-                <button type="button" class="btn btn-sm button-orange-bg">Search</button>
+                <button type="submit" class="btn btn-sm button-orange-bg">Search</button>
             </div>
         </div>
     </fieldset>

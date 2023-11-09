@@ -366,9 +366,11 @@ function setLitinerary() {
 
 function progressPassenger() {
     const _passenger = document.querySelector('#booking-route-passenger')
+    let _email = document.querySelector('#passenger-email')
+    let _cemail = document.querySelector('#passenger-confirm-email')
     let _input = _passenger.querySelectorAll('input')
     let _select = _passenger.querySelectorAll('select')
-    let input_required = select_required = 0
+    let input_required = select_required = email_confirm = 0
 
     _input.forEach((input, index) => {
         if(input.required) {
@@ -398,7 +400,19 @@ function progressPassenger() {
         }
     })
 
-    if(input_required === 0 && select_required === 0) {
+    if(_email.value !== _cemail.value) {
+        _email.classList.add('border-danger')
+        _cemail.classList.add('border-danger')
+        _email.focus()
+        email_confirm++
+    }
+    else {
+        _email.classList.remove('border-danger')
+        _cemail.classList.remove('border-danger')
+        email_confirm = 0
+    }
+
+    if(input_required === 0 && select_required === 0 && email_confirm === 0) {
         setPassengerPayment()
         progress_next.click()
     }

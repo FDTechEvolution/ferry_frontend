@@ -96,10 +96,16 @@
     max-width: 48px;
 }
 
-.booking-route-list.active {
+.booking-route-list.active,
+.booking-depart-list.active {
     background-color: lightblue;
 }
-.booking-route-list.active .station-name {
+.booking-return-list.active {
+    background-color: #fad776;
+}
+.booking-route-list.active .station-name,
+.booking-depart-list.active .station-name,
+.booking-return-list.active .station-name {
     color: #fff;
 }
 .station-name {
@@ -107,4 +113,7 @@
 }
 .route-hover:hover {
     background-color: aliceblue;
+}
+.route-return-hover:hover {
+    background-color: antiquewhite;
 }
