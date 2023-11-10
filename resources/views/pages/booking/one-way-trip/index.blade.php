@@ -16,6 +16,13 @@
                     data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
                     <i class="fi fi-users me-2"></i> Passenger
                 </a>
+                @if($passenger[0] != 0)
+                    <input type="hidden" id="passenger-adult" value="{{ $passenger[0] }}" disabled>
+                @elseif($passenger[1] != 0)
+                    <input type="hidden" id="passenger-child" value="{{ $passenger[1] }}" disabled>
+                @elseif($passenger[2] != 0)
+                    <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
+                @endif
             </div>
             <div class="col-2 border-start d-flex align-items-center justify-content-center">
                 THB <span class="ms-2" id="sum-price">0.00</span>

@@ -11,14 +11,6 @@
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
-        <p class="text-start text-light mb-0">Depart</p>
-        <x-booking-search-form 
-            :type="$type"
-            :stations="$stations"
-            :form_type="_('depart')"
-        />
-
-        <p class="text-start text-light mb-0">Return</p>
         <x-booking-search-form 
             :type="$type"
             :stations="$stations"

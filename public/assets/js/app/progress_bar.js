@@ -344,19 +344,19 @@ function setLitinerary() {
 
     if(adult_price) {
         adult_price.innerHTML = parseToNumber(passenger_payment[0]).toLocaleString("en-US")
-        let adult_sum = parseToNumber(adult_qty.innerText)*parseToNumber(passenger_payment[0])
+        let adult_sum = parseToNumber(adult_qty.value)*parseToNumber(passenger_payment[0])
         document.querySelector('.sum-of-adult').innerHTML = adult_sum.toLocaleString("en-US")
         sum_of_payment+= adult_sum
     }
     if(child_price) {
         child_price.innerHTML = parseToNumber(passenger_payment[1]).toLocaleString("en-US")
-        let child_sum = parseToNumber(child_qty.innerText)*parseToNumber(passenger_payment[1])
+        let child_sum = parseToNumber(child_qty.value)*parseToNumber(passenger_payment[1])
         document.querySelector('.sum-of-child').innerHTML = child_sum.toLocaleString("en-US")
         sum_of_payment+= child_sum
     }
     if(infant_price) {
         infant_price.innerHTML = parseToNumber(passenger_payment[2]).toLocaleString("en-US")
-        let infant_sum = parseToNumber(infant_qty.innerText)*parseToNumber(passenger_payment[2])
+        let infant_sum = parseToNumber(infant_qty.value)*parseToNumber(passenger_payment[2])
         document.querySelector('.sum-of-infant').innerHTML = infant_sum.toLocaleString("en-US")
         sum_of_payment+= infant_sum
     }

@@ -7,7 +7,7 @@
     $passenger_id = uniqid();
 @endphp
 
-<div class="row px-3">
+<div class="row px-3 is-type-{{ $form_type }}">
     <input type="hidden" name="_from_type[]" value="{{ $form_type }}">
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
@@ -32,19 +32,40 @@
         </div>
     </div>
     <div class="col-sm-3 col-md-3 px-0">
-        <div class="form-floating mb-3">
-            <input required type="text" name="date[]" class="form-control form-control-sm datepicker"
-                data-show-weeks="true"
-                data-today-highlight="true"
-                data-today-btn="true"
-                data-clear-btn="false"
-                data-autoclose="true"
-                data-date-start="today"
-                data-format="DD/MM/YYYY"
-                autocomplete="off"
-                placeholder="Travel Date">
-            <label class="text-secondary">Travel Date</label>
-        </div>
+        @if($form_type == 'depart')
+            <div class="form-floating mb-3">
+                <input required type="text" name="date[]" class="form-control form-control-sm datepicker"
+                    data-show-weeks="true"
+                    data-today-highlight="true"
+                    data-today-btn="true"
+                    data-clear-btn="false"
+                    data-autoclose="true"
+                    data-date-start="today"
+                    data-format="DD/MM/YYYY"
+                    autocomplete="off"
+                    placeholder="Travel Date">
+                <label class="text-secondary">Travel Date</label>
+            </div>
+        @else
+            <div class="form-floating mb-3">
+                <input required autocomplete="off" type="text" name="date[]" class="form-control rangepicker"
+                    data-bs-placement="left"
+                    data-ranges="false"
+                    data-disable-past-dates="true"
+                    data-date-start="{{ date('d/m/Y', strtotime('+1 day')) }}"
+                    data-date-end="{{ date('d/m/Y', strtotime('+2 day')) }}"
+                    data-date-format="DD/MM/YYYY"
+                    data-quick-locale='{
+                        "lang_apply"	: "Apply",
+                        "lang_cancel" : "Cancel",
+                        "lang_crange" : "Custom Range",
+                        "lang_months"	 : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+                    }'
+                    placeholder="Depart date - Return date">
+                <label class="text-secondary">Depart date - Return date</label>
+            </div>
+        @endif
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3 dropdown">
