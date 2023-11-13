@@ -71,7 +71,7 @@
             </div>
             <div class="procress-step d-none">
                 <!-- booking extra -->
-                <h4>Extra service</h4>
+                @include('pages.booking.round-trip.booking-extra')
             </div>
             <div class="procress-step d-none">
                 <!-- booking payment -->
