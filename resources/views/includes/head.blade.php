@@ -17,6 +17,9 @@
 <link rel="stylesheet" href="{{ asset('assets/css/vendor_bundle.min.css') }}">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+<!-- Fontawesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 

@@ -86,7 +86,15 @@ class BookingController extends Controller
         return view('pages.booking.index', ['isType' => '']);
     }
 
+    // One way booking confirm
     public function bookingConfirm(Request $request) {
+        Log::debug($request);
+
+        return redirect()->route('home');
+    }
+
+    // Round trip booking confirm
+    public function bookingRoundConfirm(Request $request) {
         Log::debug($request);
 
         return redirect()->route('home');

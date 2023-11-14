@@ -18,9 +18,11 @@
                 </a>
                 @if($passenger[0] != 0)
                     <input type="hidden" id="passenger-adult" value="{{ $passenger[0] }}" disabled>
-                @elseif($passenger[1] != 0)
+                @endif
+                @if($passenger[1] != 0)
                     <input type="hidden" id="passenger-child" value="{{ $passenger[1] }}" disabled>
-                @elseif($passenger[2] != 0)
+                @endif
+                @if($passenger[2] != 0)
                     <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
                 @endif
             </div>

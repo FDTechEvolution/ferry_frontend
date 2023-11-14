@@ -144,7 +144,7 @@
         @for($i = 1; $i <= $passenger[2]; $i++)
             <x-set-passenger 
                 :passenger_num="$is_passenger"
-                :type="_('Baby')"
+                :type="_('Infant')"
                 :color="_('primary')"
             />
             @php

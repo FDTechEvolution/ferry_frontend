@@ -302,7 +302,7 @@ function setPassengerDetail() {
         row.setAttribute('class', 'row')
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
-        header.innerHTML = 'Baby'
+        header.innerHTML = 'Infant'
         
         passenger_detail.appendChild(row)
         row.appendChild(col_12)

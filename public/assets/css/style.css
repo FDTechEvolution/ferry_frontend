@@ -117,3 +117,7 @@
 .route-return-hover:hover {
     background-color: antiquewhite;
 }
+
+.service-list:last-child {
+    border-top: 1px solid #dd0000;
+}

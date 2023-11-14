@@ -44,8 +44,14 @@
                     placeholder="Birth Day date">
                 <label class="ms-2">Birth Day date<span class="text-danger">*</span></label>
             </div>
-            <div class="col-5 text-center">
-                <span>{{ $type }}</span>
+            <div class="col-5 mb-3 d-flex align-items-center justify-content-center">
+                @if($type == 'Adult')
+                    <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-person fs-1"></i>
+                @elseif($type == 'Child')
+                    <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-children fs-4"></i>
+                @elseif($type == 'Infant')
+                    <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-baby fs-3"></i>
+                @endif
             </div>
         </div>
         <input type="hidden" name="passenger_type[]" value="{{ $type }}">

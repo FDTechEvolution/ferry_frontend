@@ -25,4 +25,5 @@ Route::controller(BookingController::class)->group(function() {
     Route::post('booking/confirm', 'bookingConfirm')->name('booking-confirm');
 
     Route::post('bookings', 'searchRoundTrip')->name('booking-round-trip');
+    Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
 });

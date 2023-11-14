@@ -2,8 +2,11 @@
     <h4 class="mb-2">Litinerary</h4>
     <div class="row bg-primary-soft mx-3 p-3 mb-5">
         <div class="col-12">
+            @php
+                $b_date = explode('/', $booking_date)
+            @endphp
             <h5>{{ $is_station['from'] }} - {{ $is_station['to'] }}</h5>
-            <p><span class="fw-bold">{{ $isType }}</span> {{ date('l d F Y' ,strtotime($booking_date)) }}</p>
+            <p><span class="fw-bold">{{ $isType }}</span> {{ date('l d F Y' ,strtotime($b_date[1].'/'.$b_date[0].'/'.$b_date[2])) }}</p>
         </div>
         <div class="col-8 border-end border-secondary border-2">
             <p class="is_depart_time mb-0"></p>

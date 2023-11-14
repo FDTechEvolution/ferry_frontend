@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-1 d-flex align-items-center justify-content-center">icon</div>
             <div class="col-7">
-                <p class="my-2"><span class="fw-bold">Depart : </span>
+                <p class="my-2 mb-1"><span class="fw-bold">Depart : </span>
                     @if(!empty($depart_routes))
                         <small>
                             {{ $station_depart['from'] }}
@@ -18,7 +18,7 @@
                         <small>Sorry. No depart route.</small>
                     @endif
                 </p>
-                <p class="my-2"><span class="fw-bold">Return : </span>
+                <p class="my-2 mt-1"><span class="fw-bold">Return : </span>
                     @if(!empty($return_routes))
                         <small>
                             {{ $station_return['from'] }}
@@ -37,6 +37,15 @@
                     data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
                     <i class="fi fi-users me-2"></i> Passenger
                 </a>
+                @if($passenger[0] > 0)
+                    <input type="hidden" id="passenger-adult" value="{{ $passenger[0] }}" disabled>
+                @endif
+                @if($passenger[1] > 0)
+                    <input type="hidden" id="passenger-child" value="{{ $passenger[1] }}" disabled>
+                @endif
+                @if($passenger[2] > 0)
+                    <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
+                @endif
             </div>
             <div class="col-2 border-start d-flex align-items-center justify-content-center">
                 THB <span class="ms-2" id="sum-price">0.00</span>
@@ -58,7 +67,7 @@
 <div class="row">
     <div class="col-12">
         @if($isType != '')
-        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-confirm') }}">
+        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('bookings-confirm') }}">
             @csrf
             <div class="procress-step d-none"></div>
             <div class="procress-step show">
@@ -75,7 +84,7 @@
             </div>
             <div class="procress-step d-none">
                 <!-- booking payment -->
-                <h4>Payment</h4>
+                @include('pages.booking.round-trip.booking-payment')
             </div>
 
             <div class="row mt-3">
