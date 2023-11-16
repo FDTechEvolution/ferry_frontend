@@ -7,6 +7,7 @@
             @endphp
             <h5>{{ $is_station['from'] }} - {{ $is_station['to'] }}</h5>
             <p><span class="fw-bold">{{ $isType }}</span> {{ date('l d F Y' ,strtotime($b_date[1].'/'.$b_date[0].'/'.$b_date[2])) }}</p>
+            <input type="hidden" name="departdate" value="{{ $booking_date }}">
         </div>
         <div class="col-8 border-end border-secondary border-2">
             <p class="is_depart_time mb-0"></p>

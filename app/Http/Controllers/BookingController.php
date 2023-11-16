@@ -30,8 +30,6 @@ class BookingController extends Controller
         $_station = ['from' => '', 'to' => ''];
         $booking_date = $request->date[0];
 
-        // Log::debug($request);
-
         foreach($routes['data'] as $index => $route) {
             if($_station['from'] == '') 
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -45,7 +43,6 @@ class BookingController extends Controller
 
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
-        // Log::debug($passenger);
 
         return view('pages.booking.one-way-trip.index', 
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl, 
@@ -54,8 +51,12 @@ class BookingController extends Controller
             ]);
     }
 
+    public function view(string $id = null) {
+
+        return view('pages.booking.view');
+    }
+
     public function searchRoundTrip(Request $request) {
-        // Log::debug($request);
         $_type = $this->Type[$request->_type];
         $_date = explode(' - ', $request->date[0]);
         $depart_date = $_date[0];
@@ -73,8 +74,6 @@ class BookingController extends Controller
         $return_routes = $result_return[0];
         $station_return = $result_return[1];
 
-        // Log::debug($depart_routes);
-
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date, 
@@ -88,16 +87,105 @@ class BookingController extends Controller
 
     // One way booking confirm
     public function bookingConfirm(Request $request) {
-        Log::debug($request);
+        $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
+        $passenger = $this->numberOfPassenger($request->passenger_type);
+        $_departdate = explode('/', $request->departdate);
 
-        return redirect()->route('home');
+        $response = Http::reqres()->post('/booking/create', [
+            'route_id' => $request->booking_route_selected,
+            'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
+            'fullname' => $fullname,
+            'passenger_type' => $request->passenger_type,
+            'passenger' => $passenger['adult'],
+            'child_passenger' => $passenger['child'],
+            'infant_passenger' => $passenger['infant'],
+            'mobile' => $request->mobile,
+            'passportno' => $request->passport_number,
+            'email' => $request->email,
+            'address' => $request->address,
+            'meal_id' => $request->meal_id,
+            'meal_qty' => $request->meal_qty,
+            'activity_id' => $request->activity_id,
+            'activity_qty' => $request->activity_qty,
+            'trip_type' => 'one-way',
+            'book_channel' => 'ONLINE'
+        ]);
+        $res = $response->json();
+
+        return redirect()->route('booking-view', ['id' => $res['data']]);
+    }
+
+    private function setPassengerBooking($first_name, $last_name) {
+        $fullname = [];
+        foreach($first_name as $key => $f_name) { array_push($fullname, $f_name.' '.$last_name[$key]); }
+        return $fullname;
+    }
+
+    private function numberOfPassenger($passenger_type) {
+        $_passenger = ['adult' => 0, 'child' => 0, 'infant' => 0];
+        foreach($passenger_type as $type) {
+            if($type == 'Adult') $_passenger['adult']++;
+            if($type == 'Child') $_passenger['child']++;
+            if($type == 'Infant') $_passenger['infant']++;
+        }
+        return $_passenger;
     }
 
     // Round trip booking confirm
     public function bookingRoundConfirm(Request $request) {
-        Log::debug($request);
+        // $_depart = $this->roundTripBooking(
+        //                     $request, 
+        //                     $request->booking_depart_selected, 
+        //                     $request->depart_meal_id,
+        //                     $request->depart_meal_qty,
+        //                     $request->depart_activity_id,
+        //                     $request->depart_activity_qty,
+        //                     $request->depart_date
+        //                 );
+        // $_return = $this->roundTripBooking(
+        //                     $request, 
+        //                     $request->booking_return_selected, 
+        //                     $request->return_meal_id,
+        //                     $request->return_meal_qty,
+        //                     $request->return_activity_id,
+        //                     $request->return_activity_qty,
+        //                     $request->return_date
+        //                 );
 
+        // Log::debug($_depart);
+        // Log::debug($_return);
+
+        Log::debug($request);
         return redirect()->route('home');
+    }
+
+    private function roundTripBooking($request, $route_id, $meal_id, $meal_qty, $activity_id, $activity_qty, $date) {
+        $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
+        $passenger = $this->numberOfPassenger($request->passenger_type);
+        $_date = explode('/', $date);
+
+        $response = Http::reqres()->post('/booking/create', [
+            'route_id' => $route_id,
+            'departdate' => $_date[2].'-'.$_date[1].'-'.$_date[0],
+            'fullname' => $fullname,
+            'passenger_type' => $request->passenger_type,
+            'passenger' => $passenger['adult'],
+            'child_passenger' => $passenger['child'],
+            'infant_passenger' => $passenger['infant'],
+            'mobile' => $request->mobile,
+            'passportno' => $request->passport_number,
+            'email' => $request->email,
+            'address' => $request->address,
+            'meal_id' => $meal_id,
+            'meal_qty' => $meal_qty,
+            'activity_id' => $activity_id,
+            'activity_qty' => $activity_qty,
+            'trip_type' => 'round-trip',
+            'book_channel' => 'ONLINE'
+        ]);
+        $res = $response->json();
+
+        return $res;
     }
 
     private function calPrice($num, $price) {

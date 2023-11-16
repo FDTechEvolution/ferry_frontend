@@ -20,6 +20,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(BookingController::class)->group(function() {
     Route::get('booking', 'search')->name('booking-search');
+    Route::get('booking/view/{id}', 'view')->name('booking-view');
     
     Route::post('booking', 'index')->name('booking-index');
     Route::post('booking/confirm', 'bookingConfirm')->name('booking-confirm');
