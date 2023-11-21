@@ -9,6 +9,64 @@
     
     <div id="depart-route-extra">
         @foreach($depart_routes as $index => $route)
+            <div class="row depart-route-shuttle-bus px-3 mb-5" id="depart-route-shuttle-bus-index-{{ $index }}">
+                <h5 class="mb-2">Shuttle bus</h5>
+                @if(!empty($route['shuttle_bus']))
+                    @foreach($route['shuttle_bus'] as $key => $bus)
+                    <div class="col-12 mb-3 pb-2 border-bottom">
+                        <div class="row">
+                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-van-shuttle fs-1"></i>
+                            </div>
+                            <div class="col-7">
+                                <h6 class="mb-1" id="depart-bus-name-{{ $key }}">{{ $bus['name'] }}</h6>
+                                <p class="mb-0">{{ $bus['description'] }}</p>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <span class="depart-bus-amount-{{ $key }} me-2">{{ number_format($bus['amount']) }}</span> THB
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('depart', 'bus', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                                <input type="number" name="depart_bus_qty[]" id="depart-bus-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                <input type="hidden" name="depart_bus_id[]" value="{{ $bus['id'] }}">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('depart', 'bus', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="col-12 ps-4">No Shuttle bus</div>
+                @endif
+            </div>
+            <div class="row depart-route-longtail-boat px-3 mb-5" id="depart-route-longtail-boat-index-{{ $index }}">
+                <h5 class="mb-2">Longtail boat</h5>
+                @if(!empty($route['longtail_boat']))
+                    @foreach($route['longtail_boat'] as $key => $boat)
+                    <div class="col-12 mb-3 pb-2 border-bottom">
+                        <div class="row">
+                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-sailboat fs-1"></i>
+                            </div>
+                            <div class="col-7">
+                                <h6 class="mb-1" id="depart-boat-name-{{ $key }}">{{ $boat['name'] }}</h6>
+                                <p class="mb-0">{{ $boat['description'] }}</p>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <span class="depart-boat-amount-{{ $key }} me-2">{{ number_format($boat['amount']) }}</span> THB
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('depart', 'boat', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                                <input type="number" name="depart_boat_qty[]" id="depart-boat-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                <input type="hidden" name="depart_boat_id[]" value="{{ $boat['id'] }}">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('depart', 'boat', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="col-12 ps-4">No Longtail boat</div>
+                @endif
+            </div>
             <div class="row depart-meal px-3 mb-5" id="extra-depart-meal-index-{{ $index }}">
                 <h5 class="mb-2">Meal Service</h5>
                 @if(!empty($route['meal_lines']))
@@ -35,7 +93,7 @@
                     </div>
                     @endforeach
                 @else
-                    <div class="col-12">No Meal</div>
+                    <div class="col-12 ps-4">No Meal</div>
                 @endif
             </div>
 
@@ -65,7 +123,7 @@
                     </div>
                     @endforeach
                 @else
-                    <div class="col-12">No Activity</div>
+                    <div class="col-12 ps-4">No Activity</div>
                 @endif
             </div>
         @endforeach
@@ -79,6 +137,64 @@
 
     <div id="return-route-extra">
         @foreach($return_routes as $index => $route)
+            <div class="row return-route-shuttle-bus px-3 mb-5" id="return-route-shuttle-bus-index-{{ $index }}">
+                <h5 class="mb-2">Shuttle bus</h5>
+                @if(!empty($route['shuttle_bus']))
+                    @foreach($route['shuttle_bus'] as $key => $bus)
+                    <div class="col-12 mb-3 pb-2 border-bottom">
+                        <div class="row">
+                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-van-shuttle fs-1"></i>
+                            </div>
+                            <div class="col-7">
+                                <h6 class="mb-1" id="return-bus-name-{{ $key }}">{{ $bus['name'] }}</h6>
+                                <p class="mb-0">{{ $bus['description'] }}</p>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <span class="return-bus-amount-{{ $key }} me-2">{{ number_format($bus['amount']) }}</span> THB
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('return', 'bus', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                                <input type="number" name="return_bus_qty[]" id="return-bus-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                <input type="hidden" name="return_bus_id[]" value="{{ $bus['id'] }}">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('return', 'bus', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="col-12 ps-4">No Shuttle bus</div>
+                @endif
+            </div>
+            <div class="row return-route-longtail-boat px-3 mb-5" id="return-route-longtail-boat-index-{{ $index }}">
+                <h5 class="mb-2">Longtail boat</h5>
+                @if(!empty($route['longtail_boat']))
+                    @foreach($route['longtail_boat'] as $key => $boat)
+                    <div class="col-12 mb-3 pb-2 border-bottom">
+                        <div class="row">
+                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-sailboat fs-1"></i>
+                            </div>
+                            <div class="col-7">
+                                <h6 class="mb-1" id="return-boat-name-{{ $key }}">{{ $boat['name'] }}</h6>
+                                <p class="mb-0">{{ $boat['description'] }}</p>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <span class="return-boat-amount-{{ $key }} me-2">{{ number_format($boat['amount']) }}</span> THB
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('return', 'boat', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                                <input type="number" name="return_boat_qty[]" id="return-boat-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                <input type="hidden" name="return_boat_id[]" value="{{ $boat['id'] }}">
+                                <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('return', 'boat', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="col-12 ps-4">No Longtail boat</div>
+                @endif
+            </div>
             <div class="row return-meal px-3 mb-5" id="extra-return-meal-index-{{ $index }}">
                 <h5 class="mb-2">Meal Service</h5>
                 @if(!empty($route['meal_lines']))
@@ -105,7 +221,7 @@
                     </div>
                     @endforeach
                 @else
-                    <div class="col-12">No Meal</div>
+                    <div class="col-12 ps-4">No Meal</div>
                 @endif
             </div>
 
@@ -135,7 +251,7 @@
                     </div>
                     @endforeach
                 @else
-                    <div class="col-12">No Activity</div>
+                    <div class="col-12 ps-4">No Activity</div>
                 @endif
             </div>
         @endforeach

@@ -153,6 +153,8 @@ function progressCondition(step) {
         const _extra = document.querySelector('#booking-route-extra')
         const meal_list = _extra.querySelectorAll(`.route-meal`)
         const activity_list = _extra.querySelectorAll('.route-activity')
+        const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
+        const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
 
         let meal_select = _extra.querySelector(`#route-meal-index-${route_selected}`)
         meal_list.forEach((item) => { item.classList.add('d-none') })
@@ -161,6 +163,14 @@ function progressCondition(step) {
         let activity_select = _extra.querySelector(`#route-activity-index-${route_selected}`)
         activity_list.forEach((item) => { item.classList.add('d-none') })
         activity_select.classList.remove('d-none')
+
+        let shuttlebus_selected = _extra.querySelector(`#route-shuttle-bus-index-${route_selected}`)
+        shuttlebus_list.forEach((item) => { item.classList.add('d-none') })
+        shuttlebus_selected.classList.remove('d-none')
+
+        let longtailboat_selected = _extra.querySelector(`#route-longtail-boat-index-${route_selected}`)
+        longtailboat_list.forEach((item) => { item.classList.add('d-none') })
+        longtailboat_selected.classList.remove('d-none')
 
         progress_next.classList.remove('d-none')
         progress_payment.classList.add('d-none')
@@ -183,16 +193,63 @@ function setExtraDetail() {
     const extra_service = document.querySelector('#payment-extra-service')
     const extra_meal = document.querySelector('#payment-extra-meal')
     const extra_activity = document.querySelector('#payment-extra-activity')
-    while (extra_meal.firstChild) {
-        extra_meal.removeChild(extra_meal.lastChild);
-    }
-    while (extra_activity.firstChild) {
-        extra_activity.removeChild(extra_activity.lastChild);
-    }
+    const extra_shuttlebus = document.querySelector('#payment-extra-shuttle-bus')
+    const extra_longtailboat = document.querySelector('#payment-extra-longtail-boat')
+
+    while (extra_meal.firstChild) { extra_meal.removeChild(extra_meal.lastChild) }
+    while (extra_activity.firstChild) { extra_activity.removeChild(extra_activity.lastChild) }
+    while (extra_shuttlebus.firstChild) { extra_shuttlebus.removeChild(extra_shuttlebus.lastChild) }
+    while (extra_longtailboat.firstChild) { extra_longtailboat.removeChild(extra_longtailboat.lastChild) }
 
     let _extra = Object.groupBy(is_extra, ex => { return ex.type })
+    // console.log(_extra)
+    if(_extra['bus']) {
+        let row = document.createElement('div')
+        let col_12 = document.createElement('div')
+        let header = document.createElement('p')
+
+        row.setAttribute('class', 'row')
+        col_12.setAttribute('class', 'col-12')
+        header.setAttribute('class', 'mb-1 fw-bold text-dark')
+        header.innerHTML = 'Shuttle Bus'
+
+        extra_shuttlebus.appendChild(row)
+        row.appendChild(col_12)
+        col_12.appendChild(header)
+
+        _extra['bus'].forEach((bus) => {
+            sum += bus.qty*bus.amount
+            let p = document.createElement('p')
+            p.setAttribute('class', 'mb-0 ms-2 text-dark')
+            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
+            extra_shuttlebus.appendChild(p)
+        })
+    }
+
+    if(_extra['boat']) {
+        let row = document.createElement('div')
+        let col_12 = document.createElement('div')
+        let header = document.createElement('p')
+
+        row.setAttribute('class', 'row')
+        col_12.setAttribute('class', 'col-12')
+        header.setAttribute('class', 'mb-1 fw-bold text-dark')
+        header.innerHTML = 'Longtail Boat'
+
+        extra_longtailboat.appendChild(row)
+        row.appendChild(col_12)
+        col_12.appendChild(header)
+
+        _extra['boat'].forEach((boat) => {
+            sum += boat.qty*boat.amount
+            let p = document.createElement('p')
+            p.setAttribute('class', 'mb-0 ms-2 text-dark')
+            p.innerHTML = `<i class="fa-solid fa-sailboat fs-1"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
+            extra_longtailboat.appendChild(p)
+        })
+    }
+
     if(_extra['meal']) {
-        
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
         let header = document.createElement('p')
@@ -498,7 +555,8 @@ function inc(element, index) {
     el.value = qty
     let _extra_amount = parseToNumber(amount.innerText)
     extra_price+= _extra_amount
-    setExtra(icon.src, name.innerText, _extra_amount, qty, element)
+    let ico_src = icon === null ? '' : icon.src
+    setExtra(ico_src, name.innerText, _extra_amount, qty, element)
     updateSumPrice()
 }
 
@@ -512,7 +570,8 @@ function dec(element, index) {
         el.value = qty
         let _extra_amount = parseToNumber(amount.innerText)
         extra_price-= _extra_amount
-        setExtra(icon.src, name.innerText, _extra_amount, qty, element)
+        let ico_src = icon === null ? '' : icon.src
+        setExtra(ico_src, name.innerText, _extra_amount, qty, element)
         updateSumPrice()
     }
 }

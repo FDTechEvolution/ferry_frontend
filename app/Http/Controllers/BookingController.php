@@ -41,6 +41,8 @@ class BookingController extends Controller
             $routes['data'][$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
         }
 
+        // Log::debug($routes);
+
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
 

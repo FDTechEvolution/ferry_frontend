@@ -7,6 +7,64 @@
         </div>
     </div>
     @foreach($routes as $index => $route)
+    <div class="row route-shuttle-bus px-3 mb-5" id="route-shuttle-bus-index-{{ $index }}">
+        <h5 class="mb-2">Shuttle bus</h5>
+        @if(!empty($route['shuttle_bus']))
+            @foreach($route['shuttle_bus'] as $key => $bus)
+            <div class="col-12 mb-3 pb-2 border-bottom">
+                <div class="row">
+                    <div class="col-1 d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-van-shuttle fs-1"></i>
+                    </div>
+                    <div class="col-7">
+                        <h6 class="mb-1" id="extra-bus-name-{{ $key }}">{{ $bus['name'] }}</h6>
+                        <p class="mb-0">{{ $bus['description'] }}</p>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <span class="extra-bus-amount-{{ $key }} me-2">{{ number_format($bus['amount']) }}</span> THB
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('bus', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <input type="number" name="bus_qty[]" id="extra-bus-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="hidden" name="bus_id[]" value="{{ $bus['id'] }}">
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('bus', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @else
+            <div class="col-12">No Shuttle bus</div>
+        @endif
+    </div>
+    <div class="row route-longtail-boat px-3 mb-5" id="route-longtail-boat-index-{{ $index }}">
+        <h5 class="mb-2">Longtail boat</h5>
+        @if(!empty($route['longtail_boat']))
+            @foreach($route['longtail_boat'] as $key => $boat)
+            <div class="col-12 mb-3 pb-2 border-bottom">
+                <div class="row">
+                    <div class="col-1 d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-sailboat fs-1"></i>
+                    </div>
+                    <div class="col-7">
+                        <h6 class="mb-1" id="extra-boat-name-{{ $key }}">{{ $boat['name'] }}</h6>
+                        <p class="mb-0">{{ $boat['description'] }}</p>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <span class="extra-boat-amount-{{ $key }} me-2">{{ number_format($boat['amount']) }}</span> THB
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('boat', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <input type="number" name="boat_qty[]" id="extra-boat-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                        <input type="hidden" name="boat_id[]" value="{{ $boat['id'] }}">
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('boat', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @else
+            <div class="col-12">No Longtail boat</div>
+        @endif
+    </div>
     <div class="row route-meal px-3 mb-5" id="route-meal-index-{{ $index }}">
         <h5 class="mb-2">Meal Service</h5>
         @if(!empty($route['meal_lines']))

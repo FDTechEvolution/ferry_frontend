@@ -45,7 +45,7 @@
                 <div class="col-7">
                     <label class="form-label">Contact Infomation</label>
                     <div class="form-floating mb-3">
-                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail">
+                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail" autocomplete="true">
                         <label for="passenger-email" class="ms-2">E-mail<span class="text-danger">*</span></label>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="row">
                 <div class="col-5 form-floating mb-3">
-                    <select required class="form-select form-select-sm" name="country" id="passenger-country" aria-label="Floating label select example">
+                    <select required class="form-select form-select-sm" name="country" id="passenger-country" aria-label="Floating label select example" autocomplete="true">
                         <option value="" selected disabled>Select Country</option>
                         @foreach($country_list as $country)
                             <option value="{{ $country }}">{{ $country }}</option>
@@ -102,7 +102,7 @@
             </div>
             <div class="row">
                 <div class="col-12 form-floating mb-3">
-                    <textarea class="form-control" placeholder="Address" id="passenger-address" name="address" style="height: 100px"></textarea>
+                    <textarea class="form-control" placeholder="Address" id="passenger-address" name="address" style="height: 100px" autocomplete="true"></textarea>
                     <label for="passenger-address" class="ms-2">Address</label>
                 </div>
             </div>
