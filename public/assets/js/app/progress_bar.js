@@ -179,6 +179,7 @@ function progressCondition(step) {
 }
 
 function setExtraDetail() {
+    let sum = 0
     const extra_service = document.querySelector('#payment-extra-service')
     const extra_meal = document.querySelector('#payment-extra-meal')
     const extra_activity = document.querySelector('#payment-extra-activity')
@@ -188,9 +189,6 @@ function setExtraDetail() {
     while (extra_activity.firstChild) {
         extra_activity.removeChild(extra_activity.lastChild);
     }
-
-    if(is_extra.length === 0) extra_service.classList.add('d-none')
-    else extra_service.classList.remove('d-none')
 
     let _extra = Object.groupBy(is_extra, ex => { return ex.type })
     if(_extra['meal']) {
@@ -209,6 +207,7 @@ function setExtraDetail() {
         col_12.appendChild(header)
 
         _extra['meal'].forEach((meal) => {
+            sum += meal.qty*meal.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
             p.innerHTML = `<img src="${meal.icon}" class="me-3" width="40" height="auto"> ${meal.name} - [ <strong>Fare </strong> ${meal.qty} x ${meal.amount.toLocaleString("en-US")} ] : ${(meal.qty*meal.amount).toLocaleString("en-US")} THB`
@@ -231,11 +230,18 @@ function setExtraDetail() {
         col_12.appendChild(header)
 
         _extra['activity'].forEach((activity) => {
+            sum += activity.qty*activity.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
             p.innerHTML = `<img src="${activity.icon}" class="me-3" width="40" height="auto"> ${activity.name} - [ <strong>Fare </strong> ${activity.qty} x ${activity.amount.toLocaleString("en-US")} ] : ${(activity.qty*activity.amount).toLocaleString("en-US")} THB`
             extra_activity.appendChild(p)
         })
+    }
+
+    if(is_extra.length === 0) extra_service.classList.add('d-none')
+    else {
+        document.querySelector('#sum-of-extra').innerHTML = sum.toLocaleString("en-US")
+        extra_service.classList.remove('d-none')
     }
 }
 

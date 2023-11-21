@@ -92,7 +92,7 @@ class BookingController extends Controller
         $_departdate = explode('/', $request->departdate);
 
         $response = Http::reqres()->post('/booking/create', [
-            'route_id' => $request->booking_route_selected,
+            'route_id' => [$request->booking_route_selected],
             'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
             'fullname' => $fullname,
             'passenger_type' => $request->passenger_type,
@@ -103,16 +103,18 @@ class BookingController extends Controller
             'passportno' => $request->passport_number,
             'email' => $request->email,
             'address' => $request->address,
-            'meal_id' => $request->meal_id,
-            'meal_qty' => $request->meal_qty,
-            'activity_id' => $request->activity_id,
-            'activity_qty' => $request->activity_qty,
+            'meal_id' => [$request->meal_id],
+            'meal_qty' => [$request->meal_qty],
+            'activity_id' => [$request->activity_id],
+            'activity_qty' => [$request->activity_qty],
             'trip_type' => 'one-way',
             'book_channel' => 'ONLINE'
         ]);
         $res = $response->json();
+        // Log::debug($res);
 
-        return redirect()->route('booking-view', ['id' => $res['data']]);
+        return redirect()->route('home');
+        // return redirect()->route('booking-view', ['id' => $res['data']]);
     }
 
     private function setPassengerBooking($first_name, $last_name) {
@@ -133,29 +135,40 @@ class BookingController extends Controller
 
     // Round trip booking confirm
     public function bookingRoundConfirm(Request $request) {
-        // $_depart = $this->roundTripBooking(
-        //                     $request, 
-        //                     $request->booking_depart_selected, 
-        //                     $request->depart_meal_id,
-        //                     $request->depart_meal_qty,
-        //                     $request->depart_activity_id,
-        //                     $request->depart_activity_qty,
-        //                     $request->depart_date
-        //                 );
-        // $_return = $this->roundTripBooking(
-        //                     $request, 
-        //                     $request->booking_return_selected, 
-        //                     $request->return_meal_id,
-        //                     $request->return_meal_qty,
-        //                     $request->return_activity_id,
-        //                     $request->return_activity_qty,
-        //                     $request->return_date
-        //                 );
+        $route_id = [$request->booking_depart_selected, $request->booking_return_selected];
+        $meal_id = [$request->depart_meal_id, $request->return_meal_id];
+        $meal_qty = [$request->depart_meal_qty, $request->return_meal_qty];
+        $activity_id = [$request->depart_activity_id, $request->return_activity_id];
+        $activity_qty = [$request->depart_activity_qty, $request->return_activity_qty];
+        $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
+        $passenger = $this->numberOfPassenger($request->passenger_type);
+        $_departdate = explode('/', $request->departdate);
+        $_returndate = explode('/', $request->returndate);
 
-        // Log::debug($_depart);
-        // Log::debug($_return);
+        $response = Http::reqres()->post('/booking/create', [
+            'route_id' => $route_id,
+            'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
+            'returndate' => $_returndate[2].'-'.$_returndate[1].'-'.$_returndate[0],
+            'fullname' => $fullname,
+            'passenger_type' => $request->passenger_type,
+            'passenger' => $passenger['adult'],
+            'child_passenger' => $passenger['child'],
+            'infant_passenger' => $passenger['infant'],
+            'mobile' => $request->mobile,
+            'passportno' => $request->passport_number,
+            'email' => $request->email,
+            'address' => $request->address,
+            'meal_id' => $meal_id,
+            'meal_qty' => $meal_qty,
+            'activity_id' => $activity_id,
+            'activity_qty' => $activity_qty,
+            'trip_type' => 'round-trip',
+            'book_channel' => 'ONLINE'
+        ]);
 
-        Log::debug($request);
+        $res = $response->json();
+        // Log::debug($res);
+
         return redirect()->route('home');
     }
 

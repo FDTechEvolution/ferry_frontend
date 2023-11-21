@@ -9,7 +9,7 @@
                     @endphp
                     <h5 class="mb-0">{{ $station_depart['from'] }} - {{ $station_depart['to'] }}</h5>
                     <p class="mb-1"><span class="badge bg-primary fw-bold">Depart</span> {{ date('l d F Y' ,strtotime($d_date[1].'/'.$d_date[0].'/'.$d_date[2])) }}</p>
-                    <input type="hidden" name="depart_date" value="{{ $depart_date }}">
+                    <input type="hidden" name="departdate" value="{{ $depart_date }}">
 
                     <div class="d-flex">
                         <p class="is_d_depart_time mb-0 me-2 fw-bold"></p> : 
@@ -72,7 +72,7 @@
                     @endphp
                     <h5 class="mb-0">{{ $station_return['from'] }} - {{ $station_return['to'] }}</h5>
                     <p class="mb-1"><span class="badge bg-warning fw-bold">Return</span> {{ date('l d F Y' ,strtotime($r_date[1].'/'.$r_date[0].'/'.$r_date[2])) }}</p>
-                    <input type="hidden" name="return_date" value="{{ $return_date }}">
+                    <input type="hidden" name="returndate" value="{{ $return_date }}">
 
                     <div class="d-flex">
                         <p class="is_r_depart_time mb-0 me-2 fw-bold"></p> : 
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-4 pt-2">
-                    <div class="row text-center fw-bold mb-3">
+                    <div class="row text-center fw-bold mb-2">
                         <div class="col-4 text-start">Return</div>
                         <div class="col-4">Fare</div>
                         <div class="col-4">THB</div>
