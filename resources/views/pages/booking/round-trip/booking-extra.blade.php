@@ -104,14 +104,14 @@
                     <div class="col-12 mb-3 pb-2 border-bottom">
                         <div class="row">
                             <div class="col-1 d-flex justify-content-center align-items-center">
-                                <img src="{{$icon_url}}{{$activity['icon']['path']}}" width="80" id="depart-activity-img-{{ $key }}">
+                                <img src="{{$icon_url}}{{$activity['icon']['path'].'/'.$activity['icon']['name']}}" width="80" id="depart-activity-img-{{ $key }}">
                             </div>
                             <div class="col-7">
                                 <h6 class="mb-1" id="depart-activity-name-{{ $key }}">{{ $activity['name'] }}</h6>
-                                {!! $activity['detail'] !!}
+                                {!! $activity['description'] !!}
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
-                                <span class="depart-activity-amount-{{ $key }} me-2">{{ number_format($activity['price']) }}</span> THB
+                                <span class="depart-activity-amount-{{ $key }} me-2">{{ number_format($activity['amount']) }}</span> THB
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('depart', 'activity', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
@@ -232,14 +232,14 @@
                     <div class="col-12 mb-3 pb-2 border-bottom">
                         <div class="row">
                             <div class="col-1 d-flex justify-content-center align-items-center">
-                                <img src="{{$icon_url}}{{$activity['icon']['path']}}" width="80" id="return-activity-img-{{ $key }}">
+                                <img src="{{$icon_url}}{{$activity['icon']['path'].'/'.$activity['icon']['name']}}" width="80" id="return-activity-img-{{ $key }}">
                             </div>
                             <div class="col-7">
                                 <h6 class="mb-1" id="return-activity-name-{{ $key }}">{{ $activity['name'] }}</h6>
-                                {!! $activity['detail'] !!}
+                                {!! $activity['description'] !!}
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
-                                <span class="return-activity-amount-{{ $key }} me-2">{{ number_format($activity['price']) }}</span> THB
+                                <span class="return-activity-amount-{{ $key }} me-2">{{ number_format($activity['amount']) }}</span> THB
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('return', 'activity', {{ $key }})"><i class="fi fi-minus smaller"></i></button>

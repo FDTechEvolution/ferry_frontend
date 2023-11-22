@@ -70,13 +70,13 @@
         <h4 class="mb-0">Extra services</h4>
         <div class="row bg-warning-soft mx-3 p-3 mb-5">
             <div class="col-12">
-                <div class="row mb-3" id="payment-extra-shuttle-bus"></div>
+                <div class="row mb-3 d-none" id="payment-extra-shuttle-bus"></div>
 
-                <div class="row mb-3" id="payment-extra-longtail-boat"></div>
+                <div class="row mb-3 d-none" id="payment-extra-longtail-boat"></div>
 
-                <div class="row mb-3" id="payment-extra-meal"></div>
+                <div class="row mb-3 d-none" id="payment-extra-meal"></div>
 
-                <div class="row mb-3" id="payment-extra-activity"></div>
+                <div class="row mb-3 d-none" id="payment-extra-activity"></div>
             </div>
             <div class="col-12 text-end mt-3 pt-3 border-top border-secondary">
                 <h6 class="text-dark pe-4">Total THB <span id="sum-of-extra">0</span></h6>

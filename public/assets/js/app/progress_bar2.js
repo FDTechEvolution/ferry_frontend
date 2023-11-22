@@ -566,10 +566,16 @@ function setExtraDetail(type) {
     const extra_activity = extra_type.querySelector('.payment-extra-activity')
     const extra_shuttlebus = extra_type.querySelector('.payment-extra-shuttle-bus')
     const extra_longtailboat = extra_type.querySelector('.payment-extra-longtail-boat')
+
     while (extra_meal.firstChild) { extra_meal.removeChild(extra_meal.lastChild) }
     while (extra_activity.firstChild) { extra_activity.removeChild(extra_activity.lastChild) }
     while (extra_shuttlebus.firstChild) { extra_shuttlebus.removeChild(extra_shuttlebus.lastChild) }
     while (extra_longtailboat.firstChild) { extra_longtailboat.removeChild(extra_longtailboat.lastChild) }
+
+    extra_longtailboat.classList.add('d-none')
+    extra_shuttlebus.classList.add('d-none')
+    extra_activity.classList.add('d-none')
+    extra_meal.classList.add('d-none')
 
     // console.log(type, is_extra)
 
@@ -578,6 +584,7 @@ function setExtraDetail(type) {
 
     let _extra = Object.groupBy(is_extra, ex => { return ex.type })
     if(_extra['bus']) {
+        extra_shuttlebus.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
         let header = document.createElement('p')
@@ -595,12 +602,13 @@ function setExtraDetail(type) {
             sum += bus.qty*bus.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3 me-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
             extra_shuttlebus.appendChild(p)
         })
     }
 
     if(_extra['boat']) {
+        extra_longtailboat.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
         let header = document.createElement('p')
@@ -618,12 +626,13 @@ function setExtraDetail(type) {
             sum += boat.qty*boat.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-sailboat fs-1"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<i class="fa-solid fa-sailboat fs-3 me-3"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
             extra_longtailboat.appendChild(p)
         })
     }
 
     if(_extra['meal']) {
+        extra_meal.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
         let header = document.createElement('p')
@@ -647,6 +656,7 @@ function setExtraDetail(type) {
     }
 
     if(_extra['activity']) {
+        extra_activity.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
         let header = document.createElement('p')

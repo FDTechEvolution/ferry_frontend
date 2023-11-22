@@ -109,6 +109,10 @@ class BookingController extends Controller
             'meal_qty' => [$request->meal_qty],
             'activity_id' => [$request->activity_id],
             'activity_qty' => [$request->activity_qty],
+            'bus_id' => [$request->bus_id],
+            'bus_qty' => [$request->bus_qty],
+            'boat_id' => [$request->boat_id],
+            'boat_qty' => [$request->boat_qty],
             'trip_type' => 'one-way',
             'book_channel' => 'ONLINE'
         ]);
@@ -137,11 +141,16 @@ class BookingController extends Controller
 
     // Round trip booking confirm
     public function bookingRoundConfirm(Request $request) {
+        // Log::debug($request);
         $route_id = [$request->booking_depart_selected, $request->booking_return_selected];
         $meal_id = [$request->depart_meal_id, $request->return_meal_id];
         $meal_qty = [$request->depart_meal_qty, $request->return_meal_qty];
         $activity_id = [$request->depart_activity_id, $request->return_activity_id];
         $activity_qty = [$request->depart_activity_qty, $request->return_activity_qty];
+        $bus_id = [$request->depart_bus_id, $request->return_bus_id];
+        $bus_qty = [$request->depart_bus_qty, $request->return_bus_qty];
+        $boat_id = [$request->depart_boat_id, $request->return_boat_id];
+        $boat_qty = [$request->depart_boat_qty, $request->return_boat_qty];
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $_departdate = explode('/', $request->departdate);
@@ -164,12 +173,16 @@ class BookingController extends Controller
             'meal_qty' => $meal_qty,
             'activity_id' => $activity_id,
             'activity_qty' => $activity_qty,
+            'bus_id' => $bus_id,
+            'bus_qty' => $bus_qty,
+            'boat_id' => $boat_id,
+            'boat_qty' => $boat_qty,
             'trip_type' => 'round-trip',
             'book_channel' => 'ONLINE'
         ]);
 
         $res = $response->json();
-        // Log::debug($res);
+        Log::debug($res);
 
         return redirect()->route('home');
     }
