@@ -117,7 +117,7 @@ class BookingController extends Controller
             'book_channel' => 'ONLINE'
         ]);
         $res = $response->json();
-        // Log::debug($res);
+        Log::debug($res);
 
         return redirect()->route('home');
         // return redirect()->route('booking-view', ['id' => $res['data']]);
@@ -182,7 +182,7 @@ class BookingController extends Controller
         ]);
 
         $res = $response->json();
-        Log::debug($res);
+        // Log::debug($res);
 
         return redirect()->route('home');
     }

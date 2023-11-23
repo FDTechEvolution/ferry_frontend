@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\RouteMapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,12 @@ Route::controller(BookingController::class)->group(function() {
 
     Route::post('bookings', 'searchRoundTrip')->name('booking-round-trip');
     Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
+});
+
+Route::controller(TimetableController::class)->group(function() {
+    Route::get('time-table', 'index')->name('timetable-index');
+});
+
+Route::controller(RouteMapController::class)->group(function() {
+    Route::get('route-map', 'index')->name('routemap-index');
 });

@@ -25,13 +25,6 @@
     <!-- navbar : navigation -->
     <ul class="navbar-nav" id="navbar-menu">
 
-        <!-- home -->
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ route('home') }}">
-                Home
-            </a>
-        </li>
-
         <!-- booking -->
         <li class="nav-item">
             <a class="nav-link" href="#">
@@ -41,15 +34,22 @@
 
         <!-- viw booking -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                View your booking
+            <a class="nav-link" href="{{ route('timetable-index') }}">
+                Timetable
             </a>
         </li>
 
         <!-- meal -->
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('routemap-index') }}">
+                Route map
+            </a>
+        </li>
+
+        <!-- station -->
+        <li class="nav-item">
             <a class="nav-link" href="#">
-                Meal on board
+                Station
             </a>
         </li>
 
@@ -60,10 +60,10 @@
             </a>
         </li>
 
-        <!-- menu -->
+        <!-- review -->
         <li class="nav-item">
             <a class="nav-link" href="#">
-                Menu
+                Review
             </a>
         </li>
 
