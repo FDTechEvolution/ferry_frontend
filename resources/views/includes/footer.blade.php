@@ -4,7 +4,7 @@
     <div class="container text-dark pt-5 pb-2">
 
         <div class="row g-4 align-items-center">
-            <div class="col-lg-12 d-flex mb-0 text-center">
+            <div class="col-lg-12 d-lg-flex mb-0 text-center">
                 <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}" class="px-2" width="100%" height="60">
                 <img src="{{ asset('assets/images/aisasia.png') }}" class="px-2" width="100%" height="60">
                 <img src="{{ asset('assets/images/nokair-logo.png') }}" class="px-2" width="100%" height="60">

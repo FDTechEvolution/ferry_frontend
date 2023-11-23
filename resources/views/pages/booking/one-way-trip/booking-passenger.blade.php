@@ -1,8 +1,8 @@
 <div id="booking-route-passenger">
     <h4 class="mb-0">Passengers</h4>
     <small>Enter passenger detail</mall>
-    <div class="row mt-2 mb-5 border-radius-10 border border-primary">
-        <div class="col-12 py-3 bg-primary" style="border-radius: 10px 10px 0 0;">
+    <div class="row mt-2 mb-5 border-radius-10 border border-booking-passenger">
+        <div class="col-12 py-3 bg-booking-passenger" style="border-radius: 10px 10px 0 0;">
             Passenger 1 <span class="text-light">(Lead passenger)</span>
         </div>
         <div class="col-12 mt-3" id="lead-passenger">
@@ -119,7 +119,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Adult')"
-                :color="_('primary')"
+                :color="_('booking-passenger')"
             />
             @php
                 $is_passenger++;
@@ -132,7 +132,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Child')"
-                :color="_('primary')"
+                :color="_('booking-passenger')"
             />
             @php
                 $is_passenger++;
@@ -145,7 +145,7 @@
             <x-set-passenger 
                 :passenger_num="$is_passenger"
                 :type="_('Infant')"
-                :color="_('primary')"
+                :color="_('booking-passenger')"
             />
             @php
                 $is_passenger++;

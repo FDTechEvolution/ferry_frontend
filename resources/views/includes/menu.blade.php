@@ -14,7 +14,7 @@
             Logo : height: 70px max
         -->
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="assets/images/logo/logo_dark.svg" width="110" height="38" alt="...">
+            <img src="{{ asset('assets/images/logo_tiger_line_ferry.png') }}" alt="...">
         </a>
 
     </div>

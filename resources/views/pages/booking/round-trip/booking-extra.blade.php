@@ -3,7 +3,7 @@
     <span>Please selecte additional services</span>
     <div class="row mt-2 mb-4">
         <div class="col-12">
-            <h5 class="text-primary"><span class="badge bg-primary">Depart</span> {{ $station_depart['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_depart['to'] }}</h5>
+            <h5 class="text-primary"><span class="badge bg-booking-select-depart">Depart</span> {{ $station_depart['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_depart['to'] }}</h5>
         </div>
     </div>
     
@@ -131,7 +131,7 @@
 
     <div class="row mt-2 mb-4">
         <div class="col-12">
-            <h5 class="text-primary"><span class="badge bg-warning">Return</span> {{ $station_return['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_return['to'] }}</h5>
+            <h5 class="text-primary"><span class="badge bg-booking-select-return">Return</span> {{ $station_return['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_return['to'] }}</h5>
         </div>
     </div>
 

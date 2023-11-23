@@ -1,6 +1,6 @@
 <div id="booking-route-select">
     <div class="mb-6" id="booking-depart">
-        <h6><span class="badge bg-primary px-3 py-2">Depart</span> 
+        <h6><span class="badge bg-booking-select-depart px-3 py-2">Depart</span> 
             @if(!empty($depart_routes))
                 {{ $station_depart['from'] }} <span class="mx-3">To</span> {{ $station_depart['to'] }}
             @else
@@ -59,7 +59,7 @@
     </div>
     
     <div class="mt-4" id="booking-return">
-        <h6><span class="badge bg-warning px-3 py-2 text-light">Return</span> 
+        <h6><span class="badge bg-booking-select-return px-3 py-2 text-light">Return</span> 
             @if(!empty($return_routes)) 
                 {{ $station_return['from'] }} <span class="mx-3">To</span> {{ $station_return['to'] }}
             @else

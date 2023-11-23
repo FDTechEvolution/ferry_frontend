@@ -1,6 +1,6 @@
 <div id="booking-route-payment">
     <h4 class="mb-2">Litinerary</h4>
-    <div class="row bg-primary-soft mx-3 p-3 mb-5">
+    <div class="row bg-booking-payment-litinerary mx-3 p-3 mb-5">
         <div class="col-12 mb-5">
             <div class="row depart-litinerary">
                 <div class="col-8 border-end border-secondary border-2">
@@ -8,7 +8,7 @@
                         $d_date = explode('/', $depart_date)
                     @endphp
                     <h5 class="mb-0">{{ $station_depart['from'] }} - {{ $station_depart['to'] }}</h5>
-                    <p class="mb-1"><span class="badge bg-primary fw-bold">Depart</span> {{ date('l d F Y' ,strtotime($d_date[1].'/'.$d_date[0].'/'.$d_date[2])) }}</p>
+                    <p class="mb-1"><span class="badge bg-booking-select-depart fw-bold">Depart</span> {{ date('l d F Y' ,strtotime($d_date[1].'/'.$d_date[0].'/'.$d_date[2])) }}</p>
                     <input type="hidden" name="departdate" value="{{ $depart_date }}">
 
                     <div class="d-flex">
@@ -71,7 +71,7 @@
                         $r_date = explode('/', $return_date)
                     @endphp
                     <h5 class="mb-0">{{ $station_return['from'] }} - {{ $station_return['to'] }}</h5>
-                    <p class="mb-1"><span class="badge bg-warning fw-bold">Return</span> {{ date('l d F Y' ,strtotime($r_date[1].'/'.$r_date[0].'/'.$r_date[2])) }}</p>
+                    <p class="mb-1"><span class="badge bg-booking-select-return fw-bold">Return</span> {{ date('l d F Y' ,strtotime($r_date[1].'/'.$r_date[0].'/'.$r_date[2])) }}</p>
                     <input type="hidden" name="returndate" value="{{ $return_date }}">
 
                     <div class="d-flex">
@@ -134,16 +134,16 @@
 
     <div id="payment-extra-service">
         <h4 class="mb-0">Extra services</h4>
-        <div class="row bg-warning-soft mx-3 p-3 mb-5 extra-service-list">
+        <div class="row bg-booking-payment-extra mx-3 p-3 mb-5 extra-service-list">
             <div class="col-12 service-list" id="depart-extra">
-                <h5 class="text-dark"><span class="badge bg-primary">Depart</span> Extra service</h5>
+                <h5 class="text-dark"><span class="badge bg-booking-select-depart">Depart</span> Extra service</h5>
                 <div class="row ps-4 mb-3 payment-extra-shuttle-bus"></div>
                 <div class="row ps-4 mb-3 payment-extra-longtail-boat"></div>
                 <div class="row ps-4 mb-3 payment-extra-meal"></div>
                 <div class="row ps-4 mb-3 payment-extra-activity"></div>
             </div>
             <div class="col-12 service-list" id="return-extra">
-                <h5 class="text-dark"><span class="badge bg-warning">Return</span> Extra service</h5>
+                <h5 class="text-dark"><span class="badge bg-booking-select-return">Return</span> Extra service</h5>
                 <div class="row ps-4 mb-3 payment-extra-shuttle-bus"></div>
                 <div class="row ps-4 mb-3 payment-extra-longtail-boat"></div>
                 <div class="row ps-4 mb-3 payment-extra-meal"></div>
@@ -157,7 +157,7 @@
 
     <h4 class="mb-0">Passenger(s)</h4>
     <p class="mb-2">Passenger detail</p>
-    <div class="row bg-success-soft mx-3 p-4 mb-5">
+    <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
         <div class="col-12">
             <div class="row" id="payment-passenger-detail">
                 

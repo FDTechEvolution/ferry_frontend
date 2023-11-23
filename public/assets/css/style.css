@@ -1,3 +1,9 @@
+@media only screen and (min-width: 768px) {
+    body:not(.layout-admin) .section, body:not(.layout-admin) section {
+        padding: 160px 0;
+    }
+}
+
 #navbar-menu a.nav-link.active {
     font-weight: bold;
     border-bottom: 2px solid #0a3961 !important;
@@ -43,6 +49,33 @@
 }
 .text-second-color {
     color: #00bf63;
+}
+.bg-booking-cover {
+    background-color: #075ae8;
+}
+.bg-booking-passenger {
+    background-color: #16aded;
+}
+.border-booking-passenger {
+    border-color: #16aded;
+}
+.bg-booking-select-depart,
+.booking-route-list.active,
+.booking-depart-list.active {
+    background-color: #16aded;
+}
+.bg-booking-select-return,
+.booking-return-list.active {
+    background-color: #ff914d;
+}
+.bg-booking-payment-litinerary {
+    background-color: #eefaff;
+}
+.bg-booking-payment-extra {
+    background-color: #fae5d7;
+}
+.bg-booking-payment-passenger {
+    background-color: #eafaee;
 }
 
 .button-green-bg {
@@ -96,13 +129,6 @@
     max-width: 48px;
 }
 
-.booking-route-list.active,
-.booking-depart-list.active {
-    background-color: lightblue;
-}
-.booking-return-list.active {
-    background-color: #fad776;
-}
 .booking-route-list.active .station-name,
 .booking-depart-list.active .station-name,
 .booking-return-list.active .station-name {

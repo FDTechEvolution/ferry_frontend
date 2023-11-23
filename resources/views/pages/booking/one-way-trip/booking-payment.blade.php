@@ -1,6 +1,6 @@
 <div id="booking-route-payment">
     <h4 class="mb-2">Litinerary</h4>
-    <div class="row bg-primary-soft mx-3 p-3 mb-5">
+    <div class="row bg-booking-payment-litinerary mx-3 p-3 mb-5">
         <div class="col-12">
             <div class="row depart-litinerary">
                 <div class="col-12">
@@ -68,7 +68,7 @@
 
     <div id="payment-extra-service">
         <h4 class="mb-0">Extra services</h4>
-        <div class="row bg-warning-soft mx-3 p-3 mb-5">
+        <div class="row bg-booking-payment-extra mx-3 p-3 mb-5">
             <div class="col-12">
                 <div class="row mb-3 d-none" id="payment-extra-shuttle-bus"></div>
 
@@ -86,7 +86,7 @@
 
     <h4 class="mb-0">Passenger(s)</h4>
     <p class="mb-2">Passenger detail</p>
-    <div class="row bg-success-soft mx-3 p-4 mb-5">
+    <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
         <div class="col-12">
             <div class="row" id="payment-passenger-detail">
                 
