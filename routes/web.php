@@ -22,13 +22,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(BookingController::class)->group(function() {
     Route::get('booking', 'search')->name('booking-search');
-    Route::get('booking/view/{id}', 'view')->name('booking-view');
+    // Route::get('booking/view', 'view')->name('booking-view');
     
     Route::post('booking', 'index')->name('booking-index');
     Route::post('booking/confirm', 'bookingConfirm')->name('booking-confirm');
 
     Route::post('bookings', 'searchRoundTrip')->name('booking-round-trip');
     Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
+
+    Route::post('booking/view', 'findBookingRecord')->name('booking-record');
 });
 
 Route::controller(TimetableController::class)->group(function() {

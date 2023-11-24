@@ -4,6 +4,7 @@
     }
 }
 
+
 #navbar-menu a.nav-link.active {
     font-weight: bold;
     border-bottom: 2px solid #0a3961 !important;
@@ -146,4 +147,64 @@
 
 .service-list:last-child {
     border-top: 1px solid #dd0000;
+}
+
+/* booking step process */
+
+.process-steps {
+    padding: 0;
+}
+.process-step-item {
+    padding: 1em 0 1em;
+    margin: 0.8em 0.8em;
+    border-bottom: 0;
+    background: #d9d9d9;
+    color: #333 !important;
+    font-weight: 500;
+    margin-right: 30px;
+}
+.process-step-item.complete {
+    background: #b7e2f4;
+}
+.process-step-item.active {
+    background: #16aded;
+}
+.process-step-item.active:after {
+    background: #16aded;
+    border-left: 34px solid #16aded;
+}
+.process-step-item.complete:after {
+    background: #b7e2f4;
+    border-left: 34px solid #b7e2f4;
+}
+.process-step-item:after {
+    content: " ";
+    position: absolute;
+    z-index: 2;
+    right: -35px;
+    top: 8px;
+    background: #d9d9d9;
+    transform: translateX(-50%) rotate(45deg);
+    border-top: 17px solid transparent;
+    border-left: 34px solid #d9d9d9;
+    border-bottom: 17px solid transparent;
+}
+.process-step-item:before {
+    content: " ";
+    position: absolute;
+    z-index: 1;
+    left: 6px;
+    top: 6px;
+    background: #fff;
+    transform: translateX(-50%) rotate(45deg);
+    border-top: 17px solid transparent;
+    border-left: 34px solid #fff;
+    border-bottom: 17px solid transparent;
+    border: 0;
+    border-radius: 0;
+    width: 35px;
+    height: 35px;
+}
+.process-steps-primary>.active:before, .process-steps-primary>.complete:before {
+    background: #fff;
 }

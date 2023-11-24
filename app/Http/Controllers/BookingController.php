@@ -253,4 +253,26 @@ class BookingController extends Controller
 
         return array($_routes, $_station);
     }
+
+    public function findBookingRecord(Request $request) {
+        if(isset($request->booking_number) && $request->booking_number != '') {
+            $response = Http::reqres()->get('/booking/record/'.$request->booking_number);
+            $res = $response->json();
+
+            $customers = $this->setCustomer($res['data']['customer']);
+            Log::debug($customers);
+            return view('pages.booking.view', ['booking' => $res['data'], 'customers' => $customers]);
+        }
+
+        return redirect()->route('home');
+    }
+
+    private function setCustomer($res) {
+        $customers = [];
+        foreach($res as $cus) {
+            $customers[$cus['type']][] = $cus;
+        }
+
+        return $customers;
+    }
 }

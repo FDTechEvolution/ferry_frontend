@@ -67,3 +67,17 @@ function clearPromotionCode(type) {
     input_promo.type = 'hidden'
     div_promo.classList.add('d-none')
 }
+
+const view_booking = document.querySelector('#view-your-booking')
+if(view_booking) {
+    const b_search = document.querySelector('#booking-record')
+    const search_b = document.querySelector('#booking-record-back')
+    view_booking.addEventListener('click', () => {
+        b_search.classList.remove('d-none')
+        view_booking.classList.add('d-none')
+    })
+    search_b.addEventListener('click', () => {
+        b_search.classList.add('d-none')
+        view_booking.classList.remove('d-none')
+    })
+}

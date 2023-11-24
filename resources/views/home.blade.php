@@ -12,15 +12,23 @@
                         <div class="col-sm-12 col-lg-2">
                             <span class="d-block p-2 text-light">Booking <i class="fa-solid fa-ship ms-1 fs-4"></i></span>
                         </div>
-                        <div class="col-sm-12 col-lg-7">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="nav flex nav-pills me-3" id="booking-tab" aria-orientation="horizontal">
                                 <a class="nav-link px-4 active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Round Trip Ticket</a>
                                 <a class="nav-link px-4" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">One Way Ticket</a>
                                 <a class="nav-link px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island</a>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-lg-3 text-end">
-                            <a href="#" class="d-block p-2 text-light">View your booking <i class="fa-regular fa-calendar-days fs-4 ms-1"></i></a>
+                        <div class="col-sm-12 col-lg-4 text-end">
+                            <form novalidate class="bs-validate d-none" id="booking-record" method="POST" action="{{ route('booking-record') }}">
+                                @csrf
+                                <div class="input-group">
+                                    <input required type="text" class="form-control form-control-sm" name="booking_number" placeholder="Booking Number..." autocomplete="off">
+                                    <button class="btn btn-sm button-link bg-light px-2" type="button" id="booking-record-back"><i class="fi fi-close me-0"></i></button>
+                                    <button class="btn btn-sm button-orange-bg" type="submit"><i class="fi fi-search me-0"></i></button>
+                                </div>
+                            </form>
+                            <p class="text-light mb-0"><span class="cursor-pointer" id="view-your-booking">View your booking <i class="fa-regular fa-calendar-days fs-4 ms-1"></i></span></p>
                         </div>
                     </div>
                     <div class="row mb-4">
