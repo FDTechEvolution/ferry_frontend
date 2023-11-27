@@ -93,7 +93,7 @@ class BookingController extends Controller
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $_departdate = explode('/', $request->departdate);
 
-        $response = Http::reqres()->post('/booking/create', [
+        $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => [$request->booking_route_selected],
             'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
             'fullname' => $fullname,
@@ -156,7 +156,7 @@ class BookingController extends Controller
         $_departdate = explode('/', $request->departdate);
         $_returndate = explode('/', $request->returndate);
 
-        $response = Http::reqres()->post('/booking/create', [
+        $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => $route_id,
             'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
             'returndate' => $_returndate[2].'-'.$_returndate[1].'-'.$_returndate[0],
@@ -192,7 +192,7 @@ class BookingController extends Controller
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $_date = explode('/', $date);
 
-        $response = Http::reqres()->post('/booking/create', [
+        $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => $route_id,
             'departdate' => $_date[2].'-'.$_date[1].'-'.$_date[0],
             'fullname' => $fullname,
@@ -256,7 +256,7 @@ class BookingController extends Controller
 
     public function findBookingRecord(Request $request) {
         if(isset($request->booking_number) && $request->booking_number != '') {
-            $response = Http::reqres()->get('/booking/record/'.$request->booking_number);
+            $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number);
             $res = $response->json();
 
             $customers = $this->setCustomer($res['data']['customer']);
