@@ -113,7 +113,7 @@
                         id="progress-payment"
                         class="btn-sm d-none"
                         :type="_('submit')"
-                        :text="_('Payment')"
+                        :text="_('Book / Payment')"
                         disabled
                     />
                 </div>

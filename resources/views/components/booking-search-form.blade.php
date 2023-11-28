@@ -79,13 +79,13 @@
                         <small class="smaller">Above 12 year old</small>
                     </div>
                     <div class="col-md-2 p-0 text-end">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="dec('{{ $type }}{{ $form_type }}_adult[]')"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="adult" onClick="dec('{{ $type }}{{ $form_type }}_adult[]', this)"><i class="fi fi-minus smaller"></i></button>
                     </div>
                     <div class="col-md-2 p-0 text-center">
-                        <input type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_adult[]" value="0">
+                        <input required type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_adult[]" value="0">
                     </div>
                     <div class="col-md-2 p-0">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="inc('{{ $type }}{{ $form_type }}_adult[]')"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="adult" onClick="inc('{{ $type }}{{ $form_type }}_adult[]', this)"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
 
@@ -95,13 +95,13 @@
                         <small class="smaller">2 - 12 year old</small>
                     </div>
                     <div class="col-md-2 p-0 text-end">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="dec('{{ $type }}{{ $form_type }}_child[]')"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="child" onClick="dec('{{ $type }}{{ $form_type }}_child[]', this)"><i class="fi fi-minus smaller"></i></button>
                     </div>
                     <div class="col-md-2 p-0 text-center">
                         <input type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_child[]" value="0">
                     </div>
                     <div class="col-md-2 p-0">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="inc('{{ $type }}{{ $form_type }}_child[]')"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="child" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_child[]', this)" disabled><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
 
@@ -111,13 +111,13 @@
                         <small class="smaller">Below 2 year old</small>
                     </div>
                     <div class="col-md-2 p-0 text-end">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="dec('{{ $type }}{{ $form_type }}_infant[]')"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="infant" onClick="dec('{{ $type }}{{ $form_type }}_infant[]', this)"><i class="fi fi-minus smaller"></i></button>
                     </div>
                     <div class="col-md-2 p-0 text-center">
                         <input type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_infant[]" value="0">
                     </div>
                     <div class="col-md-2 p-0">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" onClick="inc('{{ $type }}{{ $form_type }}_infant[]')"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="infant" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_infant[]', this)" disabled><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,11 @@ class BookingController extends Controller
             'round' => 'Round trip',
             'multi' => 'Multiple'
         ];
+    protected $BookingStatus = [
+        'DR' => 'Pending',
+        'CO' => 'Confirmed',
+        'VO' => 'Canceled'
+    ];
 
     public function __construct() {
         $this->IconUrl = config('services.store.image');
@@ -117,7 +122,11 @@ class BookingController extends Controller
             'book_channel' => 'ONLINE'
         ]);
         $res = $response->json();
-        Log::debug($res);
+        $data = $res['data'];
+
+        if($data['respCode'] == '0000') {
+            return redirect()->away($data['webPaymentUrl']);
+        }
 
         return redirect()->route('home');
         // return redirect()->route('booking-view', ['id' => $res['data']]);
@@ -222,9 +231,13 @@ class BookingController extends Controller
 
     private function setInputType($request) {
         if($request->_type == 'round')
-            return array($request->roundreturn_adult[0], $request->roundreturn_child[0], $request->roundreturn_infant[0]);
+            return array($this->setupAdultPassenger($request->roundreturn_adult[0]), $request->roundreturn_child[0], $request->roundreturn_infant[0]);
         if($request->_type == 'one')
-            return array($request->onedepart_adult[0], $request->onedepart_child[0], $request->onedepart_infant[0]);
+            return array($this->setupAdultPassenger($request->onedepart_adult[0]), $request->onedepart_child[0], $request->onedepart_infant[0]);
+    }
+
+    private function setupAdultPassenger($adult) {
+        return $adult == 0 ? 1 : $adult;
     }
 
     private function setStation($name, $pier) {
@@ -255,13 +268,15 @@ class BookingController extends Controller
     }
 
     public function findBookingRecord(Request $request) {
+        // test bookingno : BO2311280075
         if(isset($request->booking_number) && $request->booking_number != '') {
             $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number);
             $res = $response->json();
+            $booking = $res['data'];
 
             $customers = $this->setCustomer($res['data']['customer']);
-            Log::debug($customers);
-            return view('pages.booking.view', ['booking' => $res['data'], 'customers' => $customers]);
+            Log::debug($booking);
+            return view('pages.booking.view', ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus]);
         }
 
         return redirect()->route('home');

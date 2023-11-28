@@ -19,17 +19,30 @@
 //     })
 // }
 
-function inc(element) {
+function inc(element, e) {
+    let is_type = e.getAttribute('data-type')
+    if(is_type === 'adult') {
+        let undis = document.querySelectorAll('[data-inc="disabled"]')
+        undis.forEach((item) => { item.disabled = false })
+    }
     const el = document.querySelector(`[name="${element}"]`)
     el.value = parseInt(el.value) + 1
     updatePassenger(element)
 }
 
-function dec(element) {
+function dec(element, e) {
+    let is_type = e.getAttribute('data-type')
     const el = document.querySelector(`[name="${element}"]`)
     if(parseInt(el.value) > 0) {
-        el.value = parseInt(el.value) -1
-        updatePassenger(element)
+        if(is_type === 'adult') {
+            if(el.value > 1) {
+                el.value = parseInt(el.value) -1
+                updatePassenger(element)
+            }
+        }else{
+            el.value = parseInt(el.value) -1
+            updatePassenger(element)
+        }
     }
 }
 
