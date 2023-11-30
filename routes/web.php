@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\RouteMapController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,10 @@ Route::controller(TimetableController::class)->group(function() {
 
 Route::controller(RouteMapController::class)->group(function() {
     Route::get('route-map', 'index')->name('routemap-index');
+});
+
+Route::controller(PaymentController::class)->group(function() {
+    Route::get('payment', 'index')->name('payment-index');
+    Route::get('payment/print/{bookingno}', 'print')->name('payment-print');
+    Route::post('payment/create', 'payment')->name('payment-link');
 });

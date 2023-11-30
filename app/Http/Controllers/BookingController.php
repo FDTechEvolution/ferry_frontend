@@ -17,7 +17,7 @@ class BookingController extends Controller
             'multi' => 'Multiple'
         ];
     protected $BookingStatus = [
-        'DR' => 'Pending',
+        'DR' => 'Wait PAYMENT',
         'CO' => 'Confirmed',
         'VO' => 'Canceled'
     ];
@@ -123,13 +123,13 @@ class BookingController extends Controller
         ]);
         $res = $response->json();
         $data = $res['data'];
+        $booking_id = $res['booking'];
 
         if($data['respCode'] == '0000') {
-            return redirect()->away($data['webPaymentUrl']);
+            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id]);
         }
-
+        
         return redirect()->route('home');
-        // return redirect()->route('booking-view', ['id' => $res['data']]);
     }
 
     private function setPassengerBooking($first_name, $last_name) {
@@ -191,8 +191,12 @@ class BookingController extends Controller
         ]);
 
         $res = $response->json();
-        // Log::debug($res);
+        $data = $res['data'];
 
+        if($data['respCode'] == '0000') {
+            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl']]);
+        }
+        
         return redirect()->route('home');
     }
 
@@ -275,7 +279,7 @@ class BookingController extends Controller
             $booking = $res['data'];
 
             $customers = $this->setCustomer($res['data']['customer']);
-            Log::debug($booking);
+            // Log::debug($booking);
             return view('pages.booking.view', ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus]);
         }
 

@@ -79,6 +79,10 @@
     background-color: #eafaee;
 }
 
+.button-blue-bg {
+    background-color: #075ae8 !important;
+    color: #fff !important;
+}
 .button-green-bg {
     background-color: #00bf63 !important;
     color: #fff !important;
@@ -94,6 +98,10 @@
 }
 .button-orange-bg:hover {
     background-color: #d95402;
+    color: #fff;
+}
+.button-blue-bg:hover {
+    background-color: #0f56d0;
     color: #fff;
 }
 
