@@ -26,3 +26,5 @@
 <!-- favicon -->
 <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 <!-- <link rel="apple-touch-icon" href="demo.files/logo/icon_512x512.png"> -->
+
+@yield('head_meta')

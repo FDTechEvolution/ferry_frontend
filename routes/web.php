@@ -32,6 +32,7 @@ Route::controller(BookingController::class)->group(function() {
     Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
 
     Route::post('booking/view', 'findBookingRecord')->name('booking-record');
+    Route::post('ajax/booking/check-booking', 'checkPersonBookingRecord');
 });
 
 Route::controller(TimetableController::class)->group(function() {

@@ -16,7 +16,7 @@
                             <div class="nav flex nav-pills me-3" id="booking-tab" aria-orientation="horizontal">
                                 <a class="nav-link px-4 active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Round Trip Ticket</a>
                                 <a class="nav-link px-4" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">One Way Ticket</a>
-                                <a class="nav-link px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island</a>
+                                <a class="nav-link px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island <img src="{{ asset('coconut_tree.svg') }}" style="width: 30px; margin-top: -10px;"></a>
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-4 text-end">

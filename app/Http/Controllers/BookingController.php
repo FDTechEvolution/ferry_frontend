@@ -277,13 +277,28 @@ class BookingController extends Controller
             $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number);
             $res = $response->json();
             $booking = $res['data'];
+            $addons = $res['addon'];
 
             $customers = $this->setCustomer($res['data']['customer']);
+            $station_to = $this->setRoute($res['m_route']);
+            $station_form = $res['m_route'];
             // Log::debug($booking);
-            return view('pages.booking.view', ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus]);
+            return view('pages.booking.view', 
+                        ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
+                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $station_to, 'icon_url' => $this->IconUrl
+                        ]);
         }
 
         return redirect()->route('home');
+    }
+
+    public function checkPersonBookingRecord(Request $request) {
+        if(isset($request->booking_number) && $request->booking_number != '') {
+            $response = Http::reqres()->get('/online-booking/check/person/'.$request->booking_number.'/'.$request->booking_current);
+            $res = $response->json();
+
+            return response()->json(['data' => $res], 200);
+        }
     }
 
     private function setCustomer($res) {
@@ -293,5 +308,23 @@ class BookingController extends Controller
         }
 
         return $customers;
+    }
+
+    private function setRoute($res) {
+        $station_to = [];
+        foreach($res as $r) {
+            $name = $r['station_to']['name'];
+            $pier = $r['station_to']['piername'] != null ? ' ('.$r['station_to']['piername'].')' : '';
+            $depart = $r['depart_time'];
+            $arrive = $r['arrive_time'];
+            $station = $name.$pier.' ['.$this->setTime($depart).' - '.$this->setTime($arrive).']';
+            array_push($station_to, ['id' => $r['id'], 'name' => $station]);
+        }
+
+        return $station_to;
+    }
+
+    private function setTime($time) {
+        return date_format(date_create($time), 'H:i');
     }
 }

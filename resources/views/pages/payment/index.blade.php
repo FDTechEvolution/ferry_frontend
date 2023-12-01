@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-center align-items-center">
             <a href="{{ route('home') }}" class="btn btn-sm bg-main-color-2 text-light rounded"><i class="fi fi-home me-2"></i> Back To Home</a>
             <span class="mx-3">OR</span>
-            <button class="btn btn-sm bg-main-color-2 text-light rounded" id="submit-booking-record"><i class="fa-regular fa-calendar-days me-2"></i> View Route Booking</button>
+            <button class="btn btn-sm bg-main-color-2 text-light rounded" id="submit-booking-record"><i class="fa-regular fa-calendar-days me-2"></i> View Your Booking</button>
             <form action="{{ route('booking-record') }}" id="booking-record" method="POST">
                 @csrf
                 <input type="hidden" name="booking_number" value="{{ $_b }}">

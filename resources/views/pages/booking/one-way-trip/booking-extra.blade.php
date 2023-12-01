@@ -24,10 +24,10 @@
                         <span class="extra-bus-amount-{{ $key }} me-2">{{ number_format($bus['amount']) }}</span> THB
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('bus', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('bus', '{{ $key }}')"><i class="fi fi-minus smaller"></i></button>
                         <input type="number" name="bus_qty[]" id="extra-bus-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
                         <input type="hidden" name="bus_id[]" value="{{ $bus['id'] }}">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('bus', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('bus', '{{ $key }}')"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
             </div>
@@ -53,10 +53,10 @@
                         <span class="extra-boat-amount-{{ $key }} me-2">{{ number_format($boat['amount']) }}</span> THB
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('boat', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('boat', '{{ $key }}')"><i class="fi fi-minus smaller"></i></button>
                         <input type="number" name="boat_qty[]" id="extra-boat-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
                         <input type="hidden" name="boat_id[]" value="{{ $boat['id'] }}">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('boat', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('boat', '{{ $key }}')"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
             </div>
@@ -82,10 +82,10 @@
                         <span class="extra-meal-amount-{{ $key }} me-2">{{ number_format($meal['amount']) }}</span> THB
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('meal', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('meal', '{{ $key }}')"><i class="fi fi-minus smaller"></i></button>
                         <input type="number" name="meal_qty[]" id="extra-meal-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
                         <input type="hidden" name="meal_id[]" value="{{ $meal['id'] }}">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('meal', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('meal', '{{ $key }}')"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
             </div>
@@ -112,10 +112,10 @@
                         <span class="extra-activity-amount-{{ $key }} me-2">{{ number_format($activity['amount']) }}</span> THB
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('activity', {{ $key }})"><i class="fi fi-minus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('activity', '{{ $key }}')"><i class="fi fi-minus smaller"></i></button>
                         <input type="number" name="activity_qty[]" id="extra-activity-index-{{ $key }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
                         <input type="hidden" name="activity_id[]" value="{{ $activity['id'] }}">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('activity', {{ $key }})"><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('activity', '{{ $key }}')"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
             </div>
