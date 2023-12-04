@@ -8,7 +8,9 @@
 <div class="px-3 py-2 bg-primary lazy text-light">
     <div class="row">
         <div class="col-9 offset-1 d-flex align-items-center">
-            <h4 class="my-2">View your booking</h4>
+            <h4 class="my-2" style="line-height: 20px;">View your booking<br/>
+                <span class="smaller mb-0" id="booking-number">{{ $booking['booking_number'] }}</span>
+            </h4>
         </div>
         <div class="col-2 text-center">
             <p class="mb-1">status</p>
@@ -29,18 +31,20 @@
 
 @section('content')
 <div class="row">
-    @if($booking['ispayment'] == 'N')
-    <div class="col-12 text-center mb-3">
-        <form method="POST" action="{{ route('payment-link') }}">
-            @csrf
-            <input type="hidden" name="booking_number" value="{{ $booking['booking_number'] }}">
-            <button type="submit" class="btn button-green-bg rounded px-5 py-2">Payment</button>
-        </form>
-    </div>
-    @elseif($booking['ispayment'] == 'Y')
-    <div class="col-12 text-center mb-3">
-        <a href="{{ route('payment-print', ['bookingno' => $booking['booking_number']]) }}" class="btn button-blue-bg rounded px-5 py-2" target="_blank">Print Bill</a>
-    </div>
+    @if($booking['do_update'])
+        @if($booking['ispayment'] == 'N')
+        <div class="col-12 text-center mb-3">
+            <form method="POST" action="{{ route('payment-link') }}">
+                @csrf
+                <input type="hidden" name="booking_number" value="{{ $booking['booking_number'] }}">
+                <button type="submit" class="btn button-green-bg rounded px-5 py-2">Payment</button>
+            </form>
+        </div>
+        @elseif($booking['ispayment'] == 'Y')
+        <div class="col-12 text-center mb-3">
+            <a href="{{ route('payment-print', ['bookingno' => $booking['booking_number']]) }}" class="btn button-blue-bg rounded px-5 py-2" target="_blank">Print Bill</a>
+        </div>
+        @endif
     @endif
     <div class="col-12">
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
@@ -49,16 +53,40 @@
             <div class="col-12">
                 <div class="row" id="payment-passenger-detail">
                     @foreach($customers as $key => $customer)
-                        <h6 class="fw-bold mb-1">{{ $key }}</h6>
-                        @foreach($customer as $cus)
-                            <div class="d-flex">
-                                <p class="ms-3">{{ $cus['name'] }}</p>
-                                <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
-                                @if($cus['email'] != null)
-                                    <p class="ms-3"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
-                                @endif
-                            </div>
-                        @endforeach
+                        @if($key === 'ADULT')
+                            <h6 class="fw-bold mb-1">Adult</h6>
+                            @foreach($customer as $cus)
+                                <div class="d-flex">
+                                    <p class="ms-3">{{ $cus['name'] }}</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                    @if($cus['email'] != null)
+                                        <p class="ms-3"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
+                                    @endif
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                    @foreach($customers as $key => $customer)
+                        @if($key === 'CHILD')
+                            <h6 class="fw-bold mb-1">Child</h6>
+                            @foreach($customer as $cus)
+                                <div class="d-flex">
+                                    <p class="ms-3">{{ $cus['name'] }}</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                    @foreach($customers as $key => $customer)
+                        @if($key === 'INFANT')
+                            <h6 class="fw-bold mb-1">Infan</h6>
+                            @foreach($customer as $cus)
+                                <div class="d-flex">
+                                    <p class="ms-3">{{ $cus['name'] }}</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                </div>
+                            @endforeach
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -99,7 +127,14 @@
                             @foreach($customer as $cus)
                                 <p class="mb-1">{{ $cus['name'] }}</p>
                             @endforeach
-                            <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
+                            @if($booking['do_update'])
+                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
+                                <form method="POST" id="form-confirm-merge" action="{{ route('booking-record') }}">
+                                    @csrf
+                                    <input type="hidden" name="booking_number" id="booking-number-current" value="{{ $booking['booking_number'] }}">
+                                    <input type="hidden" name="booking_number_new" id="booking-number-new" value="">
+                                </form>
+                            @endif
                         </div>
                         <div class="col-3 text-center">
                             <h6 class="fw-bold mb-1">Extra detail</h6>
@@ -108,13 +143,16 @@
                             @endforeach
                         </div>
                     @endforeach
-                    <div class="col-12 text-end mt-3">
-                        <button class="btn btn-sm button-orange-bg rounded py-1 px-5">Edit</button>
-                    </div>
+                    @if($booking['do_update'])
+                        <div class="col-12 text-end mt-3">
+                            <button class="btn btn-sm button-orange-bg rounded py-1 px-5">Edit</button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
 
+        @if($booking['do_update'])
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
             <div class="col-12">
                 <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
@@ -172,6 +210,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <h4 class="mb-0 fw-bold">Extra Services</h4>
         <p class="mb-2">please select youradditional services</p>
@@ -182,9 +221,11 @@
                     <div class="card-body bg-booking-payment-extra">
                         <h5 class="card-title">Meal</h5>
                         <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
-                        <div class="text-center mt-2">
-                            <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
-                        </div>
+                        @if($booking['do_update'])
+                            <div class="text-center mt-2">
+                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -194,14 +235,17 @@
                     <div class="card-body bg-booking-payment-extra">
                         <h5 class="card-title">Daytrip</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="text-center mt-2">
-                            <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['activities'])) disabled @endif>Select</button>
-                        </div>
+                        @if($booking['do_update'])
+                            <div class="text-center mt-2">
+                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['activities'])) disabled @endif>Select</button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
+        @if($booking['do_update'])
         <div class="row bg-warning-soft mx-3 p-4 mb-5">
             <div class="col-12">
                 <h4 class="mb-1 text-dark fw-bold">Contact Services</h4>
@@ -214,6 +258,7 @@
                 <button class="btn btn-sm button-green-bg">Update</button>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @stop

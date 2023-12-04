@@ -47,7 +47,10 @@
                                     />
                                 </div>
                                 <div class="tab-pane fade text-light" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                                    Soon...
+                                    <x-booking-multi-ticket 
+                                        :type="_('multi')"
+                                        :stations="$stations"
+                                    />
                                 </div>
                             </div>
                         </div>

@@ -274,6 +274,9 @@ class BookingController extends Controller
     public function findBookingRecord(Request $request) {
         // test bookingno : BO2311280075
         if(isset($request->booking_number) && $request->booking_number != '') {
+            if(isset($request->booking_number_new)) {
+                $this->mergeBooking($request);
+            }
             $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number);
             $res = $response->json();
             $booking = $res['data'];
@@ -293,8 +296,8 @@ class BookingController extends Controller
     }
 
     public function checkPersonBookingRecord(Request $request) {
-        if(isset($request->booking_number) && $request->booking_number != '') {
-            $response = Http::reqres()->get('/online-booking/check/person/'.$request->booking_number.'/'.$request->booking_current);
+        if(isset($request->booking_current) && $request->booking_number != '') {
+            $response = Http::reqres()->get('/online-booking/check/person/'.$request->booking_current.'/'.$request->booking_number);
             $res = $response->json();
 
             return response()->json(['data' => $res], 200);
@@ -326,5 +329,13 @@ class BookingController extends Controller
 
     private function setTime($time) {
         return date_format(date_create($time), 'H:i');
+    }
+
+    private function mergeBooking(Request $request) {
+        $response = Http::reqres()->post('/online-booking/merge/', [
+                        'booking_number' => $request->booking_number,
+                        'booking_number_new' => $request->booking_number_new
+                    ]);
+        $res = $response->json();
     }
 }

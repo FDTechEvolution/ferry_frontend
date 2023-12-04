@@ -1,5 +1,5 @@
 <div class="modal fade" id="add-person" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="addPerson" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
             <div class="modal-header">
 				<div class="input-group w-50">
@@ -12,17 +12,22 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12 text-center">
-                        <i class="fi fi-circle-spin fi-spin fs-1 d-none person-loading"></i>
+                    <div class="col-12 text-center d-none person-loading">
+                        <i class="fi fi-circle-spin fi-spin fs-1"></i>
+                    </div>
+                    <div class="col-12 text-center d-none person-notice mb-3">
+                        <h3 class="notice-content"></h3>
                     </div>
                 </div>
+                <div class="row person-detail bg-booking-payment-passenger mx-3 p-4 mb-3 d-none"></div>
+                <div class="row person-route bg-booking-payment-passenger mx-3 p-4 mb-3 d-none"></div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-primary" disabled>
+                <button type="button" class="btn btn-sm btn-primary btn-add-person" disabled>
                     <i class="fi fi-user-plus"></i>
-                    Add person
-                </button>
+					Add person
+				</button>
                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                     <i class="fi fi-close"></i>
                     Cancel

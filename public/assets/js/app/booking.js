@@ -94,3 +94,15 @@ if(view_booking) {
         view_booking.classList.remove('d-none')
     })
 }
+
+const add_trip = document.querySelector('#add-another-trip')
+if(add_trip) {
+    add_trip.addEventListener('click', () => {
+        const multi_tab = document.querySelector('#v-pills-messages')
+        const multi_form = document.querySelector('#multi-island-form')
+        console.log(multi_form)
+
+        const clone = multi_form.cloneNode(true)
+        multi_tab.appendChild(clone)
+    })
+}
