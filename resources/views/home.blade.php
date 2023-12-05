@@ -37,19 +37,22 @@
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <x-booking-round-ticket 
                                         :type="_('round')"
-                                        :stations="$stations"
+                                        :station_from="$station_from"
+                                        :station_to="$station_to"
                                     />
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                     <x-booking-one-ticket 
                                         :type="_('one')"
-                                        :stations="$stations"
+                                        :station_from="$station_from"
+                                        :station_to="$station_to"
                                     />
                                 </div>
                                 <div class="tab-pane fade text-light" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                                     <x-booking-multi-ticket 
                                         :type="_('multi')"
-                                        :stations="$stations"
+                                        :station_from="$station_from"
+                                        :station_to="$station_to"
                                     />
                                 </div>
                             </div>

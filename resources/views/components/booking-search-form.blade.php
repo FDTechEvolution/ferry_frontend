@@ -1,4 +1,4 @@
-@props(['type' => '', 'stations' => [], 'form_type' => ''])
+@props(['type' => '', 'station_from' => [], 'station_to' => [], 'form_type' => ''])
 
 @php
     $from_id = uniqid();
@@ -11,10 +11,13 @@
     <input type="hidden" name="_from_type[]" value="{{ $form_type }}">
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <select required class="form-select form-select-sm" name="from[]" id="from-{{ $from_id }}" aria-label="booking station">
+            <select required class="form-select form-select-sm from-{{ $type }}-{{ $form_type }}-selected" name="from[]" id="from-{{ $from_id }}" aria-label="booking station" onChange="fromOriginalSelected(this, '{{ $type }}', '{{ $form_type }}')">
                 <option value="" selected disabled>Select Original</option>
-                @foreach($stations as $station)
-                    <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
+                @foreach($station_from as $section_key => $sections)
+                    <optgroup label="{{ $section_key }}">
+                    @foreach($sections as $station)
+                        <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
+                    @endforeach
                 @endforeach
             </select>
             <label for="from-{{ $from_id }}">From</label>
@@ -22,10 +25,13 @@
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <select required class="form-select form-select-sm" name="to[]" id="to-{{ $to_id }}" aria-label="booking station">
+            <select required class="form-select form-select-sm to-{{ $type }}-{{ $form_type }}-selected" name="to[]" id="to-{{ $to_id }}" aria-label="booking station" onChange="toDestinationSelected(this, '{{ $type }}', '{{ $form_type }}')">
                 <option value="" selected disabled>Select Destination</option>
-                @foreach((array)$stations as $station)
-                    <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
+                @foreach($station_to as $section_key => $section)
+                    <optgroup label="{{ $section_key }}">
+                        @foreach($section as $station)
+                            <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
+                        @endforeach
                 @endforeach
             </select>
             <label for="to-{{ $to_id }}">To</label>

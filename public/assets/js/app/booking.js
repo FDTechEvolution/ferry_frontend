@@ -106,3 +106,21 @@ if(add_trip) {
         multi_tab.appendChild(clone)
     })
 }
+
+function fromOriginalSelected(e, type, form_type) {
+    let destination = document.querySelector(`.to-${type}-${form_type}-selected`)
+    if(destination.value === '') {
+        getDataAnotherSelected(type, e.value)
+    }
+}
+
+function toDestinationSelected(e, type, form_type) {
+    let original = document.querySelector(`.from-${type}-${form_type}-selected`)
+    if(original.value === '') {
+        getDataAnotherSelected(type, e.value)
+    }
+}
+
+function getDataAnotherSelected(type, _id) {
+    console.log(type, _id)
+}

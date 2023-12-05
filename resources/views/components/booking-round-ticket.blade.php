@@ -1,4 +1,4 @@
-@props(['type' => '', 'stations' => []])
+@props(['type' => '', 'station_from' => [], 'station_to' => []])
 
 @php
     $from_id = uniqid();
@@ -13,7 +13,8 @@
         <input type="hidden" name="_type" value="{{ $type }}">
         <x-booking-search-form 
             :type="$type"
-            :stations="$stations"
+            :station_from="$station_from"
+            :station_to="$station_to"
             :form_type="_('return')"
         />
         <div class="row mt-3">
