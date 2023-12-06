@@ -1,6 +1,6 @@
 @props(['type' => '', 'station_from' => [], 'station_to' => []])
 
-<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-index') }}">
+<form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-multi') }}">
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
@@ -10,6 +10,42 @@
             :station_to="$station_to"
             :form_type="_('depart')"
         />
+        <input type="hidden" class="from-0-input" name="from[]" value="">
+        <input type="hidden" class="to-0-input" name="to[]" value="">
+        <div class="row multi-search-form-row">
+            <div class="col-12 multi-search-form-0 d-none">
+                <x-booking-search-multi 
+                    :number="1"
+                />
+                <input type="hidden" class="from-1-input" name="from[]" value="">
+                <input type="hidden" class="to-1-input" name="to[]" value="">
+                <input type="checkbox" class="d-none multi-check-0" name="check_form[]" value="1">
+            </div>
+            <div class="col-12 multi-search-form-1 d-none">
+                <x-booking-search-multi 
+                    :number="2"
+                />
+                <input type="hidden" class="from-2-input" name="from[]" value="">
+                <input type="hidden" class="to-2-input" name="to[]" value="">
+                <input type="checkbox" class="d-none multi-check-1" name="check_form[]" value="1">
+            </div>
+            <div class="col-12 multi-search-form-2 d-none">
+                <x-booking-search-multi 
+                    :number="3"
+                />
+                <input type="hidden" class="from-3-input" name="from[]" value="">
+                <input type="hidden" class="to-3-input" name="to[]" value="">
+                <input type="checkbox" class="d-none multi-check-2" name="check_form[]" value="1">
+            </div>
+            <div class="col-12 multi-search-form-3 d-none">
+                <x-booking-search-multi 
+                    :number="4"
+                />
+                <input type="hidden" class="from-4-input" name="from[]" value="">
+                <input type="hidden" class="to-4-input" name="to[]" value="">
+                <input type="checkbox" class="d-none multi-check-3" name="check_form[]" value="1">
+            </div>
+        </div>
         <div class="row">
             <div class="col-12 text-end">
                 <i class="fi fi-plus cursor-pointer me-3" id="add-another-trip" data-bs-toggle="tooltip" data-bs-placement="left" title="Add another trip."></i>

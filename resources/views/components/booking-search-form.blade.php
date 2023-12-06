@@ -25,8 +25,8 @@
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <select required class="form-select form-select-sm to-{{ $type }}-{{ $form_type }}-selected" name="to[]" id="to-{{ $to_id }}" aria-label="booking station" onChange="toDestinationSelected(this, '{{ $type }}', '{{ $form_type }}')">
-                <option value="" selected disabled>Select Destination</option>
+            <select required class="form-select form-select-sm to-{{ $type }}-{{ $form_type }}-selected" name="to[]" id="to-{{ $to_id }}" aria-label="booking station" disabled>
+                <option value="" selected>Select Destination</option>
                 @foreach($station_to as $section_key => $section)
                     <optgroup label="{{ $section_key }}">
                         @foreach($section as $station)
@@ -40,7 +40,7 @@
     <div class="col-sm-3 col-md-3 px-0">
         @if($form_type == 'depart')
             <div class="form-floating mb-3">
-                <input required type="text" name="date[]" class="form-control form-control-sm datepicker"
+                <input required type="text" name="date[]" class="form-control form-control-sm datepicker date-{{ $type }}-{{ $form_type }}-selected"
                     data-show-weeks="true"
                     data-today-highlight="true"
                     data-today-btn="true"

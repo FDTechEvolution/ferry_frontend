@@ -92,6 +92,12 @@ class BookingController extends Controller
         return view('pages.booking.index', ['isType' => '']);
     }
 
+    public function searchMultiTrip(Request $request) {
+        Log::debug($request);
+
+        return redirect()->route('home');
+    }
+
     // One way booking confirm
     public function bookingConfirm(Request $request) {
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);

@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('head_meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 @section('cover-content')
 <div class="section bg-theme-color-light overlay-dark overlay-opacity-5 bg-cover lazy" 
     data-background-image="{{ asset('/cover/'.$cover) }}">

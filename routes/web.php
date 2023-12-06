@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\RouteMapController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::controller(BookingController::class)->group(function() {
     Route::post('bookings', 'searchRoundTrip')->name('booking-round-trip');
     Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
 
+    Route::post('booking-multi', 'searchMultiTrip')->name('booking-multi');
+
     Route::post('booking/view', 'findBookingRecord')->name('booking-record');
     Route::post('ajax/booking/check-booking', 'checkPersonBookingRecord');
 });
@@ -47,4 +50,8 @@ Route::controller(PaymentController::class)->group(function() {
     Route::get('payment', 'index')->name('payment-index');
     Route::get('payment/print/{bookingno}', 'print')->name('payment-print');
     Route::post('payment/create', 'payment')->name('payment-link');
+});
+
+Route::controller(StationController::class)->group(function() {
+    Route::post('ajax/station/to', 'getStationTo');
 });

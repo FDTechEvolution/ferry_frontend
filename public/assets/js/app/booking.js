@@ -98,29 +98,194 @@ if(view_booking) {
 const add_trip = document.querySelector('#add-another-trip')
 if(add_trip) {
     add_trip.addEventListener('click', () => {
-        const multi_tab = document.querySelector('#v-pills-messages')
-        const multi_form = document.querySelector('#multi-island-form')
-        console.log(multi_form)
+        const station_from = document.querySelector('.from-multi-depart-selected')
+        const station_to = document.querySelector('.to-multi-depart-selected')
+        const station_to_selected = document.querySelector(`.to-1-selected`)
+        const travel_date = document.querySelector('.date-multi-depart-selected')
+        setFromValue('0', station_from.value)
+        setFromValue('1', station_to.value)
 
-        const clone = multi_form.cloneNode(true)
-        multi_tab.appendChild(clone)
+        document.querySelector(`.to-0-input`).value = station_to.value
+
+        if(station_to.value !== '' && travel_date.value !== '') {
+            const travel_date_selected = document.querySelector('.date-1-selected')
+            let setdate = travel_date.value.split('/')
+            $('.date-1-selected').datepicker()
+            $('.date-1-selected').datepicker('setStartDate', new Date(`${setdate[2]}-${setdate[1]}-${setdate[0]}`))
+
+            travel_date_selected.setAttribute('required', true)
+            station_to_selected.setAttribute('required', true)
+
+            station_to.classList.remove('border-danger')
+            travel_date.classList.remove('border-danger')
+            const multi_form = document.querySelector('.multi-search-form-0')
+            const station_from_selected = document.querySelector('.from-1-selected')
+            document.querySelector('.multi-check-0').checked = true
+
+            setMultiFromOption(station_to, station_from_selected)
+
+            let element = `.to-1-selected`
+            let result = getMultiStations(station_to.value, element)
+            if(result) {
+                station_from.disabled = true
+                station_to.disabled = true
+            }
+
+            multi_form.classList.remove('d-none')
+            add_trip.classList.add('d-none')
+        }
+        else {
+            if(station_to.value === '') station_to.classList.add('border-danger')
+            else if(travel_date.value === '') travel_date.classList.add('border-danger')
+        }
     })
 }
 
-function fromOriginalSelected(e, type, form_type) {
+function setFromValue(number, value) {
+    document.querySelector(`.from-${number}-input`).value = value
+}
+
+function updateToDataValue(e, number) {
+    document.querySelector(`.to-${number}-input`).value = e.value
+}
+
+function setMultiFromOption(station_to, station_from) {
+    let option = document.createElement('option')
+    option.value = station_to.value
+    option.text = station_to.options[station_to.selectedIndex].text
+    option.setAttribute('selected', true)
+    station_from.appendChild(option)
+    station_from.disabled = true
+}
+
+async function getMultiStations(id, element) {
+    let result = await getDataAnotherSelected(id, 'from')
+    let _result = updateDestinationSelect(result, element)
+    let _element = document.querySelector(`${element}`)
+    if(_result) {
+        _element.disabled = false
+        return _result
+    }
+}
+
+function addAmotherTrip(action_id, number) {
+    let _number = parseInt(number) + 1
+    const multi_form = document.querySelector(`.multi-search-form-${number}`)
+    const action = document.querySelector(`#a-${action_id}`)
+    const station_from_selected = document.querySelector(`.from-${_number}-selected`)
+    const station_to_selected = document.querySelector(`.to-${_number}-selected`)
+    const station_from = document.querySelector(`.from-${number}-selected`)
+    const station_to = document.querySelector(`.to-${number}-selected`)
+    const travel_date = document.querySelector(`.date-${number}-selected`)
+
+    setFromValue(_number, station_to.value)
+
+    if(station_to.value !== '' && travel_date.value !== '') {
+        const travel_date_selected = document.querySelector(`.date-${_number}-selected`)
+        let setdate = travel_date.value.split('/')
+        $(`.date-${_number}-selected`).datepicker()
+        $(`.date-${_number}-selected`).datepicker('setStartDate', new Date(`${setdate[2]}-${setdate[1]}-${setdate[0]}`))
+
+        travel_date_selected.setAttribute('required', true)
+        station_to_selected.setAttribute('required', true)
+
+        station_to.classList.remove('border-danger')
+        travel_date.classList.remove('border-danger')
+        multi_form.classList.remove('d-none')
+        action.classList.add('d-none')
+        document.querySelector(`.multi-check-${number}`).checked = true
+
+        setMultiFromOption(station_to, station_from_selected)
+
+        document.querySelector(`.date-${number}-selected`).setAttribute('required', true)
+        station_from.disabled = true
+        
+        let element = `.to-${_number}-selected`
+        let result = getMultiStations(station_to.value, element)
+        if(result) {
+            station_to.disabled = true
+        }
+    }
+    else {
+        if(station_to.value === '') station_to.classList.add('border-danger')
+        else if(travel_date.value === '') travel_date.classList.add('border-danger')
+    }
+    
+}
+
+function removeThisTrip(action_id, number) {
+    if(number == 1) {
+        document.querySelector('#add-another-trip').classList.remove('d-none')
+        document.querySelector('.from-multi-depart-selected').disabled = false
+        document.querySelector('.to-multi-depart-selected').disabled = false
+    }
+    let _number = parseInt(number)-1
+    let _number_before = _number-1
+    const multi_form = document.querySelector(`.multi-search-form-${_number}`)
+    multi_form.classList.add('d-none')
+    multi_form.disabled = true
+
+    const all_form = document.querySelectorAll(`.multi-search-form-${_number_before}`)
+    all_form.forEach((form) => {
+        let _is_type = form.querySelector('.is-type-multi')
+        let _action = _is_type.querySelector('.is-action')
+        _action.classList.remove('d-none')
+    })
+}
+
+async function fromOriginalSelected(e, type, form_type) {
     let destination = document.querySelector(`.to-${type}-${form_type}-selected`)
-    if(destination.value === '') {
-        getDataAnotherSelected(type, e.value)
-    }
+    destination.disabled = true
+
+    let result = await getDataAnotherSelected(e.value, 'from')
+    let element = `.to-${type}-${form_type}-selected`
+    let _result = updateDestinationSelect(result, element)
+    if(_result) destination.disabled = false
+    
 }
 
-function toDestinationSelected(e, type, form_type) {
-    let original = document.querySelector(`.from-${type}-${form_type}-selected`)
-    if(original.value === '') {
-        getDataAnotherSelected(type, e.value)
-    }
+// function toDestinationSelected(e, type, form_type) {
+//     let original = document.querySelector(`.from-${type}-${form_type}-selected`)
+//     if(original.value === '') {
+//         getDataAnotherSelected(type, e.value, 'to')
+//     }
+// }
+
+function updateDestinationSelect(result, element) {
+    let destination_optgroup = document.querySelectorAll(`${element} optgroup`)
+    destination_optgroup.forEach((o) => { o.remove() })
+    const stations = Map.groupBy(result.data, station => {return station.section})
+
+    let destination = document.querySelector(`${element}`)
+    stations.forEach((section, section_key) => {
+        let optgroup = document.createElement('optgroup')
+        optgroup.setAttribute('label', section_key)
+        destination.add(optgroup)
+        section.forEach((station) => {
+            let name = station.name
+            let pier = station.piername === null ? '' : `(${station.piername})`
+            let option = document.createElement('option')
+            option.value = station.id
+            option.text = name + pier
+            optgroup.appendChild(option)
+        })
+    })
+    return true
 }
 
-function getDataAnotherSelected(type, _id) {
-    console.log(type, _id)
+async function getDataAnotherSelected(_id, select) {
+    if(select === 'from') {
+        let data = new FormData()
+        data.append('station_id', _id)
+
+        let response = await fetch('/ajax/station/to', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: data
+                        })
+        let res = await response.json()
+        return res
+    }
 }
