@@ -18,6 +18,7 @@
             </select>
             <label for="from-{{ $from_id }}">From</label>
         </div>
+        <input type="hidden" class="from-{{ $number }}-input" name="from[]" value="">
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
@@ -27,10 +28,11 @@
             </select>
             <label for="to-{{ $to_id }}">To</label>
         </div>
+        <input type="hidden" class="to-{{ $number }}-input" name="to[]" value="">
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <input type="text" name="date[]" class="form-control form-control-sm datepicker date-{{ $number }}-selected"
+            <input type="text" class="form-control form-control-sm datepicker date-{{ $number }}-selected"
                 data-show-weeks="true"
                 data-today-highlight="false"
                 data-today-btn="true"
@@ -39,9 +41,11 @@
                 data-date-start="today"
                 data-format="DD/MM/YYYY"
                 autocomplete="off"
-                placeholder="Travel Date">
+                placeholder="Travel Date"
+                onChange="updateDateValue(this, '{{ $number }}')">
             <label class="text-secondary">Travel Date</label>
         </div>
+        <input type="hidden" class="date-{{ $number }}-input" name="date[]" value="">
     </div>
     <div class="col-sm-3 col-md-3 px-3 d-flex justify-content-start align-items-center">
         @if($number < 4)

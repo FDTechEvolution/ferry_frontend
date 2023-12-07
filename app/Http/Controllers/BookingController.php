@@ -14,7 +14,7 @@ class BookingController extends Controller
     protected $Type = [
             'one' => 'One way trip',
             'round' => 'Round trip',
-            'multi' => 'Multiple'
+            'multi' => 'Multiple trip'
         ];
     protected $BookingStatus = [
         'DR' => 'Wait PAYMENT',
@@ -93,9 +93,37 @@ class BookingController extends Controller
     }
 
     public function searchMultiTrip(Request $request) {
-        Log::debug($request);
+        // Log::debug($request);
+        $_type = $this->Type[$request->_type];
+        $passenger = $this->setInputType($request);
+        $route_arr = [];
 
-        return redirect()->route('home');
+        foreach($request->from as $index => $from) {
+            if($from != NULL) {
+                $routes = $this->getRouteList($from, $request->to[$index]);
+                foreach($routes['data'] as $key => $route) {
+                    $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
+                    $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
+                    $route_arr[$index]['depart'] = $request->date[$index];
+                    // if($_station['from'] == '') 
+                    //     $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
+                    // if($_station['to'] == '')
+                    //     $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
+        
+                    $routes['data'][$key]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
+                    $routes['data'][$key]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
+                    $routes['data'][$key]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
+                }
+
+                $route_arr[$index]['data'] = $routes['data'];
+            }
+        }
+
+        // Log::debug($route_arr);
+
+        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr, 
+                        'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
+                        'country_list' => $this->CountryList]);
     }
 
     // One way booking confirm
@@ -244,6 +272,8 @@ class BookingController extends Controller
             return array($this->setupAdultPassenger($request->roundreturn_adult[0]), $request->roundreturn_child[0], $request->roundreturn_infant[0]);
         if($request->_type == 'one')
             return array($this->setupAdultPassenger($request->onedepart_adult[0]), $request->onedepart_child[0], $request->onedepart_infant[0]);
+        if($request->_type == 'multi')
+            return array($this->setupAdultPassenger($request->multidepart_adult[0]), $request->multidepart_child[0], $request->multidepart_infant[0]);
     }
 
     private function setupAdultPassenger($adult) {

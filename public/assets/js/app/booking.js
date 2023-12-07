@@ -106,9 +106,11 @@ if(add_trip) {
         setFromValue('1', station_to.value)
 
         document.querySelector(`.to-0-input`).value = station_to.value
+        document.querySelector(`.date-0-input`).value = travel_date.value
 
         if(station_to.value !== '' && travel_date.value !== '') {
             const travel_date_selected = document.querySelector('.date-1-selected')
+            travel_date_selected.value = ''
             let setdate = travel_date.value.split('/')
             $('.date-1-selected').datepicker()
             $('.date-1-selected').datepicker('setStartDate', new Date(`${setdate[2]}-${setdate[1]}-${setdate[0]}`))
@@ -129,6 +131,7 @@ if(add_trip) {
             if(result) {
                 station_from.disabled = true
                 station_to.disabled = true
+                travel_date.disabled = true
             }
 
             multi_form.classList.remove('d-none')
@@ -147,6 +150,10 @@ function setFromValue(number, value) {
 
 function updateToDataValue(e, number) {
     document.querySelector(`.to-${number}-input`).value = e.value
+}
+
+function updateDateValue(e, number) {
+    document.querySelector(`.date-${number}-input`).value = e.value
 }
 
 function setMultiFromOption(station_to, station_from) {
@@ -182,6 +189,7 @@ function addAmotherTrip(action_id, number) {
 
     if(station_to.value !== '' && travel_date.value !== '') {
         const travel_date_selected = document.querySelector(`.date-${_number}-selected`)
+        travel_date_selected.value = ''
         let setdate = travel_date.value.split('/')
         $(`.date-${_number}-selected`).datepicker()
         $(`.date-${_number}-selected`).datepicker('setStartDate', new Date(`${setdate[2]}-${setdate[1]}-${setdate[0]}`))
@@ -204,6 +212,7 @@ function addAmotherTrip(action_id, number) {
         let result = getMultiStations(station_to.value, element)
         if(result) {
             station_to.disabled = true
+            travel_date.disabled = true
         }
     }
     else {
@@ -218,7 +227,12 @@ function removeThisTrip(action_id, number) {
         document.querySelector('#add-another-trip').classList.remove('d-none')
         document.querySelector('.from-multi-depart-selected').disabled = false
         document.querySelector('.to-multi-depart-selected').disabled = false
+        document.querySelector('.date-multi-depart-selected').disabled = false
     }
+    document.querySelector(`.from-${number}-input`).value = ''
+    document.querySelector(`.to-${number}-input`).value = ''
+    document.querySelector(`.date-${number}-input`).value = ''
+
     let _number = parseInt(number)-1
     let _number_before = _number-1
     const multi_form = document.querySelector(`.multi-search-form-${_number}`)
