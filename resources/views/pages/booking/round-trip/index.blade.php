@@ -34,7 +34,7 @@
                 </p>
             </div>
             <div class="col-2 py-2 border-start d-flex align-items-center justify-content-center">
-                <a tabindex="0" class="btn btm-sm btn-link popover-passenger" role="button" 
+                <a tabindex="0" class="btn btm-sm btn-link text-light popover-passenger" role="button" 
                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
                     data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
                     <i class="fi fi-users me-2"></i> Passenger <i class="fi fi-arrow-down ms-1"></i>

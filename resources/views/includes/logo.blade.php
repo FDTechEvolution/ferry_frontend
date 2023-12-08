@@ -1,3 +1,3 @@
 <a class="navbar-brand" href="{{ route('home') }}">
-    <img src="{{ asset('assets/images/logo_tiger_line_ferry.png') }}" alt="...">
+    <img src="{{ asset('tiger-line-ferry_logo.png') }}" alt="andamanexpress" style="margin-top: -10px;">
 </a>

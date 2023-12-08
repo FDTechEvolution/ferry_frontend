@@ -38,7 +38,7 @@
                     </span> 
                 </a> -->
 
-                <p class="mb-0 smaller">Contact Us: +66123456789</p>
+                <p class="mb-0 smaller"></p>
 
             </li>
 

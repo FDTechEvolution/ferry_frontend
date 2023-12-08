@@ -7,38 +7,47 @@
                     
                 </div>
                 <div class="col-4">
-                    <div class="row text-center fw-bold mb-2">
-                        <div class="col-4 text-start">Depart</div>
-                        <div class="col-4">Fare</div>
-                        <div class="col-4">THB</div>
-                    </div>
-                    @if($passenger[0] != 0)
-                        <div class="row text-center">
-                            <div class="col-4 text-start">
-                                @if($passenger[0] > 1) Adults @else Adult @endif
+                    @foreach($route_arr as $index => $route)
+                        <div class="set-passenger-litinerary mb-3 pb-3 border-bottom child-right">
+                            <div class="row text-center fw-bold mb-2">
+                                <div class="col-4 text-start">Depart</div>
+                                <div class="col-4">Fare</div>
+                                <div class="col-4">THB</div>
                             </div>
-                            <div class="col-4">{{ $passenger[0] }} x <span class="payment-adult-price"></span></div>
-                            <div class="col-4"><span class="sum-of-adult"></span></div>
-                        </div>
-                    @endif
-                    @if($passenger[1] != 0)
-                        <div class="row text-center">
-                            <div class="col-4 text-start">
-                                @if($passenger[1] > 1) Childs @else Child @endif
+                            @if($passenger[0] != 0)
+                                <div class="row text-center">
+                                    <div class="col-4 text-start">
+                                        @if($passenger[0] > 1) Adults @else Adult @endif
+                                    </div>
+                                    <div class="col-4">{{ $passenger[0] }} x <span class="payment-adult-price-{{ $index }}"></span></div>
+                                    <div class="col-4"><span class="sum-of-adult-{{ $index }}"></span></div>
+                                </div>
+                            @endif
+                            @if($passenger[1] != 0)
+                                <div class="row text-center">
+                                    <div class="col-4 text-start">
+                                        @if($passenger[1] > 1) Childs @else Child @endif
+                                    </div>
+                                    <div class="col-4">{{ $passenger[1] }} x <span class="payment-child-price-{{ $index }}"></span></div>
+                                    <div class="col-4"><span class="sum-of-child-{{ $index }}"></span></div>
+                                </div>
+                            @endif
+                            @if($passenger[2] != 0)
+                                <div class="row text-center">
+                                    <div class="col-4 text-start">
+                                        @if($passenger[2] > 1) Infants @else Infant @endif
+                                    </div>
+                                    <div class="col-4">{{ $passenger[2] }} x <span class="payment-infant-price-{{ $index }}"></span></div>
+                                    <div class="col-4"><span class="sum-of-infant-{{ $index }}"></span></div>
+                                </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-12 text-end">
+                                    <p class="fw-bold">Total : <span class="total-route-{{ $index }} mb-0 mt-2 me-4 pe-1"></span></p>
+                                </div>
                             </div>
-                            <div class="col-4">{{ $passenger[1] }} x <span class="payment-child-price"></span></div>
-                            <div class="col-4"><span class="sum-of-child"></span></div>
                         </div>
-                    @endif
-                    @if($passenger[2] != 0)
-                        <div class="row text-center">
-                            <div class="col-4 text-start">
-                                @if($passenger[2] > 1) Infants @else Infant @endif
-                            </div>
-                            <div class="col-4">{{ $passenger[2] }} x <span class="payment-infant-price"></span></div>
-                            <div class="col-4"><span class="sum-of-infant"></span></div>
-                        </div>
-                    @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -53,14 +62,8 @@
     <div id="payment-extra-service">
         <h4 class="mb-0">Extra services</h4>
         <div class="row bg-booking-payment-extra mx-3 p-3 mb-5">
-            <div class="col-12">
-                <div class="row mb-3 d-none" id="payment-extra-shuttle-bus"></div>
-
-                <div class="row mb-3 d-none" id="payment-extra-longtail-boat"></div>
-
-                <div class="row mb-3 d-none" id="payment-extra-meal"></div>
-
-                <div class="row mb-3 d-none" id="payment-extra-activity"></div>
+            <div id="set-extra-service">
+                
             </div>
             <div class="col-12 text-end mt-3 pt-3 border-top border-secondary">
                 <h6 class="text-dark pe-4">Total THB <span id="sum-of-extra">0</span></h6>

@@ -205,9 +205,9 @@ function progressCondition(step) {
     }
 
     if(step === 'payment') {
-        setLitinerary()
-        // setPassengerDetail()
-        // setExtraDetail()
+        setLitineraryQue()
+        setPassengerDetail()
+        setExtraDetail()
 
         progress_next.classList.add('d-none')
         progress_payment.classList.remove('d-none')
@@ -215,17 +215,42 @@ function progressCondition(step) {
     }
 }
 
-function clearElementLitinerry(litinerry) {
-    const div_list = litinerry.querySelectorAll('div')
+async function setLitineraryQue() {
+    await setLitinerary()
+    await setHeightChild()
+}
+
+function clearElementDiv(element) {
+    const div_list = element.querySelectorAll('div')
     div_list.forEach((div) => { div.remove() })
 }
 
+function setHeightChild() {
+    let _div_index = document.querySelector(`.div-index-0`)
+    let is_height = _div_index.getBoundingClientRect()
+    let childs = document.querySelectorAll(`.child-right`)
+    childs.forEach((child) => {
+        child.setAttribute('style', `height: ${is_height.height}px`)
+    })
+}
+
+function setFullDate(date) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", 
+                    "September", "October", "November", "December"]
+
+    let _format = date.split('/')
+    let _date = `${_format[2]}-${_format[1]}-${_format[0]}`
+    let n_date = new Date(_date)
+    let dayName = days[n_date.getDay()]
+    let monthName = months[n_date.getMonth()]
+    return `${dayName} ${_format[0]} ${monthName} ${_format[2]}`
+}
+
 function setLitinerary() {
-    // document.querySelector('.is_depart_time').innerHTML = depart_time
-    // document.querySelector('.is_arrive_time').innerHTML = arrive_time
-    console.log(payment_info.route_selected)
+    let sum_of_payment = 0
     const set_litinerry = document.querySelector('#set-litinerary')
-    clearElementLitinerry(set_litinerry)
+    clearElementDiv(set_litinerry)
     payment_info.route_selected.forEach((route, index) => {
         let div_index = document.createElement('div')
             div_index.setAttribute('class', `mb-3 pb-3 border-bottom div-index-${index}`)
@@ -245,7 +270,7 @@ function setLitinerary() {
         
         h5_station.innerHTML = `${route.depart} - ${route.arrive}`
             div_index.appendChild(h5_station)
-        p_date.innerHTML = `<span class="badge bg-booking-select-depart fw-bold">Multiple trip</span> : ${route.travel_date}`
+        p_date.innerHTML = `<span class="badge bg-booking-select-depart fw-bold">Multiple trip</span> : ${setFullDate(route.travel_date)}`
             div_index.appendChild(p_date)
         p_departTime.innerHTML = `<p class="is_d_depart_time mb-0 me-2 fw-bold">${route.depart_time} : </p><p class="ms-2 mb-0">${route.depart}</p>`
             div_index.appendChild(p_departTime)
@@ -263,49 +288,32 @@ function setLitinerary() {
             div_index.appendChild(p_arriveTime)
         
         set_litinerry.appendChild(div_index)
+        
+        // console.log(price_all[index])
+        let adult_price = document.querySelector(`.payment-adult-price-${index}`)
+        let adult_qty = document.querySelector('#passenger-adult')
+        let adult_sum = document.querySelector(`.sum-of-adult-${index}`)
+        if(adult_price) adult_price.innerHTML = parseToNumber(price_all[index][0]).toLocaleString("en-US")
+        if(adult_sum) adult_sum.innerHTML = (parseToNumber(adult_qty.value)*parseToNumber(price_all[index][0])).toLocaleString("en-US")
+
+        let child_price = document.querySelector(`.payment-child-price-${index}`)
+        let child_qty = document.querySelector('#passenger-child')
+        let child_sum = document.querySelector(`.sum-of-child-${index}`)
+        if(child_price) child_price.innerHTML = parseToNumber(price_all[index][1]).toLocaleString("en-US")
+        if(child_sum) child_sum.innerHTML = (parseToNumber(child_qty.value)*parseToNumber(price_all[index][1])).toLocaleString("en-US")
+
+        let infant_price = document.querySelector(`.payment-infant-price-${index}`)
+        let infant_qty = document.querySelector('#passenger-infant')
+        let infant_sum = document.querySelector(`.sum-of-infant-${index}`)
+        if(infant_price) infant_price.innerHTML = parseToNumber(price_all[index][2]).toLocaleString("en-US")
+        if(infant_sum) infant_sum.innerHTML = (parseToNumber(infant_qty.value)*parseToNumber(price_all[index][2])).toLocaleString("en-US")
+
+        document.querySelector(`.total-route-${index}`).innerHTML = route.route_price.toLocaleString("en-US")
+
+        sum_of_payment+= route.route_price
     })
 
-    // const route_icon = document.querySelector('.route-icon-payment')
-    // const icon_list = route_icon.querySelectorAll('img')
-
-    // icon_list.forEach((icon) => { icon.remove() })
-
-    // icon_selected.forEach((icon) => {
-    //     let img = document.createElement('img')
-    //     img.src = icon
-    //     img.setAttribute('class', 'me-1 w-100')
-
-    //     route_icon.appendChild(img)
-    // })
-
-    // let adult_qty = document.querySelector('#passenger-adult')
-    // let adult_price = document.querySelector('.payment-adult-price')
-    // let child_price = document.querySelector('.payment-child-price')
-    // let child_qty = document.querySelector('#passenger-child')
-    // let infant_price = document.querySelector('.payment-infant-price')
-    // let infant_qty = document.querySelector('#passenger-infant')
-    // let sum_of_payment = 0
-
-    // if(adult_price) {
-    //     adult_price.innerHTML = parseToNumber(passenger_payment[0]).toLocaleString("en-US")
-    //     let adult_sum = parseToNumber(adult_qty.value)*parseToNumber(passenger_payment[0])
-    //     document.querySelector('.sum-of-adult').innerHTML = adult_sum.toLocaleString("en-US")
-    //     sum_of_payment+= adult_sum
-    // }
-    // if(child_price) {
-    //     child_price.innerHTML = parseToNumber(passenger_payment[1]).toLocaleString("en-US")
-    //     let child_sum = parseToNumber(child_qty.value)*parseToNumber(passenger_payment[1])
-    //     document.querySelector('.sum-of-child').innerHTML = child_sum.toLocaleString("en-US")
-    //     sum_of_payment+= child_sum
-    // }
-    // if(infant_price) {
-    //     infant_price.innerHTML = parseToNumber(passenger_payment[2]).toLocaleString("en-US")
-    //     let infant_sum = parseToNumber(infant_qty.value)*parseToNumber(passenger_payment[2])
-    //     document.querySelector('.sum-of-infant').innerHTML = infant_sum.toLocaleString("en-US")
-    //     sum_of_payment+= infant_sum
-    // }
-
-    // document.querySelector('.sum-of-payment').innerHTML = sum_of_payment.toLocaleString("en-US")
+    document.querySelector('.sum-of-payment').innerHTML = sum_of_payment.toLocaleString("en-US")
 }
 
 function setPassengerDetail() {
@@ -390,124 +398,160 @@ function setPassengerDetail() {
 function setExtraDetail() {
     let sum = 0
     const extra_service = document.querySelector('#payment-extra-service')
-    const extra_meal = document.querySelector('#payment-extra-meal')
-    const extra_activity = document.querySelector('#payment-extra-activity')
-    const extra_shuttlebus = document.querySelector('#payment-extra-shuttle-bus')
-    const extra_longtailboat = document.querySelector('#payment-extra-longtail-boat')
+    const set_extra = extra_service.querySelector('#set-extra-service')
+    clearElementDiv(set_extra)
+    // const extra_meal = document.querySelector('#payment-extra-meal')
+    // const extra_activity = document.querySelector('#payment-extra-activity')
+    // const extra_shuttlebus = document.querySelector('#payment-extra-shuttle-bus')
+    // const extra_longtailboat = document.querySelector('#payment-extra-longtail-boat')
 
-    while (extra_meal.firstChild) { extra_meal.removeChild(extra_meal.lastChild) }
-    while (extra_activity.firstChild) { extra_activity.removeChild(extra_activity.lastChild) }
-    while (extra_shuttlebus.firstChild) { extra_shuttlebus.removeChild(extra_shuttlebus.lastChild) }
-    while (extra_longtailboat.firstChild) { extra_longtailboat.removeChild(extra_longtailboat.lastChild) }
+    // while (extra_meal.firstChild) { extra_meal.removeChild(extra_meal.lastChild) }
+    // while (extra_activity.firstChild) { extra_activity.removeChild(extra_activity.lastChild) }
+    // while (extra_shuttlebus.firstChild) { extra_shuttlebus.removeChild(extra_shuttlebus.lastChild) }
+    // while (extra_longtailboat.firstChild) { extra_longtailboat.removeChild(extra_longtailboat.lastChild) }
 
-    extra_longtailboat.classList.add('d-none')
-    extra_shuttlebus.classList.add('d-none')
-    extra_activity.classList.add('d-none')
-    extra_meal.classList.add('d-none')
+    // extra_longtailboat.classList.add('d-none')
+    // extra_shuttlebus.classList.add('d-none')
+    // extra_activity.classList.add('d-none')
+    // extra_meal.classList.add('d-none')
 
-    let _extra = Object.groupBy(is_extra, ex => { return ex.type })
-    // console.log(_extra)
-    if(_extra['bus']) {
-        extra_shuttlebus.classList.remove('d-none')
-        let row = document.createElement('div')
-        let col_12 = document.createElement('div')
-        let header = document.createElement('p')
+    console.log(payment_info.extra_selected)
 
-        row.setAttribute('class', 'row')
-        col_12.setAttribute('class', 'col-12')
-        header.setAttribute('class', 'mb-1 fw-bold text-dark')
-        header.innerHTML = 'Shuttle Bus'
+    payment_info.extra_selected.forEach((extras, index) => {
+        if(extras.length > 0) {
+            let div_index = document.createElement('div')
+            div_index.setAttribute('class', `div-index-${index} border-bottom border-warning pb-3 mb-3`)
 
-        extra_shuttlebus.appendChild(row)
-        row.appendChild(col_12)
-        col_12.appendChild(header)
+            let h_route = document.createElement('h5')
+            h_route.innerHTML = `${payment_info.route_selected[index].depart} - ${payment_info.route_selected[index].arrive}`
+            div_index.appendChild(h_route)
 
-        _extra['bus'].forEach((bus) => {
-            sum += bus.qty*bus.amount
-            let p = document.createElement('p')
-            p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3 me-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
-            extra_shuttlebus.appendChild(p)
-        })
-    }
+            let col_12_loop = document.createElement('div')
+            col_12_loop.setAttribute('class', `col-12 extra-service-${index} ps-3`)
+            div_index.appendChild(col_12_loop)
 
-    if(_extra['boat']) {
-        extra_longtailboat.classList.remove('d-none')
-        let row = document.createElement('div')
-        let col_12 = document.createElement('div')
-        let header = document.createElement('p')
+            let set_extra_suttlebus = document.createElement('div')
+            set_extra_suttlebus.setAttribute('class', 'row mb-3 d-none')
+            col_12_loop.appendChild(set_extra_suttlebus)
 
-        row.setAttribute('class', 'row')
-        col_12.setAttribute('class', 'col-12')
-        header.setAttribute('class', 'mb-1 fw-bold text-dark')
-        header.innerHTML = 'Longtail Boat'
+            let set_extra_longtailboat = document.createElement('div')
+            set_extra_longtailboat.setAttribute('class', 'row mb-3 d-none')
+            col_12_loop.appendChild(set_extra_longtailboat)
 
-        extra_longtailboat.appendChild(row)
-        row.appendChild(col_12)
-        col_12.appendChild(header)
+            let set_extra_meal = document.createElement('div')
+            set_extra_meal.setAttribute('class', 'row mb-3 d-none')
+            col_12_loop.appendChild(set_extra_meal)
 
-        _extra['boat'].forEach((boat) => {
-            sum += boat.qty*boat.amount
-            let p = document.createElement('p')
-            p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-sailboat fs-3 me-3"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
-            extra_longtailboat.appendChild(p)
-        })
-    }
+            let set_extra_activity = document.createElement('div')
+            set_extra_activity.setAttribute('class', 'row mb-3 d-none')
+            col_12_loop.appendChild(set_extra_activity)
 
-    if(_extra['meal']) {
-        extra_meal.classList.remove('d-none')
-        let row = document.createElement('div')
-        let col_12 = document.createElement('div')
-        let header = document.createElement('p')
+            let _extra = Object.groupBy(extras, ex => { return ex.type })
+            if(_extra['bus']) {
+                set_extra_suttlebus.classList.remove('d-none')
+                let row = document.createElement('div')
+                let col_12 = document.createElement('div')
+                let header = document.createElement('p')
 
-        row.setAttribute('class', 'row')
-        col_12.setAttribute('class', 'col-12')
-        header.setAttribute('class', 'mb-1 fw-bold text-dark')
-        header.innerHTML = 'Meal'
+                row.setAttribute('class', 'row')
+                col_12.setAttribute('class', 'col-12')
+                header.setAttribute('class', 'mb-1 fw-bold text-dark')
+                header.innerHTML = 'Shuttle Bus'
 
-        extra_meal.appendChild(row)
-        row.appendChild(col_12)
-        col_12.appendChild(header)
+                set_extra_suttlebus.appendChild(row)
+                row.appendChild(col_12)
+                col_12.appendChild(header)
 
-        _extra['meal'].forEach((meal) => {
-            sum += meal.qty*meal.amount
-            let p = document.createElement('p')
-            p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<img src="${meal.icon}" class="me-3" width="40" height="auto"> ${meal.name} - [ <strong>Fare </strong> ${meal.qty} x ${meal.amount.toLocaleString("en-US")} ] : ${(meal.qty*meal.amount).toLocaleString("en-US")} THB`
-            extra_meal.appendChild(p)
-        })
-    }
+                _extra['bus'].forEach((bus) => {
+                    sum += bus.qty*bus.amount
+                    let p = document.createElement('p')
+                    p.setAttribute('class', 'mb-2 ms-2 text-dark')
+                    p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3 me-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
+                    set_extra_suttlebus.appendChild(p)
+                })
+            }
 
-    if(_extra['activity']) {
-        extra_activity.classList.remove('d-none')
-        let row = document.createElement('div')
-        let col_12 = document.createElement('div')
-        let header = document.createElement('p')
+            if(_extra['boat']) {
+                set_extra_longtailboat.classList.remove('d-none')
+                let row = document.createElement('div')
+                let col_12 = document.createElement('div')
+                let header = document.createElement('p')
 
-        row.setAttribute('class', 'row')
-        col_12.setAttribute('class', 'col-12')
-        header.setAttribute('class', 'mb-1 fw-bold text-dark')
-        header.innerHTML = 'Activity'
+                row.setAttribute('class', 'row')
+                col_12.setAttribute('class', 'col-12')
+                header.setAttribute('class', 'mb-1 fw-bold text-dark')
+                header.innerHTML = 'Longtail Boat'
 
-        extra_activity.appendChild(row)
-        row.appendChild(col_12)
-        col_12.appendChild(header)
+                set_extra_longtailboat.appendChild(row)
+                row.appendChild(col_12)
+                col_12.appendChild(header)
 
-        _extra['activity'].forEach((activity) => {
-            sum += activity.qty*activity.amount
-            let p = document.createElement('p')
-            p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<img src="${activity.icon}" class="me-3" width="40" height="auto"> ${activity.name} - [ <strong>Fare </strong> ${activity.qty} x ${activity.amount.toLocaleString("en-US")} ] : ${(activity.qty*activity.amount).toLocaleString("en-US")} THB`
-            extra_activity.appendChild(p)
-        })
-    }
+                _extra['boat'].forEach((boat) => {
+                    sum += boat.qty*boat.amount
+                    let p = document.createElement('p')
+                    p.setAttribute('class', 'mb-2 ms-2 text-dark')
+                    p.innerHTML = `<i class="fa-solid fa-sailboat fs-3 me-3"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
+                    set_extra_longtailboat.appendChild(p)
+                })
+            }
 
-    if(is_extra.length === 0) extra_service.classList.add('d-none')
-    else {
-        document.querySelector('#sum-of-extra').innerHTML = sum.toLocaleString("en-US")
-        extra_service.classList.remove('d-none')
-    }
+            if(_extra['meal']) {
+                set_extra_meal.classList.remove('d-none')
+                let row = document.createElement('div')
+                let col_12 = document.createElement('div')
+                let header = document.createElement('p')
+
+                row.setAttribute('class', 'row')
+                col_12.setAttribute('class', 'col-12')
+                header.setAttribute('class', 'mb-1 fw-bold text-dark')
+                header.innerHTML = 'Meal'
+
+                set_extra_meal.appendChild(row)
+                row.appendChild(col_12)
+                col_12.appendChild(header)
+
+                _extra['meal'].forEach((meal) => {
+                    sum += meal.qty*meal.amount
+                    let p = document.createElement('p')
+                    p.setAttribute('class', 'mb-2 ms-2 text-dark')
+                    p.innerHTML = `<img src="${meal.icon}" class="me-3" width="40" height="auto"> ${meal.name} - [ <strong>Fare </strong> ${meal.qty} x ${meal.amount.toLocaleString("en-US")} ] : ${(meal.qty*meal.amount).toLocaleString("en-US")} THB`
+                    set_extra_meal.appendChild(p)
+                })
+            }
+
+            if(_extra['activity']) {
+                set_extra_activity.classList.remove('d-none')
+                let row = document.createElement('div')
+                let col_12 = document.createElement('div')
+                let header = document.createElement('p')
+
+                row.setAttribute('class', 'row')
+                col_12.setAttribute('class', 'col-12')
+                header.setAttribute('class', 'mb-1 fw-bold text-dark')
+                header.innerHTML = 'Activity'
+
+                set_extra_activity.appendChild(row)
+                row.appendChild(col_12)
+                col_12.appendChild(header)
+
+                _extra['activity'].forEach((activity) => {
+                    sum += activity.qty*activity.amount
+                    let p = document.createElement('p')
+                    p.setAttribute('class', 'mb-2 ms-2 text-dark')
+                    p.innerHTML = `<img src="${activity.icon}" class="me-3" width="40" height="auto"> ${activity.name} - [ <strong>Fare </strong> ${activity.qty} x ${activity.amount.toLocaleString("en-US")} ] : ${(activity.qty*activity.amount).toLocaleString("en-US")} THB`
+                    set_extra_activity.appendChild(p)
+                })
+            }
+
+            if(payment_info.extra_selected.length === 0) extra_service.classList.add('d-none')
+            else {
+                document.querySelector('#sum-of-extra').innerHTML = sum.toLocaleString("en-US")
+                extra_service.classList.remove('d-none')
+            }
+
+            set_extra.appendChild(div_index)
+        }
+    })
 }
 
 
@@ -633,10 +677,10 @@ function isNormalPassenger(normal_passenger) {
 
 
 function inc(element, index, route_index) {
-    const el = document.querySelector(`#extra-${element}-index-${index}`)
-    const icon = document.querySelector(`#extra-${element}-img-${index}`)
-    const name = document.querySelector(`#extra-${element}-name-${index}`)
-    const amount = document.querySelector(`.extra-${element}-amount-${index}`)
+    const el = document.querySelector(`#extra-${element}-index-${index}_${route_index}`)
+    const icon = document.querySelector(`#extra-${element}-img-${index}_${route_index}`)
+    const name = document.querySelector(`#extra-${element}-name-${index}_${route_index}`)
+    const amount = document.querySelector(`.extra-${element}-amount-${index}_${route_index}`)
     let qty = parseInt(el.value) + 1
     el.value = qty
     let _extra_amount = parseToNumber(amount.innerText)
@@ -647,10 +691,10 @@ function inc(element, index, route_index) {
 }
 
 function dec(element, index, route_index) {
-    const el = document.querySelector(`#extra-${element}-index-${index}`)
-    const icon = document.querySelector(`#extra-${element}-img-${index}`)
-    const name = document.querySelector(`#extra-${element}-name-${index}`)
-    const amount = document.querySelector(`.extra-${element}-amount-${index}`)
+    const el = document.querySelector(`#extra-${element}-index-${index}_${route_index}`)
+    const icon = document.querySelector(`#extra-${element}-img-${index}_${route_index}`)
+    const name = document.querySelector(`#extra-${element}-name-${index}_${route_index}`)
+    const amount = document.querySelector(`.extra-${element}-amount-${index}_${route_index}`)
     if(parseInt(el.value) > 0) {
         let qty = parseInt(el.value) - 1
         el.value = qty
@@ -667,7 +711,6 @@ function updateSumPrice() {
     document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
 }
 
-let is_extra = []
 function setExtra(icon, name, amount, qty, type, route_index) {
     let _extra = {
         'type': type,
@@ -678,16 +721,14 @@ function setExtra(icon, name, amount, qty, type, route_index) {
     }
 
     if(qty > 0) {
-        let index = is_extra.findIndex(extra => { return extra.name === name && extra.type === type })
-        if(index >= 0) is_extra[index].qty = qty
-        else is_extra.push(_extra)
+        let index = payment_info.extra_selected[route_index].findIndex(extra => { return extra.name === name && extra.type === type })
+        if(index >= 0) payment_info.extra_selected[route_index][index].qty = qty
+        else payment_info.extra_selected[route_index].push(_extra)
     }
     else {
-        let index = is_extra.findIndex(extra => { return extra.name === name && extra.type === type })
-        is_extra.splice(index, 1)
+        let index = payment_info.extra_selected[route_index].findIndex(extra => { return extra.name === name && extra.type === type })
+        payment_info.extra_selected[route_index].splice(index, 1)
     }
-
-    payment_info.extra_selected[route_index] = is_extra
 
     // console.log(payment_info.extra_selected)
 }
