@@ -57,11 +57,12 @@
                     <input type="hidden" class="selected-adult-price" value="{{ $route['regular_price'] }}">
                     <input type="hidden" class="selected-child-price" value="{{ $route['child_price'] }}">
                     <input type="hidden" class="selected-infant-price" value="{{ $route['infant_price'] }}">
-                    <input type="hidden" class="selected-route" value="{{ $route['id'] }}">
+                    <input type="hidden" class="selected-route-{{ $index }}_{{ $key }}" value="{{ $route['id'] }}">
                 </div>
             @endforeach
         </div>
     </div>
+    <input type="hidden" name="booking_route_selected[{{ $index }}]" id="booking-route-selected" value="">
+    <input type="hidden" name="departdate[{{ $index }}]" id="booking-route-departdate" value="">
     @endforeach
-    <input type="hidden" name="booking_route_selected" value="">
 </div>

@@ -23,7 +23,7 @@ use App\Http\Controllers\StationController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(BookingController::class)->group(function() {
-    Route::get('booking', 'search')->name('booking-search');
+    // Route::get('booking', 'search')->name('booking-search');
     // Route::get('booking/view', 'view')->name('booking-view');
     
     Route::post('booking', 'index')->name('booking-index');
@@ -33,6 +33,7 @@ Route::controller(BookingController::class)->group(function() {
     Route::post('bookings/confirm', 'bookingRoundConfirm')->name('bookings-confirm');
 
     Route::post('booking-multi', 'searchMultiTrip')->name('booking-multi');
+    Route::post('booking-multi/confirm', 'bookingMultiConfirm')->name('booking-multi-confirm');
 
     Route::post('booking/view', 'findBookingRecord')->name('booking-record');
     Route::post('ajax/booking/check-booking', 'checkPersonBookingRecord');

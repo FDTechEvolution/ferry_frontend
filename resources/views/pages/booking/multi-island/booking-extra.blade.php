@@ -34,8 +34,8 @@
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('bus', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-minus smaller"></i></button>
-                                        <input type="number" name="bus_qty[]" id="extra-bus-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
-                                        <input type="hidden" name="bus_id[]" value="{{ $bus['id'] }}">
+                                        <input type="number" name="bus_qty[{{ $r_index }}][]" id="extra-bus-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                        <input type="hidden" name="bus_id[{{ $r_index }}][]" value="{{ $bus['id'] }}">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('bus', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-plus smaller"></i></button>
                                     </div>
                                 </div>
@@ -63,8 +63,8 @@
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('boat', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-minus smaller"></i></button>
-                                        <input type="number" name="boat_qty[]" id="extra-boat-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
-                                        <input type="hidden" name="boat_id[]" value="{{ $boat['id'] }}">
+                                        <input type="number" name="boat_qty[{{ $r_index }}][]" id="extra-boat-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                        <input type="hidden" name="boat_id[{{ $r_index }}][]" value="{{ $boat['id'] }}">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('boat', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-plus smaller"></i></button>
                                     </div>
                                 </div>
@@ -92,8 +92,8 @@
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('meal', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-minus smaller"></i></button>
-                                        <input type="number" name="meal_qty[]" id="extra-meal-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
-                                        <input type="hidden" name="meal_id[]" value="{{ $meal['id'] }}">
+                                        <input type="number" name="meal_qty[{{ $r_index }}][]" id="extra-meal-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                        <input type="hidden" name="meal_id[{{ $r_index }}][]" value="{{ $meal['id'] }}">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('meal', '{{ $key }}', '{{ $r_index }}')"><i class="fi fi-plus smaller"></i></button>
                                     </div>
                                 </div>
@@ -121,8 +121,8 @@
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="dec('activity', '{{ $key }}')"><i class="fi fi-minus smaller"></i></button>
-                                        <input type="number" name="activity_qty[]" id="extra-activity-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
-                                        <input type="hidden" name="activity_id[]" value="{{ $activity['id'] }}">
+                                        <input type="number" name="activity_qty[{{ $r_index }}][]" id="extra-activity-index-{{ $key }}_{{ $r_index }}" class="form-control form-control-xs text-center mx-2 border-0" value="0" readonly>
+                                        <input type="hidden" name="activity_id[{{ $r_index }}][]" value="{{ $activity['id'] }}">
                                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-3" onClick="inc('activity', '{{ $key }}')"><i class="fi fi-plus smaller"></i></button>
                                     </div>
                                 </div>

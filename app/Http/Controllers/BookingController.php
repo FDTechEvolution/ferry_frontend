@@ -234,6 +234,51 @@ class BookingController extends Controller
         return redirect()->route('home');
     }
 
+    public function bookingMultiConfirm(Request $request) {
+        // Log::debug($request);
+        
+        $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
+        $passenger = $this->numberOfPassenger($request->passenger_type);
+        $depart_date = $request->departdate;
+        $departdate = array_map(function ($depart_date) {
+            $ex = explode('/', $depart_date);
+            return  $ex[2].'-'.$ex[1].'-'.$ex[0];
+        }, $depart_date);
+
+        $response = Http::reqres()->post('/online-booking/create/multi', [
+            'route_id' => $request->booking_route_selected,
+            'departdate' => $departdate,
+            'fullname' => $fullname,
+            'passenger_type' => $request->passenger_type,
+            'passenger' => $passenger['adult'],
+            'child_passenger' => $passenger['child'],
+            'infant_passenger' => $passenger['infant'],
+            'mobile' => $request->mobile,
+            'passportno' => $request->passport_number,
+            'email' => $request->email,
+            'address' => $request->address,
+            'meal_id' => $request->meal_id,
+            'meal_qty' => $request->meal_qty,
+            'activity_id' => $request->activity_id,
+            'activity_qty' => $request->activity_qty,
+            'bus_id' => $request->bus_id,
+            'bus_qty' => $request->bus_qty,
+            'boat_id' => $request->boat_id,
+            'boat_qty' => $request->boat_qty,
+            'trip_type' => 'multi-trip',
+            'book_channel' => 'ONLINE'
+        ]);
+        $res = $response->json();
+        $data = $res['data'];
+        $booking_id = $res['booking'];
+
+        if($data['respCode'] == '0000') {
+            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id]);
+        }
+
+        return redirect()->back();
+    }
+
     private function roundTripBooking($request, $route_id, $meal_id, $meal_qty, $activity_id, $activity_qty, $date) {
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);

@@ -4,6 +4,7 @@ let icon_selected = []
 let price_all = []
 let sum_price = []
 let is_passenger = []
+let route_price = 0
 let extra_price = 0
 let payment_info = {
     route_selected: [],
@@ -11,12 +12,17 @@ let payment_info = {
 }
 
 if(booking_routes) {
+    const destination = document.querySelector('.popover-destinations')
+
     booking_routes.forEach((route, index) => {
         route_selected.push([])
         icon_selected.push([])
         payment_info.extra_selected.push([])
         sum_price.push(0)
         let route_list = route.querySelectorAll('.booking-route-list')
+        let _depart_name = document.querySelector(`.depart-station-name-${index}`).innerText
+        let _arrive_name = document.querySelector(`.arrive-station-name-${index}`).innerText
+        let _travel_date = document.querySelector(`.travel-date-${index}`).innerText
         route_list.forEach((route, key) => {
             route.addEventListener('click', (e) => {
                 // set route //////////////////////////////////////////
@@ -28,6 +34,13 @@ if(booking_routes) {
                 route_active.classList.add('active')
                 route_active.classList.remove('route-hover')
                 route_selected[index] = key
+
+                let selected_route = document.querySelector(`.selected-route-${index}_${key}`)
+                let departdate = document.querySelector(`.travel-date-${index}`)
+
+                document.querySelector(`[name="booking_route_selected[${index}]"]`).value = selected_route.value
+                document.querySelector(`[name="departdate[${index}]"]`).value = departdate.innerText
+
                 // END set route /////////////////////////////////////
                 
                 // set icon //////////////////////////////////////////
@@ -56,11 +69,11 @@ if(booking_routes) {
 
                 // save route to payment /////////////////////////////
                 payment_info.route_selected[index] = {
-                    'depart': document.querySelector(`.depart-station-name-${index}`).innerText,
-                    'arrive': document.querySelector(`.arrive-station-name-${index}`).innerText,
+                    'depart': _depart_name,
+                    'arrive': _arrive_name,
                     'depart_time': route.querySelector('.depart-time').innerText,
                     'arrive_time': route.querySelector('.arrival-time').innerText,
-                    'travel_date': document.querySelector(`.travel-date-${index}`).innerText,
+                    'travel_date': _travel_date,
                     'route_price': parseToNumber(route.querySelector('.route-price').innerText),
                     'icons': icon_list
                 }
@@ -72,6 +85,8 @@ if(booking_routes) {
                     document.querySelector('#progress-next').disabled = false
             })
         })
+        if(index + 1 < route_list.length) destination.dataset.bsContent += `<i class="fa-solid fa-location-dot me-2"></i> ${_depart_name} <i class="fa-solid fa-arrow-right mx-2"></i> ${_arrive_name} <br/><i class="fa-regular fa-calendar-days me-2 mb-2"></i> ${_travel_date}<br/><br/>`
+        else destination.dataset.bsContent += `<i class="fa-solid fa-location-dot me-2"></i> ${_depart_name} <i class="fa-solid fa-arrow-right mx-2"></i> ${_arrive_name} <br/><i class="fa-regular fa-calendar-days me-2 mb-2"></i> ${_travel_date}`
     })
 }
 
@@ -400,22 +415,6 @@ function setExtraDetail() {
     const extra_service = document.querySelector('#payment-extra-service')
     const set_extra = extra_service.querySelector('#set-extra-service')
     clearElementDiv(set_extra)
-    // const extra_meal = document.querySelector('#payment-extra-meal')
-    // const extra_activity = document.querySelector('#payment-extra-activity')
-    // const extra_shuttlebus = document.querySelector('#payment-extra-shuttle-bus')
-    // const extra_longtailboat = document.querySelector('#payment-extra-longtail-boat')
-
-    // while (extra_meal.firstChild) { extra_meal.removeChild(extra_meal.lastChild) }
-    // while (extra_activity.firstChild) { extra_activity.removeChild(extra_activity.lastChild) }
-    // while (extra_shuttlebus.firstChild) { extra_shuttlebus.removeChild(extra_shuttlebus.lastChild) }
-    // while (extra_longtailboat.firstChild) { extra_longtailboat.removeChild(extra_longtailboat.lastChild) }
-
-    // extra_longtailboat.classList.add('d-none')
-    // extra_shuttlebus.classList.add('d-none')
-    // extra_activity.classList.add('d-none')
-    // extra_meal.classList.add('d-none')
-
-    console.log(payment_info.extra_selected)
 
     payment_info.extra_selected.forEach((extras, index) => {
         if(extras.length > 0) {
@@ -543,15 +542,15 @@ function setExtraDetail() {
                 })
             }
 
-            if(payment_info.extra_selected.length === 0) extra_service.classList.add('d-none')
-            else {
-                document.querySelector('#sum-of-extra').innerHTML = sum.toLocaleString("en-US")
-                extra_service.classList.remove('d-none')
-            }
-
             set_extra.appendChild(div_index)
         }
     })
+
+    if(extra_price === 0) extra_service.classList.add('d-none')
+    else {
+        document.querySelector('#sum-of-extra').innerHTML = extra_price.toLocaleString("en-US")
+        extra_service.classList.remove('d-none')
+    }
 }
 
 
@@ -707,7 +706,8 @@ function dec(element, index, route_index) {
 }
 
 function updateSumPrice() {
-    let sum_amount = route_price + extra_price
+    let total_route = sum_price.reduce((num1, num2) => { return num1+num2 })
+    let sum_amount = total_route + extra_price
     document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
 }
 

@@ -8,7 +8,11 @@
                 <i class="fa-solid fa-ship fs-1"></i>
             </div>
             <div class="col-7 d-flex align-items-center">
-                
+                <a tabindex="0" class="btn btm-sm btn-link text-light popover-destinations" role="button" 
+                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
+                    data-bs-content="">
+                    <i class="fa-solid fa-location-dot"></i> Destinations <i class="fi fi-arrow-down ms-1"></i>
+                </a>
             </div>
             <div class="col-2 py-2 border-start d-flex align-items-center justify-content-center">
                 <a tabindex="0" class="btn btm-sm btn-link text-light popover-passenger" role="button" 
@@ -46,7 +50,7 @@
 <div class="row">
     <div class="col-12">
         @if($isType != '')
-        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-confirm') }}">
+        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-multi-confirm') }}">
             @csrf
             <div class="procress-step d-none"></div>
             <div class="procress-step">
