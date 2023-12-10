@@ -1,6 +1,9 @@
 <div class="section">
     <div class="container">
         <div class="row">
+            <div class="col-12">
+                <h2 class="f-kanit-600 text-main-color-2"><i class="fi fi-product-tag"></i> Offers and Promotions</h2>
+            </div>
             <div class="flickity-preloader"
                 data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
 

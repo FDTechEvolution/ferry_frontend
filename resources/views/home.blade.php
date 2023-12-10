@@ -108,6 +108,8 @@
     </div>
 </div>
 
+@include('includes.home_cupon')
+
 <div class="row">
     <div class="col-6">
 
