@@ -15,12 +15,12 @@
                                 alt="Early Bird 10% Off จองวันนี้-31Dec.23 เดินทาง 1 Jan-30 April"
                                 style="border-radius: 15px 15px 0px 0px;">
                         </div>
-                        <div class="card-body fw-light bg-main-color" style="border-radius: 0px 0px 15px 15px;">
+                        <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;background-color:#fdf21c;color:#181818;">
                             <div class="d-table">
                                 <div class="d-table-cell align-bottom">
-                                    <span class="f-kanit-400 text-white pb-2"><i class="fi fi-product-tag"></i> Offers
+                                    <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
                                         and Promotions</span>
-                                    <h2 class="h5 card-title mb-4 text-white f-kanit-600">
+                                    <h2 class="h5 card-title mb-4 f-kanit-600">
                                         Early Bird 10% Off จองวันนี้-31Dec.23 เดินทาง 1 Jan-30 April
                                     </h2>
                                 </div>
@@ -38,12 +38,12 @@
                                 alt="Early Bird 10% Off จองวันนี้-31Dec.23 เดินทาง 1 Jan-30 April"
                                 style="border-radius: 15px 15px 0px 0px;">
                         </div>
-                        <div class="card-body fw-light bg-main-color" style="border-radius: 0px 0px 15px 15px;">
+                        <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;background-color:#d9d9d9;color:#181818;">
                             <div class="d-table">
                                 <div class="d-table-cell align-bottom">
-                                    <span class="f-kanit-400 text-white pb-2"><i class="fi fi-product-tag"></i> Offers
+                                    <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
                                         and Promotions</span>
-                                    <h2 class="h5 card-title mb-4 text-white f-kanit-600">
+                                    <h2 class="h5 card-title mb-4 f-kanit-600">
                                         Multi Island 8% Off จองตั๋วแบบต่อเนื่อง 3 station ขึ้นไป
                                     </h2>
                                 </div>
@@ -60,12 +60,12 @@
                             <img class="img-fluid " src="{{asset('assets/images/cupon/c.jpg')}}"
                                 alt="Round Trip Ticket จองตั๋วไป-กลับ ลด 5%" style="border-radius: 15px 15px 0px 0px;">
                         </div>
-                        <div class="card-body fw-light bg-main-color" style="border-radius: 0px 0px 15px 15px;">
+                        <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;background-color:#18aded;color:#181818;">
                             <div class="d-table">
                                 <div class="d-table-cell align-bottom">
-                                    <span class="f-kanit-400 text-white pb-2"><i class="fi fi-product-tag"></i> Offers
+                                    <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
                                         and Promotions</span>
-                                    <h2 class="h5 card-title mb-4 text-white f-kanit-600">
+                                    <h2 class="h5 card-title mb-4 f-kanit-600">
                                         Round Trip Ticket จองตั๋วทั้งไป และกลับ ลดทันที 5%
                                     </h2>
                                 </div>
@@ -83,12 +83,35 @@
                                 alt="Let's Celebrate 2024 Koh Lipe get 300 Baht discount"
                                 style="border-radius: 15px 15px 0px 0px;">
                         </div>
-                        <div class="card-body fw-light bg-main-color" style="border-radius: 0px 0px 15px 15px;">
+                        <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;background-color:#169448;color:#ffffff;">
                             <div class="d-table">
                                 <div class="d-table-cell align-bottom">
-                                    <span class="f-kanit-400 text-white pb-2"><i class="fi fi-product-tag"></i> Offers
+                                    <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
                                         and Promotions</span>
-                                    <h2 class="h5 card-title mb-4 text-white f-kanit-600">
+                                    <h2 class="h5 card-title mb-4 f-kanit-600">
+                                        Let's Celebrate 2024 Koh Lipe get 300 Baht discount
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-4 mb-4 py-4 me-4">
+                    <div
+                        class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
+                        <div class="clearfix">
+                            <img class="img-fluid " src="{{asset('assets/images/cupon/d.jpg')}}"
+                                alt="Let's Celebrate 2024 Koh Lipe get 300 Baht discount"
+                                style="border-radius: 15px 15px 0px 0px;">
+                        </div>
+                        <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;background-color:#f5060f;color:#ffffff;">
+                            <div class="d-table">
+                                <div class="d-table-cell align-bottom">
+                                    <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
+                                        and Promotions</span>
+                                    <h2 class="h5 card-title mb-4 f-kanit-600">
                                         Let's Celebrate 2024 Koh Lipe get 300 Baht discount
                                     </h2>
                                 </div>
