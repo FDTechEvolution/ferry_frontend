@@ -71,9 +71,9 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mb-4">
     <div class="col-12">
-        <h4 class="text-main-color-2">Hot Destination</h4>
+        <h2 class="f-kanit-600 text-main-color-2">Hot Destination</h2>
     </div>
     <div class="col-12">
         <div class="row py-3 bg-booking-cover">
@@ -107,15 +107,29 @@
         </div>
     </div>
 </div>
+@stop
 
-@include('includes.home_cupon')
-
-<div class="row">
-    <div class="col-6">
-
+@section('section-content')
+<div class="section py-3 bg-booking-passenger">
+    <div class="container">
+        <div class="row bg-booking-passenger py-4">
+            <div class="col-6">
+                <video width="100%" height="auto" controls>
+                    <source src="video/video_01.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
+            </div>
+        </div>
     </div>
 </div>
+
+@include('includes.home_cupon')
 @stop
+
 
 @section('script')
 <script src="{{ asset('assets/js/app/booking.js') }}"></script>

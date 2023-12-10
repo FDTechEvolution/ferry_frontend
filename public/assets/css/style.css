@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap');
 
 @media only screen and (min-width: 768px) {
-    body:not(.layout-admin) .section, body:not(.layout-admin) section {
+    .section.bg-theme-color-light.overlay-dark.overlay-opacity-2.bg-cover.lazy {
         padding: 200px 0;
         background-position: top center !important;
     }
