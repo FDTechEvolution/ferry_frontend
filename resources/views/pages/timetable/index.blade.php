@@ -8,8 +8,8 @@
 
     @foreach($timetable as $tt)
         <div class="col-12 text-center mb-4">
-            <a class="fancybox" href="{{ $img_url.$tt['image']['path'].'/'.$tt['image']['name'] }}">
-                <img src="{{ $img_url.$tt['image']['path'].'/'.$tt['image']['name'] }}" class="w-100 lazy">
+            <a class="fancybox" href="{{ $img_url.'/'.$tt['image']['path'] }}">
+                <img src="{{ $img_url.'/'.$tt['image']['path'] }}" class="w-100 lazy">
             </a>
         </div>
     @endforeach

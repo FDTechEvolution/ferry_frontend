@@ -223,18 +223,23 @@ function addAmotherTrip(action_id, number) {
 }
 
 function removeThisTrip(action_id, number) {
+    let _number = parseInt(number)-1
+    let _number_before = _number-1
+
     if(number == 1) {
         document.querySelector('#add-another-trip').classList.remove('d-none')
         document.querySelector('.from-multi-depart-selected').disabled = false
         document.querySelector('.to-multi-depart-selected').disabled = false
         document.querySelector('.date-multi-depart-selected').disabled = false
     }
+    else {
+        document.querySelector(`.to-${_number}-selected`).disabled = false
+        document.querySelector(`.date-${_number}-selected`).disabled = false
+    }
     document.querySelector(`.from-${number}-input`).value = ''
     document.querySelector(`.to-${number}-input`).value = ''
     document.querySelector(`.date-${number}-input`).value = ''
 
-    let _number = parseInt(number)-1
-    let _number_before = _number-1
     const multi_form = document.querySelector(`.multi-search-form-${_number}`)
     multi_form.classList.add('d-none')
     multi_form.disabled = true

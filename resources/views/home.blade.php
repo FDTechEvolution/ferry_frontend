@@ -5,7 +5,7 @@
 @stop
 
 @section('cover-content')
-<div class="section bg-theme-color-light overlay-dark overlay-opacity-5 bg-cover lazy" 
+<div class="section bg-theme-color-light overlay-dark overlay-opacity-2 bg-cover lazy" 
     data-background-image="{{ asset('/cover/'.$cover) }}">
     
     <div class="container"> 
@@ -70,30 +70,48 @@
 @stop
 
 @section('content')
-<div class="swiper-container swiper-white swiper-preloader"
-	data-swiper='{
-		"autoplay": { "delay" : 3000, "disableOnInteraction": false }
-	}'>
-	<div class="swiper-wrapper">
 
-        @foreach($slides as $slide)
-		<div class="swiper-slide">
-            @if($slide['link'] != NULL)
-                <a href="{{ $slide['link'] }}" target="_blank">
-                    <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
-                </a>
-            @else
-                <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
-            @endif
-		</div>
-		@endforeach
+<div class="row">
+    <div class="col-12">
+        <h4 class="text-main-color-2">Hot Destination</h4>
+    </div>
+    <div class="col-12">
+        <div class="row py-3 bg-booking-cover">
+            <div class="col-10 offset-1">
+                <div class="swiper-container swiper-white swiper-preloader"
+                    data-swiper='{
+                        "autoplay": { "delay" : 4000, "disableOnInteraction": false }
+                    }'>
+                    <div class="swiper-wrapper">
 
-	</div>
+                        @foreach($slides as $slide)
+                        <div class="swiper-slide">
+                            @if($slide['link'] != NULL)
+                                <a href="{{ $slide['link'] }}" target="_blank">
+                                    <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
+                                </a>
+                            @else
+                                <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
+                            @endif
+                        </div>
+                        @endforeach
 
-	<!-- Navs -->
-	<div class="bg-white rounded-circle swiper-button-next"></div>
-	<div class="bg-white rounded-circle swiper-button-prev"></div>
+                    </div>
 
+                    <!-- Navs -->
+                    <div class="bg-white rounded-circle swiper-button-next"></div>
+                    <div class="bg-white rounded-circle swiper-button-prev"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+
+    </div>
 </div>
 @stop
 

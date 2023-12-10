@@ -25,13 +25,6 @@
     <!-- navbar : navigation -->
     <ul class="navbar-nav" id="navbar-menu">
 
-        <!-- booking -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Booking
-            </a>
-        </li>
-
         <!-- viw booking -->
         <li class="nav-item">
             <a class="nav-link" href="{{ route('timetable-index') }}">
@@ -49,21 +42,7 @@
         <!-- station -->
         <li class="nav-item">
             <a class="nav-link" href="#">
-                Station
-            </a>
-        </li>
-
-        <!-- news -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                News
-            </a>
-        </li>
-
-        <!-- review -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Review
+                Check-in Station
             </a>
         </li>
 

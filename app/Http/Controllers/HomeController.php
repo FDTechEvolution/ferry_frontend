@@ -13,7 +13,8 @@ class HomeController extends Controller
 
     public function __construct() {
         $this->ImageUrl = config('services.store.image');
-        $this->ImageCover = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
+        // $this->ImageCover = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
+        $this->ImageCover = ['cover.webp'];
     }
 
     public function index() {
