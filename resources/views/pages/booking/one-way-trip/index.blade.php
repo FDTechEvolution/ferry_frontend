@@ -4,15 +4,15 @@
     @if($isType != '')
     <div class="px-3 py-2 bg-booking-cover lazy text-light">
         <div class="row">
-            <div class="col-1 d-flex align-items-center justify-content-end">
+            <div class="col-2 col-lg-1 d-flex align-items-center justify-content-end">
                 <i class="fa-solid fa-ship fs-1"></i>
             </div>
-            <div class="col-7 d-flex align-items-center">
+            <div class="col-10 col-lg-7 d-flex align-items-center">
                 <p class="mb-1">{{ $is_station['from'] }}
                 <span class="mx-2">To</span>
                 {{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
-            <div class="col-2 py-2 border-start d-flex align-items-center justify-content-center">
+            <div class="col-6 col-lg-2 py-2 border-start-none-mobile border-start d-flex align-items-center justify-content-center">
                 <a tabindex="0" class="btn btm-sm btn-link text-light popover-passenger" role="button" 
                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
                     data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
@@ -28,7 +28,7 @@
                     <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
                 @endif
             </div>
-            <div class="col-2 border-start d-flex align-items-center justify-content-center">
+            <div class="col-6 col-lg-2 border-start d-flex align-items-center justify-content-center">
                 THB <span class="ms-2" id="sum-price">0.00</span>
             </div>
         </div>

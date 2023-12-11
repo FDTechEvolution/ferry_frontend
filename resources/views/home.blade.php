@@ -17,10 +17,10 @@
                             <span class="d-block p-2 text-light">Booking <i class="fa-solid fa-ship ms-1 fs-4"></i></span>
                         </div>
                         <div class="col-sm-12 col-lg-6">
-                            <div class="nav flex nav-pills me-3" id="booking-tab" aria-orientation="horizontal">
-                                <a class="nav-link px-4 active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Round Trip Ticket</a>
-                                <a class="nav-link px-4" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">One Way Ticket</a>
-                                <a class="nav-link px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island <img src="{{ asset('coconut_tree.svg') }}" style="width: 30px; margin-top: -10px;"></a>
+                            <div class="nav flex nav-pills mb-3 mb-lg-0" id="booking-tab" aria-orientation="horizontal">
+                                <a class="nav-link mb-2 mb-lg-0 px-4 active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Round Trip Ticket</a>
+                                <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">One Way Ticket</a>
+                                <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island <img src="{{ asset('coconut_tree.svg') }}" style="width: 30px; margin-top: -10px;"></a>
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-4 text-end">
@@ -73,25 +73,33 @@
 
 <div class="row mb-4">
     <div class="col-12">
-        <h2 class="f-kanit-600 text-main-color-2">Hot Destination</h2>
+        <h2 class="f-kanit-600 text-main-color-2"><i class="fa-solid fa-fire"></i> Hot Destination</h2>
     </div>
     <div class="col-12">
-        <div class="row py-3 bg-booking-cover">
-            <div class="col-10 offset-1">
+        <div class="row py-3 bg-booking-cover slide-home-style">
+            <div class="col-12">
                 <div class="swiper-container swiper-white swiper-preloader"
                     data-swiper='{
-                        "autoplay": { "delay" : 4000, "disableOnInteraction": false }
+                        "spaceBetween": 8,
+                        "slidesPerGroup": 1,
+                        "loop": true,
+                        "autoplay": { "delay" : 4000, "disableOnInteraction": false },
+                        "breakpoints": {
+                            "1024": { "slidesPerView": "3" },
+                            "920":	{ "slidesPerView": "2" },
+                            "640":	{ "slidesPerView": "1" }
+                        }
                     }'>
-                    <div class="swiper-wrapper">
+                    <div class="hide swiper-wrapper">
 
                         @foreach($slides as $slide)
                         <div class="swiper-slide">
                             @if($slide['link'] != NULL)
                                 <a href="{{ $slide['link'] }}" target="_blank">
-                                    <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
+                                    <img class="img-fluid slide-home-style" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
                                 </a>
                             @else
-                                <img class="img-fluid" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
+                                <img class="img-fluid slide-home-style" src="{{ asset($store.$slide['image']['path'].'/'.$slide['image']['name']) }}" alt="...">
                             @endif
                         </div>
                         @endforeach
@@ -113,12 +121,12 @@
 <div class="section py-3 bg-booking-passenger">
     <div class="container">
         <div class="row bg-booking-passenger py-4">
-            <div class="col-6">
-                <video width="100%" height="auto" controls>
-                    <source src="video/video_01.mp4" type="video/mp4">
+            <div class="col-12 col-lg-6">
+                <video width="100%" height="auto" style="border-radius: 10px;" controls>
+                    <source src="video/tigerline.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center">
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>

@@ -18,6 +18,63 @@
     }
 }
 
+@media (max-width: 540px) {
+    a#v-pills-home-tab, a#v-pills-profile-tab, a#v-pills-messages-tab {
+        width: 100%;
+        border-radius: 5px !important;
+    }
+    .process-steps {
+        display: table;
+    }
+    li.process-step-item {
+        width: 90%;
+    }
+    .popover-passenger {
+        padding: 0;
+    }
+    .border-end-none-mobile {
+        border-right: none !important;
+    }
+    .border-start-none-mobile {
+        border-left: none !important;
+    }
+    .border-bottom-mobile {
+        border-bottom: 2px solid;
+    }
+    .dropdown-booking-width {
+        min-width: 0 !important;
+    }
+    .dropdown-booking-destinamtion-width {
+        min-width: o !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Logo & Header Style */
+.header-bg-color {
+    background-color: #fdf31a !important;
+}
+.navbar-bg-color {
+    background-color: #f30512;
+}
+.header-style {
+    margin: 0 auto;
+    margin-left: 15%;
+}
+.navbar-brand>img {
+    display: block !important;
+    width: 250px !important;
+    height: 61px !important;
+}
+a.navbar-brand {
+    margin-right: 0;
+}
+img.img-logo-style {
+    height: 61px;
+    margin-top: -2px;
+}
+/* END */
+
 .f-kanit{
     font-family: 'Kanit', sans-serif;
     font-weight: 400;
@@ -238,4 +295,25 @@
 }
 .process-steps-primary>.active:before, .process-steps-primary>.complete:before {
     background: #fff;
+}
+
+.loading-destination {
+    position: absolute;
+    left: 36px;
+    top: 5px;
+    z-index: 9;
+    color: #ff6100;
+}
+
+.slide-home-style {
+    border-radius: 20px;
+}
+
+.dropdown-booking-width {
+    min-width: 1120px;
+    width: 100%;
+}
+.dropdown-booking-destinamtion-width {
+    min-width: 840px;
+    width: 100%;
 }

@@ -1,6 +1,6 @@
-<div class="container position-relative">
+<div class="container-fluid px-0 position-relative header-style">
 
-    <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit">
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit navbar-bg-color">
 
         <div class="align-items-start">
 
@@ -24,25 +24,7 @@
 
 
         <!-- OPTIONS -->
-        <ul class="list-inline list-unstyled mb-0 d-flex align-items-end">
-            <li class="list-inline-item mx-1 dropdown text-center">
-                <!-- <a href="#" aria-label="Account Sign In" class="js-ajax-modal btn btn-sm btn-light btn-pill"
-                    data-href="_ajax/modal_signin.html"
-                        data-ajax-modal-size="modal-md"
-                        data-ajax-modal-centered="true"
-                        data-ajax-modal-backdrop="static">
-                    <span>Login</span>
-                    <span class="group-icon">
-                        <i class="fi fi-user-male"></i>
-                        <i class="fi fi-close"></i>
-                    </span> 
-                </a> -->
-
-                <p class="mb-0 smaller"></p>
-
-            </li>
-
-        </ul>
+        
         <!-- /OPTIONS -->
     </nav>
 

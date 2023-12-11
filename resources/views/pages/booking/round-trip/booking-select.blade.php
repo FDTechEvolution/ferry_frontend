@@ -16,7 +16,7 @@
                         <span class="me-2">Arrival</span>
                         <span class="station-name">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif</span>
                     </div>
-                    <div class="float-end">
+                    <div class="float-end d-none d-lg-block">
                         <span class="px-3">Fare</span>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         <span class="me-2">Arrival</span>
                         <span class="station-name">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif</span>
                     </div>
-                    <div class="float-end">
+                    <div class="float-end d-none d-lg-block">
                         <span class="px-3">Fare</span>
                     </div>
                 </div>

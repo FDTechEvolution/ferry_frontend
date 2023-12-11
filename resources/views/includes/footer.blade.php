@@ -11,8 +11,27 @@
                 <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2" width="" height="60">
                 <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2" width="" height="60">
             </div>
-            <div class="col-lg-12 text-center">
-                <span class="text-warning">Terms & Conditions | Terms of Service | Privacy Policy ©2023 Tiger Line Ferry Company Limited. All Right Reserved.</span>
+            <div class="col-lg-12 text-center mb-3">
+                <p class="text-warning mb-0">Review | Station | News | Terms & Conditions | Terms of Service | Privacy Policy </p>
+                <p class="text-warning mb-2">
+                    Tiger Line Ferry Company Limited. All Right Reserved.
+                </p>
+
+                <a href="#" class="btn btn-sm btn-facebook rounded-circle transition-hover-top" rel="noopener" target="_blank">
+                    <i class="fi fi-social-facebook text-light"></i>
+                </a>
+
+                <a href="#" class="btn btn-sm btn-instagram rounded-circle transition-hover-top" rel="noopener" target="_blank">
+                    <i class="fi fi-social-instagram text-light"></i>
+                </a>
+
+                <a href="#" class="btn btn-sm btn-youtube rounded-circle transition-hover-top" rel="noopener" target="_blank">
+                    <i class="fi fi-social-youtube text-light"></i>
+                </a>
+
+                <a href="#" class="btn btn-sm btn-email rounded-circle transition-hover-top" rel="noopener" target="_blank">
+                    <i class="fa-regular fa-envelope text-light"></i>
+                </a>
             </div>
         </div>
 

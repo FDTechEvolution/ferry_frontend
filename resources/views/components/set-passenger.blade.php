@@ -12,7 +12,7 @@
     </div>
     <div class="col-12 mt-3">
         <div class="row">
-            <div class="col-2 form-floating mb-3">
+            <div class="col-12 col-lg-2 form-floating mb-3">
                 <select required name="title[]" class="form-select form-select-sm" id="passenger-title-{{ $title }}" aria-label="Floating label select example">
                     <option value="" selected disabled>Select Title</option>
                     <option value="mr">Mr.</option>
@@ -22,11 +22,11 @@
                 </select>
                 <label for="passenger-title-{{ $title }}">Title<span class="text-danger">*</span></label>
             </div>
-            <div class="col-5 form-floating mb-3">
+            <div class="col-12 col-lg-5 form-floating mb-3">
                 <input required type="text" name="first_name[]" class="form-control form-control-sm" id="passenger-first-name-{{ $first_name }}" placeholder="First name & Middle name">
                 <label for="passenger-first-name-{{ $first_name }}" class="ms-2">First name & Middle name<span class="text-danger">*</span></label>
             </div>
-            <div class="col-5 form-floating mb-3">
+            <div class="col-12 col-lg-5 form-floating mb-3">
                 <input required type="text" name="last_name[]" class="form-control form-control-sm" id="passenger-last-name-{{ $last_name }}" placeholder="Last name">
                 <label for="passenger-last-name-{{ $last_name }}" class="ms-2">Last name<span class="text-danger">*</span></label>
             </div>

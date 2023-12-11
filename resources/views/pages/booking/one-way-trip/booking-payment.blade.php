@@ -11,7 +11,7 @@
                     <p><span class="fw-bold">{{ $isType }}</span> {{ date('l d F Y' ,strtotime($b_date[1].'/'.$b_date[0].'/'.$b_date[2])) }}</p>
                     <input type="hidden" name="departdate" value="{{ $booking_date }}">
                 </div>
-                <div class="col-8 border-end border-secondary border-2">
+                <div class="col-12 col-lg-8 pb-2 pb-lg-0 border-bottom-mobile border-end-none-mobile border-end border-secondary border-2">
                     <div class="d-flex">
                         <p class="is_depart_time mb-0 me-2 fw-bold"></p> : 
                         <p class="ms-2 mb-0">{{ $is_station['from'] }}</p>
@@ -22,7 +22,7 @@
                         <p class="ms-2 mb-0">{{ $is_station['to'] }}</p>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-lg-4 mt-3 mt-lg-0">
                     <div class="row text-center fw-bold mb-2">
                         <div class="col-4 text-start">Depart</div>
                         <div class="col-4">Fare</div>

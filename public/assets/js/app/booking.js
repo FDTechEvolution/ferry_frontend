@@ -99,9 +99,11 @@ const add_trip = document.querySelector('#add-another-trip')
 if(add_trip) {
     add_trip.addEventListener('click', () => {
         const station_from = document.querySelector('.from-multi-depart-selected')
-        const station_to = document.querySelector('.to-multi-depart-selected')
+        const station_to = document.querySelector('.input-to-multi-depart')
         const station_to_selected = document.querySelector(`.to-1-selected`)
         const travel_date = document.querySelector('.date-multi-depart-selected')
+        const station_id = document.querySelector('#to-selected_multi-depart')
+
         setFromValue('0', station_from.value)
         setFromValue('1', station_to.value)
 
@@ -124,10 +126,11 @@ if(add_trip) {
             const station_from_selected = document.querySelector('.from-1-selected')
             document.querySelector('.multi-check-0').checked = true
 
+            
             setMultiFromOption(station_to, station_from_selected)
 
             let element = `.to-1-selected`
-            let result = getMultiStations(station_to.value, element)
+            let result = getMultiStations(station_id.value, element)
             if(result) {
                 station_from.disabled = true
                 station_to.disabled = true
@@ -157,18 +160,20 @@ function updateDateValue(e, number) {
 }
 
 function setMultiFromOption(station_to, station_from) {
-    let option = document.createElement('option')
-    option.value = station_to.value
-    option.text = station_to.options[station_to.selectedIndex].text
-    option.setAttribute('selected', true)
-    station_from.appendChild(option)
+    // console.log(station_to.value)
+    // let option = document.createElement('option')
+    // option.value = station_to.value
+    // option.text = station_to.options[station_to.selectedIndex].text
+    // option.setAttribute('selected', true)
+    station_from.value = station_to.value
     station_from.disabled = true
 }
 
 async function getMultiStations(id, element) {
     let result = await getDataAnotherSelected(id, 'from')
     let _result = updateDestinationSelect(result, element)
-    let _element = document.querySelector(`${element}`)
+    // let _element = document.querySelector(`${element}`)
+    let _element = document.querySelector(`.input-to-1-selected`)
     if(_result) {
         _element.disabled = false
         return _result
@@ -254,12 +259,17 @@ function removeThisTrip(action_id, number) {
 
 async function fromOriginalSelected(e, type, form_type) {
     let destination = document.querySelector(`.to-${type}-${form_type}-selected`)
+    let destination_loading = document.querySelector(`.loading-destination-${type}-${form_type}`)
     destination.disabled = true
+    destination_loading.classList.remove('d-none')
 
     let result = await getDataAnotherSelected(e.value, 'from')
     let element = `.to-${type}-${form_type}-selected`
     let _result = updateDestinationSelect(result, element)
-    if(_result) destination.disabled = false
+    if(_result) {
+        destination_loading.classList.add('d-none')
+        destination.disabled = false
+    }
     
 }
 
@@ -271,25 +281,50 @@ async function fromOriginalSelected(e, type, form_type) {
 // }
 
 function updateDestinationSelect(result, element) {
-    let destination_optgroup = document.querySelectorAll(`${element} optgroup`)
+    let destination_optgroup = document.querySelectorAll(`${element} .group-list`)
     destination_optgroup.forEach((o) => { o.remove() })
     const stations = Map.groupBy(result.data, station => {return station.section})
 
     let destination = document.querySelector(`${element}`)
     stations.forEach((section, section_key) => {
-        let optgroup = document.createElement('optgroup')
-        optgroup.setAttribute('label', section_key)
-        destination.add(optgroup)
-        section.forEach((station) => {
+        let group_list = document.createElement('div')
+        group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
+        let optgroup = document.createElement('p')
+        optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
+        optgroup.innerHTML = section_key
+        group_list.appendChild(optgroup)
+        let ul = document.createElement('ul')
+        ul.setAttribute('class', `section-key-${section_key}`)
+        section.forEach((station, station_key) => {
             let name = station.name
-            let pier = station.piername === null ? '' : `(${station.piername})`
-            let option = document.createElement('option')
-            option.value = station.id
-            option.text = name + pier
-            optgroup.appendChild(option)
+            let pier = station.piername === null ? '' : ` (${station.piername})`
+            let li = document.createElement('li')
+            li.setAttribute('class', 'station-to-selected cursor-pointer mb-2')
+            li.setAttribute('data-id', station.id)
+            // li.setAttribute('onClick', `toDestinationSelected2(this, '${type}', '${form_type}')`)
+            li.innerHTML = name + pier
+            ul.appendChild(li)
         })
+        group_list.appendChild(ul)
+        destination.appendChild(group_list)
     })
     return true
+
+    // let destination = document.querySelector(`${element}`)
+    // stations.forEach((section, section_key) => {
+    //     let optgroup = document.createElement('optgroup')
+    //     optgroup.setAttribute('label', section_key)
+    //     destination.add(optgroup)
+    //     section.forEach((station) => {
+    //         let name = station.name
+    //         let pier = station.piername === null ? '' : `(${station.piername})`
+    //         let option = document.createElement('option')
+    //         option.value = station.id
+    //         option.text = name + pier
+    //         optgroup.appendChild(option)
+    //     })
+    // })
+    // return true
 }
 
 async function getDataAnotherSelected(_id, select) {
@@ -307,4 +342,58 @@ async function getDataAnotherSelected(_id, select) {
         let res = await response.json()
         return res
     }
+}
+
+async function fromOriginalSelected2(e, type, form_type) {
+    document.querySelector(`#from-selected_${type}-${form_type}`).value = e.dataset.id
+    document.querySelector(`.from-${type}-${form_type}-selected`).value = e.innerText
+
+    let destination = document.querySelector(`.input-to-${type}-${form_type}`)
+    let destination_loading = document.querySelector(`.loading-destination-${type}-${form_type}`)
+    destination.disabled = true
+    destination_loading.classList.remove('d-none')
+
+    let result = await getDataAnotherSelected(e.dataset.id, 'from')
+    let element = `.to-${type}-${form_type}-selected`
+    let _result = updateDestinationSelect2(result, element, type, form_type)
+    if(_result) {
+        destination_loading.classList.add('d-none')
+        destination.disabled = false
+    }
+}
+
+function updateDestinationSelect2(result, element, type, form_type) {
+    let destination_optgroup = document.querySelectorAll(`${element} .group-list`)
+    destination_optgroup.forEach((o) => { o.remove() })
+    const stations = Map.groupBy(result.data, station => {return station.section})
+
+    let destination = document.querySelector(`${element}`)
+    stations.forEach((section, section_key) => {
+        let group_list = document.createElement('div')
+        group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
+        let optgroup = document.createElement('p')
+        optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
+        optgroup.innerHTML = section_key
+        group_list.appendChild(optgroup)
+        let ul = document.createElement('ul')
+        ul.setAttribute('class', `section-key-${section_key}`)
+        section.forEach((station, station_key) => {
+            let name = station.name
+            let pier = station.piername === null ? '' : ` (${station.piername})`
+            let li = document.createElement('li')
+            li.setAttribute('class', 'station-to-selected cursor-pointer mb-2')
+            li.setAttribute('data-id', station.id)
+            li.setAttribute('onClick', `toDestinationSelected2(this, '${type}', '${form_type}')`)
+            li.innerHTML = name + pier
+            ul.appendChild(li)
+        })
+        group_list.appendChild(ul)
+        destination.appendChild(group_list)
+    })
+    return true
+}
+
+function toDestinationSelected2(e, type, form_type) {
+    document.querySelector(`#to-selected_${type}-${form_type}`).value = e.dataset.id
+    document.querySelector(`.input-to-${type}-${form_type}`).value = e.innerText
 }

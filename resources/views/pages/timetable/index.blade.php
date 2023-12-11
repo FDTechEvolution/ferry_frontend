@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-12 text-center mb-5">
-        <h1 class="fw-bold">Time Table</h1>
+        <h1 class="fw-bold">Timetable</h1>
     </div>
 
     @foreach($timetable as $tt)

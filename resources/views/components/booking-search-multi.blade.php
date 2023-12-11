@@ -12,21 +12,30 @@
     <input type="hidden" name="_from_type[]" value="multi">
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <select class="form-select form-select-sm from-{{ $number }}-selected" id="from-{{ $from_id }}" aria-label="booking station">
-                <option value="" selected disabled>Select Original</option>
-                
-            </select>
+            <input type="text" class="form-control from-{{ $number }}-selected" id="from-{{ $from_id }}" aria-label="booking station">
             <label for="from-{{ $from_id }}">From</label>
         </div>
         <input type="hidden" class="from-{{ $number }}-input" name="from[]" value="">
     </div>
     <div class="col-sm-3 col-md-3 px-0">
         <div class="form-floating mb-3">
-            <select class="form-select form-select-sm to-{{ $number }}-selected" id="to-{{ $to_id }}" aria-label="booking station" onChange="updateToDataValue(this, '{{ $number }}')" disabled>
+            <!-- <select class="form-select form-select-sm to-{{ $number }}-selected" id="to-{{ $to_id }}" aria-label="booking station" onChange="updateToDataValue(this, '{{ $number }}')" disabled>
                 <option value="" selected>Select Destination</option>
                 
             </select>
-            <label for="to-{{ $to_id }}">To</label>
+            <label for="to-{{ $to_id }}">To</label> -->
+
+            <div class="form-floating mb-3 dropdown">
+                <input required type="text" class="dropdown-toggle form-control input-to-{{ $number }}-selected" id="to-{{ $to_id }}" data-bs-toggle="dropdown" placeholder="To" disabled>
+                <label class="text-secondary" for="to-{{ $to_id }}">To</label>
+            
+                <div class="dropdown-menu dropdown-booking-destinamtion-width dropdown-md p-3">
+                    <div class="row mb-2 pb-2 pb-lg-0 to-{{ $number }}-selected">
+                        
+                    </div>
+                </div>
+                
+            </div>
         </div>
         <input type="hidden" class="to-{{ $number }}-input" name="to[]" value="">
     </div>

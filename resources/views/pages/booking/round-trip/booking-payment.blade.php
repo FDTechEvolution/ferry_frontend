@@ -3,7 +3,7 @@
     <div class="row bg-booking-payment-litinerary mx-3 p-3 mb-5">
         <div class="col-12 mb-5">
             <div class="row depart-litinerary">
-                <div class="col-8 border-end border-secondary border-2">
+                <div class="col-12 col-lg-8 border-bottom-mobile border-end-none-mobile border-end border-secondary border-2">
                     @php
                         $d_date = explode('/', $depart_date)
                     @endphp
@@ -21,7 +21,7 @@
                         <p class="ms-2 mb-0">{{ $station_depart['to'] }}</p>
                     </div>
                 </div>
-                <div class="col-4 pt-2">
+                <div class="col-12 col-lg-4 pt-2">
                     <div class="row text-center fw-bold mb-3">
                         <div class="col-4 text-start">Depart</div>
                         <div class="col-4">Fare</div>
@@ -66,7 +66,7 @@
 
         <div class="col-12">
             <div class="row return-litinerary">
-                <div class="col-8 border-end border-secondary border-2">
+                <div class="col-12 col-lg-8 border-bottom-mobile border-end-none-mobile border-end border-secondary border-2">
                     @php
                         $r_date = explode('/', $return_date)
                     @endphp
@@ -84,7 +84,7 @@
                         <p class="ms-2 mb-0">{{ $station_return['to'] }}</p>
                     </div>
                 </div>
-                <div class="col-4 pt-2">
+                <div class="col-12 col-lg-4 pt-2">
                     <div class="row text-center fw-bold mb-2">
                         <div class="col-4 text-start">Return</div>
                         <div class="col-4">Fare</div>

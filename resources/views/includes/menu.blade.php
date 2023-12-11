@@ -27,21 +27,21 @@
 
         <!-- viw booking -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('timetable-index') }}">
+            <a class="nav-link fw-bold" href="{{ route('timetable-index') }}">
                 Timetable
             </a>
         </li>
 
         <!-- meal -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('routemap-index') }}">
+            <a class="nav-link fw-bold" href="{{ route('routemap-index') }}">
                 Route map
             </a>
         </li>
 
         <!-- station -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link fw-bold" href="#">
                 Check-in Station
             </a>
         </li>
