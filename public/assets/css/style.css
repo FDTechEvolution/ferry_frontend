@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap');
 
+@font-face {
+    font-family: 'proxima_softbold';
+    src: url('../fonts/font-ProximaSoft-Bold/fontsfree-net-proximasoft-bold-webfont.woff2') format('woff2'),
+         url('../fonts/font-ProximaSoft-Bold/fontsfree-net-proximasoft-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.f-kanit{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+}
+
+.f-kanit-600{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+}
+
+
+h1,h2,h3,h4,h5{
+    font-family: 'proxima_softbold','Kanit', sans-serif;
+    font-weight: 600;
+}
+
 @media only screen and (min-width: 768px) {
     .section.bg-theme-color-light.overlay-dark.overlay-opacity-2.bg-cover.lazy {
         padding: 200px 0;
@@ -50,6 +74,13 @@
     }
 }
 
+nav.navbar-light a.nav-link:not(.active):not(:hover) {
+    color: #FFFFFF;
+}
+.navbar-light .navbar-nav .nav-item:hover>.nav-link,.navbar-light .navbar-nav .nav-link[aria-expanded=true] {
+    color: #000000!important
+}
+
 /* Logo & Header Style */
 .header-bg-color {
     background-color: #fdf31a !important;
@@ -75,15 +106,6 @@ img.img-logo-style {
 }
 /* END */
 
-.f-kanit{
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-}
-
-.f-kanit-600{
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-}
 
 #navbar-menu a.nav-link.active {
     font-weight: bold;

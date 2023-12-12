@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="f-kanit-600 text-main-color-2"><i class="fi fi-product-tag"></i> Offers and Promotions</h2>
+                <h2 class="text-main-color-2"><i class="fi fi-product-tag"></i> Offers and Promotions</h2>
             </div>
             <div class="flickity-preloader"
                 data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
@@ -19,9 +19,9 @@
                             <div class="card-body fw-light" style="border-radius: 0px 0px 15px 15px;color:#181818;background-color: {{ $promotion['bg_color']}};">
                                 <div class="d-table">
                                     <div class="d-table-cell align-bottom">
-                                        <span class="f-kanit-400 pb-2"><i class="fi fi-product-tag"></i> Offers
+                                        <span class="pb-2"><i class="fi fi-product-tag"></i> Offers
                                             and Promotions</span>
-                                        <h2 class="h5 card-title mb-4 f-kanit-600">
+                                        <h2 class="h5 card-title mb-4">
                                             {{ $promotion['title'] }}
                                         </h2>
                                     </div>
