@@ -9,7 +9,7 @@
     data-background-image="{{ asset('/cover/'.$cover) }}">
     
     <div class="container"> 
-        <div class="row text-center-md text-center d-middle justify-content-center">
+        <div class="row text-center-md text-center d-middle justify-content-center font-proxima">
             <div class="col-12 text-align-center text-center-md text-center" data-aos="fade-in" data-aos-delay="20" data-aos-offset="0">
                 <div class="d-inline-block bg-main-color-2 shadow-primary-xs rounded p-4 w-100 text-align-center border">
                     <div class="row mb-3">
@@ -73,7 +73,7 @@
 
 <div class="row mb-4">
     <div class="col-12">
-        <h2 class="f-kanit-600 text-main-color-2"><i class="fa-solid fa-fire"></i> Hot Destination</h2>
+        <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Hot Destination</h2>
     </div>
     <div class="col-12">
         <div class="row py-3 bg-booking-cover slide-home-style">

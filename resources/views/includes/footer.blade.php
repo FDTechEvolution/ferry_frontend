@@ -11,9 +11,10 @@
                 <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2" width="" height="60">
                 <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2" width="" height="60">
             </div>
-            <div class="col-lg-12 text-center mb-3">
-                <p class="text-warning mb-0">Review | Station | News | Terms & Conditions | Terms of Service | Privacy Policy </p>
-                <p class="text-warning mb-2">
+            <div class="col-lg-12 text-center mb-3 font-proxima">
+                <p class="text-main-color-2 mb-0">
+                    <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> | Station | News | <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
+                <p class="text-main-color-2 mb-2">
                     Tiger Line Ferry Company Limited. All Right Reserved.
                 </p>
 

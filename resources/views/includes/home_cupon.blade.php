@@ -8,7 +8,7 @@
                 data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
 
                 @foreach($promotions as $promotion)
-                    <div class="col-12 col-lg-4 mb-4 py-4 me-4">
+                    <div class="col-12 col-lg-4 mb-4 me-4">
                         <div
                             class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
                             <div class="clearfix">

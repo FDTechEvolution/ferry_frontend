@@ -23,7 +23,7 @@
 
 
     <!-- navbar : navigation -->
-    <ul class="navbar-nav" id="navbar-menu">
+    <ul class="navbar-nav font-proxima" id="navbar-menu">
 
         <!-- viw booking -->
         <li class="nav-item">

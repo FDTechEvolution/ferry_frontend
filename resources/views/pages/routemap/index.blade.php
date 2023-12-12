@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<div class="row">
+<div class="row min-h-50vh">
     <div class="col-12 text-center mb-5">
         <h1 class="fw-bold">Route map</h1>
     </div>

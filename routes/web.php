@@ -8,6 +8,8 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\RouteMapController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\TermAndConditionController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +57,12 @@ Route::controller(PaymentController::class)->group(function() {
 
 Route::controller(StationController::class)->group(function() {
     Route::post('ajax/station/to', 'getStationTo');
+});
+
+Route::controller(TermAndConditionController::class)->group(function() {
+    Route::get('term-and-condition', 'index')->name('term-index');
+});
+
+Route::controller(ReviewController::class)->group(function() {
+    Route::get('review', 'index')->name('review-index');
 });

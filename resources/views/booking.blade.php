@@ -31,7 +31,7 @@
     <li class="process-step-item">Payment</li>
 </ol>
 
-<div class="row">
+<div class="row min-h-50vh">
     <div class="col-12">
         @if($isType != '')
         <!-- Select -->

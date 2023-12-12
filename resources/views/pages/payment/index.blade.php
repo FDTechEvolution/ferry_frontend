@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-<div class="row">
+<div class="row min-h-50vh">
     <div class="col-12 text-center d-none" id="back-to-home">
         <div class="d-flex justify-content-center align-items-center">
             <a href="{{ route('home') }}" class="btn btn-sm bg-main-color-2 text-light rounded"><i class="fi fi-home me-2"></i> Back To Home</a>

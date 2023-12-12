@@ -24,6 +24,10 @@ h1,h2,h3,h4,h5{
     font-weight: 600;
 }
 
+.font-proxima {
+    font-family: 'proxima_softbold','Kanit', sans-serif;
+}
+
 @media only screen and (min-width: 768px) {
     .section.bg-theme-color-light.overlay-dark.overlay-opacity-2.bg-cover.lazy {
         padding: 200px 0;
@@ -106,6 +110,19 @@ img.img-logo-style {
 }
 /* END */
 
+.min-h-50vh {
+    min-height: 50vh;
+}
+
+.f-kanit{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+}
+
+.f-kanit-600{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+}
 
 #navbar-menu a.nav-link.active {
     font-weight: bold;
@@ -148,7 +165,7 @@ img.img-logo-style {
     color: #0a3961;
 }
 .text-main-color-2 {
-    color: #ff6100;
+    color: #ff6100 !important;
 }
 .text-second-color {
     color: #00bf63;
@@ -334,8 +351,35 @@ img.img-logo-style {
 .dropdown-booking-width {
     min-width: 1120px;
     width: 100%;
+    height: 350px;
+    overflow: auto;
 }
+.dropdown-booking-width::-webkit-scrollbar {
+    width: 5px;
+}
+.dropdown-booking-width::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #333;
+    border-radius: 10px;
+}
+.dropdown-booking-width::-webkit-scrollbar-thumb {
+    background: #ff6100;
+    border-radius: 5px;
+}
+
 .dropdown-booking-destinamtion-width {
     min-width: 840px;
     width: 100%;
+    height: 350px;
+    overflow: auto;
+}
+.dropdown-booking-destinamtion-width::-webkit-scrollbar {
+    width: 5px;
+}
+.dropdown-booking-destinamtion-width::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #333;
+    border-radius: 10px;
+}
+.dropdown-booking-destinamtion-width::-webkit-scrollbar-thumb {
+    background: #ff6100;
+    border-radius: 5px;
 }

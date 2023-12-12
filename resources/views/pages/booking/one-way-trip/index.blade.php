@@ -45,7 +45,7 @@
     <li class="process-step-item" data-step="payment"><span class="ps-3">Payment</span></li>
 </ol>
 
-<div class="row">
+<div class="row min-h-50vh">
     <div class="col-12">
         @if($isType != '')
         <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-confirm') }}">
