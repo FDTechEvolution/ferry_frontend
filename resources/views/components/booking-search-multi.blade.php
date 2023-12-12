@@ -26,6 +26,7 @@
             <label for="to-{{ $to_id }}">To</label> -->
 
             <div class="form-floating mb-3 dropdown">
+                <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $number }} d-none"></i>
                 <input required type="text" class="dropdown-toggle form-control input-to-{{ $number }}-selected" id="to-{{ $to_id }}" data-bs-toggle="dropdown" placeholder="To" disabled>
                 <label class="text-secondary" for="to-{{ $to_id }}">To</label>
             

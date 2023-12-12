@@ -11,7 +11,7 @@
                 <span class="station-name travel-date-{{ $index }}">{{ $routes['depart'] }}</span>
             </p>
         </div>
-        <div class="col-11 ms-5 booking-route-select">
+        <div class="col-12 col-lg-11 ms-0 ms-lg-5 booking-route-select">
             @foreach($routes['data'] as $key => $route)
                 <div class="row p-2 px-4 mb-4 border rounded booking-route-list route-hover cursor-pointer list-index_{{ $index }} list-position_{{ $index }}_{{ $key }}" data-list="{{ $index }}" data-key="{{ $key }}">
                     <div class="col-12 pb-2 border-0 border-bottom border-2 border-light">
@@ -21,7 +21,7 @@
                             <span class="me-2">Arrival</span>
                             <span class="station-name">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif</span>
                         </div>
-                        <div class="float-end">
+                        <div class="float-end d-none d-lg-block">
                             <span class="px-3">Fare</span>
                         </div>
                     </div>

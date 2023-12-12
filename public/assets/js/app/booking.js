@@ -104,10 +104,10 @@ if(add_trip) {
         const travel_date = document.querySelector('.date-multi-depart-selected')
         const station_id = document.querySelector('#to-selected_multi-depart')
 
-        setFromValue('0', station_from.value)
-        setFromValue('1', station_to.value)
+        // setFromValue('0', station_from.value)
+        setFromValue('1', station_id.value)
 
-        document.querySelector(`.to-0-input`).value = station_to.value
+        // document.querySelector(`.to-0-input`).value = station_to.value
         document.querySelector(`.date-0-input`).value = travel_date.value
 
         if(station_to.value !== '' && travel_date.value !== '') {
@@ -170,21 +170,28 @@ function setMultiFromOption(station_to, station_from) {
 }
 
 async function getMultiStations(id, element) {
+    let destination_loading = document.querySelector(`.loading-destination-1`)
+    destination_loading.classList.remove('d-none')
     let result = await getDataAnotherSelected(id, 'from')
     let _result = updateDestinationSelect(result, element)
     // let _element = document.querySelector(`${element}`)
     let _element = document.querySelector(`.input-to-1-selected`)
     if(_result) {
+        destination_loading.classList.add('d-none')
         _element.disabled = false
         return _result
     }
 }
 
 async function getMultiStationsAnother(id, element_input, element_list, number) {
+    let destination_loading = document.querySelector(`.loading-destination-${number}`)
+    destination_loading.classList.remove('d-none')
+
     let result = await getDataAnotherSelected(id, 'from')
     let _result = updateDestinationSelect(result, element_list, number)
     let _element = document.querySelector(`${element_input}`)
     if(_result) {
+        destination_loading.classList.add('d-none')
         _element.disabled = false
         return _result
     }
@@ -200,7 +207,7 @@ function addAmotherTrip(action_id, number) {
     const station_to = document.querySelector(`.input-to-${number}-selected`)
     const travel_date = document.querySelector(`.date-${number}-selected`)
 
-    setFromValue(_number, station_to.value)
+    setFromValue(_number, station_to_selected.value)
 
     if(station_to.value !== '' && travel_date.value !== '') {
         const travel_date_selected = document.querySelector(`.date-${_number}-selected`)
@@ -245,12 +252,15 @@ function removeThisTrip(action_id, number) {
     if(number == 1) {
         document.querySelector('#add-another-trip').classList.remove('d-none')
         document.querySelector('.from-multi-depart-selected').disabled = false
-        document.querySelector('.to-multi-depart-selected').disabled = false
+        document.querySelector('.input-to-multi-depart').disabled = false
         document.querySelector('.date-multi-depart-selected').disabled = false
     }
     else {
-        document.querySelector(`.to-${_number}-selected`).disabled = false
+        document.querySelector(`.input-to-${_number}-selected`).disabled = false
+        document.querySelector(`.input-to-${number}-selected`).required = false
+
         document.querySelector(`.date-${_number}-selected`).disabled = false
+        document.querySelector(`.date-${number}-selected`).required = false
     }
     document.querySelector(`.from-${number}-input`).value = ''
     document.querySelector(`.to-${number}-input`).value = ''

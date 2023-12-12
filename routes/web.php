@@ -57,6 +57,7 @@ Route::controller(PaymentController::class)->group(function() {
 
 Route::controller(StationController::class)->group(function() {
     Route::post('ajax/station/to', 'getStationTo');
+    Route::get('station', 'index')->name('station-index');
 });
 
 Route::controller(TermAndConditionController::class)->group(function() {

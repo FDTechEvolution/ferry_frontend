@@ -10,8 +10,8 @@
             :station_to="$station_to"
             :form_type="_('depart')"
         />
-        <input type="hidden" class="from-0-input" name="from[]" value="">
-        <input type="hidden" class="to-0-input" name="to[]" value="">
+        <!-- <input type="hidden" class="from-0-input" name="from[]" value="">
+        <input type="hidden" class="to-0-input" name="to[]" value=""> -->
         <input type="hidden" class="date-0-input" name="date[]" value="">
         <div class="row multi-search-form-row">
             <div class="col-12 multi-search-form-0 d-none">

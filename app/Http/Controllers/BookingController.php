@@ -94,6 +94,7 @@ class BookingController extends Controller
 
     public function searchMultiTrip(Request $request) {
         // Log::debug($request);
+        // return redirect()->route('home');
         $_type = $this->Type[$request->_type];
         $passenger = $this->setInputType($request);
         $route_arr = [];

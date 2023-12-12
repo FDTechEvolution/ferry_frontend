@@ -20,9 +20,7 @@ class HomeController extends Controller
     }
 
     public function index() {
-        $stations = $this->getStation();
         $station_route = $this->routeStation();
-        // Log::debug($station_route);
         $slide = $this->getSlide();
         $cover_index = array_rand($this->ImageCover, 1);
         $cover = $this->ImageCover[$cover_index];

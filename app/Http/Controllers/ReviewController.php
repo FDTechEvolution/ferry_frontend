@@ -12,8 +12,6 @@ class ReviewController extends Controller
         $response = Http::reqres()->get('review/get');
         $res = $response->json();
 
-        Log::debug($res);
-
         return view('pages.review.index', ['reviews' => $res['data']]);
     }
 }

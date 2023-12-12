@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="row min-h-50vh">
-    <div class="col-12">
+    <div class="col-12 px-4">
         <div class="row">
             <h1 class="text-center mb-3 fw-bold">Review</h1>
             @foreach($reviews as $review)
-                <div class="col-4 m-3 p-3 card border-review">
+                <div class="col-12 col-lg-4 mb-3 m-lg-3 p-3 card border-review">
                     <div class="card-body">
                         <p class="mb-2 fw-bold">{{ $review['title'] }}</p>
                         {{ $review['body'] }}

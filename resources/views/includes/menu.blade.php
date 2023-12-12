@@ -48,31 +48,27 @@
 
 
         <!-- social icons : mobile only -->
-        <li class="nav-item d-block d-sm-none text-center mb-4">
+        <!-- <li class="nav-item d-block d-sm-none text-center mb-4">
 
             <h3 class="h6 text-muted">Follow Us</h3>
 
-                <!-- facebook -->
             <a href="#" class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
                 <i class="fi fi-social-facebook"></i> 
             </a>
 
-            <!-- twitter -->
             <a href="#" class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
                 <i class="fi fi-social-twitter"></i> 
             </a>
 
-            <!-- linkedin -->
             <a href="#" class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
                 <i class="fi fi-social-linkedin"></i> 
             </a>
 
-            <!-- youtube -->
             <a href="#" class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
                 <i class="fi fi-social-youtube"></i> 
             </a>
 
-        </li>
+        </li> -->
 
 
     </ul>

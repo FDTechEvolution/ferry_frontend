@@ -31,4 +31,14 @@ class StationController extends Controller
 
         return $result;
     }
+
+    public function index() {
+        $response = Http::reqres()->get('stations/route');
+        $res =  $response->json();
+
+        $station_to = $this->sectionGroup('section', $res['data']['to']);
+        // Log::debug($station_to);
+
+        return view('pages.station.index', ['section' => $station_to]);
+    }
 }

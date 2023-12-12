@@ -44,6 +44,9 @@ h1,h2,h3,h4,h5{
     .navbar .navbar-nav .nav-link {
         padding: 18px 15px;
     }
+    .header-style {
+        padding-left: 15% !important;
+    }
 }
 
 @media (max-width: 540px) {
@@ -73,8 +76,20 @@ h1,h2,h3,h4,h5{
         min-width: 0 !important;
     }
     .dropdown-booking-destinamtion-width {
-        min-width: o !important;
+        min-width: 0 !important;
         margin-left: 0 !important;
+    }
+    .header-style {
+        padding-left: 0 !important;
+    }
+    nav.navbar-light a.nav-link {
+        color: #1c0950 !important;
+    }
+    .child-right {
+        height: auto !important;
+    }
+    div#set-litinerary {
+        border-right: 0 !important;
     }
 }
 
@@ -94,7 +109,6 @@ nav.navbar-light a.nav-link:not(.active):not(:hover) {
 }
 .header-style {
     margin: 0 auto;
-    padding-left: 15% !important;
 }
 .navbar-brand>img {
     display: block !important;
@@ -338,8 +352,8 @@ img.img-logo-style {
 
 .loading-destination {
     position: absolute;
-    left: 36px;
-    top: 5px;
+    left: 40px;
+    top: 15px;
     z-index: 9;
     color: #ff6100;
 }
@@ -353,6 +367,7 @@ img.img-logo-style {
     width: 100%;
     height: 350px;
     overflow: auto;
+    box-shadow: 1px 2px 15px -2px #656565;
 }
 .dropdown-booking-width::-webkit-scrollbar {
     width: 5px;
@@ -371,6 +386,7 @@ img.img-logo-style {
     width: 100%;
     height: 350px;
     overflow: auto;
+    box-shadow: 1px 2px 15px -2px #656565;
 }
 .dropdown-booking-destinamtion-width::-webkit-scrollbar {
     width: 5px;
