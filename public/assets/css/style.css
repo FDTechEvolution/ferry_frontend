@@ -399,3 +399,7 @@ img.img-logo-style {
     background: #ff6100;
     border-radius: 5px;
 }
+
+.over-time {
+    pointer-events: none;
+}

@@ -13,7 +13,7 @@
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 booking-route-select">
             @foreach($routes['data'] as $key => $route)
-                <div class="row p-2 px-4 mb-4 border rounded booking-route-list route-hover cursor-pointer list-index_{{ $index }} list-position_{{ $index }}_{{ $key }}" data-list="{{ $index }}" data-key="{{ $key }}">
+                <div class="row p-2 px-4 mb-4 border rounded booking-route-list route-hover cursor-pointer list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light @endif" data-list="{{ $index }}" data-key="{{ $key }}">
                     <div class="col-12 pb-2 border-0 border-bottom border-2 border-light">
                         <div class="float-start">
                             <span class="me-2">Depart</span>

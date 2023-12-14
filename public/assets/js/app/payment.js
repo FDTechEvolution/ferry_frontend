@@ -214,3 +214,24 @@ if(btn_add_person) {
         form_merge.submit()
     })
 }
+
+const depart_date = document.querySelector('.add-multi-trip-depart')
+const return_date = document.querySelector('.add-multi-trip-return')
+
+const add_multi_depart = document.querySelector('#to-select')
+add_multi_depart.addEventListener('change', () => {
+    const all_depart = document.querySelectorAll('.depart-last-date')
+    let last_depart = all_depart[all_depart.length - 1];
+    let ex_depart = last_depart.innerText.split('/')
+    $('.add-multi-trip-depart').datepicker()
+    $('.add-multi-trip-depart').datepicker('setStartDate', new Date(`${ex_depart[2]}-${ex_depart[1]}-${ex_depart[0]}`))
+    depart_date.disabled = false
+})
+
+$('.add-multi-trip-depart').on('change', function(e) {
+    return_date.value = ''
+    let ex_return = e.target.value.split('/')
+    $('.add-multi-trip-return').datepicker()
+    $('.add-multi-trip-return').datepicker('setStartDate', new Date(`${ex_return[2]}-${ex_return[1]}-${ex_return[0]}`))
+    return_date.disabled = false
+})

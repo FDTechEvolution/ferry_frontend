@@ -35,6 +35,9 @@ class BookingController extends Controller
         $_station = ['from' => '', 'to' => ''];
         $booking_date = $request->date[0];
 
+        $_diff = $this->checkDateDiff($booking_date);
+        // Log::debug($_diff);
+
         foreach($routes['data'] as $index => $route) {
             if($_station['from'] == '') 
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -44,9 +47,9 @@ class BookingController extends Controller
             $routes['data'][$index]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
             $routes['data'][$index]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
             $routes['data'][$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
-        }
 
-        // Log::debug($routes);
+            $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
+        }
 
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
@@ -56,6 +59,25 @@ class BookingController extends Controller
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger
             ]);
+    }
+
+    private function checkDateDiff($booking_date) {
+        $ex_date = explode('/', $booking_date);
+        $date_now = date('Y-m-d');
+        $_date_now = date_create($date_now);
+        $_date_booking = date_create($ex_date[2].'-'.$ex_date[1].'-'.$ex_date[0]);
+        $_date_diff = date_diff($_date_now,$_date_booking);
+
+        return $_date_diff->format('%d');
+    }
+
+    private function checkTimeDiff($depart_time) {
+        $time_now = date('H:i:s');
+        $_time_now = strtotime($time_now);
+        $_time_depart = strtotime($depart_time);
+        $minute = ($_time_depart - $_time_now) / 60;
+        
+        return $minute < 60 ? false : true;
     }
 
     public function view(string $id = null) {
@@ -73,11 +95,11 @@ class BookingController extends Controller
         $return_routes = $this->getRouteList($request->to[0], $request->from[0]);
         $passenger = $this->setInputType($request);
 
-        $result_depart = $this->setStationToRoute($depart_routes['data'], $passenger);
+        $result_depart = $this->setStationToRoute($depart_routes['data'], $passenger, $depart_date);
         $depart_routes = $result_depart[0];
         $station_depart = $result_depart[1];
 
-        $result_return = $this->setStationToRoute($return_routes['data'], $passenger);
+        $result_return = $this->setStationToRoute($return_routes['data'], $passenger, $return_date);
         $return_routes = $result_return[0];
         $station_return = $result_return[1];
 
@@ -102,6 +124,7 @@ class BookingController extends Controller
         foreach($request->from as $index => $from) {
             if($from != NULL) {
                 $routes = $this->getRouteList($from, $request->to[$index]);
+                $_diff = $this->checkDateDiff($request['date'][$index]);
                 foreach($routes['data'] as $key => $route) {
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
                     $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
@@ -114,6 +137,8 @@ class BookingController extends Controller
                     $routes['data'][$key]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
                     $routes['data'][$key]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
                     $routes['data'][$key]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
+
+                    $routes['data'][$key]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
                 }
 
                 $route_arr[$index]['data'] = $routes['data'];
@@ -132,17 +157,23 @@ class BookingController extends Controller
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $_departdate = explode('/', $request->departdate);
+        $_birthday = $this->setBirthday($request->birth_day);
 
         $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => [$request->booking_route_selected],
             'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
+            'titlename' => $request->title,
             'fullname' => $fullname,
             'passenger_type' => $request->passenger_type,
+            'birth_day' => $_birthday,
             'passenger' => $passenger['adult'],
             'child_passenger' => $passenger['child'],
             'infant_passenger' => $passenger['infant'],
+            'mobile_code' => $request->mobile_code,
             'mobile' => $request->mobile,
+            'th_mobile' => $request->th_mobile,
             'passportno' => $request->passport_number,
+            'country' => $request->country,
             'email' => $request->email,
             'address' => $request->address,
             'meal_id' => [$request->meal_id],
@@ -199,20 +230,26 @@ class BookingController extends Controller
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $_departdate = explode('/', $request->departdate);
         $_returndate = explode('/', $request->returndate);
+        $_birthday = $this->setBirthday($request->birth_day);
 
         $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => $route_id,
             'departdate' => $_departdate[2].'-'.$_departdate[1].'-'.$_departdate[0],
             'returndate' => $_returndate[2].'-'.$_returndate[1].'-'.$_returndate[0],
+            'titlename' => $request->title,
             'fullname' => $fullname,
             'passenger_type' => $request->passenger_type,
+            'birth_day' => $_birthday,
             'passenger' => $passenger['adult'],
             'child_passenger' => $passenger['child'],
             'infant_passenger' => $passenger['infant'],
+            'mobile_code' => $request->mobile_code,
             'mobile' => $request->mobile,
+            'th_mobile' => $request->th_mobile,
             'passportno' => $request->passport_number,
             'email' => $request->email,
             'address' => $request->address,
+            'country' => $request->country,
             'meal_id' => $meal_id,
             'meal_qty' => $meal_qty,
             'activity_id' => $activity_id,
@@ -245,19 +282,25 @@ class BookingController extends Controller
             $ex = explode('/', $depart_date);
             return  $ex[2].'-'.$ex[1].'-'.$ex[0];
         }, $depart_date);
+        $_birthday = $this->setBirthday($request->birth_day);
 
         $response = Http::reqres()->post('/online-booking/create/multi', [
             'route_id' => $request->booking_route_selected,
             'departdate' => $departdate,
+            'titlename' => $request->title,
             'fullname' => $fullname,
             'passenger_type' => $request->passenger_type,
+            'birth_day' => $_birthday,
             'passenger' => $passenger['adult'],
             'child_passenger' => $passenger['child'],
             'infant_passenger' => $passenger['infant'],
+            'mobile_code' => $request->mobile_code,
             'mobile' => $request->mobile,
+            'th_mobile' => $request->th_mobile,
             'passportno' => $request->passport_number,
             'email' => $request->email,
             'address' => $request->address,
+            'country' => $request->country,
             'meal_id' => $request->meal_id,
             'meal_qty' => $request->meal_qty,
             'activity_id' => $request->activity_id,
@@ -322,6 +365,16 @@ class BookingController extends Controller
             return array($this->setupAdultPassenger($request->multidepart_adult[0]), $request->multidepart_child[0], $request->multidepart_infant[0]);
     }
 
+    private function setBirthday($birth_day) {
+        $b_day = $birth_day;
+        $birthday = array_map(function ($b_day) {
+            $ex = explode('/', $b_day);
+            return  $ex[2].'-'.$ex[1].'-'.$ex[0];
+        }, $b_day);
+
+        return $birthday;
+    }
+
     private function setupAdultPassenger($adult) {
         return $adult == 0 ? 1 : $adult;
     }
@@ -336,9 +389,12 @@ class BookingController extends Controller
         return $response->json();
     }
 
-    private function setStationToRoute($routes, $passenger) {
+    private function setStationToRoute($routes, $passenger, $booking_date) {
         $_routes = $routes;
         $_station = ['from' => '', 'to' => ''];
+
+        $_diff = $this->checkDateDiff($booking_date);
+
         foreach($_routes as $index => $route) {
             if($_station['from'] == '') 
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -348,6 +404,8 @@ class BookingController extends Controller
             $_routes[$index]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
             $_routes[$index]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
             $_routes[$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
+
+            $_routes[$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
         }
 
         return array($_routes, $_station);
@@ -365,16 +423,59 @@ class BookingController extends Controller
             $addons = $res['addon'];
 
             $customers = $this->setCustomer($res['data']['customer']);
-            $station_to = $this->setRoute($res['m_route']);
-            $station_form = $res['m_route'];
+            // $station_to = $this->setRoute($res['m_route']);
+            $station_form = $res['m_from_route'];
+            $_station_to = $this->setStationToSection($res['m_route']);
             // Log::debug($booking);
             return view('pages.booking.view', 
                         ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
-                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $station_to, 'icon_url' => $this->IconUrl
+                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to, 'icon_url' => $this->IconUrl
                         ]);
         }
 
         return redirect()->route('home');
+    }
+
+    public function bookingNew(Request $request) {
+        Log::debug($request);
+
+        return redirect()->route('home');
+    }
+
+    private function setStationToSection($to_route) {
+        $routes = [];
+        foreach($to_route as $to) {
+            $name = $to['station_to']['name'];
+            $pier = $to['station_to']['piername'] != null ? ' ('.$to['station_to']['piername'].')' : '';
+            $depart = $to['depart_time'];
+            $arrive = $to['arrive_time'];
+            $station = $name.$pier.' ['.$this->setTime($depart).' - '.$this->setTime($arrive).']';
+
+            $to_arr = [
+                'id' => $to['station_to']['id'],
+                'name' => $station,
+                'section' => $to['station_to']['section']['name']
+            ];
+
+            array_push($routes, $to_arr);
+        }
+
+        $section = $this->sectionGroup('section', $routes);
+        return $section;
+    }
+
+    private function sectionGroup($key, $stations) {
+        $result = [];
+
+        foreach($stations as $val) {
+            if(array_key_exists($key, $val)){
+                $result[$val[$key]][] = $val;
+            }else{
+                $result[""][] = $val;
+            }
+        }
+
+        return $result;
     }
 
     public function checkPersonBookingRecord(Request $request) {
@@ -419,5 +520,7 @@ class BookingController extends Controller
                         'booking_number_new' => $request->booking_number_new
                     ]);
         $res = $response->json();
+
+        return redirect()->route('home');
     }
 }

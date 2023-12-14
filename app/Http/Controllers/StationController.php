@@ -36,9 +36,10 @@ class StationController extends Controller
         $response = Http::reqres()->get('stations/route');
         $res =  $response->json();
 
+        $image_station = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
         $station_to = $this->sectionGroup('section', $res['data']['to']);
         // Log::debug($station_to);
 
-        return view('pages.station.index', ['section' => $station_to]);
+        return view('pages.station.index', ['section' => $station_to, 'image_station' => $image_station]);
     }
 }

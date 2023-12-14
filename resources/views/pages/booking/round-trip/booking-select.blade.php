@@ -8,7 +8,7 @@
             @endif
         </h6>
         @foreach($depart_routes as $route)
-            <div class="row p-2 px-4 mb-4 border rounded booking-depart-list route-hover cursor-pointer">
+            <div class="row p-2 px-4 mb-4 border rounded booking-depart-list route-hover cursor-pointer @if(!$route['do_booking']) over-time bg-dark-light @endif">
                 <div class="col-12 pb-2 border-0 border-bottom border-2 border-light">
                     <div class="float-start">
                         <span class="me-2">Depart</span>
@@ -67,7 +67,7 @@
             @endif
         </h6>
         @foreach($return_routes as $route)
-            <div class="row p-2 px-4 mb-4 border rounded booking-return-list route-return-hover cursor-pointer">
+            <div class="row p-2 px-4 mb-4 border rounded booking-return-list route-return-hover cursor-pointer @if(!$route['do_booking']) over-time bg-dark-light @endif">
                 <div class="col-12 pb-2 border-0 border-bottom border-2 border-light">
                     <div class="float-start">
                         <span class="me-2">Depart</span>

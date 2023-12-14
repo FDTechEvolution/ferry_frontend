@@ -58,7 +58,7 @@
                             @foreach($customer as $cus)
                                 <div class="d-flex">
                                     <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                     @if($cus['email'] != null)
                                         <p class="ms-3"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
                                     @endif
@@ -72,7 +72,7 @@
                             @foreach($customer as $cus)
                                 <div class="d-flex">
                                     <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                 </div>
                             @endforeach
                         @endif
@@ -83,7 +83,7 @@
                             @foreach($customer as $cus)
                                 <div class="d-flex">
                                     <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> xxxx</p>
+                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                 </div>
                             @endforeach
                         @endif
@@ -118,7 +118,7 @@
                                 @if($route['station_to_nickname'] != null) [{{ $route['station_to_nickname'] }}] @endif
                             </p>
                             <div style="line-height: 15px;">
-                                <p class="small mb-1">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
+                                <p class="small mb-1 depart-last-date">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
                                 <p class="small mb-0">{{ date_format(date_create($route['arrive_time']), 'H:i') }}</p>
                             </div>
                         </div>
@@ -156,58 +156,71 @@
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
             <div class="col-12">
                 <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
-                <div class="row px-3 mt-2">
-                    <div class="col-3">
-                        <div class="form-floating mb-3">
-                            <select required class="form-select form-select-sm" name="from[]" id="form-select" aria-label="booking station">
-                                <option value="" selected>Select Original</option>
-                                <option value="{{ $station_from[0]['station_to_id'] }}">{{ $route['station_to'] }} @if($route['station_to_pier'] != null) ({{$route['station_to_pier']}}) @endif</option>
-                            </select>
-                            <label for="form-select">From</label>
+                <form method="POST" action="{{ route('booking-new') }}">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking['booking_number'] }}">
+                    <div class="row px-3 mt-2">
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <select required class="form-select form-select-sm" name="from" id="form-select" aria-label="booking station">
+                                    <option value="" disabled>Select Original</option>
+                                    <option value="{{ $station_from['id'] }}" selected>{{ $station_from['name'] }} @if($station_from['piername'] != null) ({{$station_from['piername']}}) @endif</option>
+                                </select>
+                                <label for="form-select">From</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <select required class="form-select form-select-sm" name="to" id="to-select" aria-label="booking station">
+                                    <option value="" selected disabled>Select Destination</option>
+                                    @if(!empty($station_to))
+                                        @foreach($station_to as $section_key => $stations)
+                                            <optgroup label="{{ $section_key }}">
+                                                @foreach($stations as $station)
+                                                    <option value="{{ $station['id'] }}">{{ $station['name'] }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    @else
+                                        <option value="" disabled>No route.</option>
+                                    @endif
+                                </select>
+                                <label for="to-select">To</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input required type="text" name="depart_date" class="form-control form-control-sm datepicker add-multi-trip-depart"
+                                    data-show-weeks="true"
+                                    data-today-highlight="false"
+                                    data-clear-btn="false"
+                                    data-autoclose="true"
+                                    data-format="DD/MM/YYYY"
+                                    autocomplete="off"
+                                    placeholder="Departure date"
+                                    disabled>
+                                <label class="text-secondary">Departure date</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input required type="text" name="return_date" class="form-control form-control-sm datepicker add-multi-trip-return"
+                                    data-show-weeks="true"
+                                    data-today-highlight="false"
+                                    data-clear-btn="false"
+                                    data-autoclose="true"
+                                    data-format="DD/MM/YYYY"
+                                    autocomplete="off"
+                                    placeholder="Return date"
+                                    disabled>
+                                <label class="text-secondary">Return date</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button class="btn btn-sm btn-light text-main-color rounded-pill fw-bold py-1">Book Now</button>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-floating mb-3">
-                            <select required class="form-select form-select-sm" name="to[]" id="to-select" aria-label="booking station">
-                                <option value="" selected disabled>Select Destination</option>
-                                @foreach($station_to as $station)
-                                    <option value="{{ $station['id'] }}">{{ $station['name'] }}</option>
-                                @endforeach
-                            </select>
-                            <label for="to-select">To</label>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-floating mb-3">
-                            <input required type="text" name="depart_date[]" class="form-control form-control-sm datepicker"
-                                data-show-weeks="true"
-                                data-today-highlight="true"
-                                data-today-btn="true"
-                                data-clear-btn="false"
-                                data-autoclose="true"
-                                data-date-start="today"
-                                data-format="DD/MM/YYYY"
-                                autocomplete="off"
-                                placeholder="Departure date">
-                            <label class="text-secondary">Departure date</label>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-floating mb-3">
-                            <input required type="text" name="return_date[]" class="form-control form-control-sm datepicker"
-                                data-show-weeks="true"
-                                data-today-highlight="true"
-                                data-today-btn="true"
-                                data-clear-btn="false"
-                                data-autoclose="true"
-                                data-date-start="today"
-                                data-format="DD/MM/YYYY"
-                                autocomplete="off"
-                                placeholder="Return date">
-                            <label class="text-secondary">Return date</label>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
         @endif
