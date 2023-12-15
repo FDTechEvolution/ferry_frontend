@@ -40,7 +40,8 @@ Route::controller(BookingController::class)->group(function() {
     Route::post('booking/view', 'findBookingRecord')->name('booking-record');
     Route::post('ajax/booking/check-booking', 'checkPersonBookingRecord');
 
-    Route::post('booking/book/new', 'bookingNew')->name('booking-new');
+    Route::post('booking/book/new', 'bookingNewRoute')->name('booking-new');
+    Route::post('booking/update/customer', 'updateCustomer')->name('booking-update-customer');
 });
 
 Route::controller(TimetableController::class)->group(function() {

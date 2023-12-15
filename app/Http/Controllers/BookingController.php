@@ -412,7 +412,6 @@ class BookingController extends Controller
     }
 
     public function findBookingRecord(Request $request) {
-        // test bookingno : BO2311280075
         if(isset($request->booking_number) && $request->booking_number != '') {
             if(isset($request->booking_number_new)) {
                 $this->mergeBooking($request);
@@ -423,33 +422,38 @@ class BookingController extends Controller
             $addons = $res['addon'];
 
             $customers = $this->setCustomer($res['data']['customer']);
-            // $station_to = $this->setRoute($res['m_route']);
             $station_form = $res['m_from_route'];
             $_station_to = $this->setStationToSection($res['m_route']);
-            // Log::debug($booking);
             return view('pages.booking.view', 
                         ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
-                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to, 'icon_url' => $this->IconUrl
+                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl
                         ]);
         }
 
         return redirect()->route('home');
     }
 
-    public function bookingNew(Request $request) {
-        Log::debug($request);
+    public function bookingNewRoute(Request $request) {
+        // Log::debug($request);
+        Http::reqres()->post('/online-booking/add-new-route', [
+            'booking_id' => $request->booking_id,
+            'route_id' => $request->to,
+            'depart' => $request->depart_date,
+            'return' => $request->return_date
+        ]);
 
-        return redirect()->route('home');
+        return view('pages.payment.updated', ['bookingno' => $request->bookingno]);
     }
 
     private function setStationToSection($to_route) {
         $routes = [];
-        foreach($to_route as $to) {
+        $routes_sub = [];
+        foreach($to_route as $index => $to) {
             $name = $to['station_to']['name'];
             $pier = $to['station_to']['piername'] != null ? ' ('.$to['station_to']['piername'].')' : '';
             $depart = $to['depart_time'];
             $arrive = $to['arrive_time'];
-            $station = $name.$pier.' ['.$this->setTime($depart).' - '.$this->setTime($arrive).']';
+            $station = $name.$pier;
 
             $to_arr = [
                 'id' => $to['station_to']['id'],
@@ -457,11 +461,15 @@ class BookingController extends Controller
                 'section' => $to['station_to']['section']['name']
             ];
 
-            array_push($routes, $to_arr);
+            if(!in_array($to_arr, $routes)) {
+                array_push($routes, $to_arr);
+            }
+
+            $routes_sub[$to['station_to']['id']][] = ['id' => $to['id'], 'station_name' => $station, 'station_id' => $to['station_to']['id'], 'depart' => $depart, 'arrive' => $arrive];
         }
 
         $section = $this->sectionGroup('section', $routes);
-        return $section;
+        return array($section, $routes_sub);
     }
 
     private function sectionGroup($key, $stations) {
@@ -521,6 +529,17 @@ class BookingController extends Controller
                     ]);
         $res = $response->json();
 
-        return redirect()->route('home');
+        return view('pages.payment.updated', ['bookingno' => $request->booking_number]);
+    }
+
+    public function updateCustomer(Request $request) {
+        Http::reqres()->post('/customer/update', [
+            'fullname' => $request->fullname,
+            'date' => $request->date,
+            'email' => $request->email,
+            'cus_id' => $request->cus_id
+        ]);
+
+        return view('pages.payment.updated', ['bookingno' => $request->bookingno]);
     }
 }

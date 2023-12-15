@@ -219,13 +219,19 @@ const depart_date = document.querySelector('.add-multi-trip-depart')
 const return_date = document.querySelector('.add-multi-trip-return')
 
 const add_multi_depart = document.querySelector('#to-select')
-add_multi_depart.addEventListener('change', () => {
+add_multi_depart.addEventListener('change', (e) => {
     const all_depart = document.querySelectorAll('.depart-last-date')
     let last_depart = all_depart[all_depart.length - 1];
     let ex_depart = last_depart.innerText.split('/')
     $('.add-multi-trip-depart').datepicker()
     $('.add-multi-trip-depart').datepicker('setStartDate', new Date(`${ex_depart[2]}-${ex_depart[1]}-${ex_depart[0]}`))
     depart_date.disabled = false
+
+    // show depart time
+    let depart_all = document.querySelectorAll('.station-depart-hide')
+    depart_all.forEach((d) => { d.classList.add('d-none') })
+    let depart_index = document.querySelector(`.station-index-${e.target.value}`)
+    depart_index.classList.remove('d-none')
 })
 
 $('.add-multi-trip-depart').on('change', function(e) {

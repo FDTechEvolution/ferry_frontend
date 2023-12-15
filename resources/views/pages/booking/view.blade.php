@@ -90,64 +90,79 @@
                     @endforeach
                 </div>
             </div>
+            <div class="col-12 text-end">
+                @if($booking['do_update'])
+                    <button class="btn btn-sm button-orange-bg rounded py-1 px-5" data-bs-toggle="modal" data-bs-target="#edit-customer">Edit</button>
+                @endif
+            </div>
         </div>
 
         <h4 class="mb-0 fw-bold">Booking</h4>
         <p class="mb-2">Detail</p>
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
-            <div class="col-12">
+            <div class="col-12 mb-3">
                 <div class="row" id="payment-passenger-detail">
                     @foreach($booking['route'] as $route)
-                        <div class="col-3">
-                            <h6 class="fw-bold mb-1">From</h6>
-                            <p class="mb-1">
-                                {{ $route['station_from'] }}
-                                @if($route['station_from_pier'] != null) ({{ $route['station_from_pier'] }}) @endif
-                                @if($route['station_from_nickname'] != null) [{{ $route['station_from_nickname'] }}] @endif
-                            </p>
-                            <div style="line-height: 15px;">
-                                <p class="small mb-1">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
-                                <p class="small mb-0">{{ date_format(date_create($route['depart_time']), 'H:i') }}</p>
+                        <div class="col-12 mb-4">
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6 class="fw-bold mb-1">From</h6>
+                                    <p class="mb-1">
+                                        {{ $route['station_from'] }}
+                                        @if($route['station_from_pier'] != null) ({{ $route['station_from_pier'] }}) @endif
+                                        @if($route['station_from_nickname'] != null) [{{ $route['station_from_nickname'] }}] @endif
+                                    </p>
+                                    <div style="line-height: 15px;">
+                                        <p class="small mb-1">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
+                                        <p class="small mb-0">{{ date_format(date_create($route['depart_time']), 'H:i') }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <h6 class="fw-bold mb-1">To</h6>
+                                    <p class="mb-1">
+                                        {{ $route['station_to'] }} 
+                                        @if($route['station_to_pier'] != null) ({{$route['station_to_pier']}}) @endif
+                                        @if($route['station_to_nickname'] != null) [{{ $route['station_to_nickname'] }}] @endif
+                                    </p>
+                                    <div style="line-height: 15px;">
+                                        <p class="small mb-1 depart-last-date">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
+                                        <p class="small mb-0">{{ date_format(date_create($route['arrive_time']), 'H:i') }}</p>
+                                    </div>
+                                    <div class=" mt-2 text-end border-bottom">Total : {{ number_format($route['amount']) }} THB</div>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h6 class="fw-bold mb-1">Passenger</h6>
+                                    @foreach($customer as $cus)
+                                        <p class="mb-1">{{ $cus['name'] }}</p>
+                                    @endforeach
+                                    @if($booking['do_update'])
+                                        <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
+                                        <form method="POST" id="form-confirm-merge" action="{{ route('booking-record') }}">
+                                            @csrf
+                                            <input type="hidden" name="booking_number" id="booking-number-current" value="{{ $booking['booking_number'] }}">
+                                            <input type="hidden" name="booking_number_new" id="booking-number-new" value="">
+                                        </form>
+                                    @endif
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h6 class="fw-bold mb-1">Extra detail</h6>
+                                    @foreach($booking['extra'] as $extra)
+                                        <p class="mb-0 small">{{ $extra['name'] }}</p>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <h6 class="fw-bold mb-1">To</h6>
-                            <p class="mb-1">
-                                {{ $route['station_to'] }} 
-                                @if($route['station_to_pier'] != null) ({{$route['station_to_pier']}}) @endif
-                                @if($route['station_to_nickname'] != null) [{{ $route['station_to_nickname'] }}] @endif
-                            </p>
-                            <div style="line-height: 15px;">
-                                <p class="small mb-1 depart-last-date">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
-                                <p class="small mb-0">{{ date_format(date_create($route['arrive_time']), 'H:i') }}</p>
-                            </div>
-                        </div>
-                        <div class="col-3 text-center">
-                            <h6 class="fw-bold mb-1">Passenger</h6>
-                            @foreach($customer as $cus)
-                                <p class="mb-1">{{ $cus['name'] }}</p>
-                            @endforeach
-                            @if($booking['do_update'])
-                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
-                                <form method="POST" id="form-confirm-merge" action="{{ route('booking-record') }}">
-                                    @csrf
-                                    <input type="hidden" name="booking_number" id="booking-number-current" value="{{ $booking['booking_number'] }}">
-                                    <input type="hidden" name="booking_number_new" id="booking-number-new" value="">
-                                </form>
-                            @endif
-                        </div>
-                        <div class="col-3 text-center">
-                            <h6 class="fw-bold mb-1">Extra detail</h6>
-                            @foreach($booking['extra'] as $extra)
-                                <p class="mb-0 small">{{ $extra['name'] }}</p>
-                            @endforeach
                         </div>
                     @endforeach
-                    @if($booking['do_update'])
-                        <div class="col-12 text-end mt-3">
-                            <button class="btn btn-sm button-orange-bg rounded py-1 px-5">Edit</button>
-                        </div>
-                    @endif
+                </div>
+            </div>
+            <div class="col-12 mt-3 border-top">
+                <div class="row">
+                    <div class="col-6 text-end pt-3">
+
+                    </div>
+                    <div class="col-6 text-end pt-3 pe-2">
+                        <p class="mb-0">Total : <span class="fw-bold">{{ number_format($booking['amount'] + $booking['amount_extra']) }}</span> THB</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,7 +173,8 @@
                 <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
                 <form method="POST" action="{{ route('booking-new') }}">
                     @csrf
-                    <input type="hidden" name="booking_id" value="{{ $booking['booking_number'] }}">
+                    <input type="hidden" name="bookingno" value="{{ $booking['booking_number'] }}">
+                    <input type="hidden" name="booking_id" value="{{ $booking['id'] }}">
                     <div class="row px-3 mt-2">
                         <div class="col-3">
                             <div class="form-floating mb-3">
@@ -176,7 +192,7 @@
                                     @if(!empty($station_to))
                                         @foreach($station_to as $section_key => $stations)
                                             <optgroup label="{{ $section_key }}">
-                                                @foreach($stations as $station)
+                                                @foreach($stations as $index => $station)
                                                     <option value="{{ $station['id'] }}">{{ $station['name'] }}</option>
                                                 @endforeach
                                             </optgroup>
@@ -216,8 +232,34 @@
                                 <label class="text-secondary">Return date</label>
                             </div>
                         </div>
+                        <div class="col-12 mb-3">
+                            @foreach($station_to_time as $station_key => $times)
+                            <div class="row station-depart-hide station-index-{{ $station_key }} d-none">
+                                <div class="col-12 mb-1">
+                                    <div class="row fw-bold">
+                                        <div class="col-3">From</div>
+                                        <div class="col-3">To</div>
+                                        <div class="col-2 text-center">Depart Time</div>
+                                        <div class="col-2 text-center">Arrive Time</div>
+                                        <div class="col-1 text-center">Select</div>
+                                    </div>
+                                </div>
+                                @foreach($times as $t_index => $time)
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-3">{{ $station_from['name'] }} @if($station_from['piername'] != null) ({{$station_from['piername']}}) @endif</div>
+                                        <div class="col-3">{{ $time['station_name'] }}</div>
+                                        <div class="col-2 text-center">{{ date_format(date_create($time['depart']), 'H:i') }}</div>
+                                        <div class="col-2 text-center">{{ date_format(date_create($time['arrive']), 'H:i') }}</div>
+                                        <div class="col-1 text-center"><input required type="radio" class="radio-input" name="route_id" value="{{ $time['id'] }}"></div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
                         <div class="col-12 text-end">
-                            <button class="btn btn-sm btn-light text-main-color rounded-pill fw-bold py-1">Book Now</button>
+                            <button type="submit" class="btn btn-sm btn-light text-main-color rounded-pill fw-bold py-1">Book Now</button>
                         </div>
                     </div>
                 </form>
@@ -279,6 +321,7 @@
 @section('script')
 @include('pages.payment.modal_extraservice')
 @include('pages.payment.modal_addperson')
+@include('pages.payment.modal_editcustomer')
 <script>
     const booking_current = `{{ $booking['booking_number'] }}`
 </script>
