@@ -20,16 +20,25 @@ if(booking_routes) {
         payment_info.extra_selected.push([])
         sum_price.push(0)
         let route_list = route.querySelectorAll('.booking-route-list')
+        let btn_route_list = document.querySelectorAll(`.btn-route-list_${index}`)
+
         let _depart_name = document.querySelector(`.depart-station-name-${index}`).innerText
         let _arrive_name = document.querySelector(`.arrive-station-name-${index}`).innerText
         let _travel_date = document.querySelector(`.travel-date-${index}`).innerText
         route_list.forEach((route, key) => {
-            route.addEventListener('click', (e) => {
+            let btn_select = document.querySelector(`.btn-route-select-${index}_${key}`)
+            btn_select.addEventListener('click', (e) => {
                 // set route //////////////////////////////////////////
                 route_list.forEach((item) => { 
                     item.classList.remove('active')
-                    item.classList.add('route-hover')
                 })
+                btn_route_list.forEach((btn) => {
+                    btn.disabled = false 
+                    btn.innerText = 'Select'
+                })
+                btn_select.disabled = true
+                btn_select.innerText = 'Selected'
+
                 let route_active = document.querySelector(`.list-position_${route.dataset.list}_${route.dataset.key}`)
                 route_active.classList.add('active')
                 route_active.classList.remove('route-hover')

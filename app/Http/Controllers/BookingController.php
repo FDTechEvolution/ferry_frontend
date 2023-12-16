@@ -31,6 +31,7 @@ class BookingController extends Controller
     public function index(Request $request) {
         $_type = $this->Type[$request->_type];
         $routes = $this->getRouteList($request->from[0], $request->to[0]);
+        // Log::debug($routes);
         $passenger = $this->setInputType($request);
         $_station = ['from' => '', 'to' => ''];
         $booking_date = $request->date[0];
@@ -49,6 +50,8 @@ class BookingController extends Controller
             $routes['data'][$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
 
             $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
+
+            $routes['data'][$index]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
         }
 
         $code_country = $this->CodeCountry;
@@ -78,6 +81,23 @@ class BookingController extends Controller
         $minute = ($_time_depart - $_time_now) / 60;
         
         return $minute < 60 ? false : true;
+    }
+
+    private function timeTravelDiff($depart, $arrive) {
+        $time_depart = strtotime($depart);
+        $time_arrive = strtotime($arrive);
+        $minute = ($time_arrive - $time_depart) / 60;
+        $hour = $minute / 60;
+        $set_time = '';
+
+        if(is_float($hour)) {
+            $ex = explode('.', $hour);
+            $digit = '0.'.$ex[1];
+            $to_minute = floatval($digit)*60;
+            
+            return $ex[0].' Hour '.$to_minute.' Minute.';
+        }
+        else return $hour.' Hour.';
     }
 
     public function view(string $id = null) {
@@ -139,6 +159,8 @@ class BookingController extends Controller
                     $routes['data'][$key]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
 
                     $routes['data'][$key]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
+
+                    $routes['data'][$key]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
                 }
 
                 $route_arr[$index]['data'] = $routes['data'];
@@ -406,6 +428,8 @@ class BookingController extends Controller
             $_routes[$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
 
             $_routes[$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
+
+            $_routes[$index]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
         }
 
         return array($_routes, $_station);

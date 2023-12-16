@@ -19,13 +19,20 @@ let payment = { // PAYMENT INFO
 
 if(depart_route) {
     let route_list = depart_route.querySelectorAll('.booking-depart-list')
+    let btn_route_list = document.querySelectorAll('.btn-route-depart-list')
 
     route_list.forEach((route, index) => {
-        route.addEventListener('click', (e) => {
+        let btn_select = document.querySelector(`.btn-route-depart-select-${index}`)
+        btn_select.addEventListener('click', (e) => {
             route_list.forEach((item) => { 
                 item.classList.remove('active')
-                item.classList.add('route-hover')
             })
+            btn_route_list.forEach((btn) => {
+                btn.disabled = false 
+                btn.innerText = 'Select'
+            })
+            btn_select.disabled = true
+            btn_select.innerText = 'Selected'
 
             route_index.depart = index
             route_selected.depart = true
@@ -68,13 +75,20 @@ if(depart_route) {
 
 if(return_route) {
     let route_list = return_route.querySelectorAll('.booking-return-list') 
+    let btn_route_list = document.querySelectorAll('.btn-route-return-list')
 
     route_list.forEach((route, index) => {
-        route.addEventListener('click', (e) => {
+        let btn_select = document.querySelector(`.btn-route-return-select-${index}`)
+        btn_select.addEventListener('click', (e) => {
             route_list.forEach((item) => { 
                 item.classList.remove('active')
-                item.classList.add('route-return-hover')
             })
+            btn_route_list.forEach((btn) => {
+                btn.disabled = false 
+                btn.innerText = 'Select'
+            })
+            btn_select.disabled = true
+            btn_select.innerText = 'Selected'
 
             route_index.return = index
             route_selected.return = true

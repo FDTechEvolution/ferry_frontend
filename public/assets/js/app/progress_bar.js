@@ -11,13 +11,21 @@ let is_extra = [] // extra service select
 let is_passenger = [] // passenger info
 if(booking_route) {
     let route_list = booking_route.querySelectorAll('.booking-route-list')
+    let btn_route_list = document.querySelectorAll('.btn-route-list')
 
     route_list.forEach((route, index) => {
-        route.addEventListener('click', (e) => {
+        let btn_select = document.querySelector(`.btn-route-select-${index}`)
+        btn_select.addEventListener('click', (e) => {
             route_list.forEach((item) => { 
                 item.classList.remove('active')
-                item.classList.add('route-hover')
             })
+            btn_route_list.forEach((btn) => { 
+                btn.disabled = false 
+                btn.innerText = 'Select'
+            })
+            btn_select.disabled = true
+            btn_select.innerText = 'Selected'
+            
             let _price = route.querySelector('.route-price')
             depart_time = route.querySelector('.depart-time').innerText
             arrive_time = route.querySelector('.arrival-time').innerText
