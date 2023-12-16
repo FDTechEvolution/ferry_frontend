@@ -147,7 +147,9 @@
                                 <div class="col-3 text-center">
                                     <h6 class="fw-bold mb-1">Extra detail</h6>
                                     @foreach($booking['extra'] as $extra)
-                                        <p class="mb-0 small">{{ $extra['name'] }}</p>
+                                        @if($extra != NULL)
+                                            <p class="mb-0 small">{{ $extra['name'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
