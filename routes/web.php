@@ -61,6 +61,7 @@ Route::controller(PaymentController::class)->group(function() {
 Route::controller(StationController::class)->group(function() {
     Route::post('ajax/station/to', 'getStationTo');
     Route::get('station', 'index')->name('station-index');
+    Route::get('station/detail/{nickname}', 'detail')->name('station-detail');
 });
 
 Route::controller(TermAndConditionController::class)->group(function() {

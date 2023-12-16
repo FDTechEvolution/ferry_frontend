@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Log;
 
 class StationController extends Controller
 {
+    protected $ImageUrl;
+
+    public function __construct() {
+        $this->ImageUrl = config('services.store.image');
+    }
+
     public function getStationTo(Request $request) {
         $response = Http::reqres()->get('stations/get/to/'.$request->station_id);
         $res = $response->json();
@@ -41,5 +47,13 @@ class StationController extends Controller
         // Log::debug($station_to);
 
         return view('pages.station.index', ['section' => $station_to, 'image_station' => $image_station]);
+    }
+
+    public function detail($nickname){
+        //$nickname = request()->code;
+        $response = Http::reqres()->get('stations/get/nickname/'.$nickname);
+        $res =  $response->json();
+
+        return view('pages.station.detail', ['station'=>$res,'store' => $this->ImageUrl]);
     }
 }

@@ -41,7 +41,7 @@
 
         <!-- station -->
         <li class="nav-item">
-            <a class="nav-link fw-bold" href="#">
+            <a class="nav-link fw-bold" href="{{ route('station-index') }}">
                 Check-in Station
             </a>
         </li>
