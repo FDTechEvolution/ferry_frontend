@@ -1,5 +1,5 @@
 <div id="booking-route-payment">
-    <h4 class="mb-2">Litinerary</h4>
+    <h4 class="mb-2">Itinerary</h4>
     <div class="row bg-booking-payment-litinerary mx-3 p-3 mb-5">
         <div class="col-12">
             <div class="row depart-litinerary">
@@ -85,7 +85,7 @@
     </div>
 
     <h4 class="mb-0">Passenger(s)</h4>
-    <p class="mb-2">Passenger detail</p>
+    <p class="mb-2">Passenger details</p>
     <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
         <div class="col-12">
             <div class="row" id="payment-passenger-detail">

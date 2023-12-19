@@ -20,7 +20,7 @@
                             <div class="nav flex nav-pills mb-3 mb-lg-0" id="booking-tab" aria-orientation="horizontal">
                                 <a class="nav-link mb-2 mb-lg-0 px-4 active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Round Trip Ticket</a>
                                 <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">One Way Ticket</a>
-                                <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi Island <img src="{{ asset('coconut_tree.svg') }}" style="width: 30px; margin-top: -10px;"></a>
+                                <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Multi-Island <img src="{{ asset('coconut_tree.svg') }}" style="width: 30px; margin-top: -10px;"></a>
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-4 text-end">
@@ -73,7 +73,7 @@
 
 <div class="row mb-4">
     <div class="col-12">
-        <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Hot Destination</h2>
+        <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
     </div>
     <div class="col-12">
         <div class="row py-3 bg-booking-cover slide-home-style">
@@ -126,10 +126,18 @@
                     <source src="video/tigerline.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center">
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br/>
+            <div class="col-12 col-lg-6 text-center">
+                <h4>Welcome to Tigerline Ferry!</h4>
+
+                <p class="mb-0">Greetings to all over the world.</p>
+                <p class="mb-0">Since 2003, We are Thai operators leading out this Andaman Sea's Tourism Industry.</p>
+                <p>Capturing the scenic on this land of plenty. Thought the beauty
+                of the emerald sea, full with discovery that form a wonderful landscape. Andaman Tropical Archipelago never run out of excitement for you explore.</p>
+
+                <p>We provide variety of transportation, extraodinary scenic experience is waiting for you to long for. Your sea trips will be the best with
+                us as we aren't just an agency, but operators and travel connoisseurs.</p>
+
+                <p>We sell what we experienced and select only the best for you!</p>
             </div>
         </div>
     </div>

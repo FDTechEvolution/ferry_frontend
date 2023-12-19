@@ -1,6 +1,6 @@
 <div id="booking-route-passenger">
     <h4 class="mb-0">Passengers</h4>
-    <small>Enter passenger detail</mall>
+    <small>Enter passenger details</mall>
     <div class="row mt-2 mb-5 border-radius-10 border border-booking-passenger">
         <div class="col-12 py-3 bg-booking-passenger" style="border-radius: 10px 10px 0 0;">
             Passenger 1 <span class="text-light">(Lead passenger)</span>
@@ -36,8 +36,8 @@
                         data-autoclose="true"
                         data-format="DD/MM/YYYY"
                         autocomplete="off"
-                        placeholder="Birth Day date">
-                    <label class="ms-2">Birth Day date<span class="text-danger">*</span></label>
+                        placeholder="Date of Birth">
+                    <label class="ms-2">Date of Birth<span class="text-danger">*</span></label>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-5">
-                    <label class="form-label">Telephone number<span class="text-danger">*</span></label>
+                    <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i class="fi fi-phone"></i> )</label>
                     <div class="row">
                         <div class="col-4">
                             <select required class="form-select" name="mobile_code">
@@ -96,7 +96,7 @@
                     <label for="passenger-country">Country<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-12 col-lg-5 offset-0 offset-lg-2 form-floating mb-3">
-                    <input type="number" name="passport_number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
+                    <input type="text" name="passport_number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
                     <label for="passenger-passport" class="ms-2">Passport Number</label>
                 </div>
             </div>
