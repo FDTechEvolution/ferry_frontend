@@ -80,4 +80,11 @@
             </div>
         </div>
     </div>
+
+    <div class="payment-list mb-6">
+        <h4 class="mb-0">Payment</h4>
+        <p class="mb-0">Select payment method</p>
+        <p class="mb-0 d-none">Select a payment to complete booking</p>
+        <x-booking-payment-list />
+    </div>
 </div>

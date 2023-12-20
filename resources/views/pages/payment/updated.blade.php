@@ -3,7 +3,7 @@
 @section('content')
 <div class="row min-h-50vh">
     <div class="col-12 text-center">
-        <h2>Updated...</h2>
+        <h2>{{ $message }}</h2>
         <div class="d-flex justify-content-center">
             <h4 class="me-1">Redirect to your booking in... </h4>
             <h4 class="hide timer-countdown text-main-color-2" 

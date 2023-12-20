@@ -207,7 +207,8 @@ class BookingController extends Controller
             'boat_id' => [$request->boat_id],
             'boat_qty' => [$request->boat_qty],
             'trip_type' => 'one-way',
-            'book_channel' => 'ONLINE'
+            'book_channel' => 'ONLINE',
+            'payment_method' => $request->payment_method
         ]);
         $res = $response->json();
         $data = $res['data'];
@@ -281,7 +282,8 @@ class BookingController extends Controller
             'boat_id' => $boat_id,
             'boat_qty' => $boat_qty,
             'trip_type' => 'round-trip',
-            'book_channel' => 'ONLINE'
+            'book_channel' => 'ONLINE',
+            'payment_method' => $request->payment_method
         ]);
 
         $res = $response->json();
@@ -332,7 +334,8 @@ class BookingController extends Controller
             'boat_id' => $request->boat_id,
             'boat_qty' => $request->boat_qty,
             'trip_type' => 'multi-trip',
-            'book_channel' => 'ONLINE'
+            'book_channel' => 'ONLINE',
+            'payment_method' => $request->payment_method
         ]);
         $res = $response->json();
         $data = $res['data'];
@@ -445,12 +448,20 @@ class BookingController extends Controller
             $booking = $res['data'];
             $addons = $res['addon'];
 
+            $isPaid = [
+                'N' => '<span class="text-danger fw-bold">Unpaid</span>',
+                'Y' => '<span class="text-success fw-bold">Paid</span>'
+            ];
+
+            // Log::debug($booking);
+
             $customers = $this->setCustomer($res['data']['customer']);
             $station_form = $res['m_from_route'];
             $_station_to = $this->setStationToSection($res['m_route']);
             return view('pages.booking.view', 
                         ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
-                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl
+                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 
+                            'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid
                         ]);
         }
 
@@ -466,7 +477,7 @@ class BookingController extends Controller
             'return' => $request->return_date
         ]);
 
-        return view('pages.payment.updated', ['bookingno' => $request->bookingno]);
+        return view('pages.payment.updated', ['message' => 'Updated...', 'bookingno' => $request->bookingno]);
     }
 
     private function setStationToSection($to_route) {
@@ -553,7 +564,7 @@ class BookingController extends Controller
                     ]);
         $res = $response->json();
 
-        return view('pages.payment.updated', ['bookingno' => $request->booking_number]);
+        return view('pages.payment.updated', ['message' => 'Updated...', 'bookingno' => $request->booking_number]);
     }
 
     public function updateCustomer(Request $request) {
@@ -564,6 +575,6 @@ class BookingController extends Controller
             'cus_id' => $request->cus_id
         ]);
 
-        return view('pages.payment.updated', ['bookingno' => $request->bookingno]);
+        return view('pages.payment.updated', ['message' => 'Updated...', 'bookingno' => $request->bookingno]);
     }
 }

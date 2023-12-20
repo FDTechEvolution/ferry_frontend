@@ -243,3 +243,13 @@ $('.add-multi-trip-depart').on('change', function(e) {
     $('.add-multi-trip-return').datepicker('setStartDate', new Date(`${ex_return[2]}-${ex_return[1]}-${ex_return[0]}`))
     return_date.disabled = false
 })
+
+let btn_confirm_payment = document.querySelector('.btn-confirm-payment')
+if(btn_confirm_payment) {
+    let payment_methods = document.querySelectorAll('.payment-methods')
+    payment_methods.forEach((payment) => {
+        payment.addEventListener('click', () => {
+            btn_confirm_payment.disabled = false
+        })
+    })
+}

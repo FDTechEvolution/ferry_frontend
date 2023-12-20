@@ -149,6 +149,7 @@ const progress_next = document.querySelector('#progress-next')
 const progress_payment = document.querySelector('#progress-payment')
 const steps = progress_bar.querySelectorAll('.process-step-item')
 const progress = document.querySelectorAll('.procress-step')
+let payment_selected = false
 let active = isStep
 updateProgress()
 
@@ -265,11 +266,21 @@ function progressCondition(step) {
 
         progress_next.classList.add('d-none')
         progress_payment.classList.remove('d-none')
-        progress_payment.disabled = false
+        if(payment_selected) progress_payment.disabled = false
     }
 }
 // END STEP BAR ///////////////////////////////////////////////////////////////////////////////////
 
+
+let payment_methods = document.querySelectorAll('.payment-methods')
+if(payment_methods) {
+    payment_methods.forEach((payment) => {
+        payment.addEventListener('click', () => {
+            payment_selected = true
+            progress_payment.disabled = false
+        })
+    })
+}
 
 
 // EXTRA STEP //////////////////////////////////////////////////////////////////////////////////////

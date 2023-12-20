@@ -33,12 +33,50 @@
 <div class="row">
     @if($booking['do_update'])
         @if($booking['ispayment'] == 'N')
-        <div class="col-12 text-center mb-3">
-            <form method="POST" action="{{ route('payment-link') }}">
-                @csrf
-                <input type="hidden" name="booking_number" value="{{ $booking['booking_number'] }}">
-                <button type="submit" class="btn button-green-bg rounded px-5 py-2">Payment</button>
-            </form>
+        <div class="col-12 text-center mb-4">
+            
+            <button type="button" class="btn button-green-bg rounded px-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
+            <div class="collapse mt-2" id="collapsePayment">
+                <div class="card card-body bg-light">
+                    <form method="POST" action="{{ route('payment-link') }}">
+                        @csrf
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row fw-bold mb-2">
+                                    <div class="col-1 text-center">#</div>
+                                    <div class="col-3">Payment Number</div>
+                                    <div class="col-2">Amount</div>
+                                    <div class="col-1">Status</div>
+                                </div>
+
+                                @foreach($booking['payment'] as $index => $payment)
+                                    <label class="row">
+                                        <div class="col-1 text-center">
+                                            <input class="form-check-input form-check-input-primary" type="radio" name="payments" id="payment-method-{{ $index }}" value="{{ $payment['payment_id'] }}" checked>
+                                        </div>
+                                        <div class="col-3">{{ $payment['paymentno'] }}</div>
+                                        <div class="col-2">{{ number_format($payment['totalamt']) }}</div>
+                                        <div class="col-1">{!! $is_paid[$payment['ispaid']] !!}</div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <hr class="my-3"/>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="mb-0 text-start">Select a payment to complete booking</p>
+                                <div class="text-start">
+                                    <x-booking-payment-list />
+                                </div>
+                                <div class="text-end mt-2">
+                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         @elseif($booking['ispayment'] == 'Y')
         <div class="col-12 text-center mb-3">

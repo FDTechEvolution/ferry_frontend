@@ -17,9 +17,13 @@ class PaymentController extends Controller
     }
 
     public function payment(Request $request) {
-        // Log::debug($request);
+        if(!isset($request->payments) || !isset($request->payment_method)) {
+            return view('pages.payment.updated', ['message' => 'Nothing...', 'bookingno' => $request->bookingno]);
+        }
+
         $response = Http::reqres()->post('/payment/create', [
-            'bookingno' => $request['booking_number']
+            'payment_id' => $request->payments,
+            'payment_method' => $request->payment_method
         ]);
 
         $res = $response->json();
