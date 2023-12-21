@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->ImageUrl = config('services.store.image');
         // $this->ImageCover = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
         $this->ImageCover = ['cover.webp'];
-        $this->PromoColor = ['#fdf21c', '#d9d9d9', '#18aded', '#169448', '#f5060f'];
+        $this->PromoColor = ['#FFF59D', '#EEEEEE', '#81D4FA', '#A5D6A7', '#ef9a9a'];
     }
 
     public function index() {

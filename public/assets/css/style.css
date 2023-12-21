@@ -28,6 +28,11 @@ h1,h2,h3,h4,h5{
     font-family: 'proxima_softbold','Kanit', sans-serif;
 }
 
+.font-proxima-400 {
+    font-family: 'proxima_softbold','Kanit', sans-serif;
+    font-weight: 400;
+}
+
 @media only screen and (min-width: 768px) {
     .section.bg-theme-color-light.overlay-dark.overlay-opacity-2.bg-cover.lazy {
         padding: 200px 0;
