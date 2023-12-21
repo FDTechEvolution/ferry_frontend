@@ -12,6 +12,7 @@
                         <img src="{{ asset('icons/mastercard_icon.svg') }}" class="me-2" width="40">
                         <img src="{{ asset('icons/jcb_icon.svg') }}" class="me-2" width="40">
                     </p>
+                    <small class="d-block" style="margin-top: -12px;">Credit card fee 3.5%</small>
                 </div>
             </div>
         </label>

@@ -270,6 +270,12 @@ img.img-logo-style {
 .mw--48 {
     max-width: 48px;
 }
+.w--7 {
+    width: 7%;
+}
+.w--10 {
+    width: 10%;
+}
 
 .booking-route-list.active .station-name,
 .booking-depart-list.active .station-name,

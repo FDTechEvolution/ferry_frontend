@@ -208,7 +208,8 @@ class BookingController extends Controller
             'boat_qty' => [$request->boat_qty],
             'trip_type' => 'one-way',
             'book_channel' => 'ONLINE',
-            'payment_method' => $request->payment_method
+            'payment_method' => $request->payment_method,
+            'ispremiumflex' => $request->ispremiumflex
         ]);
         $res = $response->json();
         $data = $res['data'];
@@ -283,7 +284,8 @@ class BookingController extends Controller
             'boat_qty' => $boat_qty,
             'trip_type' => 'round-trip',
             'book_channel' => 'ONLINE',
-            'payment_method' => $request->payment_method
+            'payment_method' => $request->payment_method,
+            'ispremiumflex' => $request->ispremiumflex
         ]);
 
         $res = $response->json();
@@ -335,7 +337,8 @@ class BookingController extends Controller
             'boat_qty' => $request->boat_qty,
             'trip_type' => 'multi-trip',
             'book_channel' => 'ONLINE',
-            'payment_method' => $request->payment_method
+            'payment_method' => $request->payment_method,
+            'ispremiumflex' => $request->ispremiumflex
         ]);
         $res = $response->json();
         $data = $res['data'];
@@ -453,15 +456,15 @@ class BookingController extends Controller
                 'Y' => '<span class="text-success fw-bold">Paid</span>'
             ];
 
-            // Log::debug($booking);
-
+            $payment_lines = $booking['payment'][0]['payment_lines'];
             $customers = $this->setCustomer($res['data']['customer']);
             $station_form = $res['m_from_route'];
             $_station_to = $this->setStationToSection($res['m_route']);
             return view('pages.booking.view', 
                         ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
                             'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 
-                            'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid
+                            'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
+                            'payment_lines' => $payment_lines
                         ]);
         }
 

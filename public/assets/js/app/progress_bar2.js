@@ -2,6 +2,7 @@ const booking_route = document.querySelector('#booking-route-select')
 const depart_route = booking_route.querySelector('#booking-depart')
 const return_route = booking_route.querySelector('#booking-return')
 let route_selected = { depart: false, return: false }
+let premium_price = 0
 let route_index = { depart: null, return: null }
 let price = { depart: 0, return: 0 }
 let icon_selected = { depart: [], return: [] }
@@ -220,6 +221,31 @@ function progressCondition(step) {
         progress_payment.disabled = true
     }
 
+    if(step === 'premium') {
+        const chk_premium = document.querySelector('#ispremiumflex')
+        const txt_price = document.querySelector('.is-premium-price')
+        const ispremiumflex = document.querySelector('[name="ispremiumflex"]')
+        let route_price = (price.depart + price.return)
+        premium_price = ((route_price*110)/100) - route_price
+        
+        txt_price.innerHTML = premium_price
+
+        if(chk_premium.checked) txt_price.innerHTML = premium_price = 0
+        chk_premium.addEventListener('change', (e) => {
+            if (e.currentTarget.checked) {
+                txt_price.innerHTML = premium_price = 0
+                ispremiumflex.value = 'N'
+            }
+            else {
+                premium_price = ((route_price*110)/100) - route_price
+                txt_price.innerHTML = premium_price
+                ispremiumflex.value = 'Y'
+            }
+            updateSumPrice()
+        })
+        updateSumPrice()
+    }
+
     if(step === 'passenger') {
         const passenger_next = document.querySelector('#progress-next-passenger')
         progress_next.classList.add('d-none')
@@ -328,7 +354,7 @@ function dec(type, element, index) {
 }
 
 function updateSumPrice() {
-    let sum_amount = (price.depart + price.return) + (extra_price.depart + extra_price.return)
+    let sum_amount = (price.depart + price.return) + (extra_price.depart + extra_price.return) + premium_price
     document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
 }
 
@@ -500,7 +526,9 @@ function setLitinerary() {
 
     let sum_depart = setPassengerAmountPayment('depart')
     let sum_return = setPassengerAmountPayment('return')
-    document.querySelector('#sum-of-payment').innerHTML = (sum_depart + sum_return).toLocaleString("en-US")
+    document.querySelector('.sum-of-payment').innerHTML = (sum_depart + sum_return).toLocaleString("en-US")
+    document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US")
+    document.querySelector('.sum-amount').innerHTML = (sum_depart + sum_return + premium_price).toLocaleString("en-US")
 }
 
 function setPassengerDetail() {

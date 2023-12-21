@@ -197,11 +197,17 @@
             </div>
             <div class="col-12 mt-3 border-top">
                 <div class="row">
-                    <div class="col-6 text-end pt-3">
-
-                    </div>
-                    <div class="col-6 text-end pt-3 pe-2">
-                        <p class="mb-0">Total : <span class="fw-bold">{{ number_format($booking['amount'] + $booking['amount_extra']) }}</span> THB</p>
+                    <div class="col-12 text-end pt-3 pe-2">
+                        @php
+                            $line_amount = 0;
+                        @endphp
+                        @foreach($payment_lines as $line)
+                            <h6 class="d-flex justify-content-end align-items-end mb-2">{!! $line['title'] !!} : <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line['amount'], 2) }}</p> <small class="smaller">THB</small></h6>
+                            @php
+                                $line_amount += $line['amount'];
+                            @endphp
+                        @endforeach
+                        <h6 class="d-flex justify-content-end align-items-end pt-3 border-top">Total : <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line_amount + $booking['amount_extra'], 2) }}</p> <small class="smaller">THB</small></h6>
                     </div>
                 </div>
             </div>

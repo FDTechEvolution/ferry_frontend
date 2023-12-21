@@ -1,6 +1,6 @@
 <div id="booking-route-select">
     @foreach($routes as $index => $route)
-        <div class="row p-2 px-4 mb-4 border rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light @endif">
+        <div class="row p-2 px-4 mb-4 border rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif">
 
             <div class="col-12">
                 <div class="row">

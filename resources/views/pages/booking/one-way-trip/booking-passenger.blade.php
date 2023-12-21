@@ -35,6 +35,7 @@
                         data-clear-btn="false"
                         data-autoclose="true"
                         data-format="DD/MM/YYYY"
+                        data-date-start="1924-01-01"
                         autocomplete="off"
                         placeholder="Date of Birth">
                     <label class="ms-2">Date of Birth<span class="text-danger">*</span></label>

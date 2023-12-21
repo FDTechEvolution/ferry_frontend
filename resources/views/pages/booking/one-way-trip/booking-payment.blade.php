@@ -60,7 +60,9 @@
 
             <div class="row mt-3">
                 <div class="col-12 text-end pe-5 pt-3 border-top border-secondary">
-                    <h6>Total THB <span class="sum-of-payment"></span></h6>
+                    <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--7 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                    <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--7 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                    <h6 class="d-flex justify-content-end align-items-end pt-2 border-top">Total <p class="sum-amount w--7 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ let price_all = []
 let sum_price = []
 let is_passenger = []
 let route_price = 0
+let premium_price = 0
 let extra_price = 0
 let payment_info = {
     route_selected: [],
@@ -181,6 +182,31 @@ function progressCondition(step) {
         progress_payment.disabled = true
     }
 
+    if(step === 'premium') {
+        const chk_premium = document.querySelector('#ispremiumflex')
+        const txt_price = document.querySelector('.is-premium-price')
+        const ispremiumflex = document.querySelector('[name="ispremiumflex"]')
+        let _route_price = sum_price.reduce((num1, num2) => { return num1+num2 })
+        premium_price = ((_route_price*110)/100) - _route_price
+        
+        txt_price.innerHTML = premium_price
+
+        if(chk_premium.checked) txt_price.innerHTML = premium_price = 0
+        chk_premium.addEventListener('change', (e) => {
+            if (e.currentTarget.checked) {
+                txt_price.innerHTML = premium_price = 0
+                ispremiumflex.value = 'N'
+            }
+            else {
+                premium_price = ((_route_price*110)/100) - _route_price
+                txt_price.innerHTML = premium_price
+                ispremiumflex.value = 'Y'
+            }
+            updateSumPrice()
+        })
+        updateSumPrice()
+    }
+
     if(step === 'passenger') {
         const passenger_next = document.querySelector('#progress-next-passenger')
         progress_next.classList.add('d-none')
@@ -349,6 +375,8 @@ function setLitinerary() {
     })
 
     document.querySelector('.sum-of-payment').innerHTML = sum_of_payment.toLocaleString("en-US")
+    document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US")
+    document.querySelector('.sum-amount').innerHTML = (sum_of_payment + premium_price).toLocaleString("en-US")
 }
 
 function setPassengerDetail() {
@@ -727,7 +755,7 @@ function dec(element, index, route_index) {
 
 function updateSumPrice() {
     let total_route = sum_price.reduce((num1, num2) => { return num1+num2 })
-    let sum_amount = total_route + extra_price
+    let sum_amount = total_route + extra_price + premium_price
     document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
 }
 

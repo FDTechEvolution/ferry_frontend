@@ -61,6 +61,7 @@
 <ol class="process-steps process-steps-primary text-muted mb-3">
 	<li class="process-step-item complete" data-step="booking">{{ $isType != '' ? $isType : 'Booking' }}</li>
 	<li class="process-step-item text-primary active" data-step="select">Select</li>
+    <li class="process-step-item" data-step="premium">Premium Flex</li>
 	<li class="process-step-item" data-step="passenger">Passenger info</li>
     <li class="process-step-item" data-step="extra">Extra services</li>
     <li class="process-step-item" data-step="payment">Payment</li>
@@ -75,6 +76,10 @@
             <div class="procress-step show">
                 <!-- booking select -->
                 @include('pages.booking.round-trip.booking-select')
+            </div>
+            <div class="procress-step d-none">
+                <!-- booking premium flex -->
+                <x-booking-premium-flex />
             </div>
             <div class="procress-step d-none">
                 <!-- booking passenger -->
