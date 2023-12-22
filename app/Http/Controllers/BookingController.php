@@ -94,8 +94,11 @@ class BookingController extends Controller
             $ex = explode('.', $hour);
             $digit = '0.'.$ex[1];
             $to_minute = floatval($digit)*60;
+
+            $setHour = $ex[0] != 0 ? $ex[0].' Hour ' : '';
+            $setMinute = number_format($to_minute, 0, '.', '').' Minute.';
             
-            return $ex[0].' Hour '.$to_minute.' Minute.';
+            return $setHour.$setMinute;
         }
         else return $hour.' Hour.';
     }

@@ -103,7 +103,7 @@
         </li>
     </ul>
 
-    <div class="dropdown ms-3">
+    <div class="dropstart ms-3">
         <a class="dropdown-toggle text-light fs-4" href="#" role="button" id="exDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
         </a>

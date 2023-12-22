@@ -29,8 +29,8 @@
                                         aria-selected="false">One Way Ticket</a>
                                     <a class="nav-link mb-2 mb-lg-0 px-4" id="v-pills-messages-tab" data-bs-toggle="pill"
                                         href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
-                                        aria-selected="false">Multi-Island <img src="{{ asset('coconut_tree.svg') }}"
-                                            style="width: 30px; margin-top: -10px;"></a>
+                                        aria-selected="false">Multi-Island <img src="{{ asset('multi-island.webp') }}"
+                                            style="width: 35px; margin-top: -10px;"></a>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-4 text-end">
@@ -80,10 +80,42 @@
 
     <div class="section">
         <div class="row">
+            <div class="col-12">
+                <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
+            </div>
             <div class="col-12 col-lg-6">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
+                        <div class="swiper-container swiper-preloader swiper-btn-group swiper-btn-group-end text-white"
+                            data-swiper='{
+                                "slidesPerView": 1,
+                                "spaceBetween": 0,
+                                "autoplay": true,
+                                "loop": true,
+                                "pagination": { "type": "progressbar" }
+                            }'
+                            style="border-radius: 10px;">
+
+                            <div class="swiper-wrapper" style="height:350px;">
+
+                                @foreach ($slides as $slide)
+                                    <div class="swiper-slide h-100 d-middle bg-white overlay-dark overlay-opacity-1 bg-cover" 
+                                        style="background:url({{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}); 
+                                                background-position: bottom center !important;"
+                                    >
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                            <!-- Add Arrows -->
+                            <div class="home-tranding swiper-button-next swiper-button-white"></div>
+                            <div class="home-tranding swiper-button-prev swiper-button-white"></div>
+
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,66 +123,20 @@
             <div class="col-12 col-lg-6">
                 <div class="row">
                     <div class="col-12">
-                        <video width="100%" height="auto" style="border-radius: 10px;" controls>
+                        <video width="100%" height="350" style="border-radius: 10px;" controls>
                             <source src="video/tigerline.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12" style="display: none;">
-                <div class="row py-3 bg-booking-cover slide-home-style">
-                    <div class="col-12">
-                        <div class="swiper-container swiper-white swiper-preloader"
-                            data-swiper='{
-                            "spaceBetween": 8,
-                            "slidesPerGroup": 1,
-                            "loop": true,
-                            "autoplay": { "delay" : 4000, "disableOnInteraction": false },
-                            "breakpoints": {
-                                "1024": { "slidesPerView": "3" },
-                                "920":	{ "slidesPerView": "2" },
-                                "640":	{ "slidesPerView": "1" }
-                            }
-                        }'>
-                            <div class="hide swiper-wrapper">
-
-                                @foreach ($slides as $slide)
-                                    <div class="swiper-slide">
-                                        @if ($slide['link'] != null)
-                                            <a href="{{ $slide['link'] }}" target="_blank">
-                                                <img class="img-fluid slide-home-style"
-                                                    src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
-                                                    alt="...">
-                                            </a>
-                                        @else
-                                            <img class="img-fluid slide-home-style"
-                                                src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
-                                                alt="...">
-                                        @endif
-                                    </div>
-                                @endforeach
-
-                            </div>
-
-                            <!-- Navs -->
-                            <div class="bg-white rounded-circle swiper-button-next"></div>
-                            <div class="bg-white rounded-circle swiper-button-prev"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
-@stop
-
-@section('section-content')
     <div class="section py-3">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                <div class="col-12 col-lg-8 offset-lg-2 text-center">
                     <h2>Welcome to Tigerline Ferry!</h2>
 
                     <p class="mb-0">Greetings to all over the world.</p>
@@ -171,9 +157,7 @@
         </div>
     </div>
 
-
 @stop
-
 
 @section('script')
     <script src="{{ asset('assets/js/app/booking.js') }}"></script>

@@ -414,3 +414,25 @@ img.img-logo-style {
 .over-time {
     pointer-events: none;
 }
+
+.swiper-container.swiper-btn-group .home-tranding.swiper-button-next:after, 
+.swiper-container.swiper-btn-group .home-tranding.swiper-button-prev:after {
+    font-size: 20px !important;
+}
+.swiper-container.swiper-btn-group .home-tranding.swiper-button-next:after {
+    margin-left: 5px;
+}
+.swiper-btn-group-end .home-tranding.swiper-button-prev, .swiper-btn-group-end.swiper-container-rtl .home-tranding.swiper-button-next,
+.swiper-btn-group-end .home-tranding.swiper-button-next, .swiper-btn-group-end.swiper-container-rtl .home-tranding.swiper-button-prev {
+    background-color: #000000a1;
+    border-radius: 50%;
+    width: 33px;
+}
+.swiper-btn-group-end .home-tranding.swiper-button-prev {
+    right: 70px !important;
+}
+
+.dropstart .dropdown-menu[data-bs-popper] {
+    right: 0;
+    top: 45px;
+}

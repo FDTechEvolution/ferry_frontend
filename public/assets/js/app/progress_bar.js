@@ -144,27 +144,30 @@ function progressCondition(step) {
     }
 
     if(step === 'premium') {
-        const chk_premium = document.querySelector('#ispremiumflex')
         const txt_price = document.querySelector('.is-premium-price')
-        const ispremiumflex = document.querySelector('[name="ispremiumflex"]')
-        premium_price = ((route_price*110)/100) - route_price
+        const ispremiumflex = document.querySelector('#is-premiumflex')
+        const nonePremiumFlex = document.querySelector('#none-premiumflex')
+        let _premium_price = ((route_price*110)/100) - route_price
         
-        txt_price.innerHTML = premium_price
+        txt_price.innerHTML = _premium_price
 
-        if(chk_premium.checked) txt_price.innerHTML = premium_price = 0
-        chk_premium.addEventListener('change', (e) => {
-            if (e.currentTarget.checked) {
-                txt_price.innerHTML = premium_price = 0
-                ispremiumflex.value = 'N'
-            }
-            else {
-                premium_price = ((route_price*110)/100) - route_price
-                txt_price.innerHTML = premium_price
-                ispremiumflex.value = 'Y'
-            }
+        if(nonePremiumFlex.checked) {
+            premium_price = 0
+            updateSumPrice()
+        }
+        if(ispremiumflex.checked) {
+            premium_price = _premium_price
+            updateSumPrice()
+        }
+
+        ispremiumflex.addEventListener('click', () => {
+            premium_price = _premium_price
             updateSumPrice()
         })
-        updateSumPrice()
+        nonePremiumFlex.addEventListener('click', () => {
+            premium_price = 0
+            updateSumPrice()
+        })
     }
 
     if(step === 'passenger') {

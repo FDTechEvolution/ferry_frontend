@@ -2,16 +2,19 @@
     <div class="row">
         <div class="col-8 offset-2 card">
             <div class="row card-body">
-                <div class="col-6">
-                    <h4 class="mb-2"><i class="fi fi-star-full" style="color: #daa520;"></i> Premuim Flex</h4>
+                <h4 class="mb-2 pb-2 border-bottom"><i class="fi fi-star-full" style="color: #daa520;"></i> Premuim Flex</h4>
+                <div class="col-6 mt-3">
                     <div class="form-check mb-2">
-                        <input class="form-check-input form-check-input-default" type="checkbox" id="ispremiumflex">
-                        <label class="form-check-label" for="ispremiumflex">Non-Premium Flex</label>
+                        <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="N" id="none-premiumflex" checked>
+                        <label class="form-check-label fw-bold" for="none-premiumflex">Non-Premium Flex</label>
                     </div>
                     <input type="hidden" name="ispremiumflex" value="Y">
                 </div>
                 <div class="col-6 border rounded p-3">
-                    <p class="fw-bold"><i class="fi fi-star-full" style="color: #daa520;"></i> Premium Flex</p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="Y" id="is-premiumflex">
+                        <label class="form-check-label fw-bold" for="is-premiumflex"> Premium Flex <i class="fi fi-star-full" style="color: #daa520; margin-top: -5px;"></i></label>
+                    </div>
                     <p class="mb-3">An additional 10% for travel changes can be made 1 time.</p>
                     <p class="mb-3">**Note: Tickets without +10% at this price cannot change the itinerary**</p>
                     <p class="mb-3">You can notify of travel changes, name changes and email notifications. Regarding seat availability 12 hours before departure</p>

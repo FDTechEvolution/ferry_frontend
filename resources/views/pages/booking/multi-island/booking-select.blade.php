@@ -19,6 +19,7 @@
                         <div class="row">
                             <div class="col-10">
                                 <div class="row py-3">
+                                    <p class="mb-2 small">Depart by : {{ isset($route['partner']['name']) ? $route['partner']['name'] : '-' }}</p>
                                     <div class="col-1 d-flex justify-content-center align-items-center">
                                         <div class="partner-image me-3">
                                             @if($route['partner'] != NULL)
@@ -32,7 +33,7 @@
                                     <div class="col-6 d-flex align-items-center">
                                         <p class="mb-0 me-2">
                                             <span class="depart-time">{{ date("H:i", strtotime($route['depart_time'])) }}</span><br/>
-                                            <span class="small">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif</span>
+                                            <span class="small">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif <x-booking-station-info :station_line="$route['station_lines']" :station="$route['station_from']['name']" :type="_('from')" /></span>
                                         </p>
                                         <span class="mx-3">
                                             <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">  
@@ -42,7 +43,7 @@
                                         </span>
                                         <p class="mb-0 ms-2">
                                             <span class="arrival-time">{{ date("H:i", strtotime($route['arrive_time'])) }}</span><br/>
-                                            <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif</span>
+                                            <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-station-info :station_line="$route['station_lines']" :station="$route['station_to']['name']" :type="_('to')" /></span>
                                         </p>
                                     </div>
 
