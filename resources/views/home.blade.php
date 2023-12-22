@@ -80,10 +80,25 @@
 
     <div class="section">
         <div class="row">
-            <div class="col-12">
-                <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
+            <div class="col-12 col-lg-6">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
+                    </div>
+                </div>
             </div>
-            <div class="col-12">
+
+            <div class="col-12 col-lg-6">
+                <div class="row">
+                    <div class="col-12">
+                        <video width="100%" height="auto" style="border-radius: 10px;" controls>
+                            <source src="video/tigerline.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12" style="display: none;">
                 <div class="row py-3 bg-booking-cover slide-home-style">
                     <div class="col-12">
                         <div class="swiper-container swiper-white swiper-preloader"
@@ -132,16 +147,11 @@
 @stop
 
 @section('section-content')
-    <div class="section py-3 bg-booking-passenger">
+    <div class="section py-3">
         <div class="container">
-            <div class="row bg-booking-passenger py-4">
-                <div class="col-12 col-lg-6">
-                    <video width="100%" height="auto" style="border-radius: 10px;" controls>
-                        <source src="video/tigerline.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="col-12 col-lg-6 text-center">
-                    <h4>Welcome to Tigerline Ferry!</h4>
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                    <h2>Welcome to Tigerline Ferry!</h2>
 
                     <p class="mb-0">Greetings to all over the world.</p>
                     <p class="mb-0">Since 2003, We are Thai operators leading out this Andaman Sea's Tourism Industry.
@@ -156,6 +166,7 @@
 
                     <p>We sell what we experienced and select only the best for you!</p>
                 </div>
+                
             </div>
         </div>
     </div>
