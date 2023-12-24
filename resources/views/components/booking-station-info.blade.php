@@ -4,7 +4,7 @@
     $modal_id = uniqid();
 @endphp
 
-<i class="fi fi-round-info-full cursor-pointer" title="Station info." data-bs-toggle="modal" data-bs-target="#m_{{ $modal_id }}"></i>
+<i class="fi fi-round-info-full cursor-pointer icon-booking-color" title="Station info." data-bs-toggle="modal" data-bs-target="#m_{{ $modal_id }}"></i>
 
 <div class="modal fade" id="m_{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLg" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">

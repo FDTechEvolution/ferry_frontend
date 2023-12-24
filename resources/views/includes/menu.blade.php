@@ -46,6 +46,60 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <ul class="navbar-nav py-2 font-proxima">
+                <li class="nav-item border-start border-2 addon-menu-style" style="line-height: 14px;">
+                    <span class="smaller text-addon-color px-2">+ Add on</span>
+                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
+                        Meal on board
+                    </a>
+                </li>
+
+                <li class="nav-item" style="line-height: 14px;">
+                    <span class="smaller text-addon-color px-2">+ Add on</span>
+                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
+                        Shuttle Bus & Boat
+                    </a>
+                </li>
+
+                <li class="nav-item" style="line-height: 14px;">
+                    <span class="smaller text-addon-color px-2">+ Add on</span>
+                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
+                        Activity
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ms-lg-3">
+            <a class="nav-link fw-bold" href="#">
+                <i class="fa-solid fa-motorcycle me-1 fs-2"></i> Rent a Bike!!
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <div class="dropstart mt-lg-3 ms-lg-3">
+                <a class="dropdown-toggle dropdown-color-style fs-4" href="#" role="button" id="exDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+
+                <ul class="dropdown-menu menu-on-nav" aria-labelledby="exDropdown">
+                    <li><a class="dropdown-item" href="#">TIMETABLE</a></li>
+                    <li><a class="dropdown-item" href="#">ROUTE MAP</a></li>
+                    <li><a class="dropdown-item" href="#">CHECK-IN STATION</a></li>
+                    <li><a class="dropdown-item" href="#">REVIEW</a></li>
+                    <li><a class="dropdown-item" href="#">NEWS</a></li>
+                    <li><a class="dropdown-item" href="#">+ MEAL ON BOARD</a></li>
+                    <li><a class="dropdown-item" href="#">+ HOTEL SHUTTLE BUS</a></li>
+                    <li><a class="dropdown-item" href="#">+ RESORT SHUTTLE BOAT</a></li>
+                    <li><a class="dropdown-item" href="#">+ ACTIVITY</a></li>
+                    <li><a class="dropdown-item" href="#">* PRIVATE CHATER</a></li>
+                    <li><a class="dropdown-item" href="#">* RENT A BIKE !!</a></li>
+                    <li><a class="dropdown-item" href="#">CONTACT US</a></li>
+                </ul>
+            </div>
+        </li>
+
 
         <!-- social icons : mobile only -->
         <!-- <li class="nav-item d-block d-sm-none text-center mb-4">
@@ -72,7 +126,7 @@
 
 
     </ul>
-    <ul class="navbar-nav py-2 font-proxima">
+    <!-- <ul class="navbar-nav py-2 font-proxima">
         <li class="nav-item border-start border-2" style="line-height: 14px;">
             <span class="smaller text-light px-2">+ Add on</span>
             <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
@@ -93,17 +147,17 @@
                 Activity
             </a>
         </li>
-    </ul>
+    </ul> -->
 
-    <ul class="navbar-nav font-proxima ms-3">
+    <!-- <ul class="navbar-nav font-proxima ms-3">
         <li class="nav-item ms-3">
             <a class="nav-link fw-bold" href="#">
                 <i class="fa-solid fa-motorcycle me-1 fs-2"></i> Rent a Bike!!
             </a>
         </li>
-    </ul>
+    </ul> -->
 
-    <div class="dropstart ms-3">
+    <!-- <div class="dropstart ms-3">
         <a class="dropdown-toggle text-light fs-4" href="#" role="button" id="exDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
         </a>
@@ -122,7 +176,7 @@
             <li><a class="dropdown-item" href="#">* RENT A BIKE !!</a></li>
             <li><a class="dropdown-item" href="#">CONTACT US</a></li>
         </ul>
-    </div>
+    </div> -->
     <!-- /navbar : navigation -->
 
 

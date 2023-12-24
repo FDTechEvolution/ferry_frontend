@@ -144,9 +144,9 @@
                         "loop": true,
                     }'>
 
-                    <div class="swiper-wrapper" style="height:230px;">
+                    <div class="swiper-wrapper">
                         @foreach ($slides as $slide)
-                        <div class="swiper-slide h-100 d-middle" style="flex-wrap: wrap; align-content: center;">
+                        <div class="swiper-slide d-middle" style="flex-wrap: wrap; align-content: center;">
                             <div class="slide-description font-proxima">
                                 <p class="text-center slide-desc-mobile fs-5">{{ $slide['description'] }}</p>
                                 <a href="#" class="btn btm-sm float-end w-25 py-2 fw-bold text-light" style="background-color: #426f95;">View</a>
@@ -173,7 +173,7 @@
                     <source src="video/tigerline.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="col-12 col-lg-7 order-lg-1 text-center px-5">
+            <div class="col-12 col-lg-7 order-lg-1 text-center px-lg-5">
                 <h2>Welcome to Tigerline Ferry!</h2>
 
                 <p class="mb-0">Greetings to all over the world.</p>
