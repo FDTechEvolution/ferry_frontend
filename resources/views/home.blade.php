@@ -5,11 +5,11 @@
 @stop
 
 @section('cover-content')
-    <div class="section bg-theme-color-light overlay-dark overlay-opacity-2 bg-cover lazy"
+    <div class="section bg-theme-color-light overlay-dark overlay-opacity-2 bg-cover lazy cover-home"
         data-background-image="{{ asset('/cover/' . $cover) }}">
 
         <div class="container">
-            <div class="row text-center-md text-center d-middle justify-content-center font-proxima">
+            <div class="row text-center-md text-center d-middle justify-content-center font-proxima mb-4">
                 <div class="col-12 text-align-center text-center-md text-center" data-aos="fade-in" data-aos-delay="20"
                     data-aos-offset="0">
                     <div
@@ -34,20 +34,35 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-4 text-end">
-                                <form novalidate class="bs-validate d-none" id="booking-record" method="POST"
-                                    action="{{ route('booking-record') }}">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input required type="text" class="form-control form-control-sm"
-                                            name="booking_number" placeholder="Booking Number..." autocomplete="off">
-                                        <button class="btn btn-sm button-link bg-light px-2" type="button"
-                                            id="booking-record-back"><i class="fi fi-close me-0"></i></button>
-                                        <button class="btn btn-sm button-orange-bg" type="submit"><i
-                                                class="fi fi-search me-0"></i></button>
+                                <div class="text-light mb-0 dropdown">
+                                    <span class="cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                        View your booking <i class="fa-regular fa-calendar-days fs-4 ms-1"></i>
+                                    </span>
+
+                                    <div class="dropdown-menu dropdown-click-ignore dropdown-lg p-4 bg-main-color-2 border">
+                                        <h6 class="mb-2 text-light">View your booking</h6>
+                                        <form class="bs-validate" id="booking-record" method="POST"
+                                            action="{{ route('booking-record') }}">
+                                            @csrf
+                                            <div class="row g-3">
+                                                <div class="col-md-12">
+                                                    <input required type="text" class="form-control form-control-sm"
+                                                        name="booking_number" placeholder="Booking Number..." autocomplete="off">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input required type="email" class="form-control form-control-sm"
+                                                        name="booking_email" placeholder="Booking Email..." autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-end pt-2">
+                                                <button type="submit" class="btn btn-sm button-orange-bg"><i class="fi fi-search me-0"></i></button>
+                                            </div>
+                                        </form>
+
                                     </div>
-                                </form>
-                                <p class="text-light mb-0"><span class="cursor-pointer" id="view-your-booking">View your
-                                        booking <i class="fa-regular fa-calendar-days fs-4 ms-1"></i></span></p>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -71,19 +86,20 @@
                     </div>
                 </div>
             </div>
+
+            @include('includes.home_cupon_2')
+
         </div>
     </div>
 @stop
 
 @section('content')
-    @include('includes.home_cupon_2')
-
-    <div class="section">
+    <div class="section pt-4 pb-4 pb-lg-6">
         <div class="row">
             <div class="col-12">
                 <h2 class="text-main-color-2"><i class="fa-solid fa-fire"></i> Trending</h2>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="row">
                     <div class="col-12">
                         <div class="swiper-container swiper-preloader swiper-btn-group swiper-btn-group-end text-white"
@@ -94,9 +110,9 @@
                                 "loop": true,
                                 "pagination": { "type": "progressbar" }
                             }'
-                            style="border-radius: 10px;">
+                            style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)">
 
-                            <div class="swiper-wrapper" style="height:350px;">
+                            <div class="swiper-wrapper" style="height:230px;">
 
                                 @foreach ($slides as $slide)
                                     <div class="swiper-slide h-100 d-middle bg-white overlay-dark overlay-opacity-1 bg-cover" 
@@ -109,8 +125,8 @@
                             </div>
 
                             <!-- Add Arrows -->
-                            <div class="home-tranding swiper-button-next swiper-button-white"></div>
-                            <div class="home-tranding swiper-button-prev swiper-button-white"></div>
+                            <div class="home-tranding swiper-button-next swiper-button-white d-none"></div>
+                            <div class="home-tranding swiper-button-prev swiper-button-white d-none"></div>
 
                             <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
@@ -119,40 +135,59 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-lg-8 px-2 px-lg-6 d-flex justify-content-center align-items-center slide-desc-desktop">
+                <div class="swiper-container swiper-preloader swiper-btn-group swiper-btn-group-end"
+                    data-swiper='{
+                        "slidesPerView": 1,
+                        "spaceBetween": 0,
+                        "autoplay": true,
+                        "loop": true,
+                    }'>
 
-            <div class="col-12 col-lg-6">
-                <div class="row">
-                    <div class="col-12">
-                        <video width="100%" height="350" style="border-radius: 10px;" controls>
-                            <source src="video/tigerline.mp4" type="video/mp4">
-                        </video>
+                    <div class="swiper-wrapper" style="height:230px;">
+                        @foreach ($slides as $slide)
+                        <div class="swiper-slide h-100 d-middle" style="flex-wrap: wrap; align-content: center;">
+                            <div class="slide-description font-proxima">
+                                <p class="text-center slide-desc-mobile fs-5">{{ $slide['description'] }}</p>
+                                <a href="#" class="btn btm-sm float-end w-25 py-2 fw-bold text-light" style="background-color: #426f95;">View</a>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div class="section py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8 offset-lg-2 text-center">
-                    <h2>Welcome to Tigerline Ferry!</h2>
+    <div class="row mt-lg-6 ">
+        <div class="col-12 d-flex justify-content-center">
+            <hr class="border-4 rounded w-25"/>
+        </div>
+    </div>
 
-                    <p class="mb-0">Greetings to all over the world.</p>
-                    <p class="mb-0">Since 2003, We are Thai operators leading out this Andaman Sea's Tourism Industry.
-                    </p>
-                    <p>Capturing the scenic on this land of plenty. Thought the beauty
-                        of the emerald sea, full with discovery that form a wonderful landscape. Andaman Tropical
-                        Archipelago never run out of excitement for you explore.</p>
+    <div class="section pt-4 pt-lg-6 pb-5">
+        <div class="row">
+            <div class="col-12 col-lg-5 order-lg-2 mb-4 d-flex align-items-center px-4">
+                <video width="100%" height="auto" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)" controls>
+                    <source src="video/tigerline.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="col-12 col-lg-7 order-lg-1 text-center px-5">
+                <h2>Welcome to Tigerline Ferry!</h2>
 
-                    <p>We provide variety of transportation, extraodinary scenic experience is waiting for you to long for.
-                        Your sea trips will be the best with
-                        us as we aren't just an agency, but operators and travel connoisseurs.</p>
+                <p class="mb-0">Greetings to all over the world.</p>
+                <p class="mb-0">Since 2003, We are Thai operators leading out this Andaman Sea's Tourism Industry.
+                </p>
+                <p>Capturing the scenic on this land of plenty. Thought the beauty
+                    of the emerald sea, full with discovery that form a wonderful landscape. Andaman Tropical
+                    Archipelago never run out of excitement for you explore.</p>
 
-                    <p>We sell what we experienced and select only the best for you!</p>
-                </div>
-                
+                <p>We provide variety of transportation, extraodinary scenic experience is waiting for you to long for.
+                    Your sea trips will be the best with
+                    us as we aren't just an agency, but operators and travel connoisseurs.</p>
+
+                <p>We sell what we experienced and select only the best for you!</p>
             </div>
         </div>
     </div>

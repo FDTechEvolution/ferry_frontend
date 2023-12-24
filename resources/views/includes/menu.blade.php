@@ -98,7 +98,7 @@
     <ul class="navbar-nav font-proxima ms-3">
         <li class="nav-item ms-3">
             <a class="nav-link fw-bold" href="#">
-                <i class="fa-solid fa-motorcycle me-1"></i> Rent a Bike!!
+                <i class="fa-solid fa-motorcycle me-1 fs-2"></i> Rent a Bike!!
             </a>
         </li>
     </ul>

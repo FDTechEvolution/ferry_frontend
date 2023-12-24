@@ -46,7 +46,9 @@
                 <div class="col-12 col-lg-7">
                     <label class="form-label">Contact Infomation</label>
                     <div class="form-floating mb-3">
-                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail" autocomplete="true">
+                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail" autocomplete="true"
+                                onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                        >
                         <label for="passenger-email" class="ms-2">E-mail<span class="text-danger">*</span></label>
                     </div>
                 </div>
@@ -70,7 +72,9 @@
             <div class="row mb-3 mb-lg-0">
                 <div class="col-12 col-lg-7 mb-3 mb-lg-0">
                     <div class="form-floating mb-3">
-                        <input required type="email" name="confirm_email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail">
+                        <input required type="email" name="confirm_email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail"
+                                onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                        >
                         <label for="passenger-confirm-email" class="ms-2">Confirm E-mail<span class="text-danger">*</span></label>
                     </div>
                 </div>

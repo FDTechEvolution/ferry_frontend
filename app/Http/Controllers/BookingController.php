@@ -445,33 +445,40 @@ class BookingController extends Controller
     }
 
     public function findBookingRecord(Request $request) {
-        if(isset($request->booking_number) && $request->booking_number != '') {
+        $_booking_number = (isset($request->booking_number) && $request->booking_number != '') ? true : false;
+        $_booking_email = (isset($request->booking_email) && $request->booking_email != '') ? true : false;
+        $msg = '';
+        if($_booking_number && $_booking_email) {
             if(isset($request->booking_number_new)) {
                 $this->mergeBooking($request);
             }
-            $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number);
+            $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number.'/'.$request->booking_email);
             $res = $response->json();
-            $booking = $res['data'];
-            $addons = $res['addon'];
+            if($res['result']) {
+                $booking = $res['data'];
+                $addons = $res['addon'];
 
-            $isPaid = [
-                'N' => '<span class="text-danger fw-bold">Unpaid</span>',
-                'Y' => '<span class="text-success fw-bold">Paid</span>'
-            ];
+                $isPaid = [
+                    'N' => '<span class="text-danger fw-bold">Unpaid</span>',
+                    'Y' => '<span class="text-success fw-bold">Paid</span>'
+                ];
 
-            $payment_lines = $booking['payment'][0]['payment_lines'];
-            $customers = $this->setCustomer($res['data']['customer']);
-            $station_form = $res['m_from_route'];
-            $_station_to = $this->setStationToSection($res['m_route']);
-            return view('pages.booking.view', 
-                        ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
-                            'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 
-                            'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
-                            'payment_lines' => $payment_lines
-                        ]);
+                $payment_lines = $booking['payment'][0]['payment_lines'];
+                $customers = $this->setCustomer($res['data']['customer']);
+                $station_form = $res['m_from_route'];
+                $_station_to = $this->setStationToSection($res['m_route']);
+                return view('pages.booking.view', 
+                            ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
+                                'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 
+                                'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
+                                'payment_lines' => $payment_lines
+                            ]);
+            }
+
+            $msg = $res['data'];
         }
 
-        return redirect()->route('home');
+        return view('404', ['msg' => $msg]);
     }
 
     public function bookingNewRoute(Request $request) {

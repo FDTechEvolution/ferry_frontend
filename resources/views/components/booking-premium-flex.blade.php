@@ -10,7 +10,7 @@
                     </div>
                     <input type="hidden" name="ispremiumflex" value="Y">
                 </div>
-                <div class="col-6 border rounded p-3">
+                <div class="col-6 border border-warning rounded p-3 bg-warning-light">
                     <div class="form-check mb-2">
                         <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="Y" id="is-premiumflex">
                         <label class="form-check-label fw-bold" for="is-premiumflex"> Premium Flex <i class="fi fi-star-full" style="color: #daa520; margin-top: -5px;"></i></label>

@@ -23,7 +23,7 @@
             <div class="col-10 card bg-light">
                 <div class="card-body p-2">
                     <p class="mb-0">
-                        <span class="me-3 fw-bold">QR Payment</span>
+                        <span class="me-3 fw-bold">Thai QR Payment</span>
                         <img src="{{ asset('icons/qr_payment_icon.svg') }}" class="me-2" width="40">
                     </p>
                 </div>

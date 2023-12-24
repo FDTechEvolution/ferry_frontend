@@ -1,14 +1,14 @@
 <div class="section" style="padding: 0px;">
  
-        <div class="row">
-            <div class="col-12">
+        <div class="row p-2 pt-3 bg-light" style="border-radius: 10px;">
+            <div class="col-12 d-none">
                 <h2 class="text-main-color-2"><i class="fi fi-product-tag"></i> Offers and Promotions</h2>
             </div>
-            <div class="flickity-preloader"
-                data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
+            <div class="flickity-preloader px-1"
+                data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": false, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
 
                 @foreach($promotions as $promotion)
-                    <div class="col-12 col-lg-3 mb-4 me-2">
+                    <div class="col-12 col-lg-3 mb-0 me-2">
                         <div
                             class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
    
@@ -26,10 +26,8 @@
                         </div>
                     </div>
                 @endforeach
-
-
-                
             </div>
+            <a href="#" class="text-end mt-2 text-main-color-2 fw-bold"><i class="fi fi-product-tag"></i> See more</a>
         </div>
     
 </div>
