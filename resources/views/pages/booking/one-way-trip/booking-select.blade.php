@@ -68,6 +68,11 @@
                                 <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2">
                                     <button type="button" class="btn btn-sm button-blue-bg btn-route-list btn-route-select-{{ $index }}">Select</button>
                                 </div>
+                                @if($index == 0)
+                                    <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2">
+                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2">promotion code</small>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

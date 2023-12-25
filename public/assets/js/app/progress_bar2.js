@@ -539,7 +539,11 @@ function setPassengerDetail() {
     while (passenger_detail.firstChild) {
         passenger_detail.removeChild(passenger_detail.lastChild);
     }
-    let _passenger = Object.groupBy(payment.is_passenger, pass => { return pass._type })
+    // let _passenger = Object.groupBy(payment.is_passenger, pass => { return pass._type })
+    let _passenger = payment.is_passenger.reduce((acc, data) => {
+        (acc[data['_type']] = acc[data['_type']] || []).push(data);
+        return acc;
+    }, {})
 
     if(_passenger['Adult']) {
         let row = document.createElement('div')
@@ -638,8 +642,13 @@ function setExtraDetail(type) {
     if(is_extra.length === 0) extra_type.classList.add('d-none')
     else extra_type.classList.remove('d-none')
 
-    let _extra = Object.groupBy(is_extra, ex => { return ex.type })
-    if(_extra['bus']) {
+    // let _extra = Object.groupBy(is_extra, ex => { return ex.type })
+    let _extra2 = is_extra.reduce((acc, data) => {
+        (acc[data['type']] = acc[data['type']] || []).push(data);
+        return acc;
+    }, {})
+
+    if(_extra2['bus']) {
         extra_shuttlebus.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
@@ -654,7 +663,7 @@ function setExtraDetail(type) {
         row.appendChild(col_12)
         col_12.appendChild(header)
 
-        _extra['bus'].forEach((bus) => {
+        _extra2['bus'].forEach((bus) => {
             sum += bus.qty*bus.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
@@ -663,7 +672,7 @@ function setExtraDetail(type) {
         })
     }
 
-    if(_extra['boat']) {
+    if(_extra2['boat']) {
         extra_longtailboat.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
@@ -678,7 +687,7 @@ function setExtraDetail(type) {
         row.appendChild(col_12)
         col_12.appendChild(header)
 
-        _extra['boat'].forEach((boat) => {
+        _extra2['boat'].forEach((boat) => {
             sum += boat.qty*boat.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
@@ -687,7 +696,7 @@ function setExtraDetail(type) {
         })
     }
 
-    if(_extra['meal']) {
+    if(_extra2['meal']) {
         extra_meal.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
@@ -702,7 +711,7 @@ function setExtraDetail(type) {
         row.appendChild(col_12)
         col_12.appendChild(header)
 
-        _extra['meal'].forEach((meal) => {
+        _extra2['meal'].forEach((meal) => {
             sum += meal.qty*meal.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
@@ -711,7 +720,7 @@ function setExtraDetail(type) {
         })
     }
 
-    if(_extra['activity']) {
+    if(_extra2['activity']) {
         extra_activity.classList.remove('d-none')
         let row = document.createElement('div')
         let col_12 = document.createElement('div')
@@ -726,7 +735,7 @@ function setExtraDetail(type) {
         row.appendChild(col_12)
         col_12.appendChild(header)
 
-        _extra['activity'].forEach((activity) => {
+        _extra2['activity'].forEach((activity) => {
             sum += activity.qty*activity.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')

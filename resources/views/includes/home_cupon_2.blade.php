@@ -9,21 +9,22 @@
 
                 @foreach($promotions as $promotion)
                     <div class="col-12 col-lg-3 mb-0 me-2">
-                        <div
-                            class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
-   
-                            <div class="card-body fw-light" style="height: 250px;border-radius: 10px 10px 10px 10px;color:#181818;background-color: {{ $promotion['bg_color']}};">
-                                <div class="d-table">
-                                    <div class="d-table-cell align-middle text-center p-3">
-                                    
-                                        <h2 class="h5 font-proxima-400 card-title mb-4">
-                                            {{ $promotion['title'] }}
-                                        </h2>
-                                        <h1>{{$promotion['code']}}</h1>
+                        <a href="{{ route('promo-view', ['promocode' => $promotion['code']]) }}" target="_blank">
+                            <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
+    
+                                <div class="card-body fw-light" style="height: 250px;border-radius: 10px 10px 10px 10px;color:#181818;background-color: {{ $promotion['bg_color']}};">
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle text-center p-3">
+                                        
+                                            <h2 class="h5 font-proxima-400 card-title mb-4">
+                                                {{ $promotion['title'] }}
+                                            </h2>
+                                            <h1>{{$promotion['code']}}</h1>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

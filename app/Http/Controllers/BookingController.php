@@ -29,8 +29,14 @@ class BookingController extends Controller
     }
 
     public function index(Request $request) {
+        // Log::debug($request);
         $_type = $this->Type[$request->_type];
+        $promocode = null;
         $routes = $this->getRouteList($request->from[0], $request->to[0]);
+        if($request->promotioncode != NULL) {
+            // promo_code, trip_type, station_from_id, station_to_id, depart_date_start, depart_date_end
+            $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0], $request->date[0]);
+        }
         // Log::debug($routes);
         $passenger = $this->setInputType($request);
         $_station = ['from' => '', 'to' => ''];
@@ -177,6 +183,20 @@ class BookingController extends Controller
                         'country_list' => $this->CountryList]);
     }
 
+    private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date_start, $depart_date_end) {
+        $response = Http::reqres()->post('/promotion/check', [
+            'promo_code' => $promo_code,
+            'trip_type' => $trip_type,
+            'station_from_id' =>$station_from_id,
+            'station_to_id' => $station_to_id,
+            'depart_date_start' => $depart_date_start,
+            'depart_date_end' => $depart_date_end
+        ]);
+
+        // $res = $response->json();
+        // Log::debug($res);
+    }
+
     // One way booking confirm
     public function bookingConfirm(Request $request) {
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
@@ -217,9 +237,10 @@ class BookingController extends Controller
         $res = $response->json();
         $data = $res['data'];
         $booking_id = $res['booking'];
+        $email = $res['email'];
 
         if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id]);
+            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
         }
         
         return redirect()->route('home');

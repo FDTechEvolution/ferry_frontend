@@ -65,6 +65,9 @@ h1,h2,h3,h4,h5{
     .dropdown-color-style, .text-addon-color {
         color: #fff;
     }
+    .footer-logo-height {
+        height: 60px;
+    }
 }
 @media only screen and (min-width: 992px) {
     nav.navbar:not(.h-auto) {
@@ -163,6 +166,10 @@ h1,h2,h3,h4,h5{
     }
     .w-sm-30 {
         width: 30% !important;
+    }
+    .footer-logo-height {
+        height: 40px;
+        margin-bottom: 10px;
     }
 }
 
@@ -511,4 +518,26 @@ img.img-logo-style {
 
 .fs--16 {
     font-size: 16px !important;
+}
+
+.news-content {
+    min-height: 260px;
+    max-height: 260px;
+    overflow-y: hidden;
+}
+
+.text-overflow {
+    max-height: 180px;
+    overflow-y: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis { 
+    text-overflow: ellipsis; 
+}
+
+.lh--16 {
+    line-height: 16px;
 }

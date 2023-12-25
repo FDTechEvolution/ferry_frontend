@@ -10,7 +10,7 @@ class PaymentController extends Controller
 {
     public function index(Request $request) {
         if(isset($request['_p']))
-            return view('pages.payment.index', ['_p' => $request['_p'], '_b' => $request['_b']]);
+            return view('pages.payment.index', ['_p' => $request['_p'], '_b' => $request['_b'], '_e' => $request['_e']]);
         else
             // return view('pages.payment.index', ['_b' => 'BO2311300126']);
             return redirect()->route('home');

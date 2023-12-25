@@ -10,6 +10,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TermAndConditionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +72,13 @@ Route::controller(TermAndConditionController::class)->group(function() {
 
 Route::controller(ReviewController::class)->group(function() {
     Route::get('review', 'index')->name('review-index');
+});
+
+Route::controller(PromotionController::class)->group(function() {
+    Route::get('promotion/view/{promocode}', 'view')->name('promo-view');
+});
+
+Route::controller(NewsController::class)->group(function() {
+    Route::get('news', 'index')->name('news-index');
+    Route::get('news/view/{id}', 'view')->name('news-view');
 });

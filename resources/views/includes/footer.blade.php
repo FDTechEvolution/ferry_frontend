@@ -5,16 +5,18 @@
 
         <div class="row g-4 align-items-center">
             <div class="col-lg-12 text-center d-lg-flex mb-0 justify-content-center">
-                <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}" class="px-2 transition-hover-zoom" width="" height="60">
-                <img src="{{ asset('assets/images/aisasia.png') }}" class="px-2 transition-hover-zoom" width="" height="60">
-                <img src="{{ asset('assets/images/nokair-logo.png') }}" class="px-2 transition-hover-zoom" width="" height="60">
-                <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2 transition-hover-zoom" width="" height="60">
-                <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2 transition-hover-zoom" width="" height="60">
+                <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
+                <img src="{{ asset('assets/images/aisasia.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
+                <img src="{{ asset('assets/images/nokair-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
+                <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
+                <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
             </div>
             <div class="col-lg-12 text-center mb-3 font-proxima">
                 <p class="text-main-color-2 mb-0">
                     <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> | 
-                    <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> | News | <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
+                    <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> | 
+                    <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> | 
+                        <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
                 <p class="text-main-color-2 mb-2">
                     Tiger Line Ferry Company Limited. All Right Reserved.
                 </p>

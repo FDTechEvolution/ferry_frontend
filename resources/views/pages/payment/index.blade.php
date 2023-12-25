@@ -20,6 +20,7 @@
             <form action="{{ route('booking-record') }}" id="booking-record" method="POST">
                 @csrf
                 <input type="hidden" name="booking_number" value="{{ $_b }}">
+                <input type="hidden" name="booking_email" value="{{ $_e }}">
             </form>
         </div>
     </div>

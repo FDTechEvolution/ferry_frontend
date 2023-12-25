@@ -169,7 +169,7 @@
     <div class="section pt-4 pt-lg-6 pb-5">
         <div class="row">
             <div class="col-12 col-lg-5 order-lg-2 mb-4 d-flex align-items-center px-4">
-                <video width="100%" height="auto" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)" controls>
+                <video controls autoplay muted width="100%" height="auto" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)" controls>
                     <source src="video/tigerline.mp4" type="video/mp4">
                 </video>
             </div>
