@@ -273,14 +273,22 @@ img.img-logo-style {
 .border-booking-passenger {
     border-color: #16aded;
 }
-.bg-booking-select-depart,
-.booking-route-list.active,
-.booking-depart-list.active {
+.bg-booking-select-depart {
     background-color: #16aded;
 }
-.bg-booking-select-return,
-.booking-return-list.active {
+.booking-route-list.active,
+.booking-depart-list.active {
+    /* background-color: #16aded; */
+    /* border: 3px solid #16aded !important; */
+    outline: #16aded solid 3px !important;
+}
+.bg-booking-select-return {
     background-color: #ff914d;
+}
+.booking-return-list.active {
+    /* background-color: #ff914d; */
+    /* border: 3px solid #ff914d !important; */
+    outline: #ff914d solid 3px !important;
 }
 .bg-booking-payment-litinerary {
     background-color: #eefaff;
@@ -306,8 +314,8 @@ img.img-logo-style {
     box-shadow: 0 4px 11px hsla(208,7%,46%,.35);
 }
 .button-orange-bg {
-    background-color: #ff6100;
-    color: #fff;
+    background-color: #ff6100 !important;
+    color: #fff !important;
 }
 .button-orange-bg:hover {
     background-color: #d95402;
@@ -394,43 +402,63 @@ img.img-logo-style {
     background: #b7e2f4;
 }
 .process-step-item.active {
-    background: #16aded;
+    /* background: #16aded; */
+    background: #d9d9d9;
+    border-top: 3px solid #075ae8;
+    border-bottom: 3px solid #075ae8;
+    border-radius: 2px;
 }
 .process-step-item.active:after {
-    background: #16aded;
-    border-left: 34px solid #16aded;
+    /* background: #16aded;
+    border-left: 34px solid #16aded; */
+    border-top: 3px solid #075ae8;
+    border-right: 3px solid #075ae8;
+    top: 6px;
+    right: -38px;
+}
+.process-steps-primary>.active:before {
+    top: 6px;
+    border-top: 3px solid #075ae8;
+    border-right: 3px solid #075ae8;
+    left: 8px;
 }
 .process-step-item.complete:after {
     background: #b7e2f4;
     border-left: 34px solid #b7e2f4;
+    top: 8px;
+    right: -39px;
+    width: 39px;
+    height: 39px;
 }
 .process-step-item:after {
     content: " ";
     position: absolute;
     z-index: 2;
-    right: -35px;
-    top: 8px;
+    right: -39px;
+    top: 9px;
     background: #d9d9d9;
     transform: translateX(-50%) rotate(45deg);
-    border-top: 17px solid transparent;
+    width: 38px;
+    height: 38px;
+    /* border-top: 17px solid transparent;
     border-left: 34px solid #d9d9d9;
-    border-bottom: 17px solid transparent;
+    border-bottom: 17px solid transparent; */
 }
 .process-step-item:before {
     content: " ";
     position: absolute;
     z-index: 1;
     left: 6px;
-    top: 6px;
+    top: 8px;
     background: #fff;
     transform: translateX(-50%) rotate(45deg);
-    border-top: 17px solid transparent;
+    /* border-top: 17px solid transparent;
     border-left: 34px solid #fff;
-    border-bottom: 17px solid transparent;
+    border-bottom: 17px solid transparent; */
     border: 0;
     border-radius: 0;
-    width: 35px;
-    height: 35px;
+    width: 38px;
+    height: 38px;
 }
 .process-steps-primary>.active:before, .process-steps-primary>.complete:before {
     background: #fff;

@@ -33,7 +33,7 @@
         </div>
         <div class="row">
             <div class="col-7 form-floating mb-3">
-                <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker"
+                <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker sub-passenger-b-date"
                     data-show-weeks="true"
                     data-today-highlight="true"
                     data-today-btn="false"
@@ -41,7 +41,8 @@
                     data-autoclose="true"
                     data-format="DD/MM/YYYY"
                     autocomplete="off"
-                    placeholder="Birth Day date">
+                    placeholder="Birth Day date"
+                    data-type="{{ $type }}">
                 <label class="ms-2">Birth Day date<span class="text-danger">*</span></label>
             </div>
             <div class="col-5 mb-3 d-flex align-items-center justify-content-center">

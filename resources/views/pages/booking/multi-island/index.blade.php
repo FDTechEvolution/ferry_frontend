@@ -14,12 +14,19 @@
                     <i class="fa-solid fa-location-dot"></i> Destinations <i class="fi fi-arrow-down ms-1"></i>
                 </a>
             </div>
-            <div class="col-6 col-lg-2 py-2 border-start-none-mobile border-start d-flex align-items-center justify-content-center">
-                <a tabindex="0" class="btn btm-sm btn-link text-light popover-passenger" role="button" 
-                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
-                    data-bs-content="<strong>Adult :</strong> {{ $passenger[0] }} | <strong>Child :</strong> {{ $passenger[1] }} | <strong>Infant :</strong> {{ $passenger[2] }}">
-                    <i class="fi fi-users me-2"></i> Passenger <i class="fi fi-arrow-down ms-1"></i>
-                </a>
+            <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
+                <p class="mb-1">Passenger</p>
+                <p class="mb-0 d-flex justify-content-evenly align-items-end">
+                    <span>
+                        <i class="fa-solid fa-person fs-2"></i> {{ $passenger[0] }}
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-children fs-4"></i> {{ $passenger[1] }}
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-baby fs-4"></i> {{ $passenger[2] }}
+                    </span>
+                </p>
                 @if($passenger[0] != 0)
                     <input type="hidden" id="passenger-adult" value="{{ $passenger[0] }}" disabled>
                 @endif
@@ -39,6 +46,7 @@
 @stop
 
 @section('content')
+<a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none" id="btn-back-to-home" style="margin-top: -30px;"><< Back</a>
 <ol class="process-steps process-steps-primary text-muted mb-3">
 	<li class="process-step-item complete" data-step="booking"><span class="ps-3">{{ $isType != '' ? $isType : 'Booking' }}</span></li>
 	<li class="process-step-item text-primary active" data-step="select"><span class="ps-3">Select</span></li>

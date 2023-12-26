@@ -19,7 +19,11 @@
                         <div class="row">
                             <div class="col-12 col-lg-10">
                                 <div class="row py-3">
-                                    <p class="mb-2 small">Depart by : {{ isset($route['partner']['name']) ? $route['partner']['name'] : '-' }}</p>
+                                    @if($key == 0)
+                                    <p class="mb-2 small">
+                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
+                                    </p>
+                                    @endif
                                     <div class="col-1 d-flex justify-content-center align-items-center">
                                         <div class="partner-image me-3">
                                             @if($route['partner'] != NULL)
@@ -30,7 +34,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-11 col-lg-6 d-flex align-items-center mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m">
+                                    <div class="col-11 col-lg-7 d-flex align-items-center mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m">
                                         <p class="mb-0 me-2">
                                             <span class="depart-time">{{ date("H:i", strtotime($route['depart_time'])) }}</span><br/>
                                             <span class="small">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif <x-booking-station-info :station_line="$route['station_lines']" :station="$route['station_from']['name']" :type="_('from')" /></span>
@@ -47,12 +51,12 @@
                                         </p>
                                     </div>
 
-                                    <div class="col-6 col-lg-2 travel-time d-flex justify-content-center align-items-center">
+                                    <div class="col-6 col-lg-1 travel-time d-flex justify-content-center align-items-center">
                                         <p class="mb-0 smaller">{{ $route['travel_time'] }}</p>
                                     </div>
 
                                     <div class="col-6 col-lg-3 route-text d-flex justify-content-center align-items-center">
-                                        <p class="mb-0 small">{{ $route['text_1'] }}</p>
+                                        <p class="mb-0 smaller">{{ $route['text_1'] }}</p>
                                     </div>
                                 </div>
 
@@ -65,7 +69,7 @@
                                         @endforeach
                                     </div>
                                     <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
-                                        <p class="mb-0">{{ $route['text_2'] }}</p>
+                                        <p class="mb-0 smaller">{{ $route['text_2'] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +77,7 @@
                             <div class="col-12 col-lg-2 mt-lg-0 mt-3 d-lg-flex justify-content-lg-center align-items-lg-center">
                                 <div class="text-end">
                                     <div class="row">
-                                        <div class="col-6 col-lg-12 mb-lg-2 text-center-m">
+                                        <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
                                             <p class="mb-0">
                                                 <span class="small me-2">THB</span>
                                                 <span class="route-price fs-4">{{ number_format($route['p_adult'] + $route['p_child'] + $route['p_infant']) }}</span>
@@ -81,7 +85,24 @@
                                             <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger.</p>
                                         </div>
                                         <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2">
-                                            <button type="button" class="btn btn-sm button-blue-bg btn-route-list_{{ $index }} btn-route-select-{{ $index }}_{{ $key }}">Select</button>
+                                            <button type="button" class="btn btn-sm button-blue-bg py-1 px-4 btn-route-list_{{ $index }} btn-route-select-{{ $index }}_{{ $key }}">Select</button>
+                                        </div>
+                                        <div class="col-6 col-lg-12">
+                                            @if($passenger[0] > 0)
+                                                <p class="mb-0 small">
+                                                    <i class="fa-solid fa-person fs-5 me-1"></i> <span class="smaller">{{ $passenger[0] }} x {{ number_format($route['p_adult'] / $passenger[0]) }} pax</span>
+                                                </p>
+                                            @endif
+                                            @if($passenger[1] > 0)
+                                                <p class="mb-0 small">
+                                                    <i class="fa-solid fa-children fs-6 me-1"></i> <span class="smaller">{{ $passenger[1] }} x {{ number_format($route['p_child'] / $passenger[1]) }} pax</span>
+                                                </p>
+                                            @endif
+                                            @if($passenger[2] > 0)
+                                                <p class="mb-0 small">
+                                                    <i class="fa-solid fa-baby fs-6 me-1"></i> <span class="smaller">{{ $passenger[2] }} x {{ number_format($route['p_infant'] / $passenger[2]) }} pax</span>
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

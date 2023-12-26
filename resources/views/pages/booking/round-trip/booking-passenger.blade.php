@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-7 form-floating mb-3">
-                        <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker"
+                        <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker lead-passenger-b-day"
                             data-show-weeks="true"
                             data-today-highlight="true"
                             data-today-btn="false"

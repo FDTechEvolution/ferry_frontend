@@ -34,7 +34,7 @@ if(booking_route) {
 
             route_price = parseToNumber(_price.innerText)
             document.querySelector('.set-time-route-select').innerHTML = `${depart_time} - ${arrive_time}`
-            document.querySelector('#sum-price').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
+            document.querySelector('#sum-price').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0 })}`
             route.classList.add('active')
             route.classList.remove('route-hover')
 
@@ -135,6 +135,8 @@ function updateProgress() {
 function progressCondition(step) {
     if(step === 'select') {
         let route_list = booking_route.querySelectorAll('.booking-route-list')
+        document.querySelector('#btn-back-to-home').classList.remove('d-none')
+        document.querySelector('#progress-prev').classList.add('d-none')
         route_list.forEach((route) => {
             if(route.classList.contains('active')) document.querySelector('#progress-next').disabled = false
         })
@@ -144,6 +146,9 @@ function progressCondition(step) {
     }
 
     if(step === 'premium') {
+        document.querySelector('#btn-back-to-home').classList.add('d-none')
+        document.querySelector('#progress-prev').classList.remove('d-none')
+
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
@@ -178,6 +183,31 @@ function progressCondition(step) {
 
         progress_payment.classList.add('d-none')
         progress_payment.disabled = true
+
+        const sub_passenger = document.querySelectorAll('.sub-passenger-b-date')
+        let startDate_adult = new Date()
+        startDate_adult.setFullYear(startDate_adult.getFullYear() - 100)
+        let startDate_child = new Date()
+        startDate_child.setFullYear(startDate_child.getFullYear() - 12)
+        let startDate_infant = new Date()
+        startDate_infant.setFullYear(startDate_infant.getFullYear() - 2)
+
+        $('.lead-passenger-b-day').datepicker()
+        $('.lead-passenger-b-day').datepicker('setEndDate', new Date())
+        $('.lead-passenger-b-day').datepicker('setStartDate', startDate_adult)
+
+        if(sub_passenger) {
+            sub_passenger.forEach((item) => {
+                let is_startDate = null
+                if(item.dataset.type == 'Adult') is_startDate = startDate_adult
+                if(item.dataset.type == 'Child') is_startDate = startDate_child
+                if(item.dataset.type == 'Infant') is_startDate = startDate_infant
+
+                $(`#${item.id}`).datepicker()
+                $(`#${item.id}`).datepicker('setEndDate', new Date())
+                $(`#${item.id}`).datepicker('setStartDate', is_startDate)
+            })
+        }
     }
     else if(step !== 'passenger') {
         const passenger_next = document.querySelector('#progress-next-passenger')
@@ -646,7 +676,7 @@ function dec(element, index) {
 
 function updateSumPrice() {
     let sum_amount = route_price + extra_price + premium_price
-    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
+    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0 })}`
 }
 
 function setExtra(icon, name, amount, qty, type) {
