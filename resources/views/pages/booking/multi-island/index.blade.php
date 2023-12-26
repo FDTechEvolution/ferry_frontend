@@ -50,9 +50,9 @@
 <ol class="process-steps process-steps-primary text-muted mb-3">
 	<li class="process-step-item complete" data-step="booking"><span class="ps-3">{{ $isType != '' ? $isType : 'Booking' }}</span></li>
 	<li class="process-step-item text-primary active" data-step="select"><span class="ps-3">Select</span></li>
-    <li class="process-step-item" data-step="premium"><span class="ps-3">Premium Flex</span></li>
+    <li class="process-step-item" data-step="premium"><span class="ps-2">Premium Flex</span></li>
 	<li class="process-step-item" data-step="passenger"><span class="ps-2">Passenger info</span></li>
-    <li class="process-step-item" data-step="extra"><span class="ps-3">Extra services</span></li>
+    <li class="process-step-item" data-step="extra"><span class="ps-2">Extra services</span></li>
     <li class="process-step-item" data-step="payment"><span class="ps-3">Payment</span></li>
 </ol>
 
