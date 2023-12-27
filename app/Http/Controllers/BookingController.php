@@ -46,7 +46,7 @@ class BookingController extends Controller
         // Log::debug($_diff);
 
         foreach($routes['data'] as $index => $route) {
-            if($_station['from'] == '') 
+            if($_station['from'] == '')
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
             if($_station['to'] == '')
                 $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
@@ -63,8 +63,8 @@ class BookingController extends Controller
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
 
-        return view('pages.booking.one-way-trip.index', 
-            ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl, 
+        return view('pages.booking.one-way-trip.index',
+            ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger
             ]);
@@ -85,7 +85,7 @@ class BookingController extends Controller
         $_time_now = strtotime($time_now);
         $_time_depart = strtotime($depart_time);
         $minute = ($_time_depart - $_time_now) / 60;
-        
+
         return $minute < 60 ? false : true;
     }
 
@@ -103,7 +103,7 @@ class BookingController extends Controller
 
             $setHour = $ex[0].'h ';
             $setMinute = number_format($to_minute, 0, '.', '').'m';
-            
+
             return $setHour.$setMinute;
         }
         else return $hour.'h 0m';
@@ -134,7 +134,7 @@ class BookingController extends Controller
 
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
-            'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date, 
+            'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
             'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList
         ]);
     }
@@ -158,11 +158,11 @@ class BookingController extends Controller
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
                     $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
                     $route_arr[$index]['depart'] = $request->date[$index];
-                    // if($_station['from'] == '') 
+                    // if($_station['from'] == '')
                     //     $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
                     // if($_station['to'] == '')
                     //     $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
-        
+
                     $routes['data'][$key]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
                     $routes['data'][$key]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
                     $routes['data'][$key]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
@@ -178,7 +178,7 @@ class BookingController extends Controller
 
         // Log::debug($route_arr);
 
-        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr, 
+        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
                         'country_list' => $this->CountryList]);
     }
@@ -242,7 +242,7 @@ class BookingController extends Controller
         if($data['respCode'] == '0000') {
             return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
         }
-        
+
         return redirect()->route('home');
     }
 
@@ -318,13 +318,13 @@ class BookingController extends Controller
         if($data['respCode'] == '0000') {
             return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl']]);
         }
-        
+
         return redirect()->route('home');
     }
 
     public function bookingMultiConfirm(Request $request) {
         // Log::debug($request);
-        
+
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $depart_date = $request->departdate;
@@ -448,7 +448,7 @@ class BookingController extends Controller
         $_diff = $this->checkDateDiff($booking_date);
 
         foreach($_routes as $index => $route) {
-            if($_station['from'] == '') 
+            if($_station['from'] == '')
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
             if($_station['to'] == '')
                 $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
@@ -488,9 +488,9 @@ class BookingController extends Controller
                 $customers = $this->setCustomer($res['data']['customer']);
                 $station_form = $res['m_from_route'];
                 $_station_to = $this->setStationToSection($res['m_route']);
-                return view('pages.booking.view', 
+                return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
-                                'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0], 
+                                'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0],
                                 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
                                 'payment_lines' => $payment_lines
                             ]);

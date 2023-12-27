@@ -1,4 +1,4 @@
-@props(['station_line' => [], 'station' => '', 'type' => ''])
+@props(['station_line' => [], 'station' => '', 'type' => '', 'is_master' => ''])
 
 @php
     $modal_id = uniqid();
@@ -18,7 +18,7 @@
 			<div class="modal-body">
                 @if(!empty($station_line))
                     @foreach($station_line as $line)
-                        @if($line['pivot']['type'] == $type)
+                        @if($line['pivot']['type'] == $type && $line['pivot']['ismaster'] == $is_master)
                             {!! $line['text'] !!}
                         @endif
                     @endforeach
