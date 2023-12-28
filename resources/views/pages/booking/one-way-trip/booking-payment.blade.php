@@ -13,12 +13,12 @@
                 </div>
                 <div class="col-12 col-lg-8 pb-2 pb-lg-0 border-bottom-mobile border-end-none-mobile border-end border-secondary border-2">
                     <div class="d-flex">
-                        <p class="is_depart_time mb-0 me-2 fw-bold"></p> : 
+                        <p class="is_depart_time mb-0 me-2 fw-bold"></p> :
                         <p class="ms-2 mb-0">{{ $is_station['from'] }}</p>
                     </div>
                     <div id="route-icon-payment" class="d-flex mw--48"></div>
                     <div class="d-flex">
-                        <p class="is_arrive_time mb-0 me-2 fw-bold"></p> : 
+                        <p class="is_arrive_time mb-0 me-2 fw-bold"></p> :
                         <p class="ms-2 mb-0">{{ $is_station['to'] }}</p>
                     </div>
                 </div>
@@ -61,6 +61,7 @@
             <div class="row mt-3">
                 <div class="col-12 text-end pe-0 pe-lg-5 pt-3 border-top border-secondary">
                     <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                    <h6 class="d-flex justify-content-end align-items-end d-none promocode-show">PromoCode <small>[{{$promocode}}]</small> <p class="sum-of-promocode w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                     <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                     <h6 class="d-flex justify-content-end align-items-end pt-2 border-top">Total <p class="sum-amount w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                 </div>
@@ -91,7 +92,7 @@
     <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
         <div class="col-12">
             <div class="row" id="payment-passenger-detail">
-                
+
             </div>
         </div>
     </div>

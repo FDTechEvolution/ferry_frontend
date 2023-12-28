@@ -26,19 +26,75 @@
         <div class="form-floating mb-3 dropdown">
             <input required type="text" class="dropdown-toggle form-control from-{{ $type }}-{{ $form_type }}-selected" id="from-{{ $from_id }}" data-bs-toggle="dropdown" placeholder="From">
             <label class="text-secondary" for="from-{{ $from_id }}">From</label>
-        
+
             <div class="dropdown-menu dropdown-booking-width dropdown-md p-3">
                 <div class="row mb-2 pb-2 pb-lg-0">
-                    @foreach($station_from as $section_key => $sections)
-                        <div class="col-12 col-lg-3">
-                            <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                            <ul class="section-key-{{ $section_key }}">
-                                @foreach($sections as $station_key => $station)
-                                    <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
+                    {{-- col 1 --}}
+                    <div class="col-12 col-lg-3">
+                        @foreach($station_from as $section_key => $sections)
+                            @if($section_key == 'ANDAMAN Hot destinations')
+                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                                <ul class="section-key-{{ $section_key }}">
+                                    @foreach($sections as $station_key => $station)
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+
+                        @foreach($station_from as $section_key => $sections)
+                            @if($section_key == 'LANGKAWI LINK')
+                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                                <ul class="section-key-{{ $section_key }}">
+                                    @foreach($sections as $station_key => $station)
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    {{-- col 2 --}}
+                    <div class="col-12 col-lg-3">
+                        @foreach($station_from as $section_key => $sections)
+                            @if($section_key == 'ANDAMAN LINK')
+                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                                <ul class="section-key-{{ $section_key }}">
+                                    @foreach($sections as $station_key => $station)
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    {{-- col 3 --}}
+                    <div class="col-12 col-lg-3">
+                        @foreach($station_from as $section_key => $sections)
+                            @if($section_key == 'ANDAMAN Line; Bus+Boat')
+                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                                <ul class="section-key-{{ $section_key }}">
+                                    @foreach($sections as $station_key => $station)
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    {{-- col 4 --}}
+                    <div class="col-12 col-lg-3">
+                        @foreach($station_from as $section_key => $sections)
+                            @if($section_key == 'AO THAI <> ANDAMAN; Bus+Boat')
+                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                                <ul class="section-key-{{ $section_key }}">
+                                    @foreach($sections as $station_key => $station)
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <input type="hidden" id="from-selected_{{ $type }}-{{ $form_type }}" name="from[]" value="">
@@ -64,10 +120,10 @@
             <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $type }}-{{ $form_type }} d-none"></i>
             <input required type="text" class="dropdown-toggle form-control input-to-{{ $type }}-{{ $form_type }}" id="to-{{ $to_id }}" data-bs-toggle="dropdown" placeholder="To" disabled>
             <label class="text-secondary" for="to-{{ $to_id }}">To</label>
-        
+
             <div class="dropdown-menu dropdown-booking-destinamtion-width dropdown-md p-3">
                 <div class="row mb-2 pb-2 pb-lg-0 to-{{ $type }}-{{ $form_type }}-selected">
-                    
+
                 </div>
             </div>
             <input type="hidden" id="to-selected_{{ $type }}-{{ $form_type }}" name="to[]" value="">
@@ -113,7 +169,7 @@
         <div class="form-floating mb-3 dropdown">
             <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}{{ $form_type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown" placeholder="Passenger">
             <label class="text-secondary" for="pass-{{ $passenger_id }}">Passenger</label>
-        
+
             <div class="dropdown-menu dropdown-click-ignore dropdown-md p-3">
                 <div class="row mb-2 pb-2 pb-lg-0 border-bottom">
                     <div class="col-md-6 mb-2 mb-lg-0 lh-1">

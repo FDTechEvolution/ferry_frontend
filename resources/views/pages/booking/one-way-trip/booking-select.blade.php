@@ -4,7 +4,7 @@
 
             <div class="col-12">
                 <div class="row">
-                    <div class="col-12 col-lg-10">
+                    <div class="col-12 col-lg-10 mb-2 mb-lg-0">
                         <div class="row py-3">
                             @if($route['ispromocode'] == 'Y')
                                 <p class="mb-2 small">
@@ -63,9 +63,14 @@
                         <div class="text-end">
                             <div class="row">
                                 <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
-                                    <p class="mb-0">
+                                    <p class="mb-0 position-relative">
                                         <span class="small me-2">THB</span>
-                                        <span class="route-price fs-4">{{ number_format($route['p_adult'] + $route['p_child'] + $route['p_infant']) }}</span>
+                                        @if(isset($route['promo_price']))
+                                            <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
+                                            <span class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
+                                        @else
+                                            <span class="route-price fs-4">{{ number_format($route['amount']) }}</span>
+                                        @endif
                                     </p>
                                     <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger.</p>
                                 </div>
@@ -101,4 +106,5 @@
         </div>
     @endforeach
     <input type="hidden" name="booking_route_selected" value="">
+    <input type="hidden" name="use_promocode" value="{{ $promocode }}">
 </div>

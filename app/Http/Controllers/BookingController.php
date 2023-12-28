@@ -32,10 +32,11 @@ class BookingController extends Controller
         // Log::debug($request);
         $_type = $this->Type[$request->_type];
         $promocode = null;
+        $use_promocode = null;
         $routes = $this->getRouteList($request->from[0], $request->to[0]);
         if($request->promotioncode != NULL) {
-            // promo_code, trip_type, station_from_id, station_to_id, depart_date_start, depart_date_end
-            $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0], $request->date[0]);
+            // promo_code, trip_type, station_from_id, station_to_id, depart_date
+            $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0]);
         }
         // Log::debug($routes);
         $passenger = $this->setInputType($request);
@@ -49,15 +50,26 @@ class BookingController extends Controller
             if($_station['from'] == '')
                 $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
             if($_station['to'] == '')
-                $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
+                $_station['to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
 
-            $routes['data'][$index]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
-            $routes['data'][$index]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
-            $routes['data'][$index]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
+            $_regular_price = intval($this->calPrice($passenger[0], $route['regular_price']));
+            $_child_price = intval($this->calPrice($passenger[1], $route['child_price']));
+            $_infant_price = intval($this->calPrice($passenger[2], $route['infant_price']));
+            $_amount = $_regular_price + $_child_price + $_infant_price;
+
+            $routes['data'][$index]['p_adult'] = $_regular_price;
+            $routes['data'][$index]['p_child'] = $_child_price;
+            $routes['data'][$index]['p_infant'] = $_infant_price;
+            $routes['data'][$index]['amount'] = $_amount;
 
             $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
-            $routes['data'][$index]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+            $routes['data'][$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+
+            if($route['ispromocode'] == 'Y' && $promocode != null) {
+                $use_promocode = $request->promotioncode;
+                $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
+            }
         }
 
         $code_country = $this->CodeCountry;
@@ -66,8 +78,20 @@ class BookingController extends Controller
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
-                'country_list' => $country_list, 'passenger' => $passenger
+                'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode
             ]);
+    }
+
+    private function promoDiscount($amount, $promo) {
+        if($promo['discount_type'] == 'PERCENT') {
+            $discount = $amount - ((intval($promo['discount'])/100)*$amount);
+            return $discount;
+        }
+
+        if($promo['discount_type'] == 'THB') {
+            $discount = $amount - intval($promo['discount']);
+            return $discount;
+        }
     }
 
     private function checkDateDiff($booking_date) {
@@ -120,6 +144,11 @@ class BookingController extends Controller
         $depart_date = $_date[0];
         $return_date = $_date[1];
 
+        if($request->promotioncode != NULL) {
+            // promo_code, trip_type, station_from_id, station_to_id, depart_date
+            $promocode = $this->checkPromotionCode($request->promotioncode, 'round-trip', $request->from[0], $request->to[0], $depart_date);
+        }
+
         $depart_routes = $this->getRouteList($request->from[0], $request->to[0]);
         $return_routes = $this->getRouteList($request->to[0], $request->from[0]);
         $passenger = $this->setInputType($request);
@@ -135,7 +164,8 @@ class BookingController extends Controller
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
-            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList
+            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList,
+            'promocode' => $promocode
         ]);
     }
 
@@ -183,18 +213,18 @@ class BookingController extends Controller
                         'country_list' => $this->CountryList]);
     }
 
-    private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date_start, $depart_date_end) {
+    private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {
         $response = Http::reqres()->post('/promotion/check', [
             'promo_code' => $promo_code,
             'trip_type' => $trip_type,
             'station_from_id' =>$station_from_id,
             'station_to_id' => $station_to_id,
-            'depart_date_start' => $depart_date_start,
-            'depart_date_end' => $depart_date_end
+            'depart_date' => $depart_date
         ]);
 
-        // $res = $response->json();
-        // Log::debug($res);
+        $res = $response->json();
+        if($res['result']) return $res['data'];
+        return null;
     }
 
     // One way booking confirm

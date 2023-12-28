@@ -5,6 +5,7 @@ let extra_price = 0
 let depart_time = ''
 let arrive_time = ''
 let route_selected = null
+let route_promo = false;
 let icon_selected = []
 let passenger_payment = []
 let extra_id = [] // extra id to post
@@ -17,16 +18,19 @@ if(booking_route) {
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-select-${index}`)
         btn_select.addEventListener('click', (e) => {
-            route_list.forEach((item) => { 
+            route_list.forEach((item) => {
                 item.classList.remove('active')
             })
-            btn_route_list.forEach((btn) => { 
-                btn.disabled = false 
+            btn_route_list.forEach((btn) => {
+                btn.disabled = false
                 btn.innerText = 'Select'
             })
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
-            
+
+            if(document.querySelector('.promo-price')) route_promo = true
+            else route_promo = false
+
             let _price = route.querySelector('.route-price')
             depart_time = route.querySelector('.depart-time').innerText
             arrive_time = route.querySelector('.arrival-time').innerText
@@ -153,7 +157,7 @@ function progressCondition(step) {
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let _premium_price = ((route_price*110)/100) - route_price
-        
+
         txt_price.innerHTML = _premium_price
 
         if(nonePremiumFlex.checked) {
@@ -414,7 +418,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mb-1 fw-bold')
         header.innerHTML = 'Adult'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -439,7 +443,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Children'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -462,7 +466,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Infant'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -522,7 +526,18 @@ function setLitinerary() {
 
     document.querySelector('.sum-of-payment').innerHTML = sum_of_payment.toLocaleString("en-US")
     document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US")
-    document.querySelector('.sum-amount').innerHTML = (sum_of_payment + premium_price).toLocaleString("en-US")
+    document.querySelector('.sum-amount').innerHTML = (route_price + premium_price).toLocaleString("en-US")
+    let promo_sum = document.querySelector('.sum-of-promocode')
+    if(route_promo) {
+        let discount = sum_of_payment - route_price
+        let minus = discount !== 0 ? '- ' : ''
+        document.querySelector('.promocode-show').classList.remove('d-none')
+        promo_sum.innerHTML = minus + discount.toLocaleString("en-US")
+    }
+    else {
+        document.querySelector('.promocode-show').classList.add('d-none')
+        promo_sum.innerHTML = 0
+    }
 }
 
 function progressPassenger() {
@@ -582,7 +597,7 @@ function progressPassenger() {
 
 function setPassengerPayment() {
     is_passenger = []
-    
+
     const booking_passenger = document.querySelector('#booking-route-passenger')
     const lead_passenger = booking_passenger.querySelector('#lead-passenger')
     const normal_passenger = booking_passenger.querySelectorAll('.normal-passenger')

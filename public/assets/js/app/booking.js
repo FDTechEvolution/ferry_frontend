@@ -2,7 +2,7 @@
 // if(is_return) {
 //     is_return.querySelector('[name="to[]"]').disabled = true
 //     is_return.querySelector('[name="from[]"]').disabled = true
-    
+
 //     const is_depart = document.querySelector('.is-type-depart')
 //     const from = is_depart.querySelector('[name="from[]"]')
 //     const to = is_depart.querySelector('[name="to[]"]')
@@ -126,7 +126,7 @@ if(add_trip) {
             const station_from_selected = document.querySelector('.from-1-selected')
             document.querySelector('.multi-check-0').checked = true
 
-            
+
             setMultiFromOption(station_to, station_from_selected)
 
             let element = `.to-1-selected`
@@ -229,7 +229,7 @@ function addAmotherTrip(action_id, number) {
 
         document.querySelector(`.date-${number}-selected`).setAttribute('required', true)
         station_from.disabled = true
-        
+
         let element_input = `.input-to-${_number}-selected`
         let element_list = `.to-${_number}-selected`
         let result = getMultiStationsAnother(station_to_selected.value, element_input, element_list, _number)
@@ -242,7 +242,7 @@ function addAmotherTrip(action_id, number) {
         if(station_to.value === '') station_to.classList.add('border-danger')
         else if(travel_date.value === '') travel_date.classList.add('border-danger')
     }
-    
+
 }
 
 function removeThisTrip(action_id, number) {
@@ -291,7 +291,7 @@ async function fromOriginalSelected(e, type, form_type) {
         destination_loading.classList.add('d-none')
         destination.disabled = false
     }
-    
+
 }
 
 // function toDestinationSelected(e, type, form_type) {
