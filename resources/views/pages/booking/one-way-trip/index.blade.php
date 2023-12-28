@@ -35,7 +35,8 @@
                     <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
                 @endif
             </div>
-            <div class="col-6 col-lg-2 border-start d-flex align-items-center justify-content-center">
+            <div class="col-6 col-lg-2 border-start text-center">
+                <p class="mb-1">Total</p>
                 THB <span class="ms-2" id="sum-price">0</span>
             </div>
         </div>

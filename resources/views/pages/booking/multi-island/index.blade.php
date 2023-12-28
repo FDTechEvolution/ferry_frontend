@@ -8,8 +8,8 @@
                 <i class="fa-solid fa-ship fs-1"></i>
             </div>
             <div class="col-10 col-lg-7 d-flex align-items-center">
-                <a tabindex="0" class="btn btm-sm btn-link text-light popover-destinations" role="button" 
-                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true" 
+                <a tabindex="0" class="btn btm-sm btn-link text-light popover-destinations" role="button"
+                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-html="true"
                     data-bs-content="">
                     <i class="fa-solid fa-location-dot"></i> Destinations <i class="fi fi-arrow-down ms-1"></i>
                 </a>
@@ -37,7 +37,8 @@
                     <input type="hidden" id="passenger-infant" value="{{ $passenger[2] }}" disabled>
                 @endif
             </div>
-            <div class="col-6 col-lg-2 border-start d-flex align-items-center justify-content-center">
+            <div class="col-6 col-lg-2 border-start text-center">
+                <p class="mb-1">Total</p>
                 THB <span class="ms-2" id="sum-price">0.00</span>
             </div>
         </div>
