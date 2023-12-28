@@ -1,11 +1,11 @@
-<footer id="footer" class="text-dark">
+<footer id="footer" class="text-dark" style="background-color: #EEEEEE">
 
     <!-- footer cta -->
     <div class="container text-dark pt-5 pb-2">
 
         <div class="row g-4 align-items-center">
             <div class="col-lg-12 text-center d-lg-flex mb-0 justify-content-center">
-                <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
+                <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="" >
                 <img src="{{ asset('assets/images/aisasia.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
                 <img src="{{ asset('assets/images/nokair-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
                 <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">

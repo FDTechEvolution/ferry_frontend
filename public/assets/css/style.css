@@ -8,6 +8,10 @@
     font-style: normal;
 
 }
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none !important;
+}
+
 .f-kanit{
     font-family: 'Kanit', sans-serif;
     font-weight: 400;
@@ -69,7 +73,7 @@ h1,h2,h3,h4,h5{
         height: 60px;
     }
 }
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1350px) {
     nav.navbar:not(.h-auto) {
         min-height: 60px;
     }
@@ -80,7 +84,7 @@ h1,h2,h3,h4,h5{
         padding: 18px 15px;
     }
     .header-style {
-        padding-left: 15% !important;
+        padding-left: 8% !important;
     }
 }
 
@@ -197,12 +201,17 @@ h1,h2,h3,h4,h5{
     }
 }
 
-nav.navbar-light a.nav-link:not(.active):not(:hover) {
+nav.navbar-light a.nav-link:not(.active):not(:hover){
     color: #FFFFFF;
 }
-.navbar-light .navbar-nav .nav-item:hover>.nav-link,.navbar-light .navbar-nav .nav-link[aria-expanded=true] {
-    color: #000000!important
+.navbar-light .navbar-nav .nav-item:hover>.nav-link,.navbar-light .navbar-nav .nav-link[aria-expanded=true],a.nav-link:active  {
+    color: #000000!important;
 }
+.navbar-light .navbar-nav .nav-item:hover> a.nav-link:visited,a.nav-link:active  {
+  
+    text-decoration: none !important;
+}
+
 
 /* Logo & Header Style */
 .header-bg-color {

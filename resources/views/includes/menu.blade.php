@@ -27,7 +27,7 @@
 
         <!-- viw booking -->
         <li class="nav-item">
-            <a class="nav-link fw-bold" href="{{ route('timetable-index') }}">
+            <a class="nav-link fw-bold" href="{{ route('timetable-index') }}" style="text-decoration: none;">
                 Timetable
             </a>
         </li>

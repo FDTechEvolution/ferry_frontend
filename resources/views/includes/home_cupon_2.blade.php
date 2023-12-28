@@ -1,6 +1,6 @@
 <div class="section" style="padding: 0px; z-index: -1;">
  
-        <div class="row p-2 pt-3 bg-light" style="border-radius: 10px;">
+        <div class="row p-2 pt-3 bg-light" style="border-radius: 10px;" data-aos="fade-up" data-aos-delay="0">
             <div class="col-12 d-none">
                 <h2 class="text-main-color-2"><i class="fi fi-product-tag"></i> Offers and Promotions</h2>
             </div>
