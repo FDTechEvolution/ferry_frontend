@@ -1,11 +1,11 @@
-<div class="section pt-4 pb-4 pb-lg-6">
+<div class="section pt-2 pb-2 pb-lg-6">
     <div class="row">
 
         <div class="col-12 col-lg-4 mb-4">
             <div class="row">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="150">
                     <div class="ratio ratio-16x9">
-                        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)"></iframe>
+                        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)"></iframe>
                     </div>
                 </div>
             </div>

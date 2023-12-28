@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            @include('includes.home_cupon_2')
+            @include('includes.home_cupon_3')
 
         </div>
     </div>
@@ -101,6 +101,8 @@
             <hr class="border-4 rounded w-25"/>
         </div>
     </div>
+
+    @include('includes.home_slide')
 
     
 
