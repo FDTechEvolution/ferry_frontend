@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Log;
 
 class PromotionController extends Controller
 {
+    public function index(){
+        $response = Http::reqres()->get('/promotion/get');
+        $res = $response->json();
+        $store =  config('services.store.image');
+        
+        return view('pages.promotion.index', ['promotions' => $res['data'],'store' => $store]);
+    }
+
     public function view($promocode) {
         $response = Http::reqres()->get('/promotion/view/'.$promocode);
         $res = $response->json();
