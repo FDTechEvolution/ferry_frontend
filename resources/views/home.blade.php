@@ -62,7 +62,7 @@
 
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -70,15 +70,15 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                                         aria-labelledby="v-pills-home-tab">
-                                        <x-booking-round-ticket :type="_('round')" :station_from="$station_from" :station_to="$station_to" />
+                                        <x-booking-round-ticket :type="_('round')" :station_to="$station_to" :section_from="$section_from" />
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                                         aria-labelledby="v-pills-profile-tab">
-                                        <x-booking-one-ticket :type="_('one')" :station_from="$station_from" :station_to="$station_to" />
+                                        <x-booking-one-ticket :type="_('one')" :station_to="$station_to" :section_from="$section_from" />
                                     </div>
                                     <div class="tab-pane fade text-light" id="v-pills-messages" role="tabpanel"
                                         aria-labelledby="v-pills-messages-tab">
-                                        <x-booking-multi-ticket :type="_('multi')" :station_from="$station_from" :station_to="$station_to" />
+                                        <x-booking-multi-ticket :type="_('multi')" :station_to="$station_to" :section_from="$section_from" />
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
 
     @include('includes.home_slide')
 
-    
+
 
 @stop
 

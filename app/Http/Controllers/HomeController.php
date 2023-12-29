@@ -24,13 +24,43 @@ class HomeController extends Controller
         $slide = $this->getSlide();
         $cover_index = array_rand($this->ImageCover, 1);
         $cover = $this->ImageCover[$cover_index];
-        $station_from = $this->sectionGroup('section', $station_route['data']['from']);
+        // $station_from = $this->sectionGroup('section', $station_route['data']['from']);
         $station_to = $this->sectionGroup('section', $station_route['data']['to']);
         $promotions = $this->getPromotion();
 
-        return view('home', ['station_from' => $station_from, 'station_to' => $station_to, 
+        $section_col = $this->sectionColumn($station_route['data']['from']);
+        // Log::debug($section_col);
+
+        return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
-                                'promotions' => $promotions['data']]);
+                                'promotions' => $promotions['data'], 'section_from' => $section_col]);
+    }
+
+    private function sectionColumn($stations) {
+        $result = [];
+        $result2 = [];
+
+        foreach($stations as $val) {
+            if(array_key_exists('col', $val)){
+                $result[$val['col']][] = $val;
+            }else{
+                $result[""][] = $val;
+            }
+        }
+
+        foreach($result as $key => $item) {
+            foreach($item as $value) {
+                if(array_key_exists('section', $value)){
+                    $result2[$key][$value['section']][] = $value;
+                }else{
+                    $result2[$key][""][] = $value;
+                }
+            }
+        }
+
+        ksort($result2);
+
+        return $result2;
     }
 
     private function getPromotion() {

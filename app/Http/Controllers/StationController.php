@@ -20,8 +20,37 @@ class StationController extends Controller
         // $result = $this->sectionGroup('section', $res['data']['to']);
         // Log::debug($result);
         $_result = $res['data']['to'];
-        
-        return response()->json(['data' => $_result], 200);
+        $_section = $this->sectionColumn($res['data']['to']);
+        // Log::debug($_section);
+
+        return response()->json(['data' => $_result, 'section' => $_section], 200);
+    }
+
+    private function sectionColumn($stations) {
+        $result = [];
+        $result2 = [];
+
+        foreach($stations as $val) {
+            if(array_key_exists('col', $val)){
+                $result[$val['col']][] = $val;
+            }else{
+                $result[""][] = $val;
+            }
+        }
+
+        foreach($result as $key => $item) {
+            foreach($item as $value) {
+                if(array_key_exists('section', $value)){
+                    $result2[$key][$value['section']][] = $value;
+                }else{
+                    $result2[$key][""][] = $value;
+                }
+            }
+        }
+
+        ksort($result2);
+
+        return $result2;
     }
 
     private function sectionGroup($key, $stations) {
