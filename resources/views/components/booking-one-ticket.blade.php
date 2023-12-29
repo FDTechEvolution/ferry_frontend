@@ -1,14 +1,14 @@
-@props(['type' => '', 'station_from' => [], 'station_to' => []])
+@props(['type' => '', 'station_to' => [], 'section_from' => []])
 
 <form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-index') }}">
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
-        <x-booking-search-form 
+        <x-booking-search-form
             :type="$type"
-            :station_from="$station_from"
             :station_to="$station_to"
             :form_type="_('depart')"
+            :section_from="$section_from"
         />
         <div class="row mt-3">
             <div class="col-6 text-start">

@@ -1,39 +1,39 @@
-@props(['type' => '', 'station_from' => [], 'station_to' => []])
+@props(['type' => '', 'station_to' => [], 'section_from' => []])
 
 <form novalidate class="bs-validate" id="{{ $type }}-search-form" method="POST" action="{{ route('booking-multi') }}">
     @csrf
     <fieldset id="search-form">
         <input type="hidden" name="_type" value="{{ $type }}">
-        <x-booking-search-form 
+        <x-booking-search-form
             :type="$type"
-            :station_from="$station_from"
             :station_to="$station_to"
             :form_type="_('depart')"
+            :section_from="$section_from"
         />
         <!-- <input type="hidden" class="from-0-input" name="from[]" value="">
         <input type="hidden" class="to-0-input" name="to[]" value=""> -->
         <input type="hidden" class="date-0-input" name="date[]" value="">
         <div class="row multi-search-form-row">
             <div class="col-12 multi-search-form-0 d-none">
-                <x-booking-search-multi 
+                <x-booking-search-multi
                     :number="1"
                 />
                 <input type="checkbox" class="d-none multi-check-0" name="check_form[]" value="1">
             </div>
             <div class="col-12 multi-search-form-1 d-none">
-                <x-booking-search-multi 
+                <x-booking-search-multi
                     :number="2"
                 />
                 <input type="checkbox" class="d-none multi-check-1" name="check_form[]" value="1">
             </div>
             <div class="col-12 multi-search-form-2 d-none">
-                <x-booking-search-multi 
+                <x-booking-search-multi
                     :number="3"
                 />
                 <input type="checkbox" class="d-none multi-check-2" name="check_form[]" value="1">
             </div>
             <div class="col-12 multi-search-form-3 d-none">
-                <x-booking-search-multi 
+                <x-booking-search-multi
                     :number="4"
                 />
                 <input type="checkbox" class="d-none multi-check-3" name="check_form[]" value="1">

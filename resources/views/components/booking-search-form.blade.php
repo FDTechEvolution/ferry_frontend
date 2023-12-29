@@ -1,4 +1,4 @@
-@props(['type' => '', 'station_from' => [], 'station_to' => [], 'form_type' => ''])
+@props(['type' => '', 'station_to' => [], 'form_type' => '', 'section_from' => []])
 
 @php
     $from_id = uniqid();
@@ -10,18 +10,6 @@
 <div class="row px-3 is-type-{{ $form_type }}">
     <input type="hidden" name="_from_type[]" value="{{ $form_type }}">
     <div class="col-sm-3 col-md-3 px-0">
-        <!-- <div class="form-floating mb-3">
-            <select required class="form-select form-select-sm from-{{ $type }}-{{ $form_type }}-selected" name="from[]" id="from-{{ $from_id }}" aria-label="booking station" onChange="fromOriginalSelected(this, '{{ $type }}', '{{ $form_type }}')">
-                <option value="" selected disabled>Select Original</option>
-                @foreach($station_from as $section_key => $sections)
-                    <optgroup label="{{ $section_key }}">
-                    @foreach($sections as $station)
-                        <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
-                    @endforeach
-                @endforeach
-            </select>
-            <label for="from-{{ $from_id }}">From</label>
-        </div> -->
 
         <div class="form-floating mb-3 dropdown">
             <input required type="text" class="dropdown-toggle form-control from-{{ $type }}-{{ $form_type }}-selected" id="from-{{ $from_id }}" data-bs-toggle="dropdown" placeholder="From">
@@ -29,72 +17,18 @@
 
             <div class="dropdown-menu dropdown-booking-width dropdown-md p-3">
                 <div class="row mb-2 pb-2 pb-lg-0">
-                    {{-- col 1 --}}
-                    <div class="col-12 col-lg-3">
-                        @foreach($station_from as $section_key => $sections)
-                            @if($section_key == 'ANDAMAN Hot destinations')
+                    @foreach($section_from as $key => $sections)
+                        <div class="col-12 col-lg-3">
+                            @foreach($sections as $section_key => $section)
                                 <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
                                 <ul class="section-key-{{ $section_key }}">
-                                    @foreach($sections as $station_key => $station)
+                                    @foreach($section as $station_key => $station)
                                         <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
                                     @endforeach
                                 </ul>
-                            @endif
-                        @endforeach
-
-                        @foreach($station_from as $section_key => $sections)
-                            @if($section_key == 'LANGKAWI LINK')
-                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                                <ul class="section-key-{{ $section_key }}">
-                                    @foreach($sections as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        @endforeach
-                    </div>
-
-                    {{-- col 2 --}}
-                    <div class="col-12 col-lg-3">
-                        @foreach($station_from as $section_key => $sections)
-                            @if($section_key == 'ANDAMAN LINK')
-                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                                <ul class="section-key-{{ $section_key }}">
-                                    @foreach($sections as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        @endforeach
-                    </div>
-
-                    {{-- col 3 --}}
-                    <div class="col-12 col-lg-3">
-                        @foreach($station_from as $section_key => $sections)
-                            @if($section_key == 'ANDAMAN Line; Bus+Boat')
-                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                                <ul class="section-key-{{ $section_key }}">
-                                    @foreach($sections as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        @endforeach
-                    </div>
-
-                    {{-- col 4 --}}
-                    <div class="col-12 col-lg-3">
-                        @foreach($station_from as $section_key => $sections)
-                            @if($section_key == 'AO THAI <> ANDAMAN; Bus+Boat')
-                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                                <ul class="section-key-{{ $section_key }}">
-                                    @foreach($sections as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <input type="hidden" id="from-selected_{{ $type }}-{{ $form_type }}" name="from[]" value="">
@@ -102,19 +36,6 @@
     </div>
 
     <div class="col-sm-3 col-md-3 px-0">
-        <!-- <div class="form-floating mb-3">
-            <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $type }}-{{ $form_type }} d-none"></i>
-            <select required class="form-select form-select-sm to-{{ $type }}-{{ $form_type }}-selected" name="to[]" id="to-{{ $to_id }}" aria-label="booking station" disabled>
-                <option value="" selected>Select Destination</option>
-                @foreach($station_to as $section_key => $section)
-                    <optgroup label="{{ $section_key }}">
-                        @foreach($section as $station)
-                            <option value="{{ $station['id'] }}">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</option>
-                        @endforeach
-                @endforeach
-            </select>
-            <label for="to-{{ $to_id }}">To</label>
-        </div> -->
 
         <div class="form-floating mb-3 dropdown">
             <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $type }}-{{ $form_type }} d-none"></i>

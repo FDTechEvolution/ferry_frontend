@@ -144,10 +144,10 @@ class BookingController extends Controller
         $depart_date = $_date[0];
         $return_date = $_date[1];
 
-        if($request->promotioncode != NULL) {
-            // promo_code, trip_type, station_from_id, station_to_id, depart_date
-            $promocode = $this->checkPromotionCode($request->promotioncode, 'round-trip', $request->from[0], $request->to[0], $depart_date);
-        }
+        // if($request->promotioncode != NULL) {
+        //     // promo_code, trip_type, station_from_id, station_to_id, depart_date
+        //     $promocode = $this->checkPromotionCode($request->promotioncode, 'round-trip', $request->from[0], $request->to[0], $depart_date);
+        // }
 
         $depart_routes = $this->getRouteList($request->from[0], $request->to[0]);
         $return_routes = $this->getRouteList($request->to[0], $request->from[0]);
@@ -164,8 +164,7 @@ class BookingController extends Controller
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
-            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList,
-            'promocode' => $promocode
+            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList
         ]);
     }
 
@@ -262,7 +261,8 @@ class BookingController extends Controller
             'trip_type' => 'one-way',
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
-            'ispremiumflex' => $request->ispremiumflex
+            'ispremiumflex' => $request->ispremiumflex,
+            'promocode' => $request->use_promocode
         ]);
         $res = $response->json();
         $data = $res['data'];
