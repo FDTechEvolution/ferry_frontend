@@ -18,9 +18,10 @@
                                         <div class="d-table-cell align-middle text-center p-3">
 
                                             <h2 class="h5 font-proxima-400 card-title mb-4">
-                                                {{ $promotion['title'] }}
+                                                {{ Str::limit($promotion['title'], 40) }}
                                             </h2>
                                             <h1 style="font-size: 2rem;">{{ $promotion['code'] }}</h1>
+                                            <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i> <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -55,9 +56,10 @@
                                     <div class="d-table">
                                         <div class="d-table-cell align-middle text-center p-3">
                                             <h2 class="h5 font-proxima-400 card-title mb-4">
-                                                {{ $promotion['title'] }}
+                                                {{ Str::limit($promotion['title'], 40) }}
                                             </h2>
                                             <h1 style="font-size: 1.7rem;">{{ $promotion['code'] }}</h1>
+                                            <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i> <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i>
                                         </div>
                                     </div>
                                 </div>
