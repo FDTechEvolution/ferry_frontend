@@ -58,12 +58,25 @@
                 </div>
             </div>
 
-            <div class="row mt-3">
-                <div class="col-12 text-end pe-0 pe-lg-5 pt-3 border-top border-secondary">
-                    <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
-                    <h6 class="d-flex justify-content-end align-items-end d-none promocode-show">PromoCode <small>[{{$promocode}}]</small> <p class="sum-of-promocode w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
-                    <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
-                    <h6 class="d-flex justify-content-end align-items-end pt-2 border-top">Total <p class="sum-amount w--7 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+            <div class="row mt-3 pe-0 pe-lg-5 pt-3 border-top border-secondary">
+                <div class="col-12 col-lg-6">
+                    @if($promocode == null)
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" class="form-control form-control-sm" name="promocode" placeholder="Promotion Code">
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div class="col-12 col-lg-6 text-end">
+                    <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                    <h6 class="d-flex justify-content-end align-items-end d-none promocode-show">PromoCode <small class="ms-1">[{{$promocode}}]</small> <p class="sum-of-promocode w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                    <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
+                </div>
+            </div>
+            <div class="row pt-2 pe-0 pe-lg-5 border-top">
+                <div class="col-12 col-lg-6 offset-lg-6">
+                    <h6 class="d-flex justify-content-end align-items-end">Total <p class="sum-amount text-end w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                 </div>
             </div>
         </div>
@@ -101,6 +114,6 @@
         <h4 class="mb-0">Payment</h4>
         <p class="mb-0">Select payment method</p>
         <p class="mb-0 d-none">Select a payment to complete booking</p>
-        <x-booking-payment-list />
+        <x-booking-payment-list :isfreecredit="$freecredit" />
     </div>
 </div>

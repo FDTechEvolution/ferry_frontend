@@ -8,7 +8,7 @@
                         <div class="row py-3">
                             @if($route['ispromocode'] == 'Y')
                                 <p class="mb-2 small">
-                                    <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
+                                    <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                 </p>
                             @endif
                             <div class="col-1 d-flex justify-content-center align-items-center">
@@ -65,14 +65,14 @@
                                 <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
                                     <p class="mb-0 position-relative">
                                         <span class="small me-2">THB</span>
-                                        @if(isset($route['promo_price']))
+                                        @if(isset($route['promo_price']) && $route['promo_price'] != 0)
                                             <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
                                             <span class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
                                         @else
                                             <span class="route-price fs-4">{{ number_format($route['amount']) }}</span>
                                         @endif
                                     </p>
-                                    <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger.</p>
+                                    <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger.(s)</p>
                                 </div>
                                 <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2">
                                     <button type="button" class="btn btn-sm button-blue-bg btn-route-list py-1 px-4 btn-route-select-{{ $index }}">Select</button>
@@ -80,17 +80,17 @@
                                 <div class="col-6 col-lg-12 text-center-m">
                                     @if($passenger[0] > 0)
                                         <p class="mb-0 small">
-                                            <i class="fa-solid fa-person fs-5 me-1"></i> <span class="smaller">{{ $passenger[0] }} x {{ number_format($route['p_adult'] / $passenger[0]) }} pax</span>
+                                            <i class="fa-solid fa-person fs-5 me-1"></i> <span class="smaller">{{ $passenger[0] }} x {{ number_format($route['p_adult'] / $passenger[0]) }}</span>
                                         </p>
                                     @endif
                                     @if($passenger[1] > 0)
                                         <p class="mb-0 small">
-                                            <i class="fa-solid fa-children fs-6 me-1"></i> <span class="smaller">{{ $passenger[1] }} x {{ number_format($route['p_child'] / $passenger[1]) }} pax</span>
+                                            <i class="fa-solid fa-children fs-6 me-1"></i> <span class="smaller">{{ $passenger[1] }} x {{ number_format($route['p_child'] / $passenger[1]) }}</span>
                                         </p>
                                     @endif
                                     @if($passenger[2] > 0)
                                         <p class="mb-0 small">
-                                            <i class="fa-solid fa-baby fs-6 me-1"></i> <span class="smaller">{{ $passenger[2] }} x {{ number_format($route['p_infant'] / $passenger[2]) }} pax</span>
+                                            <i class="fa-solid fa-baby fs-6 me-1"></i> <span class="smaller">{{ $passenger[2] }} x {{ number_format($route['p_infant'] / $passenger[2]) }}</span>
                                         </p>
                                     @endif
                                 </div>

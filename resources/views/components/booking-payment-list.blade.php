@@ -1,3 +1,5 @@
+@props(['isfreecredit' => 'N'])
+
 <div class="row mt-2">
     <div class="col-12">
         <label class="row mb-2">
@@ -12,7 +14,13 @@
                         <img src="{{ asset('icons/mastercard_icon.svg') }}" class="me-2" width="40">
                         <img src="{{ asset('icons/jcb_icon.svg') }}" class="me-2" width="40">
                     </p>
-                    <small class="d-block mt-1 mt-lg-0">Credit card fee 3.5%</small>
+                    @if($isfreecredit == 'Y')
+                        <small class="d-block mt-1 mt-minus-creditfee">Credit card fee 0%
+                            <span class="text-success">Free by promoCode</span>
+                        </small>
+                    @else
+                        <small class="d-block mt-1 mt-lg-0 mt-minus-creditfee">Credit card fee 3.5%</small>
+                    @endif
                 </div>
             </div>
         </label>

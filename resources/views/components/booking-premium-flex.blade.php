@@ -1,3 +1,5 @@
+@props(['ispremiumflex' => ''])
+
 <div id="booking-route-premuim">
     <div class="row">
         <div class="col-12 col-lg-8 offset-lg-2 card">
@@ -11,7 +13,10 @@
                     <p class="mb-3">An additional 10% for travel changes can be made 1 time.</p>
                     <p class="mb-3">**Note: Tickets without +10% at this price cannot change the itinerary**</p>
                     <p class="mb-3">You can notify of travel changes, name changes and email notifications. Regarding seat availability 12 hours before departure</p>
-                    <p class="text-second-color fw-bold fs-4">+ <span class="is-premium-price"></span> <span class="smaller ms-1">THB</span></p>
+                    <p class="text-second-color fw-bold fs-4 mb-0">+ <span class="is-premium-price"></span> <span class="smaller ms-1">THB</span></p>
+                    @if($ispremiumflex == 'Y')
+                        <small class="text-success selected-route-promocode d-none">Free by promoCode</small>
+                    @endif
                 </div>
                 <div class="col-12 col-lg-6 mt-3 order-lg-1">
                     <div class="form-check mb-2">
@@ -19,6 +24,7 @@
                         <label class="form-check-label fw-bold" for="none-premiumflex">Non-Premium Flex</label>
                     </div>
                     <input type="hidden" name="ispremiumflex" value="Y">
+                    <input type="hidden" class="ispremiumflex" value="{{ $ispremiumflex }}">
                 </div>
             </div>
         </div>

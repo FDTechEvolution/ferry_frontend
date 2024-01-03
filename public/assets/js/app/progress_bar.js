@@ -5,7 +5,8 @@ let extra_price = 0
 let depart_time = ''
 let arrive_time = ''
 let route_selected = null
-let route_promo = false;
+let route_promo = false
+let selected_promo = false
 let icon_selected = []
 let passenger_payment = []
 let extra_id = [] // extra id to post
@@ -27,6 +28,10 @@ if(booking_route) {
             })
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
+
+            let is_promo_selected = route.querySelector('.promo-avaliable')
+            if(is_promo_selected) selected_promo = true
+            else selected_promo = false
 
             if(document.querySelector('.promo-price')) route_promo = true
             else route_promo = false
@@ -152,11 +157,20 @@ function progressCondition(step) {
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
+        let promo_premiumflex = document.querySelector('.ispremiumflex').value
+        let use_promocode = document.querySelector('[name="use_promocode"]')
+        let select_promo = document.querySelector('.selected-route-promocode')
 
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
-        let _premium_price = ((route_price*110)/100) - route_price
+        let _premium_price = (promo_premiumflex === 'Y' && selected_promo) ? 0 : ((route_price*110)/100) - route_price
+
+        // console.log(select_promo)
+        if(use_promocode.value !== '') {
+            if(promo_premiumflex === 'Y' && selected_promo) select_promo.classList.remove('d-none')
+            if(!selected_promo && select_promo) select_promo.classList.add('d-none')
+        }
 
         txt_price.innerHTML = _premium_price
 

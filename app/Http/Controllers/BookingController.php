@@ -29,22 +29,22 @@ class BookingController extends Controller
     }
 
     public function index(Request $request) {
-        // Log::debug($request);
         $_type = $this->Type[$request->_type];
         $promocode = null;
         $use_promocode = null;
+        $freecredit = 'N';
+        $freepremiumflex = 'N';
+
         $routes = $this->getRouteList($request->from[0], $request->to[0]);
         if($request->promotioncode != NULL) {
             // promo_code, trip_type, station_from_id, station_to_id, depart_date
             $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0]);
         }
-        // Log::debug($routes);
         $passenger = $this->setInputType($request);
         $_station = ['from' => '', 'to' => ''];
         $booking_date = $request->date[0];
 
         $_diff = $this->checkDateDiff($booking_date);
-        // Log::debug($_diff);
 
         foreach($routes['data'] as $index => $route) {
             if($_station['from'] == '')
@@ -68,8 +68,14 @@ class BookingController extends Controller
 
             if($route['ispromocode'] == 'Y' && $promocode != null) {
                 $use_promocode = $request->promotioncode;
-                $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
+                if(intval($promocode['discount']) != 0)
+                    $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
             }
+        }
+
+        if($promocode != null) {
+            $freecredit = $promocode['isfreecreditcharge'];
+            $freepremiumflex = $promocode['isfreepremiumflex'];
         }
 
         $code_country = $this->CodeCountry;
@@ -78,7 +84,8 @@ class BookingController extends Controller
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
-                'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode
+                'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode,
+                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex
             ]);
     }
 
