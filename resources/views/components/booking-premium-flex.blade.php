@@ -23,7 +23,6 @@
                         <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="N" id="none-premiumflex" checked>
                         <label class="form-check-label fw-bold" for="none-premiumflex">Non-Premium Flex</label>
                     </div>
-                    <input type="hidden" name="ispremiumflex" value="Y">
                     <input type="hidden" class="ispremiumflex" value="{{ $ispremiumflex }}">
                 </div>
             </div>

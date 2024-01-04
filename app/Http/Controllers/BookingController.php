@@ -271,16 +271,19 @@ class BookingController extends Controller
             'ispremiumflex' => $request->ispremiumflex,
             'promocode' => $request->use_promocode
         ]);
-        $res = $response->json();
-        $data = $res['data'];
-        $booking_id = $res['booking'];
-        $email = $res['email'];
 
-        if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+        $res = $response->json();
+        if(isset($res)) {
+            $data = $res['data'];
+            $booking_id = $res['booking'];
+            $email = $res['email'];
+
+            if($data['respCode'] == '0000') {
+                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+            }
         }
 
-        return redirect()->route('home');
+        return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
 
     private function setPassengerBooking($first_name, $last_name) {
@@ -350,18 +353,20 @@ class BookingController extends Controller
         ]);
 
         $res = $response->json();
-        $data = $res['data'];
+        if(isset($res)) {
+            $data = $res['data'];
+            $booking_id = $res['booking'];
+            $email = $res['email'];
 
-        if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl']]);
+            if($data['respCode'] == '0000') {
+                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+            }
         }
 
-        return redirect()->route('home');
+        return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
 
     public function bookingMultiConfirm(Request $request) {
-        // Log::debug($request);
-
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);
         $depart_date = $request->departdate;
@@ -402,14 +407,18 @@ class BookingController extends Controller
             'ispremiumflex' => $request->ispremiumflex
         ]);
         $res = $response->json();
-        $data = $res['data'];
-        $booking_id = $res['booking'];
+        if(isset($res)) {
+            $data = $res['data'];
+            $booking_id = $res['booking'];
+            $booking_id = $res['booking'];
+            $email = $res['email'];
 
-        if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id]);
+            if($data['respCode'] == '0000') {
+                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+            }
         }
 
-        return redirect()->back();
+        return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
 
     private function roundTripBooking($request, $route_id, $meal_id, $meal_qty, $activity_id, $activity_qty, $date) {
