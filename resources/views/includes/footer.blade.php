@@ -1,4 +1,4 @@
-<footer id="footer" class="text-dark" style="background-color: #EEEEEE">
+<footer id="footer" class="text-dark" >
 
     <!-- footer cta -->
     <div class="container text-dark pt-5 pb-2">
@@ -12,7 +12,7 @@
                 <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
                 <img src="{{ asset('assets/images/123travel-logo.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
             </div>
-            <div class="col-lg-12 text-center mb-3 font-proxima">
+            <div class="col-lg-12 pt-2 pb-2 text-center font-proxima" style="background-color: #EEEEEE">
                 <p class="text-main-color-2 mb-0">
                     <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> | 
                     <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> | 

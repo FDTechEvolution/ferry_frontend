@@ -29,11 +29,7 @@
                     </div>
                     
                 </div>
-                <div class="row">
-                    <div class="col-12 text-end">
-                        <small>Created {{$item['created_at']}}</small>
-                    </div>
-                </div>
+                
                 <hr>
             @endforeach
         </div>

@@ -14,7 +14,7 @@
             </div>
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
                 <p class="mb-1">Passenger</p>
-                <p class="mb-0 d-flex justify-content-evenly align-items-end">
+                <p class="mb-0 d-flex justify-content-evenly align-items-end align-middle">
                     <span>
                         <i class="fa-solid fa-person fs-2"></i> {{ $passenger[0] }}
                     </span>
@@ -22,7 +22,7 @@
                         <i class="fa-solid fa-children fs-4"></i> {{ $passenger[1] }}
                     </span>
                     <span>
-                        <i class="fa-solid fa-baby fs-4"></i> {{ $passenger[2] }}
+                        <img src="{{asset('icons/child.png')}}" width="26px" alt=""> {{ $passenger[2] }}
                     </span>
                 </p>
                 @if($passenger[0] != 0)
