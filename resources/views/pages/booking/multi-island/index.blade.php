@@ -16,7 +16,7 @@
             </div>
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
                 <p class="mb-1">Passenger</p>
-                <p class="mb-0 d-flex justify-content-evenly align-items-end align-items-baseline">
+                <p class="mb-0 d-flex justify-content-evenly align-items-end align-middle">
                     <span>
                         <i class="fa-solid fa-person fs-2"></i> {{ $passenger[0] }}
                     </span>

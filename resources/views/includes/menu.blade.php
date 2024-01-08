@@ -8,7 +8,6 @@
                 <path d="M 20.7895 0.977 L 19.3752 -0.4364 L 10.081 8.8522 L 0.7869 -0.4364 L -0.6274 0.977 L 8.6668 10.2656 L -0.6274 19.5542 L 0.7869 20.9676 L 10.081 11.679 L 19.3752 20.9676 L 20.7895 19.5542 L 11.4953 10.2656 L 20.7895 0.977 Z"></path>
             </svg>
         </button>
-
         <!-- 
             Mobile Menu Logo 
             Logo : height: 70px max
@@ -16,11 +15,8 @@
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('assets/images/logo_tiger_line_ferry.png') }}" alt="...">
         </a>
-
     </div>
     <!-- /navbar : mobile menu -->
-
-
 
     <!-- navbar : navigation -->
     <ul class="navbar-nav font-proxima" id="navbar-menu">
@@ -46,7 +42,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item ">
             <ul class="navbar-nav py-2 font-proxima">
                 <li class="nav-item border-start border-2 addon-menu-style" style="line-height: 14px;">
                     <span class="smaller text-addon-color px-2">+ Add on</span>

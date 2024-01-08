@@ -47,7 +47,7 @@
                                             <div class="row g-3">
                                                 <div class="col-md-12">
                                                     <input required type="text" class="form-control form-control-sm"
-                                                        name="booking_number" placeholder="Booking Number..." autocomplete="off">
+                                                        name="booking_number" placeholder="Invoice Number..." autocomplete="off">
                                                 </div>
                                                 <div class="col-md-12">
                                                     <input required type="email" class="form-control form-control-sm"
