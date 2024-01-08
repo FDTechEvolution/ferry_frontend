@@ -30,7 +30,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="#" class="text-end mt-2 text-main-color-2 fw-bold"><i class="fi fi-product-tag"></i> See more</a>
+            <a href="{{ route('promo-index') }}" class="text-end mt-2 text-main-color-2 fw-bold"><i class="fi fi-product-tag"></i> See more</a>
         </div>
 
 </div>
