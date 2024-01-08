@@ -42,54 +42,61 @@
                 </div>
             </div>
 
-            <div class="row mb-2">
+            <div class="row mb-3 mb-lg-0">
                 <div class="col-12 col-lg-7">
-                    <label class="form-label">Contact Infomation</label>
-                    <div class="form-floating mb-3">
-                        <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail" autocomplete="true"
-                                onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-                        >
-                        <label for="passenger-email" class="ms-2">E-mail<span class="text-danger">*</span></label>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label">Contact Infomation</label>
+                            <div class="form-floating mb-3">
+                                <input required type="email" name="email" class="form-control form-control-sm" id="passenger-email" placeholder="E-mail" autocomplete="true"
+                                        onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                                >
+                                <label for="passenger-email" class="ms-2">E-mail<span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input required type="email" name="confirm_email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail"
+                                        onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                                >
+                                <label for="passenger-confirm-email" class="ms-2">Confirm E-mail<span class="text-danger">*</span></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-5">
-                    <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i class="fi fi-phone"></i> )</label>
                     <div class="row">
-                        <div class="col-4">
-                            <select required class="form-select" name="mobile_code">
-                                <option value="" selected disabled></option>
-                                @foreach($code_country as $code)
-                                    <option value="{{ $code }}">+{{ $code }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-12">
+                            <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i class="fi fi-phone"></i> )</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <select required class="form-select" name="mobile_code">
+                                        <option value="" selected disabled></option>
+                                        @foreach($code_country as $code)
+                                            <option value="{{ $code }}">+{{ $code }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-8">
+                                    <input required type="number" class="form-control" name="mobile">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <input required type="number" class="form-control" name="mobile">
+                        <div class="col-12 mt-4 pt-1">
+                            <label class="form-label position-absolute mt-n4">Thai telephone number (if any)</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="text" name="th_code" class="form-control" value="+66" readonly>
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" name="th_mobile" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-3 mb-lg-0">
-                <div class="col-12 col-lg-7 mb-3 mb-lg-0">
-                    <div class="form-floating mb-3">
-                        <input required type="email" name="confirm_email" class="form-control form-control-sm" id="passenger-confirm-email" placeholder="Confirm E-mail"
-                                onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-                        >
-                        <label for="passenger-confirm-email" class="ms-2">Confirm E-mail<span class="text-danger">*</span></label>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-5 position-relative">
-                    <label class="form-label position-absolute mt-n4">Thai telephone number (if any)</label>
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="text" name="th_code" class="form-control" value="+66" readonly>
-                        </div>
-                        <div class="col-8">
-                            <input type="number" name="th_mobile" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-12 col-lg-5 form-floating mb-3">
                     <select required class="form-select form-select-sm" name="country" id="passenger-country" aria-label="Floating label select example" autocomplete="true">
@@ -121,7 +128,7 @@
 
     @if($passenger[0] > 1)
         @for($i = $is_passenger; $i <= $passenger[0]; $i++)
-            <x-set-passenger 
+            <x-set-passenger
                 :passenger_num="$is_passenger"
                 :type="_('Adult')"
                 :color="_('booking-passenger')"
@@ -134,7 +141,7 @@
 
     @if($passenger[1] > 0)
         @for($i = 1; $i <= $passenger[1]; $i++)
-            <x-set-passenger 
+            <x-set-passenger
                 :passenger_num="$is_passenger"
                 :type="_('Child')"
                 :color="_('booking-passenger')"
@@ -147,7 +154,7 @@
 
     @if($passenger[2] > 0)
         @for($i = 1; $i <= $passenger[2]; $i++)
-            <x-set-passenger 
+            <x-set-passenger
                 :passenger_num="$is_passenger"
                 :type="_('Infant')"
                 :color="_('booking-passenger')"

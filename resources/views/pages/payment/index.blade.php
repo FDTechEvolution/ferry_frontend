@@ -37,7 +37,7 @@
     @media (max-width: 540px) {
         iframe {
             aspect-ratio: 16 / 9;
-            height: 60vh;
+            height: 70vh;
             width: 100%;
         }
     }

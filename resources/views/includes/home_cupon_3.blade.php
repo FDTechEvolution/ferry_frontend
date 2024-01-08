@@ -1,4 +1,4 @@
-<div class="section" style="padding: 0px; z-index: -1;">
+<div class="section home-cupon-desktop" style="padding: 0px; z-index: -1;">
     <div class="row d-none d-md-block">
         <div class="col-12">
             <div class="d-inline-block bg-light shadow-primary-xs rounded w-100">

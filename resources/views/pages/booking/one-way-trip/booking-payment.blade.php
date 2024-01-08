@@ -26,7 +26,7 @@
                     <div class="row text-center fw-bold mb-2">
                         <div class="col-4 text-start">Depart</div>
                         <div class="col-4">Fare</div>
-                        <div class="col-4">THB</div>
+                        <div class="col-4 text-end">THB</div>
                     </div>
                     @if($passenger[0] != 0)
                         <div class="row text-center">
@@ -34,7 +34,7 @@
                                 @if($passenger[0] > 1) Adults @else Adult @endif
                             </div>
                             <div class="col-4">{{ $passenger[0] }} x <span class="payment-adult-price"></span></div>
-                            <div class="col-4"><span class="sum-of-adult"></span></div>
+                            <div class="col-4 text-end"><span class="sum-of-adult"></span></div>
                         </div>
                     @endif
                     @if($passenger[1] != 0)
@@ -43,7 +43,7 @@
                                 @if($passenger[1] > 1) Childs @else Child @endif
                             </div>
                             <div class="col-4">{{ $passenger[1] }} x <span class="payment-child-price"></span></div>
-                            <div class="col-4"><span class="sum-of-child"></span></div>
+                            <div class="col-4 text-end"><span class="sum-of-child"></span></div>
                         </div>
                     @endif
                     @if($passenger[2] != 0)
@@ -52,7 +52,7 @@
                                 @if($passenger[2] > 1) Infants @else Infant @endif
                             </div>
                             <div class="col-4">{{ $passenger[2] }} x <span class="payment-infant-price"></span></div>
-                            <div class="col-4"><span class="sum-of-infant"></span></div>
+                            <div class="col-4 text-end"><span class="sum-of-infant"></span></div>
                         </div>
                     @endif
                 </div>
@@ -61,9 +61,12 @@
             <div class="row mt-3 pe-0 pe-lg-5 pt-3 border-top border-secondary">
                 <div class="col-12 col-lg-6">
                     @if($promocode == null)
-                        <div class="row">
-                            <div class="col-6">
+                        <div class="row mb-3">
+                            <div class="col-10 col-lg-6">
                                 <input type="text" class="form-control form-control-sm" name="promocode" placeholder="Promotion Code">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-sm button-green-bg"><i class="fi fi-check me-0"></i></button>
                             </div>
                         </div>
                     @endif
@@ -102,7 +105,7 @@
 
     <h4 class="mb-0">Passenger(s)</h4>
     <p class="mb-2">Passenger details</p>
-    <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
+    <div class="row bg-booking-payment-passenger mx-3 px-2 py-3 p-lg-4 mb-5">
         <div class="col-12">
             <div class="row" id="payment-passenger-detail">
 

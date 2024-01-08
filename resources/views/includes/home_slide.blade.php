@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="row" data-aos="fade-up" data-aos-delay="150">
                 <div class="flickity-preloader"
-                    data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": true, "contain": true, "rightToLeft": false }'>
+                    data-flickity='{ "autoPlay": true, "cellAlign": "left", "pageDots": true, "prevNextButtons": false, "contain": true, "rightToLeft": false }'>
 
                     @foreach ($slides as $slide)
                         <div class="col-12 col-lg-3 mb-4 me-4">
@@ -37,3 +37,11 @@
 
     </div>
 </div>
+
+<style>
+@media only screen and (max-width: 768px) {
+    .flickity-page-dots {
+        width: 97%;
+    }
+}
+</style>

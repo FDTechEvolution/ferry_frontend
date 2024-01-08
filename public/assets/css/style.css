@@ -36,11 +36,35 @@ h1,h2,h3,h4,h5{
     font-family: 'proxima_softbold','Kanit', sans-serif;
     font-weight: 400;
 }
+.footer-logo-height {
+    height: 60px;
+}
+.dropdown-color-style, .text-addon-color {
+    color: #fff;
+}
 
-@media only screen and (min-width: 768px) {
-    .section.cover-home {
-        padding: 200px 0 100px !important;
-        background-position: top center !important;
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+    nav.navbar:not(.h-auto) {
+        min-height: 60px;
+    }
+    .navbar-nav:not(.navbar-sm) {
+        height: 60px;
+    }
+    .navbar .navbar-nav .nav-link {
+        padding: 18px 15px;
+    }
+    .header-style {
+        padding-left: 8% !important;
+    }
+    .home-cupon-desktop {
+        display: block;
+    }
+    .home-cupon-mobile {
+        display: none;
+    }
+    .promo-input-w {
+        width: 50%;
     }
     .slide-desc-desktop {
         border-radius: 10px;
@@ -51,6 +75,14 @@ h1,h2,h3,h4,h5{
         background-color: #0a3961;
         color: #fff;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* Ipad */
+@media only screen and (max-width: 768px) {
+    .section.cover-home {
+        padding: 200px 0 100px !important;
+        background-position: top center !important;
     }
     .flickity-prev-next-button.next {
         right: -35px !important;
@@ -68,53 +100,20 @@ h1,h2,h3,h4,h5{
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
         display: none;
     }
-    .dropdown-color-style, .text-addon-color {
-        color: #fff;
-    }
-    .footer-logo-height {
-        height: 60px;
-    }
     .mt-minus-creditfee {
         margin-top: -7px !important;
     }
-}
-@media only screen and (min-width: 1350px) {
-    nav.navbar:not(.h-auto) {
-        min-height: 60px;
+    .home-cupon-desktop {
+        display: none;
     }
-    .navbar-nav:not(.navbar-sm) {
-        height: 60px;
+    .text-center-m {
+        text-align: center !important;
     }
-    .navbar .navbar-nav .nav-link {
-        padding: 18px 15px;
+    nav.navbar-light a.nav-link {
+        color: #1c0950 !important;
     }
-    .header-style {
-        padding-left: 8% !important;
-    }
-}
-
-@media (max-width: 540px) {
-    a#v-pills-home-tab, a#v-pills-profile-tab, a#v-pills-messages-tab {
-        width: 100%;
-        border-radius: 5px !important;
-    }
-    .process-steps {
-        display: table;
-    }
-    li.process-step-item {
-        width: 90%;
-    }
-    .popover-passenger {
-        padding: 0;
-    }
-    .border-end-none-mobile {
-        border-right: none !important;
-    }
-    .border-start-none-mobile {
-        border-left: none !important;
-    }
-    .border-bottom-mobile {
-        border-bottom: 2px solid;
+    .dropdown-color-style, .text-addon-color {
+        color: #000;
     }
     .dropdown-booking-width {
         min-width: 0 !important;
@@ -123,11 +122,67 @@ h1,h2,h3,h4,h5{
         min-width: 0 !important;
         margin-left: 0 !important;
     }
+    .border-start-none-mobile {
+        border-left: none !important;
+    }
+    .footer-logo-height {
+        height: 40px;
+        margin-bottom: 10px;
+    }
+    .booking-selected-zone {
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+    .process-steps {
+        display: table;
+    }
+    li.process-step-item {
+        width: 90%;
+    }
+    .process-step-item.complete:after {
+        top: 7px !important;
+        right: -34px !important;
+        width: 35px !important;
+        height: 35px !important;
+    }
+    .process-step-item:after {
+        right: -35px !important;
+        top: 7px !important;
+        width: 35px !important;
+        height: 35px !important;
+    }
+    .process-step-item.active:after {
+        top: 6px !important;
+        right: -38px !important;
+        width: 38px !important;
+        height: 38px !important;
+    }
+    #btn-back-to-home {
+        display: none !important;
+    }
+    .border-end-none-mobile {
+        border-right: none !important;
+    }
+    .booking-select-header {
+        font-weight: bold;
+    }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+    a#v-pills-home-tab, a#v-pills-profile-tab, a#v-pills-messages-tab {
+        width: 100%;
+        border-radius: 5px !important;
+    }
+
+    .popover-passenger {
+        padding: 0;
+    }
+    .border-bottom-mobile {
+        border-bottom: 2px solid;
+    }
     .header-style {
         padding-left: 0 !important;
-    }
-    nav.navbar-light a.nav-link {
-        color: #1c0950 !important;
     }
     .child-right {
         height: auto !important;
@@ -151,7 +206,6 @@ h1,h2,h3,h4,h5{
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
         display: none;
     }
-
     .flickity-prev-next-button.previous {
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
         display: none;
@@ -162,9 +216,6 @@ h1,h2,h3,h4,h5{
         background-color: #0a3961;
         color: #fff;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.6);
-    }
-    .dropdown-color-style, .text-addon-color {
-        color: #000;
     }
     .addon-menu-style {
         border: none !important;
@@ -178,36 +229,42 @@ h1,h2,h3,h4,h5{
     .w-sm-30 {
         width: 30% !important;
     }
-    .footer-logo-height {
-        height: 40px;
-        margin-bottom: 10px;
-    }
     .fs--14-m {
         font-size: 14px !important;
     }
-    .process-step-item.complete:after {
-        top: 7px !important;
-        right: -34px !important;
-        width: 35px !important;
-        height: 35px !important;
-    }
-    .process-step-item:after {
-        right: -35px !important;
-        top: 7px !important;
-        width: 35px !important;
-        height: 35px !important;
-    }
-    .process-step-item.active:after {
-        top: 6px !important;
-        right: -38px !important;
-        width: 38px !important;
-        height: 38px !important;
-    }
-    #btn-back-to-home {
-        display: none !important;
-    }
     .current-price {
         right: 15px !important;
+    }
+    .home-cupon-desktop {
+        display: none;
+    }
+    .process-step-item:before {
+        top: 5px !important;
+    }
+    .link-on-mobile {
+        font-size: small;
+    }
+    .booking-select-header {
+        font-size: small;
+    }
+    .right-on-mobile {
+        font-size: smaller;
+        margin-top: 7px;
+    }
+    .promo-input-w {
+        width: 100%;
+    }
+}
+@media (max-width: 400px) {
+    img.img-logo-style {
+        height: 58px !important;
+        margin-top: 0px !important;
+    }
+}
+@media (max-width: 370px) {
+    img.img-logo-style {
+        height: 56px !important;
+        margin-top: 0px !important;
     }
 }
 
@@ -620,4 +677,8 @@ img.img-logo-style {
     position: absolute;
     top: -20px;
     right: 0;
+}
+
+#footer {
+    background: linear-gradient( to top, #eeeeee 0%, #eeeeee 50%, transparent 50%, transparent 100% );
 }

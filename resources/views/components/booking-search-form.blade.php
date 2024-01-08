@@ -9,7 +9,7 @@
 
 <div class="row px-3 is-type-{{ $form_type }}">
     <input type="hidden" name="_from_type[]" value="{{ $form_type }}">
-    <div class="col-sm-3 col-md-3 px-0">
+    <div class="col-12 col-md-6 col-lg-3 px-0">
 
         <div class="form-floating mb-3 dropdown">
             <input required type="text" class="dropdown-toggle form-control from-{{ $type }}-{{ $form_type }}-selected" id="from-{{ $from_id }}" data-bs-toggle="dropdown" placeholder="From">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="col-sm-3 col-md-3 px-0">
+    <div class="col-12 col-md-6 col-lg-3 px-0">
 
         <div class="form-floating mb-3 dropdown">
             <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $type }}-{{ $form_type }} d-none"></i>
@@ -50,7 +50,7 @@
             <input type="hidden" id="to-selected_{{ $type }}-{{ $form_type }}" name="to[]" value="">
         </div>
     </div>
-    <div class="col-sm-3 col-md-3 px-0">
+    <div class="col-12 col-md-6 col-lg-3 px-0">
         @if($form_type == 'depart')
             <div class="form-floating mb-3">
                 <input required type="text" name="date[]" class="form-control form-control-sm datepicker date-{{ $type }}-{{ $form_type }}-selected"
@@ -86,7 +86,7 @@
             </div>
         @endif
     </div>
-    <div class="col-sm-3 col-md-3 px-0">
+    <div class="col-12 col-md-6 col-lg-3 px-0">
         <div class="form-floating mb-3 dropdown">
             <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}{{ $form_type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown" placeholder="Passenger">
             <label class="text-secondary" for="pass-{{ $passenger_id }}">Passenger</label>

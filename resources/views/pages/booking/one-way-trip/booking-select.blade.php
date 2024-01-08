@@ -25,7 +25,7 @@
                                     <span class="depart-time">{{ date("H:i", strtotime($route['depart_time'])) }}</span><br/>
                                     <span class="small">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif <x-booking-station-info :station_line="$route['station_lines']" :station="$route['station_from']['name']" :type="_('from')" :is_master="$route['master_from_info']" /></span>
                                 </p>
-                                <span class="mx-3">
+                                <span class="mx-0 mx-md-3">
                                     <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"></path>
                                         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"></path>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-2 mt-lg-0 mt-3 d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <div class="col-12 col-lg-2 mt-lg-0 mt-2 d-lg-flex justify-content-lg-center align-items-lg-center booking-selected-zone">
                         <div class="text-end">
                             <div class="row">
                                 <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
@@ -72,9 +72,9 @@
                                             <span class="route-price fs-4">{{ number_format($route['amount']) }}</span>
                                         @endif
                                     </p>
-                                    <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger.(s)</p>
+                                    <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
                                 </div>
-                                <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2">
+                                <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
                                     <button type="button" class="btn btn-sm button-blue-bg btn-route-list py-1 px-4 btn-route-select-{{ $index }}">Select</button>
                                 </div>
                                 <div class="col-6 col-lg-12 text-center-m">

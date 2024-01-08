@@ -1,4 +1,4 @@
-<footer id="footer" class="text-dark" >
+<footer id="footer" class="text-dark">
 
     <!-- footer cta -->
     <div class="container text-dark pt-5 pb-2">
@@ -12,13 +12,13 @@
                 <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
                 <img src="{{ asset('assets/images/123travel-logo.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
             </div>
-            <div class="col-lg-12 pt-2 pb-2 text-center font-proxima" style="background-color: #EEEEEE">
-                <p class="text-main-color-2 mb-0">
-                    <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> | 
-                    <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> | 
-                    <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> | 
-                        <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
-                <p class="text-main-color-2 mb-2">
+            <div class="col-lg-12 pt-2 pb-2 text-center font-proxima">
+                <p class="text-main-color-2 mb-0 link-on-mobile">
+                    <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> |
+                    <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> |
+                    <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
+                <p class="text-main-color-2 mb-3 mb-lg-2 right-on-mobile">
                     Tiger Line Ferry Company Limited. All Right Reserved.
                 </p>
 

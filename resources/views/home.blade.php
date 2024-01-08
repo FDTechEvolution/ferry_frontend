@@ -87,6 +87,7 @@
                 </div>
             </div>
 
+            @include('includes.home_cupon_2')
             @include('includes.home_cupon_3')
 
         </div>
@@ -103,9 +104,6 @@
     </div>
 
     @include('includes.home_slide')
-
-
-
 @stop
 
 @section('script')
