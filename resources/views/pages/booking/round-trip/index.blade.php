@@ -8,7 +8,7 @@
                 <i class="fa-solid fa-ship fs-1"></i>
             </div>
             <div class="col-10 col-lg-7">
-                <p class="my-2 mb-1"><span class="fw-bold">Depart : </span>
+                <p class="my-2 mb-1 booking-route-depart-roundtrip"><span class="fw-bold">Depart : </span>
                     @if(!empty($depart_routes))
                         <small>
                             {{ $station_depart['from'] }}
@@ -20,7 +20,7 @@
                         <small>Sorry. No depart route.</small>
                     @endif
                 </p>
-                <p class="my-2 mt-1"><span class="fw-bold">Return : </span>
+                <p class="my-2 mt-1 booking-route-return-roundtrip"><span class="fw-bold">Return : </span>
                     @if(!empty($return_routes))
                         <small>
                             {{ $station_return['from'] }}
@@ -36,15 +36,7 @@
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
                 <p class="mb-1">Passenger</p>
                 <p class="mb-0 d-flex justify-content-evenly align-items-end align-middle">
-                    <span>
-                        <i class="fa-solid fa-person fs-2"></i> {{ $passenger[0] }}
-                    </span>
-                    <span>
-                        <i class="fa-solid fa-children fs-4"></i> {{ $passenger[1] }}
-                    </span>
-                    <span>
-                        <img src="{{asset('icons/child.png')}}" width="26px" alt=""> {{ $passenger[2] }}
-                    </span>
+                    <x-booking-passenger-icon :passenger="$passenger" />
                 </p>
                 @if($passenger[0] > 0)
                     <input type="hidden" id="passenger-adult" value="{{ $passenger[0] }}" disabled>
@@ -68,12 +60,12 @@
 @section('content')
 <a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none" id="btn-back-to-home" style="margin-top: -30px;"><< Back</a>
 <ol class="process-steps process-steps-primary text-muted mb-3">
-	<li class="process-step-item complete" data-step="booking">{{ $isType != '' ? $isType : 'Booking' }}</li>
-	<li class="process-step-item text-primary active" data-step="select"><span class="ps-2">Select</span></li>
-    <li class="process-step-item" data-step="premium"><span class="ps-2">Premium Flex</span></li>
-	<li class="process-step-item" data-step="passenger"><span class="ps-2">Passenger info</span></li>
-    <li class="process-step-item" data-step="extra"><span class="ps-2">Extra services</span></li>
-    <li class="process-step-item" data-step="payment"><span class="ps-2">Payment</span></li>
+	<li class="process-step-item position-relative complete" data-step="booking"><span class="ps-3 progress-step-name">{{ $isType != '' ? $isType : 'Booking' }}</span></li>
+	<li class="process-step-item position-relative text-primary active" data-step="select"><span class="ps-2 progress-step-name">Select</span></li>
+    <li class="process-step-item position-relative" data-step="premium"><span class="ps-2 progress-step-name">Premium Flex</span></li>
+	<li class="process-step-item position-relative" data-step="passenger"><span class="ps-2 progress-step-name">Passenger info</span></li>
+    <li class="process-step-item position-relative" data-step="extra"><span class="ps-2 progress-step-name">Extra services</span></li>
+    <li class="process-step-item position-relative" data-step="payment"><span class="ps-2 progress-step-name">Payment</span></li>
 </ol>
 
 <div class="row min-h-50vh">

@@ -19,8 +19,8 @@
                                 <span class="d-block p-2 text-light">Booking <i
                                         class="fa-solid fa-ship ms-1 fs-4"></i></span>
                             </div>
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="nav flex nav-pills mb-3 mb-lg-0" id="booking-tab" aria-orientation="horizontal">
+                            <div class="col-sm-12 col-md-12 col-lg-7">
+                                <div class="nav flex justify-content-lg-start justify-content-md-center nav-pills mb-3 mb-lg-0" id="booking-tab" aria-orientation="horizontal">
                                     <a class="nav-link mb-2 mb-lg-0 px-4 active" id="v-pills-home-tab" data-bs-toggle="pill"
                                         href="#v-pills-home" role="tab" aria-controls="v-pills-home"
                                         aria-selected="true">Round Trip Ticket</a>
@@ -33,7 +33,7 @@
                                             style="width: 35px; margin-top: -10px;"></a>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-lg-4 text-end">
+                            <div class="col-sm-12 col-md-12 col-lg-3 ps-md-0 text-end">
                                 <div class="text-light mb-0 dropdown">
                                     <span class="cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                         View your booking <i class="fa-regular fa-calendar-days fs-4 ms-1"></i>
