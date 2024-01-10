@@ -10,13 +10,14 @@ let extra_id = { depart: [], return: [] }
 let extra_price = { depart: 0, return: 0 }
 let payment = { // PAYMENT INFO
         time: {
-                depart: { depart_time: null, arrive_time: null }, 
+                depart: { depart_time: null, arrive_time: null },
                 return: { depart_time: null, arrive_time: null }
             },
         passenger: { depart: [], return: [] },
         is_passenger: [],
         extra: { depart: [], return: [] }
     }
+let route_promo = false
 
 if(depart_route) {
     let route_list = depart_route.querySelectorAll('.booking-depart-list')
@@ -25,15 +26,18 @@ if(depart_route) {
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-depart-select-${index}`)
         btn_select.addEventListener('click', (e) => {
-            route_list.forEach((item) => { 
+            route_list.forEach((item) => {
                 item.classList.remove('active')
             })
             btn_route_list.forEach((btn) => {
-                btn.disabled = false 
+                btn.disabled = false
                 btn.innerText = 'Select'
             })
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
+
+            if(document.querySelector('.promo-price')) route_promo = true
+            else route_promo = false
 
             route_index.depart = index
             route_selected.depart = true
@@ -75,17 +79,17 @@ if(depart_route) {
 }
 
 if(return_route) {
-    let route_list = return_route.querySelectorAll('.booking-return-list') 
+    let route_list = return_route.querySelectorAll('.booking-return-list')
     let btn_route_list = document.querySelectorAll('.btn-route-return-list')
 
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-return-select-${index}`)
         btn_select.addEventListener('click', (e) => {
-            route_list.forEach((item) => { 
+            route_list.forEach((item) => {
                 item.classList.remove('active')
             })
             btn_route_list.forEach((btn) => {
-                btn.disabled = false 
+                btn.disabled = false
                 btn.innerText = 'Select'
             })
             btn_select.disabled = true
@@ -210,7 +214,7 @@ function progressCondition(step) {
     if(step === 'select') {
         document.querySelector('#btn-back-to-home').classList.remove('d-none')
         document.querySelector('#progress-prev').classList.add('d-none')
-        
+
         let depart_list = booking_route.querySelectorAll('.booking-depart-list')
         let return_list = booking_route.querySelectorAll('.booking-return-list')
         depart_list.forEach((route) => {
@@ -233,7 +237,7 @@ function progressCondition(step) {
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let route_price = (price.depart + price.return)
         let _premium_price = ((route_price*110)/100) - route_price
-        
+
         txt_price.innerHTML = _premium_price
 
         if(nonePremiumFlex.checked) {
@@ -360,7 +364,7 @@ function inc(type, element, index) {
     const amount = document.querySelector(`.${type}-${element}-amount-${index}`)
     let qty = parseInt(el.value) + 1
     el.value = qty
-    
+
     let _extra_amount = parseToNumber(amount.innerText)
     if(type === 'depart') extra_price.depart += _extra_amount
     if(type === 'return') extra_price.return += _extra_amount
@@ -485,7 +489,7 @@ function progressPassenger() {
 
 function setPassengerPayment() {
     payment.is_passenger = []
-    
+
     const booking_passenger = document.querySelector('#booking-route-passenger')
     const lead_passenger = booking_passenger.querySelector('#lead-passenger')
     const normal_passenger = booking_passenger.querySelectorAll('.normal-passenger')
@@ -585,7 +589,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mb-1 fw-bold')
         header.innerHTML = 'Adult'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -610,7 +614,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Children'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -633,7 +637,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Infant'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)

@@ -322,7 +322,7 @@ function updateDestinationSelect(result, element, number = null) {
                     let name = station.name
                     let pier = station.piername === null ? '' : ` (${station.piername})`
                     let li = document.createElement('li')
-                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2')
+                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
                     li.setAttribute('data-id', station.id)
                     li.setAttribute('onClick', `toDestinationSelectedAnother(this, '${_number}')`)
                     li.innerHTML = name + pier
@@ -429,7 +429,7 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
                     let name = station.name
                     let pier = station.piername === null ? '' : ` (${station.piername})`
                     let li = document.createElement('li')
-                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2')
+                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
                     li.setAttribute('data-id', station.id)
                     li.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
                     li.innerHTML = name + pier

@@ -6,7 +6,13 @@
             <h5 class="text-primary">{{ $is_station['from'] }} <span class="mx-2 text-dark">To</span> {{ $is_station['to'] }}</h5>
         </div>
     </div>
+
     @foreach($routes as $index => $route)
+        <x-booking-addon
+            :route_addons="$route['route_addons']"
+            :route_index="$index"
+        />
+
         <div @class(['d-none' => empty($route['shuttle_bus'])])>
             <div class="row route-shuttle-bus px-3 mb-3" id="route-shuttle-bus-index-{{ $index }}">
                 @if(!empty($route['shuttle_bus']))

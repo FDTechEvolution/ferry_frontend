@@ -240,6 +240,11 @@ function progressCondition(step) {
         const activity_list = _extra.querySelectorAll('.route-activity')
         const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
         const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
+        const route_addon_lists = _extra.querySelectorAll('.route-addon-lists')
+
+        let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}`)
+        route_addon_lists.forEach((item) => { item.classList.add('d-none') })
+        route_addons.forEach((item) => { item.classList.remove('d-none') })
 
         let meal_select = _extra.querySelector(`#route-meal-index-${route_selected}`)
         meal_list.forEach((item) => { item.classList.add('d-none') })

@@ -23,7 +23,7 @@
                                 <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
                                 <ul class="section-key-{{ $section_key }}">
                                     @foreach($section as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
+                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer font-proxima-400" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
                                     @endforeach
                                 </ul>
                             @endforeach
