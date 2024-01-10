@@ -8,6 +8,16 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'proximanovasoftw03-regularRg';
+    src: url('../fonts/font-ProximaSoft/fontsfree-net-proxima-nova-soft-w03-regular-webfont.woff2') format('woff2'),
+         url('../fonts/font-ProximaSoft/fontsfree-net-proxima-nova-soft-w03-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 a, a:hover, a:active, a:visited, a:focus {
     text-decoration:none !important;
 }
@@ -33,7 +43,7 @@ h1,h2,h3,h4,h5{
 }
 
 .font-proxima-400 {
-    font-family: 'proxima_softbold','Kanit', sans-serif;
+    font-family: 'proximanovasoftw03-regularRg','Kanit', sans-serif;
     font-weight: 400;
 }
 .footer-logo-height {
