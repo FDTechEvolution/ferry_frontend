@@ -30,11 +30,11 @@ if(booking_routes) {
             let btn_select = document.querySelector(`.btn-route-select-${index}_${key}`)
             btn_select.addEventListener('click', (e) => {
                 // set route //////////////////////////////////////////
-                route_list.forEach((item) => { 
+                route_list.forEach((item) => {
                     item.classList.remove('active')
                 })
                 btn_route_list.forEach((btn) => {
-                    btn.disabled = false 
+                    btn.disabled = false
                     btn.innerText = 'Select'
                 })
                 btn_select.disabled = true
@@ -52,7 +52,7 @@ if(booking_routes) {
                 document.querySelector(`[name="departdate[${index}]"]`).value = departdate.innerText
 
                 // END set route /////////////////////////////////////
-                
+
                 // set icon //////////////////////////////////////////
                 let icons = route.querySelectorAll('.icon-selected')
                 let icon_list = []
@@ -95,8 +95,8 @@ if(booking_routes) {
                     document.querySelector('#progress-next').disabled = false
             })
         })
-        if(index + 1 < route_list.length) destination.dataset.bsContent += `<i class="fa-solid fa-location-dot me-2"></i> ${_depart_name} <i class="fa-solid fa-arrow-right mx-2"></i> ${_arrive_name} <br/><i class="fa-regular fa-calendar-days me-2 mb-2"></i> ${_travel_date}<br/><br/>`
-        else destination.dataset.bsContent += `<i class="fa-solid fa-location-dot me-2"></i> ${_depart_name} <i class="fa-solid fa-arrow-right mx-2"></i> ${_arrive_name} <br/><i class="fa-regular fa-calendar-days me-2 mb-2"></i> ${_travel_date}`
+
+        destination.dataset.bsContent += `<p class="popover-destination-list"><i class="fa-solid fa-location-dot me-2"></i> ${_depart_name} <i class="fa-solid fa-arrow-right mx-2"></i> ${_arrive_name} <br/><i class="fa-regular fa-calendar-days me-2 mb-2"></i> ${_travel_date}</p>`
     })
 }
 
@@ -188,13 +188,13 @@ function progressCondition(step) {
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
-        
+
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let _route_price = sum_price.reduce((num1, num2) => { return num1+num2 })
         let _premium_price = ((_route_price*110)/100) - _route_price
-        
+
         txt_price.innerHTML = _premium_price
 
         if(nonePremiumFlex.checked) {
@@ -331,7 +331,7 @@ function setHeightChild() {
 
 function setFullDate(date) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", 
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August",
                     "September", "October", "November", "December"]
 
     let _format = date.split('/')
@@ -362,7 +362,7 @@ function setLitinerary() {
         let div_icon = document.createElement('div')
             div_icon.setAttribute('class', 'd-flex mw--48')
             div_icon.setAttribute('id', `route-icon-payment-${index}`)
-        
+
         h5_station.innerHTML = `${route.depart} - ${route.arrive}`
             div_index.appendChild(h5_station)
         p_date.innerHTML = `<span class="badge bg-booking-select-depart fw-bold">Multiple trip</span> : ${setFullDate(route.travel_date)}`
@@ -374,16 +374,16 @@ function setLitinerary() {
             let img = document.createElement('img')
             img.src = icon
             img.setAttribute('class', 'me-1 w-100')
-    
+
             div_icon.appendChild(img)
         })
             div_index.appendChild(div_icon)
 
         p_arriveTime.innerHTML = `<p class="is_d_arrive_time mb-0 me-2 fw-bold">${route.arrive_time} : </p><p class="ms-2 mb-0">${route.arrive}</p>`
             div_index.appendChild(p_arriveTime)
-        
+
         set_litinerry.appendChild(div_index)
-        
+
         // console.log(price_all[index])
         let adult_price = document.querySelector(`.payment-adult-price-${index}`)
         let adult_qty = document.querySelector('#passenger-adult')
@@ -433,7 +433,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mb-1 fw-bold')
         header.innerHTML = 'Adult'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -458,7 +458,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Children'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -481,7 +481,7 @@ function setPassengerDetail() {
         col_12.setAttribute('class', 'col-12')
         header.setAttribute('class', 'mt-3 mb-1 fw-bold')
         header.innerHTML = 'Infant'
-        
+
         passenger_detail.appendChild(row)
         row.appendChild(col_12)
         col_12.appendChild(header)
@@ -703,7 +703,7 @@ function progressPassenger() {
 
 function setPassengerPayment() {
     is_passenger = []
-    
+
     const booking_passenger = document.querySelector('#booking-route-passenger')
     const lead_passenger = booking_passenger.querySelector('#lead-passenger')
     const normal_passenger = booking_passenger.querySelectorAll('.normal-passenger')

@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12 col-lg-10">
-                            <div class="row py-3">
+                            <div class="row py-3 pb-lg-3 pb-2">
                                 @if($route['ispromocode'] == 'Y')
                                     <p class="mb-2 small">
                                         <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
@@ -46,25 +46,29 @@
                                     </p>
                                 </div>
 
-                                <div class="col-6 col-lg-1 travel-time d-flex justify-content-center align-items-center">
+                                <div @class(['col-lg-1', 'travel-time', 'd-flex', 'justify-content-center', 'align-items-center', 'col-3' => $route['text_1'] != '', 'col-12' => $route['text_1'] == ''])>
                                     <p class="mb-0 smaller">{{ $route['travel_time'] }}</p>
                                 </div>
 
-                                <div class="col-6 col-lg-3 route-text d-flex justify-content-center align-items-center">
-                                    <p class="mb-0 smaller">{{ $route['text_1'] }}</p>
-                                </div>
+                                @if($route['text_1'] != '')
+                                    <div class="col-9 col-lg-3 route-text d-flex justify-content-start align-items-center">
+                                        <p class="mb-0 smaller">{{ $route['text_1'] }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="row pt-2 border-top">
                                 <div class="col-12 col-lg-4 route-icon d-flex align-items-center justify-content-lg-start justify-content-center">
-                                    @foreach($route['icons'] as $icon)
-                                    <div class="mw--48">
-                                        <img src="{{ $icon_url }}{{ $icon['path'] }}" class="me-1 w-100 icon-selected">
+                                    <x-booking-select-icon
+                                        :icons="$route['icons']"
+                                        :icon_url="$icon_url"
+                                    />
+                                </div>
+
+                                @if($route['text_2'] != '')
+                                    <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
+                                        <p class="mb-0 smaller">{{ $route['text_2'] }}</p>
                                     </div>
-                                    @endforeach
-                                </div>
-                                <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
-                                    <p class="mb-0 smaller">{{ $route['text_2'] }}</p>
-                                </div>
+                                @endif
                             </div>
                         </div>
 
@@ -76,27 +80,18 @@
                                             <span class="small me-2">THB</span>
                                             <span class="route-price fs-4">{{ number_format($route['p_adult'] + $route['p_child'] + $route['p_infant']) }}</span>
                                         </p>
-                                        <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
+                                        <p class="mb-1 smaller">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
                                     </div>
                                     <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
                                         <button type="button" class="btn btn-sm button-blue-bg btn-route-depart-list py-1 px-4 btn-route-depart-select-{{ $index }}">Select</button>
                                     </div>
                                     <div class="col-6 col-lg-12 text-center-m">
-                                        @if($passenger[0] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-person fs-5 me-1"></i> <span class="smaller">{{ $passenger[0] }} x {{ number_format($route['p_adult']) }}</span>
-                                            </p>
-                                        @endif
-                                        @if($passenger[1] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-children fs-6 me-1"></i> <span class="smaller">{{ $passenger[1] }} x {{ number_format($route['p_child']) }}</span>
-                                            </p>
-                                        @endif
-                                        @if($passenger[2] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-baby fs-6 me-1"></i> <span class="smaller">{{ $passenger[2] }} x {{ number_format($route['p_infant']) }}</span>
-                                            </p>
-                                        @endif
+                                        <x-booking-select-passenger-icon
+                                            :passenger="$passenger"
+                                            :p_adult="$route['p_adult']"
+                                            :p_child="$route['p_child']"
+                                            :p_infant="$route['p_infant']"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +121,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12 col-lg-10">
-                            <div class="row py-3">
+                            <div class="row py-3 pb-lg-3 pb-2">
                                 @if($route['ispromocode'] == 'Y')
                                     <p class="mb-2 small">
                                         <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
@@ -159,26 +154,30 @@
                                     </p>
                                 </div>
 
-                                <div class="col-6 col-lg-1 travel-time d-flex justify-content-center align-items-center">
+                                <div @class(['col-lg-1', 'travel-time', 'd-flex', 'justify-content-center', 'align-items-center', 'col-3' => $route['text_1'] != '', 'col-12' => $route['text_1'] == ''])>
                                     <p class="mb-0 smaller">{{ $route['travel_time'] }}</p>
                                 </div>
 
-                                <div class="col-6 col-lg-3 route-text d-flex justify-content-center align-items-center">
-                                    <p class="mb-0 smaller">{{ $route['text_1'] }}</p>
-                                </div>
+                                @if($route['text_1'] != '')
+                                    <div class="col-9 col-lg-3 route-text d-flex justify-content-start align-items-center">
+                                        <p class="mb-0 smaller">{{ $route['text_1'] }}</p>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="row pt-2 border-top">
                                 <div class="col-12 route-icon d-flex align-items-center justify-content-lg-start justify-content-center">
-                                    @foreach($route['icons'] as $icon)
-                                    <div class="mw--48">
-                                        <img src="{{ $icon_url }}{{ $icon['path'] }}" class="me-1 w-100 icon-selected">
+                                    <x-booking-select-icon
+                                        :icons="$route['icons']"
+                                        :icon_url="$icon_url"
+                                    />
+                                </div>
+
+                                @if($route['text_2'] != '')
+                                    <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
+                                        <p class="mb-0 smaller">{{ $route['text_2'] }}</p>
                                     </div>
-                                    @endforeach
-                                </div>
-                                <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
-                                    <p class="mb-0 smaller">{{ $route['text_2'] }}</p>
-                                </div>
+                                @endif
                             </div>
                         </div>
 
@@ -190,27 +189,18 @@
                                             <span class="small me-2">THB</span>
                                             <span class="route-price fs-4">{{ number_format($route['p_adult'] + $route['p_child'] + $route['p_infant']) }}</span>
                                         </p>
-                                        <p class="mb-1 small">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
+                                        <p class="mb-1 smaller">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
                                     </div>
                                     <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
                                         <button type="button" class="btn btn-sm button-orange-bg btn-route-return-list py-1 px-4 btn-route-return-select-{{ $index }}">Select</button>
                                     </div>
-                                    <div class="col-6 col-lg-12 text-center-m">
-                                        @if($passenger[0] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-person fs-5 me-1"></i> <span class="smaller">{{ $passenger[0] }} x {{ number_format($route['p_adult'] / $passenger[0]) }}</span>
-                                            </p>
-                                        @endif
-                                        @if($passenger[1] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-children fs-6 me-1"></i> <span class="smaller">{{ $passenger[1] }} x {{ number_format($route['p_child'] / $passenger[1]) }}</span>
-                                            </p>
-                                        @endif
-                                        @if($passenger[2] > 0)
-                                            <p class="mb-0 small">
-                                                <i class="fa-solid fa-baby fs-6 me-1"></i> <span class="smaller">{{ $passenger[2] }} x {{ number_format($route['p_infant'] / $passenger[2]) }}</span>
-                                            </p>
-                                        @endif
+                                    <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
+                                        <x-booking-select-passenger-icon
+                                            :passenger="$passenger"
+                                            :p_adult="$route['p_adult']"
+                                            :p_child="$route['p_child']"
+                                            :p_infant="$route['p_infant']"
+                                        />
                                     </div>
                                 </div>
                             </div>

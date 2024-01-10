@@ -8,8 +8,8 @@
                 <path d="M 20.7895 0.977 L 19.3752 -0.4364 L 10.081 8.8522 L 0.7869 -0.4364 L -0.6274 0.977 L 8.6668 10.2656 L -0.6274 19.5542 L 0.7869 20.9676 L 10.081 11.679 L 19.3752 20.9676 L 20.7895 19.5542 L 11.4953 10.2656 L 20.7895 0.977 Z"></path>
             </svg>
         </button>
-        <!-- 
-            Mobile Menu Logo 
+        <!--
+            Mobile Menu Logo
             Logo : height: 70px max
         -->
         <a class="navbar-brand" href="{{ route('home') }}">
@@ -74,17 +74,17 @@
         </li>
 
         <li class="nav-item">
-            <div class="dropstart mt-lg-3 ms-lg-3">
+            <div class="dropstart mt-lg-3 ms-lg-3 dropdown-menu-right">
                 <a class="dropdown-toggle dropdown-color-style fs-4" href="#" role="button" id="exDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </a>
 
                 <ul class="dropdown-menu menu-on-nav" aria-labelledby="exDropdown">
-                    <li><a class="dropdown-item" href="#">TIMETABLE</a></li>
-                    <li><a class="dropdown-item" href="#">ROUTE MAP</a></li>
-                    <li><a class="dropdown-item" href="#">CHECK-IN STATION</a></li>
-                    <li><a class="dropdown-item" href="#">REVIEW</a></li>
-                    <li><a class="dropdown-item" href="#">NEWS</a></li>
+                    <li><a class="dropdown-item" href="{{ route('timetable-index') }}">TIMETABLE</a></li>
+                    <li><a class="dropdown-item" href="{{ route('routemap-index') }}">ROUTE MAP</a></li>
+                    <li><a class="dropdown-item" href="{{ route('station-index') }}">CHECK-IN STATION</a></li>
+                    <li><a class="dropdown-item" href="{{ route('review-index') }}">REVIEW</a></li>
+                    <li><a class="dropdown-item" href="{{ route('news-index') }}">NEWS</a></li>
                     <li><a class="dropdown-item" href="#">+ MEAL ON BOARD</a></li>
                     <li><a class="dropdown-item" href="#">+ HOTEL SHUTTLE BUS</a></li>
                     <li><a class="dropdown-item" href="#">+ RESORT SHUTTLE BOAT</a></li>
@@ -103,19 +103,19 @@
             <h3 class="h6 text-muted">Follow Us</h3>
 
             <a href="#" class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
-                <i class="fi fi-social-facebook"></i> 
+                <i class="fi fi-social-facebook"></i>
             </a>
 
             <a href="#" class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
-                <i class="fi fi-social-twitter"></i> 
+                <i class="fi fi-social-twitter"></i>
             </a>
 
             <a href="#" class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
-                <i class="fi fi-social-linkedin"></i> 
+                <i class="fi fi-social-linkedin"></i>
             </a>
 
             <a href="#" class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle text-white" rel="noopener">
-                <i class="fi fi-social-youtube"></i> 
+                <i class="fi fi-social-youtube"></i>
             </a>
 
         </li> -->

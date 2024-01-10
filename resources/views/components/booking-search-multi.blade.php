@@ -8,7 +8,7 @@
     $action_id = uniqid();
 @endphp
 
-<div class="row px-3 is-type-multi">
+<div class="row px-3 my-2 py-3 my-lg-0 py-lg-0 is-type-multi border-top-m">
     <input type="hidden" name="_from_type[]" value="multi">
     <div class="col-12 col-md-6 col-lg-3 px-0">
         <div class="form-floating mb-3">

@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-7 form-floating mb-3">
+            <div class="col-8 col-lg-7 form-floating mb-3">
                 <input required type="text" name="birth_day[]" class="form-control form-control-sm datepicker sub-passenger-b-date"
                     data-show-weeks="true"
                     data-today-highlight="true"
@@ -41,15 +41,15 @@
                     data-autoclose="true"
                     data-format="DD/MM/YYYY"
                     autocomplete="off"
-                    placeholder="Birth Day date"
+                    placeholder="Date of Birth"
                     data-type="{{ $type }}">
-                <label class="ms-2">Birth Day date<span class="text-danger">*</span></label>
+                <label class="ms-2">Date of Birth<span class="text-danger">*</span></label>
             </div>
-            <div class="col-5 mb-3 d-flex align-items-center justify-content-center">
+            <div class="col-4 col-lg-5 mb-3 d-flex align-items-center justify-content-center">
                 @if($type == 'Adult')
                     <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-person fs-1"></i>
                 @elseif($type == 'Child')
-                    <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-children fs-4"></i>
+                    <span class="me-2">{{ $type }}</span> <img src="{{asset('icons/child.png')}}" width="26px" alt="" style="filter: invert(1); margin-top: -5px;">
                 @elseif($type == 'Infant')
                     <span class="me-2">{{ $type }}</span> <i class="fa-solid fa-baby fs-3"></i>
                 @endif
