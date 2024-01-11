@@ -11,6 +11,7 @@
         <x-booking-addon
             :route_addons="$route['route_addons']"
             :route_index="$index"
+            :addon_icon="$addon_icon"
         />
 
         <div @class(['d-none' => empty($route['shuttle_bus'])])>

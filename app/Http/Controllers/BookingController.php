@@ -21,6 +21,11 @@ class BookingController extends Controller
         'CO' => 'Confirmed',
         'VO' => 'Canceled'
     ];
+    protected $RouteAddonIcon = [
+        'shuttle_bus' => 'fa-solid fa-bus',
+        'private_taxi' => 'fa-solid fa-taxi',
+        'longtail_boat' => 'fa-solid fa-sailboat'
+    ];
 
     public function __construct() {
         $this->IconUrl = config('services.store.image');
@@ -65,6 +70,7 @@ class BookingController extends Controller
             $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
             $routes['data'][$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+            // $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
 
             if($route['ispromocode'] == 'Y' && $promocode != null) {
                 $use_promocode = $request->promotioncode;
@@ -80,14 +86,17 @@ class BookingController extends Controller
 
         $code_country = $this->CodeCountry;
         $country_list = $this->CountryList;
+        $addon_icon = $this->RouteAddonIcon;
 
-        // Log::debug($routes['data']);
+        // Log::debug($routes['data'][0]['route_addons']);
+        // $addon_group = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
+        // Log::debug($addon_group);
 
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode,
-                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex
+                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $addon_icon
             ]);
     }
 
@@ -282,7 +291,9 @@ class BookingController extends Controller
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
             'ispremiumflex' => $request->ispremiumflex,
-            'promocode' => $request->use_promocode
+            'promocode' => $request->use_promocode,
+            'route_addon' => [$request->route_addon],
+            'route_addon_detail' => [$request->route_addon_detail]
         ]);
 
         $res = $response->json();

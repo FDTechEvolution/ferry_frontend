@@ -15,6 +15,8 @@ let is_passenger = [] // passenger info
 if(booking_route) {
     let route_list = booking_route.querySelectorAll('.booking-route-list')
     let btn_route_list = document.querySelectorAll('.btn-route-list')
+    const route_addon_checked = document.querySelectorAll('.route-addon-checked')
+    const route_addon_detail = document.querySelectorAll('.route-addon-detail')
 
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-select-${index}`)
@@ -55,6 +57,9 @@ if(booking_route) {
                 icon_list.push(icon.src)
             })
             icon_selected = icon_list
+
+            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_detail.forEach((detail) => { detail.name = '' })
 
             price_list.push(route.querySelector('.selected-adult-price').value)
             price_list.push(route.querySelector('.selected-child-price').value)
@@ -241,6 +246,27 @@ function progressCondition(step) {
         const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
         const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
         const route_addon_lists = _extra.querySelectorAll('.route-addon-lists')
+        const route_addon_checked = _extra.querySelectorAll('.route-addon-checked')
+
+        route_addon_checked.forEach((route_addon) => {
+            route_addon.addEventListener('change', (e) => {
+                let type = e.target.dataset.type
+                let subtype = e.target.dataset.subtype
+                let routeindex = e.target.dataset.routeindex
+                let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}`)
+                let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}`)
+                if(e.target.checked) {
+                    extra_price += parseInt(addon_price.value)
+                    addon_detail.name = 'route_addon_detail[]'
+                    updateSumPrice()
+                }
+                else {
+                    extra_price -= parseInt(addon_price.value)
+                    addon_detail.name = ''
+                    updateSumPrice()
+                }
+            })
+        })
 
         let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}`)
         route_addon_lists.forEach((item) => { item.classList.add('d-none') })
