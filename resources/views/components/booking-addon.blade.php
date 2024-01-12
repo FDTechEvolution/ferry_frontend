@@ -1,6 +1,6 @@
-@props(['route_addons' => [], 'route_index' => '', 'addon_icon' => []])
+@props(['route_addons' => [], 'route_index' => '', 'addon_icon' => [], 'type' => ''])
 
-<div class="row route-addon-lists route-addon-index-{{ $route_index }}">
+<div class="row route-addon-lists-{{ $type }} route-addon-index-{{ $route_index }}-{{ $type }}">
     @foreach($route_addons as $index => $addon)
         @php
             $from_id = uniqid();
@@ -20,17 +20,17 @@
                                     title="{{ $addon['mouseover'] }}">
                                 </i>
                             </label>
-                            <input class="form-check-input form-check-input-default route-addon-checked"
-                                    type="checkbox" id="{{ $from_id }}" name="route_addon[]"
+                            <input class="form-check-input form-check-input-default route-addon-checked-{{ $type }}"
+                                    type="checkbox" id="{{ $from_id }}" name="route_addon_{{ $type }}[]"
                                     data-type="{{ $addon['type'] }}" data-subtype="{{ $addon['subtype'] }}"
                                     data-routeindex="{{ $route_index }}" value="{{ $addon['id'] }}">
 
-                            <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}"
+                            <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}"
                                     value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}">
                         </div>
                     </div>
                     <div class="col-10">
-                        <textarea class="form-control route-addon-detail addon-detail-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}" rows="3" name="" placeholder="{{ $addon['message'] }}"></textarea>
+                        <textarea class="form-control route-addon-detail-{{ $type }} addon-detail-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}" rows="3" name="" placeholder="{{ $addon['message'] }}"></textarea>
                         @if($addon['isservice_charge'] == 'Y')
                             <p class="small mt-2 mb-0"><span class="fw-bold">Service charge</span> {{ number_format($addon['price']) }} <span class="small">THB</span></p>
                         @endif

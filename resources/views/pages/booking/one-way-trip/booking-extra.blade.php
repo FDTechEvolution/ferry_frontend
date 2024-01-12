@@ -12,9 +12,10 @@
             :route_addons="$route['route_addons']"
             :route_index="$index"
             :addon_icon="$addon_icon"
+            :type="_('depart')"
         />
 
-        <div @class(['d-none' => empty($route['shuttle_bus'])])>
+        {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>
             <div class="row route-shuttle-bus px-3 mb-3" id="route-shuttle-bus-index-{{ $index }}">
                 @if(!empty($route['shuttle_bus']))
                     <h5 class="mb-2">Shuttle bus</h5>
@@ -71,7 +72,7 @@
                     @endforeach
                 @endif
             </div>
-        </div>
+        </div> --}}
         <div @class(['d-none' => empty($route['meal_lines'])])>
             <div class="row route-meal px-3 mb-5" id="route-meal-index-{{ $index }}">
                 @if(!empty($route['meal_lines']))

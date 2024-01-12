@@ -262,18 +262,44 @@ function progressCondition(step) {
         const ex_route = r_extra.querySelectorAll('.booking-route-extra')
         ex_route.forEach((_extra, ex_index) => {
             let list_index = _extra.dataset.list
-            const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
-            const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
+            // const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
+            // const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
             const meal_list = _extra.querySelectorAll(`.route-meal`)
             const activity_list = _extra.querySelectorAll('.route-activity')
+            const route_addon_lists = _extra.querySelectorAll(`.route-addon-lists-${ex_index}`)
+            const route_addon_checked = _extra.querySelectorAll(`.route-addon-checked-${ex_index}`)
 
-            let shuttlebus_selected = _extra.querySelector(`#route-shuttle-bus-index-${list_index}_${route_selected[list_index]}`)
-            shuttlebus_list.forEach((item) => { item.classList.add('d-none') })
-            shuttlebus_selected.classList.remove('d-none')
+            route_addon_checked.forEach((route_addon) => {
+                route_addon.addEventListener('change', (e) => {
+                    let type = e.target.dataset.type
+                    let subtype = e.target.dataset.subtype
+                    let routeindex = e.target.dataset.routeindex
+                    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${ex_index}`)
+                    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
+                    if(e.target.checked) {
+                        extra_price += parseInt(addon_price.value)
+                        addon_detail.name = `route_addon_detail_${ex_index}[]`
+                        updateSumPrice()
+                    }
+                    else {
+                        extra_price -= parseInt(addon_price.value)
+                        addon_detail.name = ''
+                        updateSumPrice()
+                    }
+                })
+            })
 
-            let longtailboat_selected = _extra.querySelector(`#route-longtail-boat-index-${list_index}_${route_selected[list_index]}`)
-            longtailboat_list.forEach((item) => { item.classList.add('d-none') })
-            longtailboat_selected.classList.remove('d-none')
+            let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected[list_index]}-${ex_index}`)
+            route_addon_lists.forEach((item) => { item.classList.add('d-none') })
+            route_addons.forEach((item) => { item.classList.remove('d-none') })
+
+            // let shuttlebus_selected = _extra.querySelector(`#route-shuttle-bus-index-${list_index}_${route_selected[list_index]}`)
+            // shuttlebus_list.forEach((item) => { item.classList.add('d-none') })
+            // shuttlebus_selected.classList.remove('d-none')
+
+            // let longtailboat_selected = _extra.querySelector(`#route-longtail-boat-index-${list_index}_${route_selected[list_index]}`)
+            // longtailboat_list.forEach((item) => { item.classList.add('d-none') })
+            // longtailboat_selected.classList.remove('d-none')
 
             let meal_select = _extra.querySelector(`#route-meal-index-${list_index}_${route_selected[list_index]}`)
             meal_list.forEach((item) => { item.classList.add('d-none') })

@@ -15,7 +15,14 @@
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 booking-route-extra border rounded p-3" data-list="{{ $r_index }}">
             @foreach($routes['data'] as $index => $route)
-                <div @class(['d-none' => empty($route['shuttle_bus'])])>
+                <x-booking-addon
+                    :route_addons="$route['route_addons']"
+                    :route_index="$index"
+                    :addon_icon="$addon_icon"
+                    :type="$r_index"
+                />
+
+                {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>
                     <div class="row route-shuttle-bus px-3 mb-3" id="route-shuttle-bus-index-{{ $r_index }}_{{ $index }}">
                         @if(!empty($route['shuttle_bus']))
                             <h5 class="mb-2">Shuttle bus</h5>
@@ -72,7 +79,7 @@
                             @endforeach
                         @endif
                     </div>
-                </div>
+                </div> --}}
                 <div @class(['d-none' => empty($route['meal_lines'])])>
                     <div class="row route-meal px-3 mb-3" id="route-meal-index-{{ $r_index }}_{{ $index }}">
                         @if(!empty($route['meal_lines']))

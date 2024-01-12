@@ -22,6 +22,8 @@ let route_promo = false
 if(depart_route) {
     let route_list = depart_route.querySelectorAll('.booking-depart-list')
     let btn_route_list = document.querySelectorAll('.btn-route-depart-list')
+    const route_addon_checked = document.querySelectorAll('.route-addon-checked-depart')
+    const route_addon_detail = document.querySelectorAll('.route-addon-detail-depart')
 
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-depart-select-${index}`)
@@ -53,6 +55,9 @@ if(depart_route) {
             })
             icon_selected.depart = icon_list
 
+            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_detail.forEach((detail) => { detail.name = '' })
+
             price_list.push(route.querySelector('.selected-adult-price').value)
             price_list.push(route.querySelector('.selected-child-price').value)
             price_list.push(route.querySelector('.selected-infant-price').value)
@@ -81,6 +86,8 @@ if(depart_route) {
 if(return_route) {
     let route_list = return_route.querySelectorAll('.booking-return-list')
     let btn_route_list = document.querySelectorAll('.btn-route-return-list')
+    const route_addon_checked = document.querySelectorAll('.route-addon-checked-return')
+    const route_addon_detail = document.querySelectorAll('.route-addon-detail-return')
 
     route_list.forEach((route, index) => {
         let btn_select = document.querySelector(`.btn-route-return-select-${index}`)
@@ -108,6 +115,9 @@ if(return_route) {
                 icon_list.push(icon.src)
             })
             icon_selected.return = icon_list
+
+            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_detail.forEach((detail) => { detail.name = '' })
 
             price_list.push(route.querySelector('.selected-adult-price').value)
             price_list.push(route.querySelector('.selected-child-price').value)
@@ -301,15 +311,29 @@ function progressCondition(step) {
     }
 
     if(step === 'extra') {
-        extraList('.depart-route-shuttle-bus', `#depart-route-shuttle-bus-index-${route_index.depart}`)
-        extraList('.depart-route-longtail-boat', `#depart-route-longtail-boat-index-${route_index.depart}`)
+        // extraList('.depart-route-shuttle-bus', `#depart-route-shuttle-bus-index-${route_index.depart}`, `.route-addon-index-${route_index.depart}`)
+        // extraList('.depart-route-longtail-boat', `#depart-route-longtail-boat-index-${route_index.depart}`)
+        extraList('.route-addon-lists-depart', `.route-addon-index-${route_index.depart}-depart`)
         extraList('.depart-meal', `#extra-depart-meal-index-${route_index.depart}`)
         extraList('.depart-activity', `#extra-depart-activity-index-${route_index.depart}`)
+        const depart_route_addon_checked = document.querySelectorAll('.route-addon-checked-depart')
+        depart_route_addon_checked.forEach((route_addon) => {
+            route_addon.addEventListener('change', (e) => {
+                routeAddonCheck(e, 'depart')
+            })
+        })
 
-        extraList('.return-route-shuttle-bus', `#return-route-shuttle-bus-index-${route_index.return}`)
-        extraList('.return-route-longtail-boat', `#return-route-longtail-boat-index-${route_index.return}`)
+        // extraList('.return-route-shuttle-bus', `#return-route-shuttle-bus-index-${route_index.return}`)
+        // extraList('.return-route-longtail-boat', `#return-route-longtail-boat-index-${route_index.return}`)
+        extraList('.route-addon-lists-return', `.route-addon-index-${route_index.return}-return`)
         extraList('.return-meal', `#extra-return-meal-index-${route_index.return}`)
         extraList('.return-activity', `#extra-return-activity-index-${route_index.return}`)
+        const return_route_addon_checked = document.querySelectorAll('.route-addon-checked-return')
+        return_route_addon_checked.forEach((route_addon) => {
+            route_addon.addEventListener('change', (e) => {
+                routeAddonCheck(e, 'return')
+            })
+        })
 
         progress_next.classList.remove('d-none')
         progress_payment.classList.add('d-none')
@@ -355,6 +379,32 @@ function extraList(lists, list) {
     const _list = _extra.querySelector(list)
     _lists.forEach((list) => { list.classList.add('d-none') })
     _list.classList.remove('d-none')
+}
+
+function routeAddonCheck(e, _type) {
+    let type = e.target.dataset.type
+    let subtype = e.target.dataset.subtype
+    let routeindex = e.target.dataset.routeindex
+    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${_type}`)
+    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${_type}`)
+    if(e.target.checked) {
+        if(_type === 'depart') {
+            extra_price.depart += parseInt(addon_price.value)
+            addon_detail.name = `route_addon_detail_${_type}[]`
+        }
+        if(_type === 'return') {
+            extra_price.return += parseInt(addon_price.value)
+            addon_detail.name = `route_addon_detail_${_type}[]`
+        }
+
+        updateSumPrice()
+    }
+    else {
+        if(_type === 'depart') extra_price.depart -= parseInt(addon_price.value)
+        if(_type === 'return') extra_price.return -= parseInt(addon_price.value)
+        addon_detail.name = ''
+        updateSumPrice()
+    }
 }
 
 function inc(type, element, index) {

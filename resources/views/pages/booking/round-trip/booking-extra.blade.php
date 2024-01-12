@@ -6,10 +6,17 @@
             <h5 class="text-primary"><span class="badge bg-booking-select-depart">Depart</span> {{ $station_depart['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_depart['to'] }}</h5>
         </div>
     </div>
-    
+
     <div id="depart-route-extra">
         @foreach($depart_routes as $index => $route)
-            <div @class(['d-none' => empty($route['shuttle_bus'])])>
+            <x-booking-addon
+                :route_addons="$route['route_addons']"
+                :route_index="$index"
+                :addon_icon="$addon_icon"
+                :type="_('depart')"
+            />
+
+            {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>
                 <div class="row depart-route-shuttle-bus px-3 mb-5" id="depart-route-shuttle-bus-index-{{ $index }}">
                     @if(!empty($route['shuttle_bus']))
                         <h5 class="mb-2">Shuttle bus</h5>
@@ -66,7 +73,7 @@
                         @endforeach
                     @endif
                 </div>
-            </div>
+            </div> --}}
             <div @class(['d-none' => empty($route['meal_lines'])])>
                 <div class="row depart-meal px-3 mb-5" id="extra-depart-meal-index-{{ $index }}">
                     @if(!empty($route['meal_lines']))
@@ -136,7 +143,14 @@
 
     <div id="return-route-extra">
         @foreach($return_routes as $index => $route)
-            <div @class(['d-none' => empty($route['shuttle_bus'])])>
+            <x-booking-addon
+                :route_addons="$route['route_addons']"
+                :route_index="$index"
+                :addon_icon="$addon_icon"
+                :type="_('return')"
+            />
+
+            {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>
                 <div class="row return-route-shuttle-bus px-3 mb-5" id="return-route-shuttle-bus-index-{{ $index }}">
                     @if(!empty($route['shuttle_bus']))
                         <h5 class="mb-2">Shuttle bus</h5>
@@ -193,7 +207,7 @@
                         @endforeach
                     @endif
                 </div>
-            </div>
+            </div> --}}
             <div @class(['d-none' => empty($route['meal_lines'])])>
                 <div class="row return-meal px-3 mb-5" id="extra-return-meal-index-{{ $index }}">
                     @if(!empty($route['meal_lines']))

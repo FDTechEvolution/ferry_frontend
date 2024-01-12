@@ -189,11 +189,13 @@ class BookingController extends Controller
             $freepremiumflex = $promocode['isfreepremiumflex'];
         }
 
+        // Log::debug($depart_routes);
+
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
             'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList,
-            'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex
+            'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $this->RouteAddonIcon
         ]);
     }
 
@@ -202,8 +204,6 @@ class BookingController extends Controller
     }
 
     public function searchMultiTrip(Request $request) {
-        // Log::debug($request);
-        // return redirect()->route('home');
         $_type = $this->Type[$request->_type];
         $passenger = $this->setInputType($request);
         $route_arr = [];
@@ -216,10 +216,6 @@ class BookingController extends Controller
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
                     $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
                     $route_arr[$index]['depart'] = $request->date[$index];
-                    // if($_station['from'] == '')
-                    //     $_station['from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
-                    // if($_station['to'] == '')
-                    //     $_station['to'] = $_station_from = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
 
                     $routes['data'][$key]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
                     $routes['data'][$key]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
@@ -234,11 +230,9 @@ class BookingController extends Controller
             }
         }
 
-        // Log::debug($route_arr);
-
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
-                        'country_list' => $this->CountryList]);
+                        'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon]);
     }
 
     private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {
@@ -292,8 +286,8 @@ class BookingController extends Controller
             'payment_method' => $request->payment_method,
             'ispremiumflex' => $request->ispremiumflex,
             'promocode' => $request->use_promocode,
-            'route_addon' => [$request->route_addon],
-            'route_addon_detail' => [$request->route_addon_detail]
+            'route_addon' => [$request->route_addon_depart],
+            'route_addon_detail' => [$request->route_addon_detail_depart]
         ]);
 
         $res = $response->json();
@@ -328,7 +322,6 @@ class BookingController extends Controller
 
     // Round trip booking confirm
     public function bookingRoundConfirm(Request $request) {
-        // Log::debug($request);
         $route_id = [$request->booking_depart_selected, $request->booking_return_selected];
         $meal_id = [$request->depart_meal_id, $request->return_meal_id];
         $meal_qty = [$request->depart_meal_qty, $request->return_meal_qty];
@@ -343,6 +336,8 @@ class BookingController extends Controller
         $_departdate = explode('/', $request->departdate);
         $_returndate = explode('/', $request->returndate);
         $_birthday = $this->setBirthday($request->birth_day);
+        $_route_addon = [$request->route_addon_depart, $request->route_addon_return];
+        $_route_addon_detail = [$request->route_addon_detail_depart, $request->route_addon_detail_return];
 
         $response = Http::reqres()->post('/online-booking/create', [
             'route_id' => $route_id,
@@ -373,7 +368,9 @@ class BookingController extends Controller
             'trip_type' => 'round-trip',
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
-            'ispremiumflex' => $request->ispremiumflex
+            'ispremiumflex' => $request->ispremiumflex,
+            'route_addon' => $_route_addon,
+            'route_addon_detail' => $_route_addon_detail
         ]);
 
         $res = $response->json();
