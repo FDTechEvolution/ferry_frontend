@@ -22,6 +22,8 @@ if(booking_routes) {
         sum_price.push(0)
         let route_list = route.querySelectorAll('.booking-route-list')
         let btn_route_list = document.querySelectorAll(`.btn-route-list_${index}`)
+        const route_addon_checked = document.querySelectorAll(`.route-addon-checked-${index}`)
+        const route_addon_detail = document.querySelectorAll(`.route-addon-detail-${index}`)
 
         let _depart_name = document.querySelector(`.depart-station-name-${index}`).innerText
         let _arrive_name = document.querySelector(`.arrive-station-name-${index}`).innerText
@@ -87,6 +89,12 @@ if(booking_routes) {
                     'route_price': parseToNumber(route.querySelector('.route-price').innerText),
                     'icons': icon_list
                 }
+
+                route_addon_checked.forEach((addon) => {
+                    addon.checked = false
+                    addon.name = ''
+                })
+                route_addon_detail.forEach((detail) => { detail.name = '' })
 
                 // END save route to payment /////////////////////////////
 
@@ -278,11 +286,13 @@ function progressCondition(step) {
                     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
                     if(e.target.checked) {
                         extra_price += parseInt(addon_price.value)
-                        addon_detail.name = `route_addon_detail_${ex_index}[]`
+                        e.target.name = `route_addon[${ex_index}][]`
+                        addon_detail.name = `route_addon_detail[${ex_index}][]`
                         updateSumPrice()
                     }
                     else {
                         extra_price -= parseInt(addon_price.value)
+                        e.target.name = ''
                         addon_detail.name = ''
                         updateSumPrice()
                     }

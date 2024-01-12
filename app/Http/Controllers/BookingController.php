@@ -22,9 +22,9 @@ class BookingController extends Controller
         'VO' => 'Canceled'
     ];
     protected $RouteAddonIcon = [
-        'shuttle_bus' => 'fa-solid fa-bus',
-        'private_taxi' => 'fa-solid fa-taxi',
-        'longtail_boat' => 'fa-solid fa-sailboat'
+        'shuttle_bus' => 'ico-bus.png',
+        'private_taxi' => 'ico-private-taxi.png',
+        'longtail_boat' => 'ico-long-tail-boat.png'
     ];
 
     public function __construct() {
@@ -425,7 +425,9 @@ class BookingController extends Controller
             'trip_type' => 'multi-trip',
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
-            'ispremiumflex' => $request->ispremiumflex
+            'ispremiumflex' => $request->ispremiumflex,
+            'route_addon' => $request->route_addon,
+            'route_addon_detail' => $request->route_addon_detail
         ]);
         $res = $response->json();
         if(isset($res)) {

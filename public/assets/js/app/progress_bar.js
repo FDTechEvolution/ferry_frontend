@@ -58,7 +58,10 @@ if(booking_route) {
             })
             icon_selected = icon_list
 
-            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_checked.forEach((addon) => {
+                addon.checked = false
+                addon.name = ''
+            })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
             price_list.push(route.querySelector('.selected-adult-price').value)
@@ -257,11 +260,13 @@ function progressCondition(step) {
                 let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
                 if(e.target.checked) {
                     extra_price += parseInt(addon_price.value)
+                    e.target.name = 'route_addon_depart[]'
                     addon_detail.name = 'route_addon_detail_depart[]'
                     updateSumPrice()
                 }
                 else {
                     extra_price -= parseInt(addon_price.value)
+                    e.target.name = ''
                     addon_detail.name = ''
                     updateSumPrice()
                 }

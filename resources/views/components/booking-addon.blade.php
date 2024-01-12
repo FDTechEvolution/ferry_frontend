@@ -1,27 +1,24 @@
-@props(['route_addons' => [], 'route_index' => '', 'addon_icon' => [], 'type' => ''])
+@props(['route_addons' => [], 'route_index' => '', 'addon_icon' => [], 'type' => '', 'from' => '', 'to' => ''])
 
 <div class="row route-addon-lists-{{ $type }} route-addon-index-{{ $route_index }}-{{ $type }}">
     @foreach($route_addons as $index => $addon)
         @php
             $from_id = uniqid();
-            $to_id = uniqid();
         @endphp
 
         @if($addon['isactive'] == 'Y')
             <div class="col-12 col-lg-6 mb-3 pb-4 border-bottom">
-                <h4>{{ $addon['name'] }}</h4>
+                <h5>{{ $addon['name'] }} {{ $addon['subtype'] == 'from' ? $from : $to }}</h5>
                 <div class="row">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <div class="mb-2 d-grid" style="justify-items: center;">
                             <label class="form-check-label mb-2" for="{{ $from_id }}">
-                                <i class="{{ $addon_icon[$addon['type']] }} fs-2"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="{{ $addon['mouseover'] }}">
-                                </i>
+                                <img src="{{ asset('icons/'.$addon_icon[$addon['type']]) }}"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $addon['mouseover'] }}"
+                                    width="70" />
                             </label>
                             <input class="form-check-input form-check-input-default route-addon-checked-{{ $type }}"
-                                    type="checkbox" id="{{ $from_id }}" name="route_addon_{{ $type }}[]"
+                                    type="checkbox" id="{{ $from_id }}" name=""
                                     data-type="{{ $addon['type'] }}" data-subtype="{{ $addon['subtype'] }}"
                                     data-routeindex="{{ $route_index }}" value="{{ $addon['id'] }}">
 

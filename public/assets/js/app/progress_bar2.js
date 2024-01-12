@@ -55,7 +55,10 @@ if(depart_route) {
             })
             icon_selected.depart = icon_list
 
-            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_checked.forEach((addon) => {
+                addon.checked = false
+                addon.name = ''
+            })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
             price_list.push(route.querySelector('.selected-adult-price').value)
@@ -116,7 +119,10 @@ if(return_route) {
             })
             icon_selected.return = icon_list
 
-            route_addon_checked.forEach((addon) => { addon.checked = false })
+            route_addon_checked.forEach((addon) => {
+                addon.checked = false
+                addon.name = ''
+            })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
             price_list.push(route.querySelector('.selected-adult-price').value)
@@ -390,10 +396,12 @@ function routeAddonCheck(e, _type) {
     if(e.target.checked) {
         if(_type === 'depart') {
             extra_price.depart += parseInt(addon_price.value)
+            e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
         }
         if(_type === 'return') {
             extra_price.return += parseInt(addon_price.value)
+            e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
         }
 
@@ -402,6 +410,7 @@ function routeAddonCheck(e, _type) {
     else {
         if(_type === 'depart') extra_price.depart -= parseInt(addon_price.value)
         if(_type === 'return') extra_price.return -= parseInt(addon_price.value)
+        e.target.name = ''
         addon_detail.name = ''
         updateSumPrice()
     }
