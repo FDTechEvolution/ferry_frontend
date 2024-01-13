@@ -16,7 +16,7 @@
                             <div class="row py-3 pb-lg-3 pb-2">
                                 @if($route['ispromocode'] == 'Y')
                                     <p class="mb-2 small">
-                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
+                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable-depart">PromoCode Avaliable!</small>
                                     </p>
                                 @endif
                                 <div class="col-1 d-flex justify-content-center align-items-center">
@@ -129,7 +129,7 @@
                             <div class="row py-3 pb-lg-3 pb-2">
                                 @if($route['ispromocode'] == 'Y')
                                     <p class="mb-2 small">
-                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2">PromoCode Avaliable!</small>
+                                        <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable-return">PromoCode Avaliable!</small>
                                     </p>
                                 @endif
                                 <div class="col-1 d-flex justify-content-center align-items-center">

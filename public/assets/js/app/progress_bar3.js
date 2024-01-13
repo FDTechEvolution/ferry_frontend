@@ -7,6 +7,7 @@ let is_passenger = []
 let route_price = 0
 let premium_price = 0
 let extra_price = 0
+let addon_route = []
 let payment_info = {
     route_selected: [],
     extra_selected: []
@@ -18,6 +19,7 @@ if(booking_routes) {
     booking_routes.forEach((route, index) => {
         route_selected.push([])
         icon_selected.push([])
+        addon_route.push([])
         payment_info.extra_selected.push([])
         sum_price.push(0)
         let route_list = route.querySelectorAll('.booking-route-list')
@@ -282,15 +284,20 @@ function progressCondition(step) {
                     let type = e.target.dataset.type
                     let subtype = e.target.dataset.subtype
                     let routeindex = e.target.dataset.routeindex
+                    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${ex_index}`)
                     let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${ex_index}`)
                     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
                     if(e.target.checked) {
+                        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+                        if(addon_index < 0) addon_route[ex_index].push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${ex_index}`})
                         extra_price += parseInt(addon_price.value)
                         e.target.name = `route_addon[${ex_index}][]`
                         addon_detail.name = `route_addon_detail[${ex_index}][]`
                         updateSumPrice()
                     }
                     else {
+                        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+                        if(addon_index >= 0) addon_route[ex_index].splice(addon_index, 1)
                         extra_price -= parseInt(addon_price.value)
                         e.target.name = ''
                         addon_detail.name = ''
@@ -447,6 +454,18 @@ function setLitinerary() {
     document.querySelector('.sum-of-payment').innerHTML = sum_of_payment.toLocaleString("en-US")
     document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US")
     document.querySelector('.sum-amount').innerHTML = (sum_of_payment + premium_price).toLocaleString("en-US")
+
+    const addon_list = document.querySelector('.amount-detail-list')
+    const addon_lists = addon_list.querySelectorAll('.addon-route-detail')
+    addon_lists.forEach((list) => { list.remove() })
+    for(i = 0; i < addon_route.length; i++) {
+        addon_route[i].forEach((addon) => {
+            let h6 = document.createElement('h6')
+            h6.setAttribute('class', 'd-flex justify-content-end align-items-end addon-route-detail')
+            h6.innerHTML = `[Trip ${i+1}] ${addon.name} <p class="w--20 w-sm-30 me-2 mb-0"> ${addon.price} </p><small class="smaller">THB</small>`
+            addon_list.appendChild(h6)
+        })
+    }
 }
 
 function setPassengerDetail() {

@@ -8,7 +8,7 @@ let price = { depart: 0, return: 0 }
 let icon_selected = { depart: [], return: [] }
 let extra_id = { depart: [], return: [] }
 let extra_price = { depart: 0, return: 0 }
-let addon_route = { depadr: [], return: [] }
+let addon_route = { depart: [], return: [] }
 let payment = { // PAYMENT INFO
         time: {
                 depart: { depart_time: null, arrive_time: null },
@@ -18,7 +18,8 @@ let payment = { // PAYMENT INFO
         is_passenger: [],
         extra: { depart: [], return: [] }
     }
-let route_promo = false
+let route_promo = { depart: false, return: false }
+let selected_promo = { depart: false, return: false }
 
 if(depart_route) {
     let route_list = depart_route.querySelectorAll('.booking-depart-list')
@@ -39,8 +40,12 @@ if(depart_route) {
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
 
-            if(document.querySelector('.promo-price')) route_promo = true
-            else route_promo = false
+            let is_promo_selected = route.querySelector('.promo-avaliable-depart')
+            if(is_promo_selected) selected_promo.depart = true
+            else selected_promo.depart = false
+
+            if(document.querySelector('.promo-price')) route_promo.depart = true
+            else route_promo.depart = false
 
             route_index.depart = index
             route_selected.depart = true
@@ -107,6 +112,13 @@ if(return_route) {
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
 
+            let is_promo_selected = route.querySelector('.promo-avaliable-return')
+            if(is_promo_selected) selected_promo.return = true
+            else selected_promo.return = false
+
+            if(document.querySelector('.promo-price')) route_promo.return = true
+            else route_promo.return = false
+
             route_index.return = index
             route_selected.return = true
             routeSelected()
@@ -159,7 +171,7 @@ function routeSelected() {
 }
 
 function updateRoutePrice() {
-    document.querySelector('#sum-price').innerHTML = (price.depart + price.return).toLocaleString("en-US", { minimumFractionDigits: 0 })
+    document.querySelector('#sum-price').innerHTML = (price.depart + price.return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
 function parseToNumber(str) {
@@ -257,7 +269,7 @@ function progressCondition(step) {
         let route_price = (price.depart + price.return)
         let _premium_price = ((route_price*110)/100) - route_price
 
-        txt_price.innerHTML = _premium_price
+        txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 
         if(nonePremiumFlex.checked) {
             premium_price = 0
@@ -357,7 +369,7 @@ function progressCondition(step) {
         let extra_sum = extra_sum_depart + extra_sum_return
         if(extra_sum > 0) {
             document.querySelector('#payment-extra-service').classList.remove('d-none')
-            document.querySelector('#sum-of-extra').innerHTML = extra_sum.toLocaleString("en-US")
+            document.querySelector('#sum-of-extra').innerHTML = extra_sum.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         }
         else document.querySelector('#payment-extra-service').classList.add('d-none')
 
@@ -434,8 +446,6 @@ function routeAddonCheck(e, _type) {
         addon_detail.name = ''
         updateSumPrice()
     }
-
-    console.log(addon_route)
 }
 
 function inc(type, element, index) {
@@ -474,7 +484,7 @@ function dec(type, element, index) {
 
 function updateSumPrice() {
     let sum_amount = (price.depart + price.return) + (extra_price.depart + extra_price.return) + premium_price
-    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0 })}`
+    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
 }
 
 function setExtra(icon, name, amount, qty, element, type) {
@@ -645,9 +655,62 @@ function setLitinerary() {
 
     let sum_depart = setPassengerAmountPayment('depart')
     let sum_return = setPassengerAmountPayment('return')
-    document.querySelector('.sum-of-payment').innerHTML = (sum_depart + sum_return).toLocaleString("en-US")
-    document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US")
-    document.querySelector('.sum-amount').innerHTML = (sum_depart + sum_return + premium_price).toLocaleString("en-US")
+    document.querySelector('.sum-of-payment').innerHTML = (sum_depart + sum_return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    document.querySelector('.sum-of-premium').innerHTML = premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+
+    let promo_sum = document.querySelector('.sum-of-promocode')
+    let sum_discount = 0
+    if(selected_promo.depart) {
+        let discount = sum_depart - price.depart
+        sum_discount += discount
+        let minus = sum_discount !== 0 ? '- ' : ''
+        document.querySelector('.promocode-show').classList.remove('d-none')
+        promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    }
+    else {
+        document.querySelector('.promocode-show').classList.add('d-none')
+        let minus = sum_discount !== 0 ? '- ' : ''
+        promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    }
+
+    if(selected_promo.return) {
+        let discount = sum_return - price.return
+        sum_discount += discount
+        let minus = sum_discount !== 0 ? '- ' : ''
+        document.querySelector('.promocode-show').classList.remove('d-none')
+        promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    }
+    else {
+        let minus = sum_discount !== 0 ? '- ' : ''
+        if(selected_promo.depart) {
+            promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        }
+        else {
+            document.querySelector('.promocode-show').classList.add('d-none')
+            promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        }
+    }
+
+    const addon_list = document.querySelector('.amount-detail-list')
+    const addon_lists = addon_list.querySelectorAll('.addon-route-detail')
+    addon_lists.forEach((list) => { list.remove() })
+    let route_addon_price = 0
+    addon_route.depart.forEach((addon) => {
+        let h6 = document.createElement('h6')
+        h6.setAttribute('class', 'd-flex justify-content-end align-items-end addon-route-detail')
+        h6.innerHTML = `[Depart] : ${addon.name} <p class="w--20 w-sm-30 me-2 mb-0"> ${addon.price} </p><small class="smaller">THB</small>`
+        addon_list.appendChild(h6)
+        route_addon_price += parseInt(addon.price)
+    })
+    addon_route.return.forEach((addon) => {
+        let h6 = document.createElement('h6')
+        h6.setAttribute('class', 'd-flex justify-content-end align-items-end addon-route-detail')
+        h6.innerHTML = `[Return] : ${addon.name} <p class="w--20 w-sm-30 me-2 mb-0"> ${addon.price} </p><small class="smaller">THB</small>`
+        addon_list.appendChild(h6)
+        route_addon_price += parseInt(addon.price)
+    })
+
+    document.querySelector('.sum-amount').innerHTML = ((sum_depart + sum_return + premium_price + route_addon_price) - sum_discount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
 function setPassengerDetail() {
@@ -783,7 +846,7 @@ function setExtraDetail(type) {
             sum += bus.qty*bus.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3 me-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US")} ] : ${(bus.qty*bus.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<i class="fa-solid fa-van-shuttle fs-3 me-3"></i> ${bus.name} - [ <strong>Fare </strong> ${bus.qty} x ${bus.amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ] : ${(bus.qty*bus.amount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} THB`
             extra_shuttlebus.appendChild(p)
         })
     }
@@ -807,7 +870,7 @@ function setExtraDetail(type) {
             sum += boat.qty*boat.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<i class="fa-solid fa-sailboat fs-3 me-3"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US")} ] : ${(boat.qty*boat.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<i class="fa-solid fa-sailboat fs-3 me-3"></i> ${boat.name} - [ <strong>Fare </strong> ${boat.qty} x ${boat.amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ] : ${(boat.qty*boat.amount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} THB`
             extra_longtailboat.appendChild(p)
         })
     }
@@ -831,7 +894,7 @@ function setExtraDetail(type) {
             sum += meal.qty*meal.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<img src="${meal.icon}" class="me-3" width="40" height="auto"> ${meal.name} - [ <strong>Fare </strong> ${meal.qty} x ${meal.amount.toLocaleString("en-US")} ] : ${(meal.qty*meal.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<img src="${meal.icon}" class="me-3" width="40" height="auto"> ${meal.name} - [ <strong>Fare </strong> ${meal.qty} x ${meal.amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ] : ${(meal.qty*meal.amount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} THB`
             extra_meal.appendChild(p)
         })
     }
@@ -855,7 +918,7 @@ function setExtraDetail(type) {
             sum += activity.qty*activity.amount
             let p = document.createElement('p')
             p.setAttribute('class', 'mb-0 ms-2 text-dark')
-            p.innerHTML = `<img src="${activity.icon}" class="me-3" width="40" height="auto"> ${activity.name} - [ <strong>Fare </strong> ${activity.qty} x ${activity.amount.toLocaleString("en-US")} ] : ${(activity.qty*activity.amount).toLocaleString("en-US")} THB`
+            p.innerHTML = `<img src="${activity.icon}" class="me-3" width="40" height="auto"> ${activity.name} - [ <strong>Fare </strong> ${activity.qty} x ${activity.amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ] : ${(activity.qty*activity.amount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} THB`
             extra_activity.appendChild(p)
         })
     }
@@ -900,24 +963,24 @@ function setPassengerAmountPayment(type) {
     let sum_of_payment = 0
 
     if(adult_price) {
-        adult_price.innerHTML = parseToNumber(_payment[0]).toLocaleString("en-US")
+        adult_price.innerHTML = parseToNumber(_payment[0]).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         let adult_sum = parseToNumber(adult_qty.value)*parseToNumber(_payment[0])
-        document.querySelector(`.${type}-sum-of-adult`).innerHTML = adult_sum.toLocaleString("en-US")
+        document.querySelector(`.${type}-sum-of-adult`).innerHTML = adult_sum.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         sum_of_payment+= adult_sum
     }
     if(child_price) {
-        child_price.innerHTML = parseToNumber(_payment[1]).toLocaleString("en-US")
+        child_price.innerHTML = parseToNumber(_payment[1]).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         let child_sum = parseToNumber(child_qty.value)*parseToNumber(_payment[1])
-        document.querySelector(`.${type}-sum-of-child`).innerHTML = child_sum.toLocaleString("en-US")
+        document.querySelector(`.${type}-sum-of-child`).innerHTML = child_sum.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         sum_of_payment+= child_sum
     }
     if(infant_price) {
-        infant_price.innerHTML = parseToNumber(_payment[2]).toLocaleString("en-US")
+        infant_price.innerHTML = parseToNumber(_payment[2]).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         let infant_sum = parseToNumber(infant_qty.value)*parseToNumber(_payment[2])
-        document.querySelector(`.${type}-sum-of-infant`).innerHTML = infant_sum.toLocaleString("en-US")
+        document.querySelector(`.${type}-sum-of-infant`).innerHTML = infant_sum.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
         sum_of_payment+= infant_sum
     }
 
-    document.querySelector(`.sum-of-${type}`).innerHTML = sum_of_payment.toLocaleString("en-US")
+    document.querySelector(`.sum-of-${type}`).innerHTML = sum_of_payment.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
     return sum_of_payment
 }
