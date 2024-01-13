@@ -50,6 +50,12 @@ class StationController extends Controller
 
         ksort($result2);
 
+        foreach($result2 as $key => $res) {
+            foreach($res as $index => $r) {
+                usort($result2[$key][$index], function ($a, $b) {return $a['sort'] > $b['sort'];});
+            }
+        }
+
         return $result2;
     }
 

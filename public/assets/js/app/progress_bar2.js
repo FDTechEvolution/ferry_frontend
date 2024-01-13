@@ -8,6 +8,7 @@ let price = { depart: 0, return: 0 }
 let icon_selected = { depart: [], return: [] }
 let extra_id = { depart: [], return: [] }
 let extra_price = { depart: 0, return: 0 }
+let addon_route = { depadr: [], return: [] }
 let payment = { // PAYMENT INFO
         time: {
                 depart: { depart_time: null, arrive_time: null },
@@ -58,6 +59,7 @@ if(depart_route) {
             route_addon_checked.forEach((addon) => {
                 addon.checked = false
                 addon.name = ''
+                addon_route.depart = []
             })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
@@ -122,6 +124,7 @@ if(return_route) {
             route_addon_checked.forEach((addon) => {
                 addon.checked = false
                 addon.name = ''
+                addon_route.return = []
             })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
@@ -382,24 +385,33 @@ function extraList(lists, list) {
     const _extra = document.querySelector('#booking-route-extra')
 
     const _lists = _extra.querySelectorAll(lists)
-    const _list = _extra.querySelector(list)
-    _lists.forEach((list) => { list.classList.add('d-none') })
-    _list.classList.remove('d-none')
+    const _list = _extra.querySelectorAll(list)
+    if(_lists && _list) {
+        _lists.forEach((list) => { list.classList.add('d-none') })
+        _list.forEach((list) => { list.classList.remove('d-none') })
+    }
 }
 
 function routeAddonCheck(e, _type) {
     let type = e.target.dataset.type
     let subtype = e.target.dataset.subtype
     let routeindex = e.target.dataset.routeindex
+    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${_type}`)
     let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${_type}`)
     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${_type}`)
     if(e.target.checked) {
         if(_type === 'depart') {
+            let addon_index = addon_route.depart.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
+            if(addon_index < 0) addon_route.depart.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
+
             extra_price.depart += parseInt(addon_price.value)
             e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
         }
         if(_type === 'return') {
+            let addon_index = addon_route.return.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
+            if(addon_index < 0) addon_route.return.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
+
             extra_price.return += parseInt(addon_price.value)
             e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
@@ -408,12 +420,22 @@ function routeAddonCheck(e, _type) {
         updateSumPrice()
     }
     else {
-        if(_type === 'depart') extra_price.depart -= parseInt(addon_price.value)
-        if(_type === 'return') extra_price.return -= parseInt(addon_price.value)
+        if(_type === 'depart') {
+            let addon_index = addon_route.depart.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
+            if(addon_index >= 0) addon_route.depart.splice(addon_index, 1)
+            extra_price.depart -= parseInt(addon_price.value)
+        }
+        if(_type === 'return') {
+            let addon_index = addon_route.return.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
+            if(addon_index >= 0) addon_route.return.splice(addon_index, 1)
+            extra_price.return -= parseInt(addon_price.value)
+        }
         e.target.name = ''
         addon_detail.name = ''
         updateSumPrice()
     }
+
+    console.log(addon_route)
 }
 
 function inc(type, element, index) {

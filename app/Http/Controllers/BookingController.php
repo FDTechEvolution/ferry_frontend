@@ -70,7 +70,7 @@ class BookingController extends Controller
             $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
             $routes['data'][$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
-            // $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
+            $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
 
             if($route['ispromocode'] == 'Y' && $promocode != null) {
                 $use_promocode = $request->promotioncode;
@@ -184,12 +184,12 @@ class BookingController extends Controller
         $return_routes = $result_return[0];
         $station_return = $result_return[1];
 
+        // Log::debug($return_routes);
+
         if($promocode != null) {
             $freecredit = $promocode['isfreecreditcharge'];
             $freepremiumflex = $promocode['isfreepremiumflex'];
         }
-
-        // Log::debug($depart_routes);
 
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
@@ -224,6 +224,7 @@ class BookingController extends Controller
                     $routes['data'][$key]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
                     $routes['data'][$key]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+                    $routes['data'][$key]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
                 }
 
                 $route_arr[$index]['data'] = $routes['data'];
@@ -535,6 +536,7 @@ class BookingController extends Controller
             $_routes[$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
             $_routes[$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+            $_routes[$index]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
 
             if($route['ispromocode'] == 'Y' && $promocode != null) {
                 if(intval($promocode['discount']) != 0)

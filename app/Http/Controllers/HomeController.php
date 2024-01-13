@@ -28,6 +28,8 @@ class HomeController extends Controller
         $station_to = $this->sectionGroup('section', $station_route['data']['to']);
         $promotions = $this->getPromotion();
 
+        // Log::debug($station_route['data']['from']);
+
         $section_col = $this->sectionColumn($station_route['data']['from']);
         // Log::debug($section_col);
 
@@ -59,6 +61,12 @@ class HomeController extends Controller
         }
 
         ksort($result2);
+
+        foreach($result2 as $key => $res) {
+            foreach($res as $index => $r) {
+                usort($result2[$key][$index], function ($a, $b) {return $a['sort'] > $b['sort'];});
+            }
+        }
 
         return $result2;
     }

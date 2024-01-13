@@ -16,7 +16,7 @@
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 booking-route-extra border rounded p-3" data-list="{{ $r_index }}">
             @foreach($routes['data'] as $index => $route)
                 <x-booking-addon
-                    :route_addons="$route['route_addons']"
+                    :route_addons="$route['addon_group']"
                     :route_index="$index"
                     :addon_icon="$addon_icon"
                     :type="$r_index"

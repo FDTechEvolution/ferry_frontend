@@ -9,12 +9,10 @@
 
     @foreach($routes as $index => $route)
         <x-booking-addon
-            :route_addons="$route['route_addons']"
+            :route_addons="$route['addon_group']"
             :route_index="$index"
             :addon_icon="$addon_icon"
             :type="_('depart')"
-            :from="$is_station['from']"
-            :to="$is_station['to']"
         />
 
         {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>

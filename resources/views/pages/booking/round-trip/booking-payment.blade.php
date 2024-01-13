@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <div class="col-12 mt-3 text-end pe-0 pe-lg-5 pt-3 border-top border-secondary">
+        <div class="col-12 mt-3 text-end pe-0 pe-lg-5 pt-3 border-top border-secondary amount-detail-list">
             <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
             <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
         </div>

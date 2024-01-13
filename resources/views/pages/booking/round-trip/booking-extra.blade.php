@@ -10,7 +10,7 @@
     <div id="depart-route-extra">
         @foreach($depart_routes as $index => $route)
             <x-booking-addon
-                :route_addons="$route['route_addons']"
+                :route_addons="$route['addon_group']"
                 :route_index="$index"
                 :addon_icon="$addon_icon"
                 :type="_('depart')"
@@ -144,7 +144,7 @@
     <div id="return-route-extra">
         @foreach($return_routes as $index => $route)
             <x-booking-addon
-                :route_addons="$route['route_addons']"
+                :route_addons="$route['addon_group']"
                 :route_index="$index"
                 :addon_icon="$addon_icon"
                 :type="_('return')"

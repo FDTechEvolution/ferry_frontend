@@ -12,6 +12,7 @@ let passenger_payment = []
 let extra_id = [] // extra id to post
 let is_extra = [] // extra service select
 let is_passenger = [] // passenger info
+let addon_route = []
 if(booking_route) {
     let route_list = booking_route.querySelectorAll('.booking-route-list')
     let btn_route_list = document.querySelectorAll('.btn-route-list')
@@ -61,6 +62,7 @@ if(booking_route) {
             route_addon_checked.forEach((addon) => {
                 addon.checked = false
                 addon.name = ''
+                addon_route = []
             })
             route_addon_detail.forEach((detail) => { detail.name = '' })
 
@@ -251,20 +253,29 @@ function progressCondition(step) {
         const route_addon_lists = _extra.querySelectorAll('.route-addon-lists-depart')
         const route_addon_checked = _extra.querySelectorAll('.route-addon-checked-depart')
 
+        let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}-depart`)
+        route_addon_lists.forEach((item) => { item.classList.add('d-none') })
+        route_addons.forEach((item) => { item.classList.remove('d-none') })
+
         route_addon_checked.forEach((route_addon) => {
             route_addon.addEventListener('change', (e) => {
                 let type = e.target.dataset.type
                 let subtype = e.target.dataset.subtype
                 let routeindex = e.target.dataset.routeindex
+                let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
                 let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
                 let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
                 if(e.target.checked) {
+                    let addon_index = addon_route.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}` })
+                    if(addon_index < 0) addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
                     extra_price += parseInt(addon_price.value)
                     e.target.name = 'route_addon_depart[]'
                     addon_detail.name = 'route_addon_detail_depart[]'
                     updateSumPrice()
                 }
                 else {
+                    let addon_index = addon_route.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}` })
+                    if(addon_index >= 0) addon_route.splice(addon_index, 1)
                     extra_price -= parseInt(addon_price.value)
                     e.target.name = ''
                     addon_detail.name = ''
@@ -272,10 +283,6 @@ function progressCondition(step) {
                 }
             })
         })
-
-        let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}-depart`)
-        route_addon_lists.forEach((item) => { item.classList.add('d-none') })
-        route_addons.forEach((item) => { item.classList.remove('d-none') })
 
         let meal_select = _extra.querySelector(`#route-meal-index-${route_selected}`)
         meal_list.forEach((item) => { item.classList.add('d-none') })
@@ -588,6 +595,16 @@ function setLitinerary() {
         document.querySelector('.promocode-show').classList.add('d-none')
         promo_sum.innerHTML = 0
     }
+
+    const addon_list = document.querySelector('.amount-detail-list')
+    const addon_lists = addon_list.querySelectorAll('.addon-route-detail')
+    addon_lists.forEach((list) => { list.remove() })
+    addon_route.forEach((addon) => {
+        let h6 = document.createElement('h6')
+        h6.setAttribute('class', 'd-flex justify-content-end align-items-end addon-route-detail')
+        h6.innerHTML = `${addon.name} <p class="w--20 w-sm-30 me-2 mb-0"> ${addon.price} </p><small class="smaller">THB</small>`
+        addon_list.appendChild(h6)
+    })
 }
 
 function progressPassenger() {
