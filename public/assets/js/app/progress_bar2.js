@@ -664,7 +664,7 @@ function setLitinerary() {
         let discount = sum_depart - price.depart
         sum_discount += discount
         let minus = sum_discount !== 0 ? '- ' : ''
-        document.querySelector('.promocode-show').classList.remove('d-none')
+        if(route_promo.depart) document.querySelector('.promocode-show').classList.remove('d-none')
         promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
     }
     else {
@@ -677,7 +677,7 @@ function setLitinerary() {
         let discount = sum_return - price.return
         sum_discount += discount
         let minus = sum_discount !== 0 ? '- ' : ''
-        document.querySelector('.promocode-show').classList.remove('d-none')
+        if(route_promo.return) document.querySelector('.promocode-show').classList.remove('d-none')
         promo_sum.innerHTML = minus + sum_discount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
     }
     else {

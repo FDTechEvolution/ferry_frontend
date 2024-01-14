@@ -609,7 +609,7 @@ function setLitinerary() {
         route_addon_price += parseInt(addon.price)
     })
 
-    document.querySelector('.sum-amount').innerHTML = ((route_price + premium_price + route_addon_price) - sum_discount).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    document.querySelector('.sum-amount').innerHTML = (route_price + premium_price + route_addon_price).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
 function progressPassenger() {

@@ -207,9 +207,20 @@ class BookingController extends Controller
         $_type = $this->Type[$request->_type];
         $passenger = $this->setInputType($request);
         $route_arr = [];
+        $promocode = [];
+        $use_promocode = null;
 
         foreach($request->from as $index => $from) {
             if($from != NULL) {
+
+                if($request->promotioncode != NULL) {
+                    // promo_code, trip_type, station_from_id, station_to_id, depart_date
+                    $_promocode = $this->checkPromotionCode($request->promotioncode, 'multi-trip', $from, $request->to[$index], $request['date'][$index]);
+                    $use_promocode = $request->promotioncode;
+                    if($_promocode !== null) array_push($promocode, $_promocode);
+                    else array_push($promocode, []);
+                }
+
                 $routes = $this->getRouteList($from, $request->to[$index]);
                 $_diff = $this->checkDateDiff($request['date'][$index]);
                 foreach($routes['data'] as $key => $route) {
@@ -217,14 +228,25 @@ class BookingController extends Controller
                     $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
                     $route_arr[$index]['depart'] = $request->date[$index];
 
-                    $routes['data'][$key]['p_adult'] = intval($this->calPrice($passenger[0], $route['regular_price']));
-                    $routes['data'][$key]['p_child'] = intval($this->calPrice($passenger[1], $route['child_price']));
-                    $routes['data'][$key]['p_infant'] = intval($this->calPrice($passenger[2], $route['infant_price']));
+                    $_regular_price = intval($this->calPrice($passenger[0], $route['regular_price']));
+                    $_child_price = intval($this->calPrice($passenger[1], $route['child_price']));
+                    $_infant_price = intval($this->calPrice($passenger[2], $route['infant_price']));
+                    $_amount = $_regular_price + $_child_price + $_infant_price;
+
+                    $routes['data'][$key]['p_adult'] = $_regular_price;
+                    $routes['data'][$key]['p_child'] = $_child_price;
+                    $routes['data'][$key]['p_infant'] = $_infant_price;
+                    $routes['data'][$key]['amount'] = $_amount;
 
                     $routes['data'][$key]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
-                    $routes['data'][$key]['travel_time'] = $travel_time = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
+                    $routes['data'][$key]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
                     $routes['data'][$key]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
+
+                    if($route['ispromocode'] == 'Y' && !empty($promocode)) {
+                        if(intval($promocode[$index]['discount']) != 0)
+                            $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index]);
+                    }
                 }
 
                 $route_arr[$index]['data'] = $routes['data'];
@@ -233,7 +255,7 @@ class BookingController extends Controller
 
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
-                        'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon]);
+                        'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode]);
     }
 
     private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {
@@ -370,6 +392,7 @@ class BookingController extends Controller
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
             'ispremiumflex' => $request->ispremiumflex,
+            'promocode' => $request->use_promocode,
             'route_addon' => $_route_addon,
             'route_addon_detail' => $_route_addon_detail
         ]);
@@ -428,7 +451,8 @@ class BookingController extends Controller
             'payment_method' => $request->payment_method,
             'ispremiumflex' => $request->ispremiumflex,
             'route_addon' => $request->route_addon,
-            'route_addon_detail' => $request->route_addon_detail
+            'route_addon_detail' => $request->route_addon_detail,
+            'promocode' => $request->use_promocode
         ]);
         $res = $response->json();
         if(isset($res)) {
