@@ -209,14 +209,25 @@ function progressCondition(step) {
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
+        let promo_premiumflex = document.querySelector('.ispremiumflex').value
+        let use_promocode = document.querySelector('[name="use_promocode"]')
+        let select_promo = document.querySelector('.selected-route-promocode')
+        let _selected_promo = selected_promo.find((s) => { return s === true })
 
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let _route_price = sum_price.reduce((num1, num2) => { return num1+num2 })
-        let _premium_price = ((_route_price*110)/100) - _route_price
+        // let _premium_price = ((_route_price*110)/100) - _route_price
+        let _premium_price = (promo_premiumflex === 'Y' && _selected_promo) ? 0 : ((_route_price*110)/100) - _route_price
 
-        txt_price.innerHTML = _premium_price
+        // console.log(select_promo)
+        if(use_promocode.value !== '') {
+            if(promo_premiumflex === 'Y' && _selected_promo) select_promo.classList.remove('d-none')
+            if(!_selected_promo && select_promo) select_promo.classList.add('d-none')
+        }
+
+        txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 
         if(nonePremiumFlex.checked) {
             premium_price = 0

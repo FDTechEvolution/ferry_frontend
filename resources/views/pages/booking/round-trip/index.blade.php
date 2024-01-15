@@ -80,7 +80,7 @@
             </div>
             <div class="procress-step d-none">
                 <!-- booking premium flex -->
-                <x-booking-premium-flex />
+                <x-booking-premium-flex :ispremiumflex="$freepremiumflex"/>
             </div>
             <div class="procress-step d-none">
                 <!-- booking passenger -->

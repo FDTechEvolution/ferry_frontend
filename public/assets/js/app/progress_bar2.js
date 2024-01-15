@@ -262,12 +262,24 @@ function progressCondition(step) {
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
+        let promo_premiumflex = document.querySelector('.ispremiumflex').value
+        let use_promocode = document.querySelector('[name="use_promocode"]')
+        let select_promo = document.querySelector('.selected-route-promocode')
 
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let route_price = (price.depart + price.return)
-        let _premium_price = ((route_price*110)/100) - route_price
+        // let _premium_price = ((route_price*110)/100) - route_price
+        let _selected_promo = false;
+        if(selected_promo.depart) _selected_promo = true
+        if(select_promo.return) _selected_promo = true
+        let _premium_price = (promo_premiumflex === 'Y' && _selected_promo) ? 0 : ((route_price*110)/100) - route_price
+
+        if(use_promocode.value !== '') {
+            if(promo_premiumflex === 'Y' && _selected_promo) select_promo.classList.remove('d-none')
+            if(!selected_promo && select_promo) select_promo.classList.add('d-none')
+        }
 
         txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 

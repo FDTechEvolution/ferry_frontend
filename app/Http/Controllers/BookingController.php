@@ -209,6 +209,8 @@ class BookingController extends Controller
         $route_arr = [];
         $promocode = [];
         $use_promocode = null;
+        $freecredit = 'N';
+        $freepremiumflex = 'N';
 
         foreach($request->from as $index => $from) {
             if($from != NULL) {
@@ -253,9 +255,17 @@ class BookingController extends Controller
             }
         }
 
+        if(!empty($promocode)) {
+            foreach($promocode as $promo) {
+                if($promo['isfreecreditcharge'] == 'Y') $freecredit = 'Y';
+                if($promo['isfreepremiumflex'] == 'Y') $freepremiumflex = 'Y';
+            }
+        }
+
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
-                        'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode]);
+                        'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
+                        'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex]);
     }
 
     private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {
