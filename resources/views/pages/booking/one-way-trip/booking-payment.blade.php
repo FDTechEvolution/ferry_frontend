@@ -61,7 +61,7 @@
             <div class="row mt-3 pe-0 pe-lg-0 pt-3 border-top border-secondary">
                 <div class="col-12 col-lg-6">
                     @if($promocode == null)
-                        <div class="row mb-3">
+                        <div class="row mb-3 d-none">
                             <div class="col-10 col-lg-6">
                                 <input type="text" class="form-control form-control-sm" name="promocode" placeholder="Promotion Code">
                             </div>

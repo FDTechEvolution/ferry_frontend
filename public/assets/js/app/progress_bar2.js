@@ -273,7 +273,7 @@ function progressCondition(step) {
         // let _premium_price = ((route_price*110)/100) - route_price
         let _selected_promo = false;
         if(selected_promo.depart) _selected_promo = true
-        if(select_promo.return) _selected_promo = true
+        if(selected_promo.return) _selected_promo = true
         let _premium_price = (promo_premiumflex === 'Y' && _selected_promo) ? 0 : ((route_price*110)/100) - route_price
 
         if(use_promocode.value !== '') {

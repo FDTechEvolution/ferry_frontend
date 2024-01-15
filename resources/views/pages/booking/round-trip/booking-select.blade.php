@@ -42,7 +42,7 @@
                                     </span>
                                     <p class="mb-0 ms-2">
                                         <span class="arrival-time">{{ date("H:i", strtotime($route['arrive_time'])) }}</span><br/>
-                                        <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-master-info :info="$route['master_from']" :station="$route['station_to']['name']"/></span>
+                                        <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-master-info :info="$route['master_to']" :station="$route['station_to']['name']"/></span>
                                     </p>
                                 </div>
 
@@ -155,7 +155,7 @@
                                     </span>
                                     <p class="mb-0 ms-2">
                                         <span class="arrival-time">{{ date("H:i", strtotime($route['arrive_time'])) }}</span><br/>
-                                        <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-master-info :info="$route['master_from']" :station="$route['station_to']['name']"/></span>
+                                        <span class="small">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-master-info :info="$route['master_to']" :station="$route['station_to']['name']"/></span>
                                     </p>
                                 </div>
 
