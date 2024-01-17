@@ -17,15 +17,24 @@
 
             <div class="dropdown-menu dropdown-booking-width dropdown-md p-3">
                 <div class="row mb-2 pb-2 pb-lg-0">
-                    @foreach($section_from as $key => $sections)
+                    {{-- @foreach($section_from as $key => $sections)
+                        @foreach($sections as $section_key => $section)
                         <div class="col-12 col-lg-3">
-                            @foreach($sections as $section_key => $section)
-                                <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
-                                <ul class="section-key-{{ $section_key }}">
-                                    @foreach($section as $station_key => $station)
-                                        <li class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer font-proxima-400" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif</li>
-                                    @endforeach
-                                </ul>
+                            <p class="text-main-color-2 mb-1 fw-bold">{{ $section_key }}</p>
+                            @foreach($section as $station_key => $station)
+                                <p class="station-select_{{ $section_key }}_{{ $station_key }} mb-2 cursor-pointer font-proxima-400" data-id="{{ $station['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $station['name'] }} @if($station['piername'] != NULL) ({{$station['piername']}}) @endif </p>
+                            @endforeach
+                        </div>
+                        @endforeach
+                    @endforeach --}}
+                    @foreach ($section_from as $items)
+                        <div class="col-12 col-lg-3">
+                            @foreach($items as $index => $item)
+                                @if($item['is_section'] == 'Y')
+                                    <p class="text-main-color-2 mb-1 fw-bold">{{ $item['section'] }}</p>
+                                @elseif($item['is_section'] == 'N')
+                                    <p class="station-select_{{ $item['station']['section'] }}_{{ $index }} ms-2 mb-2 cursor-pointer font-proxima-400" data-id="{{ $item['station']['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $item['station']['name'] }} @if($item['station']['piername'] != NULL) ({{$item['station']['piername']}}) @endif </p>
+                                @endif
                             @endforeach
                         </div>
                     @endforeach

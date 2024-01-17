@@ -21,9 +21,41 @@ class StationController extends Controller
         // Log::debug($result);
         $_result = $res['data']['to'];
         $_section = $this->sectionColumn($res['data']['to']);
-        // Log::debug($_section);
+        $sections = $this->stationSetTen($_section);
+        // Log::debug($sections);
 
-        return response()->json(['data' => $_result, 'section' => $_section], 200);
+        return response()->json(['data' => $_result, 'section' => $sections], 200);
+    }
+
+    private function stationSetTen($section_col) {
+        $result = [];
+        $loop = [];
+        $_loop = 0;
+
+        foreach($section_col as $sections) {
+            foreach($sections as $key => $stations) {
+                $_loop++;
+                array_push($loop, ['is_section' => 'Y', 'section' => $key]);
+                if($_loop == 10) {
+                    array_push($result, $loop);
+                    $_loop = 0;
+                    $loop = [];
+                }
+                foreach($stations as $station) {
+                    $_loop++;
+                    array_push($loop, ['is_section' => 'N', 'station' => $station]);
+                    if($_loop == 10) {
+                        array_push($result, $loop);
+                        $_loop = 0;
+                        $loop = [];
+                    }
+                }
+            }
+        }
+
+        Log::debug($result);
+
+        return $result;
     }
 
     private function sectionColumn($stations) {
@@ -31,8 +63,8 @@ class StationController extends Controller
         $result2 = [];
 
         foreach($stations as $val) {
-            if(array_key_exists('col', $val)){
-                $result[$val['col']][] = $val;
+            if(array_key_exists('s_sort', $val)){
+                $result[$val['s_sort']][] = $val;
             }else{
                 $result[""][] = $val;
             }

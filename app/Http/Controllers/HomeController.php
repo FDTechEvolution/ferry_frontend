@@ -28,14 +28,42 @@ class HomeController extends Controller
         $station_to = $this->sectionGroup('section', $station_route['data']['to']);
         $promotions = $this->getPromotion();
 
-        // Log::debug($station_route['data']['from']);
-
         $section_col = $this->sectionColumn($station_route['data']['from']);
+        $sections = $this->stationSetTen($section_col);
         // Log::debug($section_col);
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
-                                'promotions' => $promotions['data'], 'section_from' => $section_col]);
+                                'promotions' => $promotions['data'], 'section_from' => $sections]);
+    }
+
+    private function stationSetTen($section_col) {
+        $result = [];
+        $loop = [];
+        $_loop = 0;
+
+        foreach($section_col as $sections) {
+            foreach($sections as $key => $stations) {
+                $_loop++;
+                array_push($loop, ['is_section' => 'Y', 'section' => $key]);
+                if($_loop == 10) {
+                    array_push($result, $loop);
+                    $_loop = 0;
+                    $loop = [];
+                }
+                foreach($stations as $station) {
+                    $_loop++;
+                    array_push($loop, ['is_section' => 'N', 'station' => $station]);
+                    if($_loop == 10) {
+                        array_push($result, $loop);
+                        $_loop = 0;
+                        $loop = [];
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     private function sectionColumn($stations) {
@@ -43,8 +71,8 @@ class HomeController extends Controller
         $result2 = [];
 
         foreach($stations as $val) {
-            if(array_key_exists('col', $val)){
-                $result[$val['col']][] = $val;
+            if(array_key_exists('s_sort', $val)){
+                $result[$val['s_sort']][] = $val;
             }else{
                 $result[""][] = $val;
             }

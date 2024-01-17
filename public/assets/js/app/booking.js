@@ -307,32 +307,56 @@ function updateDestinationSelect(result, element, number = null) {
 
     let destination = document.querySelector(`${element}`)
     let _number = number === null ? '1' : number
-    for (const section_col in result.section) {
+    result.section.forEach((items) => {
         let group_list = document.createElement('div')
         group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
-        for(const section_key in result.section[section_col]) {
-            if (result.section[section_col].hasOwnProperty(section_key)) {
+        items.forEach((item, index) => {
+            if(item.is_section === 'Y') {
                 let optgroup = document.createElement('p')
                 optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
-                optgroup.innerHTML = section_key
+                optgroup.innerHTML = item.section
                 group_list.appendChild(optgroup)
-                let ul = document.createElement('ul')
-                ul.setAttribute('class', `section-key-${section_key}`)
-                result.section[section_col][section_key].forEach((station) => {
-                    let name = station.name
-                    let pier = station.piername === null ? '' : ` (${station.piername})`
-                    let li = document.createElement('li')
-                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
-                    li.setAttribute('data-id', station.id)
-                    li.setAttribute('onClick', `toDestinationSelectedAnother(this, '${_number}')`)
-                    li.innerHTML = name + pier
-                    ul.appendChild(li)
-                })
-                group_list.appendChild(ul)
-                destination.appendChild(group_list)
             }
-        }
-    }
+            else if(item.is_section === 'N') {
+                let name = item.station.name
+                let pier = item.station.piername === null ? '' : ` (${item.station.piername})`
+                let p = document.createElement('p')
+                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400')
+                p.setAttribute('data-id', item.station.id)
+                p.setAttribute('onClick', `toDestinationSelectedAnother(this, '${_number}')`)
+                p.innerHTML = name + pier
+                group_list.appendChild(p)
+            }
+            destination.appendChild(group_list)
+        })
+    })
+
+    // for (const section_col in result.section) {
+    //     let group_list = document.createElement('div')
+    //     group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
+    //     for(const section_key in result.section[section_col]) {
+    //         if (result.section[section_col].hasOwnProperty(section_key)) {
+    //             let optgroup = document.createElement('p')
+    //             optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
+    //             optgroup.innerHTML = section_key
+    //             group_list.appendChild(optgroup)
+    //             let ul = document.createElement('ul')
+    //             ul.setAttribute('class', `section-key-${section_key}`)
+    //             result.section[section_col][section_key].forEach((station) => {
+    //                 let name = station.name
+    //                 let pier = station.piername === null ? '' : ` (${station.piername})`
+    //                 let li = document.createElement('li')
+    //                 li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
+    //                 li.setAttribute('data-id', station.id)
+    //                 li.setAttribute('onClick', `toDestinationSelectedAnother(this, '${_number}')`)
+    //                 li.innerHTML = name + pier
+    //                 ul.appendChild(li)
+    //             })
+    //             group_list.appendChild(ul)
+    //             destination.appendChild(group_list)
+    //         }
+    //     }
+    // }
 
     // const stations = result.data.reduce((acc, data) => {
     //     (acc[data['section']] = acc[data['section']] || []).push(data);
@@ -414,32 +438,55 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
     destination_optgroup.forEach((o) => { o.remove() })
 
     let destination = document.querySelector(`${element}`)
-    for (const section_col in result.section) {
+    result.section.forEach((items) => {
         let group_list = document.createElement('div')
         group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
-        for(const section_key in result.section[section_col]) {
-            if (result.section[section_col].hasOwnProperty(section_key)) {
+        items.forEach((item, index) => {
+            if(item.is_section === 'Y') {
                 let optgroup = document.createElement('p')
                 optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
-                optgroup.innerHTML = section_key
+                optgroup.innerHTML = item.section
                 group_list.appendChild(optgroup)
-                let ul = document.createElement('ul')
-                ul.setAttribute('class', `section-key-${section_key}`)
-                result.section[section_col][section_key].forEach((station) => {
-                    let name = station.name
-                    let pier = station.piername === null ? '' : ` (${station.piername})`
-                    let li = document.createElement('li')
-                    li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
-                    li.setAttribute('data-id', station.id)
-                    li.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
-                    li.innerHTML = name + pier
-                    ul.appendChild(li)
-                })
-                group_list.appendChild(ul)
-                destination.appendChild(group_list)
             }
-        }
-    }
+            else if(item.is_section === 'N') {
+                let name = item.station.name
+                let pier = item.station.piername === null ? '' : ` (${item.station.piername})`
+                let p = document.createElement('p')
+                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400')
+                p.setAttribute('data-id', item.station.id)
+                p.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
+                p.innerHTML = name + pier
+                group_list.appendChild(p)
+            }
+            destination.appendChild(group_list)
+        })
+    })
+    // for (const section_col in result.section) {
+    //     let group_list = document.createElement('div')
+    //     group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
+    //     for(const section_key in result.section[section_col]) {
+    //         if (result.section[section_col].hasOwnProperty(section_key)) {
+    //             let optgroup = document.createElement('p')
+    //             optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
+    //             optgroup.innerHTML = section_key
+    //             group_list.appendChild(optgroup)
+    //             let ul = document.createElement('ul')
+    //             ul.setAttribute('class', `section-key-${section_key}`)
+    //             result.section[section_col][section_key].forEach((station) => {
+    //                 let name = station.name
+    //                 let pier = station.piername === null ? '' : ` (${station.piername})`
+    //                 let li = document.createElement('li')
+    //                 li.setAttribute('class', 'station-to-selected cursor-pointer mb-2 font-proxima-400')
+    //                 li.setAttribute('data-id', station.id)
+    //                 li.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
+    //                 li.innerHTML = name + pier
+    //                 ul.appendChild(li)
+    //             })
+    //             group_list.appendChild(ul)
+    //             destination.appendChild(group_list)
+    //         }
+    //     }
+    // }
 
     // const stations = result.data.reduce((acc, data) => {
     //     (acc[data['section']] = acc[data['section']] || []).push(data);
