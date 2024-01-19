@@ -15,8 +15,8 @@ class NewsController extends Controller
         return view('pages.news.index', ['news' => $res['data']]);
     }
 
-    public function view(string $id = null) {
-        $response = Http::reqres()->get('/news/get/'.$id);
+    public function view(string $slug = null) {
+        $response = Http::reqres()->get('/news/get/'.$slug);
         $res = $response->json();
 
         $_news = $this->getNewByView();

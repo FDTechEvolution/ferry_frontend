@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::controller(BookingController::class)->group(function() {
     // Route::get('booking', 'search')->name('booking-search');
     // Route::get('booking/view', 'view')->name('booking-view');
-    
+
     Route::post('booking', 'index')->name('booking-index');
     Route::post('booking/confirm', 'bookingConfirm')->name('booking-confirm');
 
@@ -81,5 +81,5 @@ Route::controller(PromotionController::class)->group(function() {
 
 Route::controller(NewsController::class)->group(function() {
     Route::get('news', 'index')->name('news-index');
-    Route::get('news/view/{id}', 'view')->name('news-view');
+    Route::get('news/{slug}', 'view')->name('news-view');
 });

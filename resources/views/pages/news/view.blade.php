@@ -19,7 +19,7 @@
                         @foreach($_news as $new)
                             <li class="nav-item py-2 border-bottom lh--16 d-flex">
                                 <i class="fi fi-arrow-end m-0 smaller me-2"></i>
-                                <a href="{{ route('news-view', ['id' => $new['id']]) }}" class="nav-link py-0 ps-0 text-dark">
+                                <a href="{{ route('news-view', ['slug' => $new['slug']]) }}" class="nav-link py-0 ps-0 text-dark">
                                     <p class="mb-0">{{ $new['title'] }}</p>
                                     <small class="smaller">{{ date('M d, Y', strtotime($new['created_at'])) }}</small>
                                 </a>

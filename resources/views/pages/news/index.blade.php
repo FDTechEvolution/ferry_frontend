@@ -8,11 +8,16 @@
             @foreach($news as $new)
                 <div class="col-12 col-lg-4 mb-4">
                     <div class="card shadow-3d news-content bg-warning-light">
-                        <div class="card-body">
+                        <div class="card-body position-relative">
                             <h4 class="mb-0">{{ $new['title'] }}</h4>
                             <p class="smaller mb-2">{{ date('M d, Y', strtotime($new['created_at'])) }}</p>
                             <span class="small text-overflow ellipsis">{!! $new['body'] !!}</span>
-                            <a href="{{ route('news-view', ['id' => $new['id']]) }}" class="text-main-color-2 text-end mb-0 mt-2 d-block" target="_blank">Read more...</a>
+                            <a href="{{ route('news-view', ['slug' => $new['slug']]) }}"
+                                class="text-main-color-2 text-end mb-0 mt-2 d-block position-absolute"
+                                target="_blank"
+                                style="right: 10px; bottom: 6px;">
+                                Read more...
+                            </a>
                         </div>
                     </div>
                 </div>
