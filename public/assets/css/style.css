@@ -833,3 +833,12 @@ img.img-logo-style {
 #footer {
     background: linear-gradient( to top, #eeeeee 0%, #eeeeee 50%, transparent 50%, transparent 100% );
 }
+
+.slide-first-text {
+    bottom: 0;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.5998774509803921) 20%, rgba(255,255,255,0) 90%);
+    border-radius: 0 0 15px 15px;
+    color: #fff;
+    height: 40%;
+}

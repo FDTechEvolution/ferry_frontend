@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    @include('includes.home_slide')
+    @include('includes.home_slide_2')
 @stop
 
 @section('script')

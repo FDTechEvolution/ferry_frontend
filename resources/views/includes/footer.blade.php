@@ -14,10 +14,10 @@
             </div>
             <div class="col-lg-12 pt-2 pb-2 text-center font-proxima">
                 <p class="text-main-color-2 mb-0 link-on-mobile">
-                    <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> |
+                    {{-- <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> |
                     <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> |
-                    <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> |
-                    <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Terms of Service | Privacy Policy </p>
+                    <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> | --}}
+                    <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Baggage Policy | Terms of Service | Privacy Policy | Q&A </p>
                 <p class="text-main-color-2 mb-3 mb-lg-2 right-on-mobile">
                     Tiger Line Ferry Company Limited. All Right Reserved.
                 </p>
