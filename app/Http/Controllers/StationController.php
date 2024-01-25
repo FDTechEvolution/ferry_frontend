@@ -53,8 +53,6 @@ class StationController extends Controller
             }
         }
 
-        Log::debug($result);
-
         return $result;
     }
 

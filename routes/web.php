@@ -67,7 +67,7 @@ Route::controller(StationController::class)->group(function() {
 });
 
 Route::controller(TermAndConditionController::class)->group(function() {
-    Route::get('term-and-condition', 'index')->name('term-index');
+    Route::get('infomation/{type}', 'index')->name('term-index');
 });
 
 Route::controller(ReviewController::class)->group(function() {

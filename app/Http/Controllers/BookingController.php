@@ -39,8 +39,9 @@ class BookingController extends Controller
         $use_promocode = null;
         $freecredit = 'N';
         $freepremiumflex = 'N';
+        $g_date = $this->setDateToGlobal($request->date[0]);
 
-        $routes = $this->getRouteList($request->from[0], $request->to[0]);
+        $routes = $this->getRouteList($request->from[0], $request->to[0], $g_date);
         if($request->promotioncode != NULL) {
             // promo_code, trip_type, station_from_id, station_to_id, depart_date
             $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0]);
@@ -112,6 +113,11 @@ class BookingController extends Controller
         }
     }
 
+    private function setDateToGlobal($date) {
+        $ex_date = explode('/', $date);
+        return $ex_date[2].'-'.$ex_date[1].'-'.$ex_date[0];
+    }
+
     private function checkDateDiff($booking_date) {
         $ex_date = explode('/', $booking_date);
         $date_now = date('Y-m-d');
@@ -172,8 +178,11 @@ class BookingController extends Controller
             $use_promocode = $request->promotioncode;
         }
 
-        $depart_routes = $this->getRouteList($request->from[0], $request->to[0]);
-        $return_routes = $this->getRouteList($request->to[0], $request->from[0]);
+        $g_depart_date = $this->setDateToGlobal($depart_date);
+        $g_return_date = $this->setDateToGlobal($return_date);
+
+        $depart_routes = $this->getRouteList($request->from[0], $request->to[0], $g_depart_date);
+        $return_routes = $this->getRouteList($request->to[0], $request->from[0], $g_return_date);
         $passenger = $this->setInputType($request);
 
         $result_depart = $this->setStationToRoute($depart_routes['data'], $passenger, $depart_date, $promocode);
@@ -223,7 +232,9 @@ class BookingController extends Controller
                     else array_push($promocode, []);
                 }
 
-                $routes = $this->getRouteList($from, $request->to[$index]);
+                $g_date = $this->setDateToGlobal($request['date'][$index]);
+
+                $routes = $this->getRouteList($from, $request->to[$index], $g_date);
                 $_diff = $this->checkDateDiff($request['date'][$index]);
                 foreach($routes['data'] as $key => $route) {
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -540,8 +551,8 @@ class BookingController extends Controller
         return $name.$piername;
     }
 
-    private function getRouteList($station_from, $station_to) {
-        $response = Http::reqres()->get('/route/search/'.$station_from.'/'.$station_to);
+    private function getRouteList($station_from, $station_to, $date) {
+        $response = Http::reqres()->get('/route/search/'.$station_from.'/'.$station_to.'/'.$date);
         return $response->json();
     }
 

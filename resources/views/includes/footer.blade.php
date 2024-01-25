@@ -17,7 +17,12 @@
                     {{-- <a class="text-main-color-2" href="{{ route('review-index') }}">Review</a> |
                     <a class="text-main-color-2" href="{{ route('station-index') }}">Station</a> |
                     <a class="text-main-color-2" href="{{ route('news-index') }}">News</a> | --}}
-                    <a class="text-main-color-2" href="{{ route('term-index') }}">Terms & Conditions</a> | Baggage Policy | Terms of Service | Privacy Policy | Q&A </p>
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'TERM']) }}">Terms & Conditions</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'BAGGAGE_POLICY']) }}">Baggage Policy</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'TERMS_OF_SERVICE']) }}">Terms of Service</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'PRIVACY_POLICY']) }}">Privacy Policy</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'Q&A']) }}">Q&A</a> |
+                    <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'PRIVATE_CHATER_BOAT']) }}">Private Chater Boat</a></p>
                 <p class="text-main-color-2 mb-3 mb-lg-2 right-on-mobile">
                     Tiger Line Ferry Company Limited. All Right Reserved.
                 </p>

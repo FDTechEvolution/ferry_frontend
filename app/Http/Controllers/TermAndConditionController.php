@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\Log;
 
 class TermAndConditionController extends Controller
 {
-    public function index() {
-        $response = Http::reqres()->get('term-and-condition/get');
+    public function index(string $type = null) {
+        $response = Http::reqres()->get('infomation/get/'.$type);
         $res = $response->json();
 
-        return view('pages.termandcondition.index', ['data' => $res['data']['body']]);
+        if($res['result'])
+            return view('pages.termandcondition.index', ['data' => $res['data']]);
+        else
+            return view('404', ['msg' => "Page Not Found."]);
     }
 }
