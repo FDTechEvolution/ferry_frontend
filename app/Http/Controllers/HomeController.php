@@ -22,6 +22,7 @@ class HomeController extends Controller
     public function index() {
         $station_route = $this->routeStation();
         $slide = $this->getSlide();
+        $billboard = $this->getBillboard();
         $cover_index = array_rand($this->ImageCover, 1);
         $cover = $this->ImageCover[$cover_index];
         // $station_from = $this->sectionGroup('section', $station_route['data']['from']);
@@ -34,7 +35,13 @@ class HomeController extends Controller
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
-                                'promotions' => $promotions['data'], 'section_from' => $sections]);
+                                'promotions' => $promotions['data'], 'section_from' => $sections,
+                                'billboards' => $billboard['data']]);
+    }
+
+    private function getBillboard() {
+        $response = Http::reqres()->get('/billboard/get');
+        return $response->json();
     }
 
     private function stationSetTen($section_col) {

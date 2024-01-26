@@ -5,13 +5,33 @@
             <div class="row">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="150">
                     <div class="ratio ratio-16x9">
-                        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7)"></iframe>
+                        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7); background-color: #fff;"></iframe>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-8 slide-desc-desktop" >
-            <div class="row">
+        <div class="col-12 col-lg-8 slide-desc-desktop position-relative">
+            <div class="accordion" id="billboardContent">
+                @foreach ($billboards as $index => $item)
+                    <div class="row">
+                        <button
+                            style="background-color: {{ $item['color'] }}; top: {{20 * $index}}px; margin-top: 10px;"
+                            class="btn btn-link btn-sm btn-billboard" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
+                            aria-expanded="true" aria-controls="billboard-content-{{ $index }}">
+                        </button>
+                        <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 1]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
+                            <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0">
+                                <h2>{{ $item['title'] }}</h2>
+
+                                {!! $item['description'] !!}
+                            </div>
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
+            {{-- <div class="row">
                 <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0">
                     <h2>Welcome to Tigerline Ferry!</h2>
 
@@ -29,7 +49,7 @@
 
                     <p>We sell what we experienced and select only the best for you!</p>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

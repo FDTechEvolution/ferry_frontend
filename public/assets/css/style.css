@@ -58,9 +58,15 @@ h1,h2,h3,h4,h5{
     margin-right: -70px;
     margin-bottom: -50px;
     margin-top: 35px;
-    background-color: #0a3961;
     color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4), 0 1px 0px rgba(0, 0, 0, 0.6)
+}
+
+.btn-billboard {
+    position: absolute;
+    z-index: 9;
+    width: 40px;
+    right: -40px;
 }
 
 /* desktop */
