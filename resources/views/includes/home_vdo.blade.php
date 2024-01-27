@@ -12,14 +12,19 @@
         </div>
         <div class="col-12 col-lg-8 slide-desc-desktop position-relative">
             <div class="accordion" id="billboardContent">
+                @php
+                    $bb_index = count($billboards);
+                @endphp
                 @foreach ($billboards as $index => $item)
                     <div class="row">
-                        <button
-                            style="background-color: {{ $item['color'] }}; top: {{20 * $index}}px; margin-top: 10px;"
-                            class="btn btn-link btn-sm btn-billboard" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
-                            aria-expanded="true" aria-controls="billboard-content-{{ $index }}">
-                        </button>
+                        @if($bb_index > 1)
+                            <button
+                                style="background-color: {{ $item['color'] }}; top: {{20 * $index}}px; margin-top: 10px;"
+                                class="btn btn-link btn-sm btn-billboard" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
+                                aria-expanded="true" aria-controls="billboard-content-{{ $index }}">
+                            </button>
+                        @endif
                         <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 1]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
                             <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0">
                                 <h2>{{ $item['title'] }}</h2>

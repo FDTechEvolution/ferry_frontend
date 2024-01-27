@@ -12,6 +12,7 @@ use App\Http\Controllers\TermAndConditionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,4 +83,9 @@ Route::controller(PromotionController::class)->group(function() {
 Route::controller(NewsController::class)->group(function() {
     Route::get('news', 'index')->name('news-index');
     Route::get('news/{slug}', 'view')->name('news-view');
+});
+
+Route::controller(BlogController::class)->group(function() {
+    Route::get('blog', 'index')->name('blog-index');
+    Route::get('blog/{slug}', 'view')->name('blog-view');
 });

@@ -202,7 +202,7 @@
                                         <p class="mb-1 smaller">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
                                     </div>
                                     <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
-                                        <button type="button" class="btn btn-sm button-orange-bg btn-route-return-list py-1 px-4 btn-route-return-select-{{ $index }}">Select</button>
+                                        <button type="button" class="btn btn-sm button-orange-bg btn-route-return-list py-1 px-3 btn-route-return-select-{{ $index }}">Select</button>
                                     </div>
                                     <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
                                         <x-booking-select-passenger-icon

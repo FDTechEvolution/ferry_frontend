@@ -251,13 +251,21 @@ function progressCondition(step) {
         // const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
         // const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
         const route_addon_lists = _extra.querySelectorAll('.route-addon-lists-depart')
-        const route_addon_checked = _extra.querySelectorAll('.route-addon-checked-depart')
+        const route_addon_checked = _extra.querySelectorAll('.route-addon-checked-depart input')
 
         let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}-depart`)
         route_addon_lists.forEach((item) => { item.classList.add('d-none') })
         route_addons.forEach((item) => { item.classList.remove('d-none') })
 
-        route_addon_checked.forEach((route_addon) => {
+        route_addon_checked.forEach((route_addon, index) => {
+            if(route_addon.checked) {
+                let type = route_addon.dataset.type
+                let subtype = route_addon.dataset.subtype
+                let routeindex = route_addon.dataset.routeindex
+                route_addon.name = 'route_addon_depart[]'
+                let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                addon_detail.name = 'route_addon_detail_depart[]'
+            }
             route_addon.addEventListener('change', (e) => {
                 let type = e.target.dataset.type
                 let subtype = e.target.dataset.subtype
@@ -271,6 +279,7 @@ function progressCondition(step) {
                     extra_price += parseInt(addon_price.value)
                     e.target.name = 'route_addon_depart[]'
                     addon_detail.name = 'route_addon_detail_depart[]'
+                    addon_detail.disabled = false
                     updateSumPrice()
                 }
                 else {
@@ -279,6 +288,7 @@ function progressCondition(step) {
                     extra_price -= parseInt(addon_price.value)
                     e.target.name = ''
                     addon_detail.name = ''
+                    addon_detail.disabled = true
                     updateSumPrice()
                 }
             })

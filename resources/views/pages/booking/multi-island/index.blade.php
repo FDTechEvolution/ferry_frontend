@@ -39,74 +39,111 @@
 @stop
 
 @section('content')
-<a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none" id="btn-back-to-home" style="margin-top: -30px;"><< Back</a>
-<ol class="process-steps process-steps-primary text-muted mb-3">
-	<li class="process-step-item position-relative complete" data-step="booking"><span class="ps-3 progress-step-name">{{ $isType != '' ? $isType : 'Booking' }}</span></li>
-	<li class="process-step-item position-relative text-primary active" data-step="select"><span class="ps-3 progress-step-name">Select</span></li>
-    <li class="process-step-item position-relative" data-step="premium"><span class="ps-2 progress-step-name">Premium Flex</span></li>
-	<li class="process-step-item position-relative" data-step="passenger"><span class="ps-2 progress-step-name">Passenger info</span></li>
-    <li class="process-step-item position-relative" data-step="extra"><span class="ps-2 progress-step-name">Extra services</span></li>
-    <li class="process-step-item position-relative" data-step="payment"><span class="ps-3 progress-step-name">Payment</span></li>
-</ol>
+<a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none position-absolute" id="btn-back-to-home" style="margin-top: -40px;"><< Back</a>
+<div class="row">
+    <div class="col-12 col-lg-12">
+        <ol class="process-steps process-steps-primary text-muted mb-3">
+            <li class="process-step-item position-relative complete" data-step="booking">
+                <span class="ps-3 progress-step-name">
+                    <img src="{{ asset('icons/booking/trip.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">{{ $isType != '' ? $isType : 'Booking' }}</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative text-primary active" data-step="select">
+                <span class="ps-3 progress-step-name">
+                    <img src="{{ asset('icons/booking/select.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Select</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="premium">
+                <span class="ps-2 progress-step-name">
+                    <img src="{{ asset('icons/booking/premium-flex.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Premium Flex</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="passenger">
+                <span class="ps-2 progress-step-name">
+                    <img src="{{ asset('icons/booking/passenger-info.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Passenger info</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="extra">
+                <span class="ps-2 progress-step-name">
+                    <img src="{{ asset('icons/booking/extra-service.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Extra services</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="payment">
+                <span class="ps-3 progress-step-name">
+                    <img src="{{ asset('icons/booking/payment.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Payment</span>
+                </span>
+            </li>
+        </ol>
 
-<div class="row min-h-50vh">
-    <div class="col-12">
-        @if($isType != '')
-        <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-multi-confirm') }}">
-            @csrf
-            <div class="procress-step d-none"></div>
-            <div class="procress-step">
-                <!-- booking select -->
-                @include('pages.booking.multi-island.booking-select')
-            </div>
-            <div class="procress-step d-none">
-                <!-- booking premium flex -->
-                <x-booking-premium-flex :ispremiumflex="$freepremiumflex"/>
-            </div>
-            <div class="procress-step d-none">
-                <!-- booking passenger -->
-                @include('pages.booking.multi-island.booking-passenger')
-            </div>
-            <div class="procress-step d-none">
-                <!-- booking extra -->
-                @include('pages.booking.multi-island.booking-extra')
-            </div>
-            <div class="procress-step d-none">
-                <!-- booking payment -->
-                @include('pages.booking.multi-island.booking-payment')
-            </div>
+        <div class="row min-h-50vh">
+            <div class="col-12">
+                @if($isType != '')
+                <form novalidate class="bs-validate" id="booking-form" method="POST" action="{{ route('booking-multi-confirm') }}">
+                    @csrf
+                    <div class="procress-step d-none"></div>
+                    <div class="procress-step">
+                        <!-- booking select -->
+                        @include('pages.booking.multi-island.booking-select')
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking premium flex -->
+                        <x-booking-premium-flex :ispremiumflex="$freepremiumflex"/>
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking passenger -->
+                        @include('pages.booking.multi-island.booking-passenger')
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking extra -->
+                        @include('pages.booking.multi-island.booking-extra')
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking payment -->
+                        @include('pages.booking.multi-island.booking-payment')
+                    </div>
 
-            <div class="row mt-3">
-                <div class="col-6">
-                    <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
-                </div>
-                <div class="col-6 text-end">
-                    <x-button-green
-                        id="progress-next"
-                        class="btn-sm"
-                        :type="_('button')"
-                        :text="_('Continue >>')"
-                        disabled
-                    />
-                    <x-button-green
-                        id="progress-next-passenger"
-                        class="btn-sm d-none"
-                        :type="_('button')"
-                        :text="_('Continue >>')"
-                        onClick="progressPassenger()"
-                        disabled
-                    />
-                    <x-button-green
-                        id="progress-payment"
-                        class="btn-sm d-none"
-                        :type="_('submit')"
-                        :text="_('Book / Payment')"
-                        disabled
-                    />
-                </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
+                        </div>
+                        <div class="col-6 text-end">
+                            <x-button-green
+                                id="progress-next"
+                                class="btn-sm"
+                                :type="_('button')"
+                                :text="_('Continue >>')"
+                                disabled
+                            />
+                            <x-button-green
+                                id="progress-next-passenger"
+                                class="btn-sm d-none"
+                                :type="_('button')"
+                                :text="_('Continue >>')"
+                                onClick="progressPassenger()"
+                                disabled
+                            />
+                            <x-button-green
+                                id="progress-payment"
+                                class="btn-sm d-none"
+                                :type="_('submit')"
+                                :text="_('Book / Payment')"
+                                disabled
+                            />
+                        </div>
+                    </div>
+                </form>
+                @endif
             </div>
-        </form>
-        @endif
+        </div>
+    </div>
+    <div class="col-12 col-lg-2 d-none">
+        xxxxxxxxxxxx
     </div>
 </div>
 @stop

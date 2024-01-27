@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function index() {
         $station_route = $this->routeStation();
-        $slide = $this->getSlide();
+        $slide = $this->getBlog();
         $billboard = $this->getBillboard();
         $cover_index = array_rand($this->ImageCover, 1);
         $cover = $this->ImageCover[$cover_index];
@@ -126,8 +126,8 @@ class HomeController extends Controller
         return $response->json();
     }
 
-    private function getSlide() {
-        $response = Http::reqres()->get('/slide/get');
+    private function getBlog() {
+        $response = Http::reqres()->get('/blog/get');
         return $response->json();
     }
 

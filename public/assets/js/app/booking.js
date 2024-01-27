@@ -46,6 +46,16 @@ function dec(element, e) {
     }
 }
 
+const passenger_done = document.querySelectorAll('.passenger-select-done')
+if(passenger_done) {
+    passenger_done.forEach((item) => {
+        item.addEventListener('click', () => {
+            let dd_id = item.dataset.id
+            $(`.dropdown-passenger-select-${dd_id}`).dropdown("toggle");
+        })
+    })
+}
+
 function updatePassenger(type) {
     let _type = type.split('_')[0]
     const adult = document.querySelector(`[name="${_type}_adult[]"]`)

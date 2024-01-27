@@ -5,6 +5,7 @@
     $to_id = uniqid();
     $date_id = uniqid();
     $passenger_id = uniqid();
+    $dropdown_id = uniqid();
 @endphp
 
 <div class="row px-3 is-type-{{ $form_type }}">
@@ -97,10 +98,10 @@
     </div>
     <div class="col-12 col-md-6 col-lg-3 px-0">
         <div class="form-floating mb-3 dropdown">
-            <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}{{ $form_type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown" placeholder="Passenger">
+            <input required type="text" class="dropdown-toggle form-control" data-id="{{ $type }}{{ $form_type }}" id="pass-{{ $passenger_id }}" data-bs-toggle="dropdown" placeholder="Passenger" value="Adult : 2">
             <label class="text-secondary" for="pass-{{ $passenger_id }}">Passenger</label>
 
-            <div class="dropdown-menu dropdown-click-ignore dropdown-md p-3">
+            <div class="dropdown-menu dropdown-click-ignore dropdown-md p-3 dropdown-passenger-select-{{ $dropdown_id }}">
                 <div class="row mb-2 pb-2 pb-lg-0 border-bottom">
                     <div class="col-md-6 mb-2 mb-lg-0 lh-1">
                         <p class="text-primary mb-0">Adult</p>
@@ -110,7 +111,7 @@
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="adult" onClick="dec('{{ $type }}{{ $form_type }}_adult[]', this)"><i class="fi fi-minus smaller"></i></button>
                     </div>
                     <div class="col-4 col-md-2 p-0 text-center">
-                        <input required type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_adult[]" value="0">
+                        <input required type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_adult[]" value="2">
                     </div>
                     <div class="col-4 col-md-2 p-0">
                         <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="adult" onClick="inc('{{ $type }}{{ $form_type }}_adult[]', this)"><i class="fi fi-plus smaller"></i></button>
@@ -129,7 +130,7 @@
                         <input type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_child[]" value="0">
                     </div>
                     <div class="col-4 col-md-2 p-0">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="child" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_child[]', this)" disabled><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="child" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_child[]', this)"><i class="fi fi-plus smaller"></i></button>
                     </div>
                 </div>
 
@@ -145,7 +146,13 @@
                         <input type="number" class="border-0 text-center w-100" name="{{ $type }}{{ $form_type }}_infant[]" value="0">
                     </div>
                     <div class="col-4 col-md-2 p-0">
-                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="infant" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_infant[]', this)" disabled><i class="fi fi-plus smaller"></i></button>
+                        <button type="button" class="btn btn-primary rounded-circle btn-sm p-2" data-type="infant" data-inc="disabled" onClick="inc('{{ $type }}{{ $form_type }}_infant[]', this)"><i class="fi fi-plus smaller"></i></button>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12 text-end">
+                        <button type="button" data-id="{{ $dropdown_id }}" class="btn btn-sm btn-secondary smaller py-0 px-1 passenger-select-done">Done!</button>
                     </div>
                 </div>
             </div>

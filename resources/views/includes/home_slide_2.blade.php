@@ -6,7 +6,7 @@
                     <h2 class="text-main-color-2 text-start"><i class="fa-solid fa-plane-departure"></i> Look what's news!</h2>
                 </div>
                 <div class="col-12 col-lg-6 text-end pt-2">
-                    <a href="{{ route('news-index') }}" class="fw-bold text-main-color">More</a>
+                    <a href="{{ route('blog-index') }}" class="fw-bold text-main-color">More</a>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <div class="flickity-preloader"
                     data-flickity='{ "autoPlay": false, "cellAlign": "left", "pageDots": false, "prevNextButtons": false, "contain": true, "rightToLeft": false }'>
                     @foreach ($slides as $index => $slide)
-                        <a href="{{ route('news-index') }}" @class([
+                        <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" @class([
                                 'col-12',
                                 'col-lg-5' => $index == 0,
                                 'col-lg-3' => $index >= 1,
@@ -34,14 +34,15 @@
                                             <div class="d-table-cell align-bottom text-left">
 
                                                 <h2 class="h6 card-title" style="line-height: 1.4rem;">
-                                                    {{ Str::limit($slide['description'], 180) }}
+                                                    <h5>{{ $slide['title'] }}</h5>
+                                                    {!! Str::limit($slide['description'], 100) !!}
                                                 </h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @else
-                                <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 mb-4"
+                                <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 mb-2"
                                     style="background-color: transparent;"
                                 >
                                     <div class="clearfix">
@@ -51,7 +52,8 @@
                                     </div>
                                 </div>
                                 <h2 class="h6 card-title">
-                                    {{ Str::limit($slide['description'], 100) }}
+                                    <h5 class="mb-2">{{ $slide['title'] }}</h5>
+                                    {!! Str::limit($slide['description'], 60) !!}
                                 </h2>
                             @endif
                         </a>
