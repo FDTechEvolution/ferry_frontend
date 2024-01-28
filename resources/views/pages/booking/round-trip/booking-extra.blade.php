@@ -1,9 +1,12 @@
 <div id="booking-route-extra">
     <h4 class="mb-0">Extra Service</h4>
     <span>Please selecte additional services</span>
-    <div class="row mt-2 mb-4">
-        <div class="col-12">
-            <h5 class="text-primary"><span class="badge bg-booking-select-depart">Depart</span> {{ $station_depart['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_depart['to'] }}</h5>
+    <div class="row mt-2 mb-1">
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary"><span class="badge bg-booking-select-depart">Depart</span> {{ $station_depart['from'] }}</h5>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary">{{ $station_depart['to'] }}</h5>
         </div>
     </div>
 
@@ -14,6 +17,8 @@
                 :route_index="$index"
                 :addon_icon="$addon_icon"
                 :type="_('depart')"
+                :station_from="$station_depart['from']"
+                :station_to="$station_depart['to']"
             />
 
             {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>
@@ -135,9 +140,12 @@
         @endforeach
     </div>
 
-    <div class="row mt-2 mb-4">
-        <div class="col-12">
-            <h5 class="text-primary"><span class="badge bg-booking-select-return">Return</span> {{ $station_return['from'] }} <span class="mx-2 text-dark">To</span> {{ $station_return['to'] }}</h5>
+    <div class="row mt-4 mb-1">
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary"><span class="badge bg-booking-select-return">Return</span> {{ $station_return['from'] }}</h5>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary">{{ $station_return['to'] }}</h5>
         </div>
     </div>
 
@@ -148,6 +156,8 @@
                 :route_index="$index"
                 :addon_icon="$addon_icon"
                 :type="_('return')"
+                :station_from="$station_return['from']"
+                :station_to="$station_return['to']"
             />
 
             {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>

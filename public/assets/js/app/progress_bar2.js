@@ -77,6 +77,13 @@ if(depart_route) {
             payment.time.depart.arrive_time = route.querySelector('.arrival-time').innerText
             document.querySelector('.set-time-route-depart').innerHTML = ` | ${payment.time.depart.depart_time} - ${payment.time.depart.arrive_time}`
 
+            // set Your Booking
+            document.querySelector('.your-booking-summary').classList.remove('d-none')
+            document.querySelector('.your-booking-depart-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${payment.time.depart.depart_time}`
+            document.querySelector('.your-booking-depart-from').innerHTML = '<i class="fa-solid fa-ship"></i> ' + route.querySelector('.station-depart-from-text').innerText
+            document.querySelector('.your-booking-arrive-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${payment.time.depart.arrive_time}`
+            document.querySelector('.your-booking-depart-to').innerHTML = '<i class="fa-solid fa-anchor"></i> ' + route.querySelector('.station-depart-to-text').innerText
+
             let _price = route.querySelector('.route-price')
             price.depart = parseToNumber(_price.innerText)
             updateRoutePrice()
@@ -149,6 +156,13 @@ if(return_route) {
             payment.time.return.arrive_time = route.querySelector('.arrival-time').innerText
             document.querySelector('.set-time-route-return').innerHTML = ` | ${payment.time.return.depart_time} - ${payment.time.return.arrive_time}`
 
+            // set Your Booking
+            document.querySelector('.your-booking-summary').classList.remove('d-none')
+            document.querySelector('.your-booking-return-depart-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${payment.time.depart.depart_time}`
+            document.querySelector('.your-booking-return-from').innerHTML = '<i class="fa-solid fa-ship"></i> ' + route.querySelector('.station-return-from-text').innerText
+            document.querySelector('.your-booking-return-arrive-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${payment.time.depart.arrive_time}`
+            document.querySelector('.your-booking-return-to').innerHTML = '<i class="fa-solid fa-anchor"></i> ' + route.querySelector('.station-return-to-text').innerText
+
             let _price = route.querySelector('.route-price')
             price.return = parseToNumber(_price.innerText)
             updateRoutePrice()
@@ -171,6 +185,8 @@ function routeSelected() {
 }
 
 function updateRoutePrice() {
+    document.querySelector('.your-booking-fare').innerHTML = document.querySelector('.your-booking-amount').innerHTML = `${(price.depart + price.return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
     document.querySelector('#sum-price').innerHTML = (price.depart + price.return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
@@ -269,6 +285,7 @@ function progressCondition(step) {
         const txt_price = document.querySelector('.is-premium-price')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
+        const your_booking = document.querySelector('.your-booking-premium-flex')
         let route_price = (price.depart + price.return)
         // let _premium_price = ((route_price*110)/100) - route_price
         let _selected_promo = false;
@@ -281,6 +298,7 @@ function progressCondition(step) {
             if(!selected_promo && select_promo) select_promo.classList.add('d-none')
         }
 
+        your_booking.classList.remove('d-none')
         txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 
         if(nonePremiumFlex.checked) {
@@ -349,8 +367,27 @@ function progressCondition(step) {
         extraList('.route-addon-lists-depart', `.route-addon-index-${route_index.depart}-depart`)
         extraList('.depart-meal', `#extra-depart-meal-index-${route_index.depart}`)
         extraList('.depart-activity', `#extra-depart-activity-index-${route_index.depart}`)
-        const depart_route_addon_checked = document.querySelectorAll('.route-addon-checked-depart')
+        const depart_route_addon_checked = document.querySelectorAll('.route-addon-checked-depart input')
+        extra_price.return = 0
+        extra_price.depart = 0
+        addon_route.depart = []
+        addon_route.return = []
         depart_route_addon_checked.forEach((route_addon) => {
+            if(route_addon.checked) {
+                let type = route_addon.dataset.type
+                let subtype = route_addon.dataset.subtype
+                let routeindex = route_addon.dataset.routeindex
+                let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
+                let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
+                let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                route_addon.name = `route_addon_depart[]`
+                addon_detail.name = `route_addon_detail_depart[]`
+                extra_price.depart += parseInt(addon_price.value)
+                addon_route.depart.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-depart`})
+                document.querySelector('.your-booking-extra').classList.remove('d-none')
+                updateSumPrice()
+            }
+
             route_addon.addEventListener('change', (e) => {
                 routeAddonCheck(e, 'depart')
             })
@@ -361,8 +398,22 @@ function progressCondition(step) {
         extraList('.route-addon-lists-return', `.route-addon-index-${route_index.return}-return`)
         extraList('.return-meal', `#extra-return-meal-index-${route_index.return}`)
         extraList('.return-activity', `#extra-return-activity-index-${route_index.return}`)
-        const return_route_addon_checked = document.querySelectorAll('.route-addon-checked-return')
+        const return_route_addon_checked = document.querySelectorAll('.route-addon-checked-return input')
         return_route_addon_checked.forEach((route_addon) => {
+            if(route_addon.checked) {
+                let type = route_addon.dataset.type
+                let subtype = route_addon.dataset.subtype
+                let routeindex = route_addon.dataset.routeindex
+                let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-return`)
+                let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-return`)
+                let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-return`)
+                route_addon.name = `route_addon_return[]`
+                addon_detail.name = `route_addon_detail_return[]`
+                extra_price.return += parseInt(addon_price.value)
+                addon_route.return.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-return`})
+                document.querySelector('.your-booking-extra').classList.remove('d-none')
+                updateSumPrice()
+            }
             route_addon.addEventListener('change', (e) => {
                 routeAddonCheck(e, 'return')
             })
@@ -431,6 +482,7 @@ function routeAddonCheck(e, _type) {
             extra_price.depart += parseInt(addon_price.value)
             e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
+            addon_detail.disabled = false
         }
         if(_type === 'return') {
             let addon_index = addon_route.return.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
@@ -439,6 +491,7 @@ function routeAddonCheck(e, _type) {
             extra_price.return += parseInt(addon_price.value)
             e.target.name = `route_addon_${_type}[]`
             addon_detail.name = `route_addon_detail_${_type}[]`
+            addon_detail.disabled = false
         }
 
         updateSumPrice()
@@ -456,6 +509,7 @@ function routeAddonCheck(e, _type) {
         }
         e.target.name = ''
         addon_detail.name = ''
+        addon_detail.disabled = true
         updateSumPrice()
     }
 }
@@ -495,8 +549,19 @@ function dec(type, element, index) {
 }
 
 function updateSumPrice() {
+    let your_booking = {
+        premium_flex: document.querySelector('.your-booking-premium-flex-price'),
+        extra: document.querySelector('.your-booking-extra-price'),
+        total: document.querySelector('.your-booking-amount')
+    }
+
+    your_booking.premium_flex.innerHTML = `${premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    your_booking.extra.innerHTML = `${(extra_price.depart + extra_price.return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
     let sum_amount = (price.depart + price.return) + (extra_price.depart + extra_price.return) + premium_price
-    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+    let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+    document.querySelector('#sum-price').innerHTML = sum_amount_digit
+    your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
 }
 
 function setExtra(icon, name, amount, qty, element, type) {

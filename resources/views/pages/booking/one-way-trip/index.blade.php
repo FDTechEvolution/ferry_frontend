@@ -39,7 +39,7 @@
 @section('content')
 <a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 position-absolute d-none" id="btn-back-to-home" style="margin-top: -40px;"><< Back</a>
 <div class="row">
-    <div class="col-12 col-lg-12">
+    <div class="col-12 col-lg-9">
         <ol class="process-steps process-steps-primary text-muted mb-3">
             <li class="process-step-item position-relative complete" data-step="booking">
                 <span class="ps-3 progress-step-name">
@@ -140,11 +140,58 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-2 d-none">
-        <div class="card rounded">
-            <div class="card-body">
-                <p class="fw-bold mb-2">Passenger(s)</p>
+    <div class="col-12 col-lg-3 d-none d-lg-block">
+        <div class="border rounded">
+            <div class="your-booking-title p-3" style="background-color: #075ae8; border-radius: 5px 5px 0 0; border: 1px solid #075ae8;">
+                <h5 class="mb-0 text-light">Your booking.</h5>
+            </div>
+            <div class="your-booking-body p-3">
+                <div class="your-booking-passenger border-bottom pb-2 mb-2">
+                    <p class="fw-bold mb-0">{{ $passenger[0] + $passenger[1] + $passenger[2] }} Passenger(s)</p>
+                    @if($passenger[0] != 0)
+                        <p class="mb-0 small">{{ $passenger[0] }} Adult</p>
+                    @endif
+                    @if($passenger[1] != 0)
+                        <p class="mb-0 small">{{ $passenger[1] }} Child</p>
+                    @endif
+                    @if($passenger[2] != 0)
+                        <p class="mb-0 small">{{ $passenger[2] }} Infant</p>
+                    @endif
+                </div>
+                <div class="your-booking-date">
+                    @php
+                        $booking_date = explode('/', $booking_date);
+                    @endphp
+                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date[2].'-'.$booking_date[1].'-'.$booking_date[0])) }}</p>
+                </div>
+                <div class="your-booking-destination">
+                    <small class="your-booking-depart-time"></small>
+                    <p class="your-booking-destination-from"></p>
 
+                    <small class="your-booking-arrive-time"></small>
+                    <p class="your-booking-destination-to"></p>
+                </div>
+
+                <div class="card your-booking-summary d-none">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 fw-bold">Fare</p>
+                            <p class="mb-2 your-booking-fare"></p>
+                        </div>
+                        <div class="d-flex justify-content-between your-booking-premium-flex d-none">
+                            <p class="mb-2 fw-bold">Premium Flex</p>
+                            <p class="mb-2 your-booking-premium-flex-price"></p>
+                        </div>
+                        <div class="d-flex justify-content-between your-booking-extra d-none">
+                            <p class="mb-2 fw-bold">Extra Service</p>
+                            <p class="mb-2 your-booking-extra-price"></p>
+                        </div>
+                        <div class="d-flex justify-content-between border-top pt-2">
+                            <p class="mb-0 fw-bold">Total</p>
+                            <p class="mb-0 your-booking-amount"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -152,6 +199,13 @@
 @stop
 
 @section('script')
+<style>
+    @media (min-width: 1200px) {
+        .container {
+            max-width: 1366px;
+        }
+    }
+</style>
 <script>
     let isStep = {{ $isType == '' ? 0 : 1 }}
 </script>

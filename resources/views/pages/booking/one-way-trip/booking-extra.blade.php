@@ -1,9 +1,12 @@
 <div id="booking-route-extra">
     <h4 class="mb-0">Extra Service</h4>
     <span>Please selecte additional services</span>
-    <div class="row mt-2 mb-4">
-        <div class="col-12">
-            <h5 class="text-primary">{{ $is_station['from'] }} <span class="mx-2 text-dark">To</span> {{ $is_station['to'] }}</h5>
+    <div class="row mt-2 mb-1">
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary"><i class="fa-solid fa-ship text-dark"></i> {{ $is_station['from'] }}</h5>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h5 class="text-primary"><i class="fa-solid fa-anchor text-dark"></i> {{ $is_station['to'] }}</h5>
         </div>
     </div>
 

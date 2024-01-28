@@ -20,6 +20,8 @@
                     :route_index="$index"
                     :addon_icon="$addon_icon"
                     :type="$r_index"
+                    :station_from="$routes['station_from']"
+                    :station_to="$routes['station_to']"
                 />
 
                 {{-- <div @class(['d-none' => empty($route['shuttle_bus'])])>

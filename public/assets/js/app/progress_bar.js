@@ -46,6 +46,15 @@ if(booking_route) {
 
             route_price = parseToNumber(_price.innerText)
             document.querySelector('.set-time-route-select').innerHTML = `${depart_time} - ${arrive_time}`
+
+            // set Yout Booking
+            document.querySelector('.your-booking-summary').classList.remove('d-none')
+            document.querySelector('.your-booking-depart-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${depart_time}`
+            document.querySelector('.your-booking-destination-from').innerHTML = '<i class="fa-solid fa-ship"></i> ' + route.querySelector('.station-from-text').innerText
+            document.querySelector('.your-booking-arrive-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${arrive_time}`
+            document.querySelector('.your-booking-destination-to').innerHTML = '<i class="fa-solid fa-anchor"></i> ' + route.querySelector('.station-to-text').innerText
+            document.querySelector('.your-booking-fare').innerHTML = document.querySelector('.your-booking-amount').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
             document.querySelector('#sum-price').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
             route.classList.add('active')
             route.classList.remove('route-hover')
@@ -172,6 +181,7 @@ function progressCondition(step) {
         let select_promo = document.querySelector('.selected-route-promocode')
 
         const txt_price = document.querySelector('.is-premium-price')
+        const your_booking = document.querySelector('.your-booking-premium-flex')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let _premium_price = (promo_premiumflex === 'Y' && selected_promo) ? 0 : ((route_price*110)/100) - route_price
@@ -182,6 +192,7 @@ function progressCondition(step) {
             if(!selected_promo && select_promo) select_promo.classList.add('d-none')
         }
 
+        your_booking.classList.remove('d-none')
         txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 
         if(nonePremiumFlex.checked) {
@@ -257,14 +268,22 @@ function progressCondition(step) {
         route_addon_lists.forEach((item) => { item.classList.add('d-none') })
         route_addons.forEach((item) => { item.classList.remove('d-none') })
 
+        extra_price = 0
+        addon_route = []
         route_addon_checked.forEach((route_addon, index) => {
             if(route_addon.checked) {
                 let type = route_addon.dataset.type
                 let subtype = route_addon.dataset.subtype
                 let routeindex = route_addon.dataset.routeindex
-                route_addon.name = 'route_addon_depart[]'
+                let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
+                let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
                 let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
+                route_addon.name = 'route_addon_depart[]'
                 addon_detail.name = 'route_addon_detail_depart[]'
+                extra_price += parseInt(addon_price.value)
+                document.querySelector('.your-booking-extra').classList.remove('d-none')
+                updateSumPrice()
             }
             route_addon.addEventListener('change', (e) => {
                 let type = e.target.dataset.type
@@ -772,8 +791,18 @@ function dec(element, index) {
 }
 
 function updateSumPrice() {
+    let your_booking = {
+        premium_flex: document.querySelector('.your-booking-premium-flex-price'),
+        extra: document.querySelector('.your-booking-extra-price'),
+        total: document.querySelector('.your-booking-amount')
+    }
+    your_booking.premium_flex.innerHTML = `${premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    your_booking.extra.innerHTML = `${extra_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
     let sum_amount = route_price + extra_price + premium_price
-    document.querySelector('#sum-price').innerHTML = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+    let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+    document.querySelector('#sum-price').innerHTML = sum_amount_digit
+    your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
 }
 
 function setExtra(icon, name, amount, qty, type) {
