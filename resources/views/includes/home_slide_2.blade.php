@@ -3,10 +3,10 @@
         <div class="col-12" data-aos="fade-up" data-aos-delay="0">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <h2 class="text-main-color-2 text-start"><i class="fa-solid fa-plane-departure"></i> Look what's news!</h2>
+                    <h2 class="text-main-color-2 text-start d-flex align-items-end"><img src="{{ asset('icons/blog_icon.png') }}" width="50"> Look what's news!</h2>
                 </div>
-                <div class="col-12 col-lg-6 text-end pt-2">
-                    <a href="{{ route('blog-index') }}" class="fw-bold text-main-color">More</a>
+                <div class="col-12 col-lg-6 d-flex justify-content-end align-items-end pt-2">
+                    <a href="{{ route('blog-index') }}" class="fw-bold text-main-color pb-2">More</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
 
                                                 <h2 class="h6 card-title" style="line-height: 1.4rem;">
                                                     <h5>{{ $slide['title'] }}</h5>
-                                                    {!! Str::limit($slide['description'], 100) !!}
+                                                    {!! Str::limit($slide['description'], 100) !!} <span class="text-main-color-2 fw-bold small">See More.</span>
                                                 </h2>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <h2 class="h6 card-title">
                                     <h5 class="mb-2">{{ $slide['title'] }}</h5>
-                                    {!! Str::limit($slide['description'], 60) !!}
+                                    {!! Str::limit($slide['description'], 60) !!} <span class="text-main-color-2 fw-bold small">See More.</span>
                                 </h2>
                             @endif
                         </a>

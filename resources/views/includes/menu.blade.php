@@ -73,7 +73,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item d-none">
             <div class="dropstart mt-lg-3 ms-lg-3 dropdown-menu-right">
                 <a class="dropdown-toggle dropdown-color-style fs-4" href="#" role="button" id="exDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
