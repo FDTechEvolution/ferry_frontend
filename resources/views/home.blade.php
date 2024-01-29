@@ -118,5 +118,10 @@
 @stop
 
 @section('script')
-    <script src="{{ asset('assets/js/app/booking.js') }}"></script>
+<style>
+    #footer {
+        background: linear-gradient( to top, #eeeeee 0%, #eeeeee 50%, transparent 50%, transparent 100% );
+    }
+</style>
+<script src="{{ asset('assets/js/app/booking.js') }}"></script>
 @stop

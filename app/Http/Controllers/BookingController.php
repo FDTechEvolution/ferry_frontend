@@ -89,6 +89,8 @@ class BookingController extends Controller
         $country_list = $this->CountryList;
         $addon_icon = $this->RouteAddonIcon;
 
+        $premium_flex = $this->getPremiumFlex();
+
         // Log::debug($routes['data'][0]['route_addons']);
         // $addon_group = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
         // Log::debug($addon_group);
@@ -97,7 +99,8 @@ class BookingController extends Controller
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode,
-                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $addon_icon
+                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $addon_icon,
+                'premium_flex' => $premium_flex['data']
             ]);
     }
 
@@ -111,6 +114,11 @@ class BookingController extends Controller
             $discount = $amount - intval($promo['discount']);
             return $discount;
         }
+    }
+
+    private function getPremiumFlex() {
+        $response = Http::reqres()->get('/premium-flex');
+        return $response->json();
     }
 
     private function setDateToGlobal($date) {
@@ -193,18 +201,33 @@ class BookingController extends Controller
         $return_routes = $result_return[0];
         $station_return = $result_return[1];
 
-        // Log::debug($return_routes);
+        if($g_depart_date == $g_return_date) {
+            $_return_routes = [];
+            foreach($depart_routes as $depart) {
+                $arrive_time = strtotime($depart['arrive_time']);
+                foreach($return_routes as $return) {
+                    $depart_time = strtotime($depart['depart_time']);
+                    if($depart_time >= $arrive_time) {
+                        array_push($_return_routes, $return);
+                    }
+                }
+            }
+            $return_routes = $_return_routes;
+        }
 
         if($promocode != null) {
             $freecredit = $promocode['isfreecreditcharge'];
             $freepremiumflex = $promocode['isfreepremiumflex'];
         }
 
+        $premium_flex = $this->getPremiumFlex();
+
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
             'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList,
-            'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $this->RouteAddonIcon
+            'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $this->RouteAddonIcon,
+            'premium_flex' => $premium_flex['data']
         ]);
     }
 
@@ -273,10 +296,12 @@ class BookingController extends Controller
             }
         }
 
+        $premium_flex = $this->getPremiumFlex();
+
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
                         'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
-                        'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex]);
+                        'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'premium_flex' => $premium_flex['data']]);
     }
 
     private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {

@@ -24,7 +24,7 @@
                                 <input class="form-check-input form-check-input-default"
                                         type="checkbox" id="x-{{ $from_id }}" name=""
                                         data-type="{{ $addon['type'] }}" data-subtype="{{ $addon['subtype'] }}"
-                                        data-routeindex="{{ $route_index }}" value="{{ $addon['id'] }}" @checked($route_index == $index)>
+                                        data-routeindex="{{ $route_index }}" value="{{ $addon['id'] }}">
                             </span>
 
                             <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}"

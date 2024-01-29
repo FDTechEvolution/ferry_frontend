@@ -71,14 +71,14 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-12 col-lg-6 text-end amount-detail-list">
+                <div class="col-12 col-lg-8 offset-lg-4 text-end amount-detail-list">
                     <h6 class="d-flex justify-content-end align-items-end">Route <p class="sum-of-payment w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                     <h6 class="d-flex justify-content-end align-items-end d-none promocode-show">PromoCode <small class="ms-1">[{{$promocode}}]</small> <p class="sum-of-promocode w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                     <h6 class="d-flex justify-content-end align-items-end">Premium Flex <p class="sum-of-premium w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                 </div>
             </div>
             <div class="row pt-2 pe-0 pe-lg-0 border-top">
-                <div class="col-12 col-lg-6 offset-lg-6">
+                <div class="col-12 col-lg-8 offset-lg-4">
                     <h6 class="d-flex justify-content-end align-items-end">Total <p class="sum-amount text-end w--20 w-sm-30 me-2 mb-0"></p> <small class="smaller">THB</small></h6>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-@props(['ispremiumflex' => ''])
+@props(['ispremiumflex' => '', 'premium_flex' => []])
 
 <div id="booking-route-premuim">
     <div class="row">
@@ -6,12 +6,13 @@
             <div class="row card-body">
                 <h4 class="mb-2 pb-2 border-bottom"><i class="fi fi-star-full" style="color: #daa520;"></i> Premuim Flex</h4>
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0 p-2 order-lg-2">
-                    <div class="bg-primary-soft p-3 rounded" style="min-height: 420px;">
+                    <div class="bg-primary-soft p-3 rounded" style="min-height: 380px;">
                         <div class="form-check mb-2">
                             <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="Y" id="is-premiumflex">
-                            <label class="form-check-label fw-bold" for="is-premiumflex"> Premium Flex <i class="fi fi-star-full" style="color: #daa520; margin-top: -5px;"></i></label>
+                            <label class="form-check-label fw-bold" for="is-premiumflex"> {{ $premium_flex[1]['title'] }} <i class="fi fi-star-full" style="color: #daa520; margin-top: -5px;"></i></label>
                         </div>
-                        <p class="mb-3">Think your plans might change? You need the Flex</p>
+                        {!! $premium_flex[1]['body'] !!}
+                        {{-- <p class="mb-3">Think your plans might change? You need the Flex</p>
                         <p class="mb-2 text-primary">Following are the benefits:</p>
                         <ul>
                             <li>
@@ -21,7 +22,7 @@
                             <li>
                                 Premium Flex Hotline: Premium Flex guest are able to us the Premium Hotline number.
                             </li>
-                        </ul>
+                        </ul> --}}
                         <p class="text-second-color fw-bold fs-4 mb-0">+ <span class="is-premium-price"></span> <span class="smaller ms-1">THB</span></p>
                         @if($ispremiumflex == 'Y')
                             <small class="text-success selected-route-promocode d-none">Free by promoCode</small>
@@ -29,13 +30,13 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0 rounded p-2 order-lg-1">
-                    <div class="bg-secondary-soft p-3 rounded" style="min-height: 420px;">
+                    <div class="bg-secondary-soft p-3 rounded" style="min-height: 380px;">
                         <div class="form-check mb-2">
                             <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="N" id="none-premiumflex" checked>
-                            <label class="form-check-label fw-bold" for="none-premiumflex">Online Price</label>
-                            <p>Our basic fare</p>
+                            <label class="form-check-label fw-bold" for="none-premiumflex">{{ $premium_flex[0]['title'] }}</label>
                         </div>
-                        <p class="mb-2 text-primary">Fare conditions:</p>
+                        {!! $premium_flex[0]['body'] !!}
+                        {{-- <p class="mb-2 text-primary">Fare conditions:</p>
                         <ul>
                             <li>
                                 <p>Changes of traveling date or passenger name can be made through the Booking Center via email only,
@@ -44,7 +45,7 @@
                                     <span class="text-danger">Please not that change frees is 25% of the fare, plus the fare differences apply</span>
                                 </p>
                             </li>
-                        </ul>
+                        </ul> --}}
                         <input type="hidden" class="ispremiumflex" value="{{ $ispremiumflex }}">
                     </div>
                 </div>

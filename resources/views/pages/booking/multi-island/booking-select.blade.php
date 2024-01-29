@@ -48,7 +48,7 @@
                                         </p>
                                     </div>
 
-                                    <div @class(['col-lg-1', 'travel-time', 'd-flex', 'justify-content-center', 'align-items-center', 'col-3' => $route['text_1'] != '', 'col-12' => $route['text_1'] == ''])>
+                                    <div @class(['col-lg-1', 'px-0', 'travel-time', 'd-flex', 'justify-content-center', 'align-items-center', 'col-3' => $route['text_1'] != '', 'col-12' => $route['text_1'] == ''])>
                                         <p class="mb-0 smaller">{{ $route['travel_time'] }}</p>
                                     </div>
 

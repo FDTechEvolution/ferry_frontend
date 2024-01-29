@@ -2,6 +2,7 @@ const booking_route = document.querySelector('#booking-route-select')
 let route_price = 0
 let premium_price = 0
 let extra_price = 0
+let set_extra = 0
 let depart_time = ''
 let arrive_time = ''
 let route_selected = null
@@ -265,27 +266,47 @@ function progressCondition(step) {
         const route_addon_checked = _extra.querySelectorAll('.route-addon-checked-depart input')
 
         let route_addons = _extra.querySelectorAll(`.route-addon-index-${route_selected}-depart`)
-        route_addon_lists.forEach((item) => { item.classList.add('d-none') })
-        route_addons.forEach((item) => { item.classList.remove('d-none') })
+
+        if(set_extra === 0) {
+            route_addon_lists.forEach((item) => {
+                let uncheck = item.querySelectorAll(`input[type="checkbox"]`)
+                uncheck.forEach((uc) => {
+                    uc.checked = true
+                    let type = uc.dataset.type
+                    let subtype = uc.dataset.subtype
+                    let routeindex = uc.dataset.routeindex
+                    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                    uc.name = ``
+                    addon_detail.name = ``
+                })
+                item.classList.add('d-none')
+            })
+            route_addons.forEach((item) => {
+                let check = item.querySelectorAll(`input[type="checkbox"]`)
+                check.forEach((c) => {
+                    c.checked = true
+                    let type = c.dataset.type
+                    let subtype = c.dataset.subtype
+                    let routeindex = c.dataset.routeindex
+                    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
+                    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
+                    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                    addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
+                    c.name = 'route_addon_depart[]'
+                    addon_detail.name = 'route_addon_detail_depart[]'
+                    extra_price += parseInt(addon_price.value)
+                })
+                document.querySelector('.your-booking-extra').classList.remove('d-none')
+                item.classList.remove('d-none')
+                updateSumPrice()
+            })
+        }
 
         extra_price = 0
         addon_route = []
         route_addon_checked.forEach((route_addon, index) => {
-            if(route_addon.checked) {
-                let type = route_addon.dataset.type
-                let subtype = route_addon.dataset.subtype
-                let routeindex = route_addon.dataset.routeindex
-                let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
-                let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
-                let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
-                addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
-                route_addon.name = 'route_addon_depart[]'
-                addon_detail.name = 'route_addon_detail_depart[]'
-                extra_price += parseInt(addon_price.value)
-                document.querySelector('.your-booking-extra').classList.remove('d-none')
-                updateSumPrice()
-            }
             route_addon.addEventListener('change', (e) => {
+                set_extra = 1
                 let type = e.target.dataset.type
                 let subtype = e.target.dataset.subtype
                 let routeindex = e.target.dataset.routeindex

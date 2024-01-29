@@ -112,7 +112,10 @@
                     </div>
                     <div class="procress-step d-none">
                         <!-- booking premium flex -->
-                        <x-booking-premium-flex :ispremiumflex="$freepremiumflex"/>
+                        <x-booking-premium-flex
+                            :ispremiumflex="$freepremiumflex"
+                            :premium_flex="$premium_flex"
+                        />
                     </div>
                     <div class="procress-step d-none">
                         <!-- booking passenger -->
@@ -185,11 +188,11 @@
                         $booking_return_date = explode('/', $return_date);
                     @endphp
                     <span class="badge bg-booking-select-depart px-2 py-1 smaller">Depart</span>
-                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_depart_date[2].'-'.$booking_depart_date[1].'-'.$booking_depart_date[0])) }}</p>
+                    <p class="fw-bold mb-1"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_depart_date[2].'-'.$booking_depart_date[1].'-'.$booking_depart_date[0])) }}</p>
                 </div>
-                <div class="your-booking-depart">
+                <div class="your-booking-depar ps-2">
                     <small class="your-booking-depart-time"></small>
-                    <p class="your-booking-depart-from"></p>
+                    <p class="your-booking-depart-from mb-1"></p>
 
                     <small class="your-booking-arrive-time"></small>
                     <p class="your-booking-depart-to"></p>
@@ -197,11 +200,11 @@
 
                 <div class="your-booking-return-date">
                     <span class="badge bg-booking-select-return px-2 py-1 smaller">Return</span>
-                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_return_date[2].'-'.$booking_return_date[1].'-'.$booking_return_date[0])) }}</p>
+                    <p class="fw-bold mb-1"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_return_date[2].'-'.$booking_return_date[1].'-'.$booking_return_date[0])) }}</p>
                 </div>
-                <div class="your-booking-return">
+                <div class="your-booking-return ps-2">
                     <small class="your-booking-return-depart-time"></small>
-                    <p class="your-booking-return-from"></p>
+                    <p class="your-booking-return-from mb-1"></p>
 
                     <small class="your-booking-return-arrive-time"></small>
                     <p class="your-booking-return-to"></p>
