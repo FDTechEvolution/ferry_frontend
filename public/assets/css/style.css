@@ -308,6 +308,11 @@ h1,h2,h3,h4,h5{
         background-color: transparent;
         color: #333;
         box-shadow: none;
+        width: 82%;
+        margin: 0 auto;
+    }
+    .slide-desc-desktop h2 {
+        color: #fff;
     }
     .progress-step-text-name {
         display: none;
@@ -395,6 +400,11 @@ h1,h2,h3,h4,h5{
     }
     .passenger-icon-price-list {
         flex-wrap: wrap;
+    }
+    .slide-first-text {
+        position: relative !important;
+        color: #333 !important;
+        background: transparent !important;
     }
 }
 @media (max-width: 400px) {
@@ -843,6 +853,7 @@ img.img-logo-style {
 }
 
 .slide-first-text {
+    position: absolute;
     bottom: 0;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,0.5998774509803921) 20%, rgba(255,255,255,0) 90%);

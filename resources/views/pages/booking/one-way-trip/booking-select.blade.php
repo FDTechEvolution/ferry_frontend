@@ -23,7 +23,14 @@
                             <div class="col-11 col-lg-7 d-flex align-items-center mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m fs--14-m">
                                 <p class="mb-0 me-2">
                                     <span class="depart-time">{{ date("H:i", strtotime($route['depart_time'])) }}</span><br/>
-                                    <span class="small station-from-text">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif <x-booking-master-info :info="$route['master_from']" :station="$route['station_from']['name']" /></span>
+                                    <span class="small station-from-text">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif
+                                        <x-booking-master-info
+                                            :info="$route['master_from']"
+                                            :station="$route['station_from']['name']"
+                                            :googlemap="$route['station_from']['google_map']"
+                                            :image="$route['station_from']['image']['path']"
+                                            :store="$icon_url"/>
+                                    </span>
                                 </p>
                                 <span class="mx-1">
                                     <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -33,7 +40,14 @@
                                 </span>
                                 <p class="mb-0 ms-2">
                                     <span class="arrival-time">{{ date("H:i", strtotime($route['arrive_time'])) }}</span><br/>
-                                    <span class="small station-to-text">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif <x-booking-master-info :info="$route['master_to']" :station="$route['station_to']['name']" /></span>
+                                    <span class="small station-to-text">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif
+                                        <x-booking-master-info
+                                            :info="$route['master_to']"
+                                            :station="$route['station_to']['name']"
+                                            :googlemap="$route['station_to']['google_map']"
+                                            :image="$route['station_to']['image']['path']"
+                                            :store="$icon_url"/>
+                                    </span>
                                 </p>
                             </div>
 

@@ -95,6 +95,8 @@ class BookingController extends Controller
         // $addon_group = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
         // Log::debug($addon_group);
 
+        // Log::debug($routes['data']);
+
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
