@@ -6,9 +6,9 @@
             <div class="row card-body">
                 <h4 class="mb-2 pb-2 border-bottom"><i class="fi fi-star-full" style="color: #daa520;"></i> Premuim Flex</h4>
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0 p-2 order-lg-2">
-                    <div class="bg-primary-soft p-3 rounded" style="min-height: 380px;">
+                    <div class="bg-primary-soft p-3 rounded premium-border border-selected" style="min-height: 420px;">
                         <div class="form-check mb-2">
-                            <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="Y" id="is-premiumflex">
+                            <input class="form-check-input form-check-input-default premium-selected" type="radio" name="ispremiumflex" value="Y" id="is-premiumflex" checked>
                             <label class="form-check-label fw-bold" for="is-premiumflex"> {{ $premium_flex[1]['title'] }} <i class="fi fi-star-full" style="color: #daa520; margin-top: -5px;"></i></label>
                         </div>
                         {!! $premium_flex[1]['body'] !!}
@@ -30,9 +30,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0 rounded p-2 order-lg-1">
-                    <div class="bg-secondary-soft p-3 rounded" style="min-height: 380px;">
+                    <div class="bg-secondary-soft p-3 rounded online-border border-none-selected" style="min-height: 420px;">
                         <div class="form-check mb-2">
-                            <input class="form-check-input form-check-input-default" type="radio" name="ispremiumflex" value="N" id="none-premiumflex" checked>
+                            <input class="form-check-input form-check-input-default online-selected" type="radio" name="ispremiumflex" value="N" id="none-premiumflex">
                             <label class="form-check-label fw-bold" for="none-premiumflex">{{ $premium_flex[0]['title'] }}</label>
                         </div>
                         {!! $premium_flex[0]['body'] !!}
@@ -53,3 +53,32 @@
         </div>
     </div>
 </div>
+
+<style>
+    .border-selected {
+        border: 2px solid #faac00;
+    }
+    .border-none-selected {
+        border: 2px solid transparent;
+    }
+</style>
+
+<script>
+    const p_selected = document.querySelector('.premium-selected')
+    const o_selected = document.querySelector('.online-selected')
+
+    p_selected.addEventListener('click', () => {
+        document.querySelector('.premium-border').classList.add('border-selected')
+        document.querySelector('.premium-border').classList.remove('border-none-selected')
+
+        document.querySelector('.online-border').classList.remove('border-selected')
+        document.querySelector('.online-border').classList.add('border-none-selected')
+    })
+    o_selected.addEventListener('click', () => {
+        document.querySelector('.online-border').classList.add('border-selected')
+        document.querySelector('.online-border').classList.remove('border-none-selected')
+
+        document.querySelector('.premium-border').classList.remove('border-selected')
+        document.querySelector('.premium-border').classList.add('border-none-selected')
+    })
+</script>

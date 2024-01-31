@@ -2,13 +2,20 @@
     @foreach($route_arr as $index => $routes)
     <div class="row mb-4">
         <div class="col-12 mb-2">
+            @php
+                $_depart_date = explode('/', $routes['depart']);
+            @endphp
+            <h5 class="mb-0 text-main-color-2">Route {{ $index + 1 }}</h5>
             <p class="mb-0 fw-bolder booking-select-header d-lg-block d-grid">
                 <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4">{{ $routes['station_from'] }}</span></span>
                 <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4">{{ $routes['station_to'] }}</span></span>
-                <span class="me-0">Date : <span class="station-name travel-date-{{ $index }}">{{ $routes['depart'] }}</span></span>
+                <span class="me-0">Date :
+                    <span class="station-name travel-date-{{ $index }} d-none">{{ $routes['depart'] }}</span>
+                    <span class="station-name">{{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span>
+                </span>
             </p>
         </div>
-        <div class="col-12 col-lg-11 ms-0 ms-lg-5 booking-route-select">
+        <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
             @foreach($routes['data'] as $key => $route)
                 <div class="row p-2 px-4 mx-1 mb-4 border rounded booking-route-list list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light @endif" data-list="{{ $index }}" data-key="{{ $key }}">
 

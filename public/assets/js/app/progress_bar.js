@@ -328,6 +328,7 @@ function progressCondition(step) {
                     extra_price -= parseInt(addon_price.value)
                     e.target.name = ''
                     addon_detail.name = ''
+                    addon_detail.value = ''
                     addon_detail.disabled = true
                     updateSumPrice()
                 }

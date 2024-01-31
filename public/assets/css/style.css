@@ -157,6 +157,9 @@ h1,h2,h3,h4,h5{
     .mw--48 {
         width: 34px;
     }
+    .progress-step-text-name {
+        display: none;
+    }
 }
 
 /* Ipad */
@@ -314,9 +317,7 @@ h1,h2,h3,h4,h5{
     .slide-desc-desktop h2 {
         color: #fff;
     }
-    .progress-step-text-name {
-        display: none;
-    }
+
 }
 
 /* Mobile */

@@ -10,11 +10,14 @@
             <div class="col-10 col-lg-7">
                 <p class="my-2 mb-1 booking-route-depart-roundtrip"><span class="fw-bold">Depart : </span>
                     @if(!empty($depart_routes))
+                        @php
+                            $_depart_date = explode('/', $depart_date);
+                        @endphp
                         <small>
                             {{ $station_depart['from'] }}
                             <span class="mx-2">To</span>
                             {{ $station_depart['to'] }}
-                            <span class="ms-4">[ {{ $depart_date }}</span><span class="set-time-route-depart"></span> ]
+                            <span class="ms-2">[ {{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span><span class="set-time-route-depart"></span> ]
                         </small>
                     @else
                         <small>Sorry. No depart route.</small>
@@ -22,11 +25,14 @@
                 </p>
                 <p class="my-2 mt-1 booking-route-return-roundtrip"><span class="fw-bold">Return : </span>
                     @if(!empty($return_routes))
+                        @php
+                            $_return_date = explode('/', $return_date);
+                        @endphp
                         <small>
                             {{ $station_return['from'] }}
                             <span class="mx-2">To</span>
                             {{ $station_return['to'] }}
-                            <span class="ms-4">[ {{ $return_date }}</span><span class="set-time-route-return"></span> ]
+                            <span class="ms-2">[ {{ date('l M d, Y', strtotime($_return_date[2].'-'.$_return_date[1].'-'.$_return_date[0])) }}</span><span class="set-time-route-return"></span> ]
                         </small>
                     @else
                         <small>Sorry. No return route.</small>

@@ -4,13 +4,16 @@
     @if($isType != '')
     <div class="px-3 py-2 bg-booking-cover lazy text-light">
         <div class="row">
+            @php
+                $booking_date_1 = explode('/', $booking_date);
+            @endphp
             <div class="col-2 col-lg-1 d-flex align-items-center justify-content-end">
                 <i class="fa-solid fa-ship fs-1"></i>
             </div>
             <div class="col-10 col-lg-7 d-flex align-items-center">
-                <p class="mb-1">{{ $is_station['from'] }}
+                <p class="mb-1"><span class="fw-bold">Depart : </span> {{ $is_station['from'] }}
                 <span class="mx-2">To</span>
-                {{ $is_station['to'] }} <span class="ms-2">{{ $booking_date }}</span> <span class="ms-2 set-time-route-select"></span></p>
+                {{ $is_station['to'] }} <span class="ms-2"> | {{ date('l M d, Y', strtotime($booking_date_1[2].'-'.$booking_date_1[1].'-'.$booking_date_1[0])) }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
                 <p class="mb-1">Passenger</p>
@@ -163,11 +166,11 @@
                 </div>
                 <div class="your-booking-date">
                     @php
-                        $booking_date = explode('/', $booking_date);
+                        $booking_date_2 = explode('/', $booking_date);
                     @endphp
-                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date[2].'-'.$booking_date[1].'-'.$booking_date[0])) }}</p>
+                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date_2[2].'-'.$booking_date_2[1].'-'.$booking_date_2[0])) }}</p>
                 </div>
-                <div class="your-booking-destination">
+                <div class="your-booking-destination ms-2">
                     <small class="your-booking-depart-time"></small>
                     <p class="your-booking-destination-from"></p>
 

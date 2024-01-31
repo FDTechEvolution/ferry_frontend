@@ -560,6 +560,7 @@ function routeAddonCheck(e, _type) {
         }
         e.target.name = ''
         addon_detail.name = ''
+        addon_detail.value = ''
         addon_detail.disabled = true
         updateSumPrice()
     }
