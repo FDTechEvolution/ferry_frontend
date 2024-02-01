@@ -107,8 +107,8 @@
                     <label for="passenger-country">Country<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-12 col-lg-5 offset-0 offset-lg-2 form-floating mb-3">
-                    <input type="text" name="passport_number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
-                    <label for="passenger-passport" class="ms-2">Passport Number</label>
+                    <input required type="text" name="passport_number" class="form-control form-control-sm" id="passenger-passport" placeholder="Passport Number">
+                    <label for="passenger-passport" class="ms-2">Passport Number<span class="text-danger">*</span></label>
                 </div>
             </div>
             <div class="row">
