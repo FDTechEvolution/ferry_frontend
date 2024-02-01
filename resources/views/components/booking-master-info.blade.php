@@ -1,12 +1,12 @@
-@props(['info' => '', 'station' => '', 'googlemap' => '', 'image' => '', 'store' => ''])
+@props(['info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat' =>'' , 'long' => ''])
 
 @php
-    $modal_id = uniqid();
+    $modal_id = 'm_'.uniqid();
 @endphp
 
-<i class="fi fi-round-info-full cursor-pointer icon-booking-color" title="Station info." data-bs-toggle="modal" data-bs-target="#m_{{ $modal_id }}"></i>
+<i class="fi fi-round-info-full cursor-pointer icon-booking-color" title="Station info." data-bs-toggle="modal" data-bs-target="#{{ $modal_id }}" onClick="updateMap(`{{ $modal_id }}`, `{{ $lat }}`, `{{ $long }}`)"></i>
 
-<div class="modal fade" id="m_{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLg" aria-hidden="true">
+<div class="modal fade" id="{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLg" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 
@@ -16,27 +16,44 @@
 			</div>
 
 			<div class="modal-body">
-                @if($info)
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            {!! $info !!}
-                        </div>
-                        <div class="col-12 text-center mb-3">
-                            @if ($googlemap != '')
-                                <a href="https://www.google.co.th/maps/dir//{{ $googlemap }}"
-                                    target="_blank"><i class="fa-solid fa-location-dot"></i> Google Map.</a>
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        {!! $info !!}
+                    </div>
+                    <div class="col-12" id="map_{{ $modal_id }}">
+                        <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 border rounded">
+                            @if($image != '')
+                                <img class="w-100" src="{{ $store.'/'.$image }}">
                             @endif
                         </div>
-                        <div class="col-12">
-                            <div class="p-3 border rounded">
-                                <img class="w-100" src="{{ $store.'/'.$image }}">
-                            </div>
-                        </div>
                     </div>
-                @else
-                    <p class="text-center">No station info.</p>
-                @endif
+                </div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+    function updateMap(modal_id, lat, long) {
+        if(lat !== '' && long !== '') {
+            if(map) {
+                map.off()
+                map.remove()
+            }
+
+            var map = L.map(`s_${modal_id}`).setView([lat, long], 17)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(map)
+            L.marker([lat, long]).addTo(map)
+
+            setTimeout(function() {
+                map.invalidateSize()
+            }, 500)
+        }
+    }
+</script>

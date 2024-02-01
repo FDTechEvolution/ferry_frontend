@@ -78,6 +78,9 @@ class BookingController extends Controller
                 if(intval($promocode['discount']) != 0)
                     $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
             }
+
+            $routes['data'][$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
+            $routes['data'][$index]['station_to']['g_map'] = $this->setGoogleMapPosition($route['station_to']['google_map'])[0];
         }
 
         if($promocode != null) {
@@ -104,6 +107,15 @@ class BookingController extends Controller
                 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $addon_icon,
                 'premium_flex' => $premium_flex['data']
             ]);
+    }
+
+    private function setGoogleMapPosition($google_map) {
+        if($google_map != '') {
+            $g_map = explode(',', str_replace(' ', '', $google_map));
+            return array($g_map);
+        }
+
+        return array('', '');
     }
 
     private function promoDiscount($amount, $promo) {
@@ -285,6 +297,9 @@ class BookingController extends Controller
                         if(intval($promocode[$index]['discount']) != 0)
                             $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index]);
                     }
+
+                    $routes['data'][$key]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
+                    $routes['data'][$key]['station_to']['g_map'] = $this->setGoogleMapPosition($route['station_to']['google_map'])[0];
                 }
 
                 $route_arr[$index]['data'] = $routes['data'];
@@ -614,6 +629,9 @@ class BookingController extends Controller
                 if(intval($promocode['discount']) != 0)
                     $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
             }
+
+            $_routes[$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
+            $_routes[$index]['station_to']['g_map'] = $this->setGoogleMapPosition($route['station_to']['google_map'])[0];
         }
 
         return array($_routes, $_station);
