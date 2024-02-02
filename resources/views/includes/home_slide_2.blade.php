@@ -16,16 +16,11 @@
                 <div class="flickity-preloader"
                     data-flickity='{ "autoPlay": false, "cellAlign": "left", "pageDots": false, "prevNextButtons": false, "contain": true, "rightToLeft": false }'>
                     @foreach ($slides as $index => $slide)
-                        <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" @class([
-                                'col-12',
-                                'col-lg-5' => $index == 0,
-                                'col-lg-3' => $index >= 1,
-                                'mb-4', 'me-4', 'text-dark'])
-                            >
-                            @if($index == 0)
+                        @if($index == 0)
+                            <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" class="col-12 col-lg-5 mb-4 me-4 text-dark">
                                 <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 position-relative">
                                     <div class="clearfix">
-                                        <img class="img-fluid"
+                                        <img class="w-100"
                                             src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
                                             alt="" style="border-radius: 15px">
                                     </div>
@@ -35,28 +30,36 @@
 
                                                 <h2 class="h6 card-title" style="line-height: 1.4rem;">
                                                     <h5>{{ $slide['title'] }}</h5>
-                                                    {!! Str::limit($slide['description'], 100) !!} <span class="text-main-color-2 fw-bold small">See More.</span>
+                                                    <p class="mb-0">
+                                                        <span>{!! Str::limit(strip_tags($slide['description']), 100) !!}</span>
+                                                        <span class="text-main-color-2 fw-bold small">See More.</span>
+                                                    </p>
                                                 </h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @else
+                            </a>
+                        @else
+                            <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" class="col-12 col-lg-3 mb-4 me-4 text-dark">
                                 <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 mb-2"
                                     style="background-color: transparent;"
                                 >
                                     <div class="clearfix">
-                                        <img class="img-fluid "
+                                        <img class="w-100"
                                             src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
-                                            alt="" style="border-radius: 15px;">
+                                            alt="" style="border-radius: 15px; height: 220px;">
                                     </div>
                                 </div>
                                 <h2 class="h6 card-title">
                                     <h5 class="mb-2">{{ $slide['title'] }}</h5>
-                                    {!! Str::limit($slide['description'], 60) !!} <span class="text-main-color-2 fw-bold small">See More.</span>
+                                    <p class="mb-0">
+                                        <span>{!! Str::limit(strip_tags($slide['description']), 60) !!}</span>
+                                        <span class="text-main-color-2 fw-bold small">See More.</span>
+                                    </p>
                                 </h2>
-                            @endif
-                        </a>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>

@@ -53,7 +53,8 @@ class StationController extends Controller
             }
         }
 
-        return $result;
+        if(count($result) <= 0) return array($loop);
+        else return $result;
     }
 
     private function sectionColumn($stations) {

@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $section_col = $this->sectionColumn($station_route['data']['from']);
         $sections = $this->stationSetTen($section_col);
-        // Log::debug($section_col);
+        // Log::debug($sections);
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
@@ -70,7 +70,8 @@ class HomeController extends Controller
             }
         }
 
-        return $result;
+        if(count($result) <= 0) return array($loop);
+        else return $result;
     }
 
     private function sectionColumn($stations) {
