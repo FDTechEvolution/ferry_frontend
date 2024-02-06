@@ -18,17 +18,17 @@
 			<div class="modal-body">
                 <div class="row">
                     <div class="col-12 mb-4">
-                        {!! $info !!}
-                    </div>
-                    <div class="col-12" id="map_{{ $modal_id }}">
-                        <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
-                    </div>
-                    <div class="col-12">
                         <div class="p-3 border rounded">
                             @if($image != '')
                                 <img class="w-100" src="{{ $store.'/'.$image }}">
                             @endif
                         </div>
+                    </div>
+                    <div class="col-12">
+                        {!! $info !!}
+                    </div>
+                    <div class="col-12" id="map_{{ $modal_id }}">
+                        <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
                     </div>
                 </div>
 			</div>
