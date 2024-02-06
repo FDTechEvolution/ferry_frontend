@@ -73,7 +73,7 @@
                                         <select required class="form-select" name="mobile_code">
                                             <option value="" selected disabled></option>
                                             @foreach($code_country as $code)
-                                                <option value="{{ $code }}">+{{ $code }}</option>
+                                                <option value="{{ $code }}">{{ $code }}</option>
                                             @endforeach
                                         </select>
                                     </div>
