@@ -124,4 +124,20 @@
     }
 </style>
 <script src="{{ asset('assets/js/app/booking.js') }}"></script>
+<script>
+    const btn_announce = document.querySelectorAll('.btn-content-announce')
+    if(btn_announce) {
+        btn_announce.forEach((btn) => {
+            btn.addEventListener('mouseover', () => {
+                let icon = btn.querySelector('.icon-announce')
+                icon.classList.add('icon-shake')
+            })
+
+            btn.addEventListener('mouseout', () => {
+                let icon = btn.querySelector('.icon-announce')
+                icon.classList.remove('icon-shake')
+            })
+        })
+    }
+</script>
 @stop

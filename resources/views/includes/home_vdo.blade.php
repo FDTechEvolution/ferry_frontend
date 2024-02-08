@@ -20,10 +20,14 @@
                         @if($bb_index > 1)
                             <button
                                 style="background-color: {{ $item['color'] }}; top: {{40 * $index}}px; margin-top: 10px;"
-                                class="btn btn-link btn-sm btn-billboard" type="button"
+                                class="btn btn-link btn-sm btn-billboard btn-content-announce" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
-                                aria-expanded="true" aria-controls="billboard-content-{{ $index }}">
-                                <i class="fa-solid fa-square-caret-left text-light" style="margin-left: -8px;"></i>
+                                aria-expanded="true" aria-controls="billboard-content-{{ $index }}"
+                            >
+                                <i class="fa-solid fa-bullhorn text-light icon-announce"
+                                    style="margin-left: -8px; -webkit-transform: scaleX(-1); transform: scaleX(-1);"
+                                >
+                                </i>
                             </button>
                         @endif
                         <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 1]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
@@ -60,3 +64,23 @@
         </div>
     </div>
 </div>
+
+<style>
+    .icon-shake {
+        animation: shake 1s;
+        animation-iteration-count: 1;
+    }
+    @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg) scaleX(-1); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg) scaleX(-1); }
+        20% { transform: translate(-3px, 0px) rotate(1deg) scaleX(-1); }
+        30% { transform: translate(3px, 2px) rotate(0deg) scaleX(-1); }
+        40% { transform: translate(1px, -1px) rotate(1deg) scaleX(-1); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg) scaleX(-1); }
+        60% { transform: translate(-3px, 1px) rotate(0deg) scaleX(-1); }
+        70% { transform: translate(3px, 1px) rotate(-1deg) scaleX(-1); }
+        80% { transform: translate(-1px, -1px) rotate(1deg) scaleX(-1); }
+        90% { transform: translate(1px, 2px) rotate(0deg) scaleX(-1); }
+        100% { transform: translate(1px, -2px) rotate(-1deg) scaleX(-1); }
+    }
+</style>
