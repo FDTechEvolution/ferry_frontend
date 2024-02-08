@@ -19,10 +19,11 @@
                     <div class="row">
                         @if($bb_index > 1)
                             <button
-                                style="background-color: {{ $item['color'] }}; top: {{20 * $index}}px; margin-top: 10px;"
+                                style="background-color: {{ $item['color'] }}; top: {{40 * $index}}px; margin-top: 10px;"
                                 class="btn btn-link btn-sm btn-billboard" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
                                 aria-expanded="true" aria-controls="billboard-content-{{ $index }}">
+                                <i class="fa-solid fa-square-caret-left text-light" style="margin-left: -8px;"></i>
                             </button>
                         @endif
                         <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 1]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
