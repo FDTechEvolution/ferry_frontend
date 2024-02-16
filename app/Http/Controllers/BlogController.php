@@ -26,9 +26,10 @@ class BlogController extends Controller
 
     public function view(string $slug = null) {
         $blog = $this->getBlogBySlug($slug);
+        $slide = $this->getBlog();
 
         if($blog['result'])
-            return view('pages.blog.view', ['blog' => $blog['data'], 'store' => $this->ImageUrl]);
+            return view('pages.blog.view', ['blog' => $blog['data'], 'store' => $this->ImageUrl,'slides'=>$slide['data']]);
         else
             return view('404', ['msg' => "Page Not Found."]);
     }
@@ -40,6 +41,11 @@ class BlogController extends Controller
 
     private function getBlogBySlug($slug) {
         $response = Http::reqres()->get('/blog/get-blog/'.$slug);
+        return $response->json();
+    }
+
+    private function getBlog() {
+        $response = Http::reqres()->get('/blog/get');
         return $response->json();
     }
 }

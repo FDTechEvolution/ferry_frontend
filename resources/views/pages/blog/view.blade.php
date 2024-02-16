@@ -6,7 +6,7 @@
         <div class="row g-4 align-items-center">
             <div class="col position-relative mt-0">
                 <header class="py-5">
-                    <p class="smaller mb-0">Post Date : {{ date('M d, Y', strtotime($blog['created_at'])) }}</p>
+
                     <h1 class="mb-0 fw-bold">{{ $blog['title'] }}</h1>
                 </header>
             </div>
@@ -20,15 +20,19 @@
                 </picture>
             </div>
         </div>
+
+
     </div>
 </div>
 
-<div class='container py-6'>
+<div class='container py-2 pt-3'>
     <div class="col-lg-10 mx-auto">
         <div class="article-format">
             {!! $blog['description'] !!}
         </div>
     </div>
+    <hr>
+    @include('includes.home_slide_2')
 </div>
 @stop
 

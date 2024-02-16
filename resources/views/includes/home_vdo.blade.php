@@ -30,7 +30,7 @@
                                 >
                                 </i>
                             -->
-                            <img class="avatar avatar-xs rounded-circle" style="margin-left: -13px; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="{{asset($store.'/'.$item['icon'])}}" />
+                            <img class="avatar avatar-xs icon-announce" style="margin-left: -13px; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="{{asset($store.'/'.$item['icon'])}}" />
 
                             </button>
                         @endif
