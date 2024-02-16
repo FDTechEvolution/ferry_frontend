@@ -20,17 +20,21 @@
                         @if($bb_index > 1)
                             <button
                                 style="background-color: {{ $item['color'] }}; top: {{40 * $index}}px; margin-top: 10px;"
-                                class="btn btn-link btn-sm btn-billboard btn-content-announce" type="button"
+                                class="btn btn-link btn-sm btn-billboard btn-content-announce " type="button"
                                 data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
                                 aria-expanded="true" aria-controls="billboard-content-{{ $index }}"
                             >
+                                <!--
                                 <i class="fa-solid fa-bullhorn text-light icon-announce"
                                     style="margin-left: -8px; -webkit-transform: scaleX(-1); transform: scaleX(-1);"
                                 >
                                 </i>
+                            -->
+                            <img class="avatar avatar-xs rounded-circle" style="margin-left: -13px; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="{{asset($store.'/'.$item['icon'])}}" />
+
                             </button>
                         @endif
-                        <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 1]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
+                        <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 3]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
                             <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0" style="min-height: 400px;">
                                 <h2 class="blog-title">{{ $item['title'] }}</h2>
 

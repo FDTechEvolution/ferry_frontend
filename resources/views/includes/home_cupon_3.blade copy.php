@@ -21,12 +21,11 @@
                                             <div class="d-table">
                                                 <div class="d-table-cell align-middle text-center p-1">
 
-                                                    <h2 class="h5 font-proxima-400 card-title mb-4" style="color: {{$promotion['font_color']}}">
+                                                    <h2 class="h5 font-proxima-400 card-title mb-4">
                                                         {{ Str::limit($promotion['title'], 80) }}
                                                     </h2>
-                                                    <h1 style="font-size: 1.8rem;color: {{$promotion['font_color']}};" class="mb-0">{{ $promotion['code'] }}</h1>
-                                                    <span style="color: {{$promotion['font_color']}}"><i class="fa-solid fa-barcode" style="font-size: 3.9rem;"></i> <i
-                                                        class="fa-solid fa-barcode" style="font-size: 3.9rem;"></i></span>
+                                                    <h1 style="font-size: 1.8rem;" class="pb-0 mb-0">{{ $promotion['code'] }}</h1>
+                                                    <img class="w-100" src="{{asset('icons/barcode.png')}}" />
                                                 </div>
                                             </div>
                                         </div>

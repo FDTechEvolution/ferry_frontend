@@ -11,12 +11,14 @@ class HomeController extends Controller
     protected $ImageUrl;
     protected $ImageCover;
     protected $PromoColor;
+    protected $PromoFontColor;
 
     public function __construct() {
         $this->ImageUrl = config('services.store.image');
         // $this->ImageCover = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
         $this->ImageCover = ['cover.webp'];
         $this->PromoColor = ['#FFF59D', '#EEEEEE', '#81D4FA', '#A5D6A7', '#ef9a9a'];
+        $this->PromoFontColor = ['#ddc704', '#706d6d', '#2297cd', '#2cab31', '#bd2828'];
     }
 
     public function index() {
@@ -111,11 +113,14 @@ class HomeController extends Controller
         $response = Http::reqres()->get('/promotion/get');
         $promotions = $response->json();
         $promo_color = $this->PromoColor;
+        $promo_font_color = $this->PromoFontColor;
         $color_length = sizeof($this->PromoColor) -1;
         $color_index = 0;
         foreach($promotions['data'] as $index => $promo) {
             if($color_index > $color_length) $color_index = 0;
             $promotions['data'][$index]['bg_color'] = $promo_color[$color_index];
+            $promotions['data'][$index]['font_color'] = $promo_font_color[$color_index];
+
             $color_index++;
         }
 
