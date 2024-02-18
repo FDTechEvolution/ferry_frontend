@@ -149,9 +149,9 @@
         </div>
     </div>
     <div class="col-12 col-lg-3 d-none d-lg-block">
-        <div class="border rounded">
+        <div class="border rounded bg-white">
             <div class="your-booking-title p-3" style="background-color: #075ae8; border-radius: 5px 5px 0 0; border: 1px solid #075ae8;">
-                <h5 class="mb-0 text-light">Your booking.</h5>
+                <h5 class="mb-0 text-light">Booking Summary</h5>
             </div>
             <div class="your-booking-body p-3">
                 <div class="your-booking-passenger border-bottom pb-2 mb-2">

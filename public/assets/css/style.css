@@ -661,7 +661,7 @@ img.img-logo-style {
     font-weight: 500;
 }
 .process-step-item.active, .process-step-item.complete {
-    color: #333333 !important;
+    color: #ff6100  !important;
     font-weight: bold;
 }
 .process-step-item img {

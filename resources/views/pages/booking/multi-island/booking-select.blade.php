@@ -17,7 +17,7 @@
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
             @foreach($routes['data'] as $key => $route)
-                <div class="row p-2 px-4 mx-1 mb-4 border rounded booking-route-list list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light @endif" data-list="{{ $index }}" data-key="{{ $key }}">
+                <div class="row p-2 px-4 mx-1 mb-2 bg-white shadow border rounded booking-route-list list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light @endif" data-list="{{ $index }}" data-key="{{ $key }}">
 
                     <div class="col-12">
                         <div class="row">

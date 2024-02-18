@@ -1,10 +1,10 @@
 <div id="booking-route-select">
-    <h6 class="booking-select-header">
-        <span class="badge bg-booking-select-depart px-3 py-2">Depart</span>
-        {{ $is_station['from'] }} <span class="mx-1 mx-lg-3">To</span> {{ $is_station['to'] }}
-    </h6>
+    <h4 class="booking-select-header">
+        <span class="badge bg-booking-select-depart px-3 py-2">Depart,{{ $is_station['from'] }} <span class="ms-2">To,</span> {{ $is_station['to'] }}</span>
+
+    </h4>
     @foreach($routes as $index => $route)
-        <div class="row p-2 px-4 mx-1 mb-4 border rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif">
+        <div class="row p-2 px-4 mx-1 mb-2 border bg-white shadow rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif">
 
             <div class="col-12">
                 <div class="row">
@@ -101,7 +101,7 @@
                                     <p class="mb-1 smaller">For {{ $passenger[0] + $passenger[1] + $passenger[2] }} passenger(s)</p>
                                 </div>
                                 <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
-                                    <button type="button" class="btn btn-sm button-blue-bg btn-route-list py-1 px-3 btn-route-select-{{ $index }}">Select</button>
+                                    <button type="button" class="btn transition-hover-top btn-sm button-blue-bg btn-route-list py-1 px-3 btn-route-select-{{ $index }}">Select</button>
                                 </div>
                                 <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
                                     <x-booking-select-passenger-icon

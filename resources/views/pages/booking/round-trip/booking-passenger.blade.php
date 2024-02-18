@@ -2,7 +2,7 @@
     <div class="passenger-depart mb-6">
         <h4 class="mb-0">Passengers</h4>
         <small>Enter passenger details</small>
-        <div class="row mt-2 mb-5 border-radius-10 border border-booking-passenger">
+        <div class="row mt-2 mb-5 bg-white border-radius-10 border border-booking-passenger">
             <div class="col-12 py-3 bg-booking-passenger" style="border-radius: 10px 10px 0 0;">
                 Passenger 1 <span class="text-light">(Lead passenger)</span>
             </div>

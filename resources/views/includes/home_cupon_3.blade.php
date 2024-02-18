@@ -12,7 +12,7 @@
                         @endphp
                         <div style="width: 20%;">
                             <div class="col-12 ">
-                                <a href="{{ route('promo-view', ['promocode' => $promotion['code']]) }}" target="_blank">
+                                <a href="{{ route('promo-index') }}" target="_blank">
                                     <div
                                         class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100">
 
@@ -37,7 +37,7 @@
                     @endforeach
                     <div class="col-12 text-end mt-2">
                         <a href="{{ route('promo-index') }}" class="mt-2 text-main-color-2 fw-bold"><i
-                                class="fi fi-product-tag"></i> See
+                                class="fa-solid fa-tag"></i> See
                             more</a>
 
                     </div>

@@ -35,7 +35,7 @@
             </div>
             <div class="col-6 col-lg-2 border-start text-center">
                 <p class="mb-1">Total</p>
-                THB <span class="ms-2" id="sum-price">0</span>
+                 <span class="ms-2" id="sum-price">0</span> THB
             </div>
         </div>
     </div>
@@ -114,7 +114,7 @@
                         <!-- booking payment -->
                         @include('pages.booking.one-way-trip.booking-payment')
                     </div>
-
+                    <hr>
                     <div class="row mt-3">
                         <div class="col-6">
                             <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
@@ -150,9 +150,9 @@
         </div>
     </div>
     <div class="col-12 col-lg-3 d-none d-lg-block">
-        <div class="border rounded">
+        <div class="border bg-white rounded">
             <div class="your-booking-title p-3" style="background-color: #075ae8; border-radius: 5px 5px 0 0; border: 1px solid #075ae8;">
-                <h5 class="mb-0 text-light">Your booking.</h5>
+                <h5 class="mb-0 text-light">Booking Summary</h5>
             </div>
             <div class="your-booking-body p-3">
                 <div class="your-booking-passenger border-bottom pb-2 mb-2">

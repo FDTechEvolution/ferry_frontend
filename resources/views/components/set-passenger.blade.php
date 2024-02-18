@@ -6,7 +6,7 @@
     $last_name = uniqid();
 @endphp
 
-<div class="row mt-2 mb-5 border-radius-10 border border-{{ $color }} normal-passenger">
+<div class="row mt-2 bg-white mb-5 border-radius-10 border border-{{ $color }} normal-passenger">
     <div class="col-12 py-3 bg-{{ $color }}" style="border-radius: 10px 10px 0 0;">
         Passenger {{ $passenger_num }}
     </div>
