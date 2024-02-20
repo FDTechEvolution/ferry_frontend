@@ -68,7 +68,7 @@
                         <div class="col-12">
                             <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i class="fi fi-phone"></i> )</label>
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-5">
                                     <select required class="form-select" name="mobile_code">
                                         <option value="" selected disabled></option>
                                         @foreach($code_country as $code)
@@ -76,7 +76,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-7">
                                     <input required type="number" class="form-control" name="mobile">
                                 </div>
                             </div>

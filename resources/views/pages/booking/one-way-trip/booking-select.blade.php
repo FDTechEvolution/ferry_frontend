@@ -103,12 +103,14 @@
                                 <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
                                     <button type="button" class="btn transition-hover-top btn-sm button-blue-bg btn-route-list py-1 px-3 btn-route-select-{{ $index }}">Select</button>
                                 </div>
-                                <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
+                                <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list d-none">
                                     <x-booking-select-passenger-icon
                                         :passenger="$passenger"
                                         :p_adult="$route['p_adult']"
                                         :p_child="$route['p_child']"
                                         :p_infant="$route['p_infant']"
+                                        :type="_('depart')"
+                                        :index="$index"
                                     />
                                 </div>
                             </div>

@@ -43,7 +43,7 @@
 @stop
 
 @section('content')
-<a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 position-absolute d-none" id="btn-back-to-home" style="margin-top: -40px;"><< Back</a>
+
 <div class="row">
     <div class="col-12 col-lg-9">
         <ol class="process-steps process-steps-primary text-muted mb-3">
@@ -65,16 +65,16 @@
                     <span class="progress-step-text-name">Premium Flex</span>
                 </span>
             </li>
-            <li class="process-step-item position-relative" data-step="passenger">
-                <span class="ps-2 progress-step-name">
-                    <img src="{{ asset('icons/booking/passenger-info.png') }}" width="24" class="me-1">
-                    <span class="progress-step-text-name">Passenger info</span>
-                </span>
-            </li>
             <li class="process-step-item position-relative" data-step="extra">
                 <span class="ps-2 progress-step-name">
                     <img src="{{ asset('icons/booking/extra-service.png') }}" width="24" class="me-1">
                     <span class="progress-step-text-name">Extra services</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="passenger">
+                <span class="ps-2 progress-step-name">
+                    <img src="{{ asset('icons/booking/passenger-info.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Passenger info</span>
                 </span>
             </li>
             <li class="process-step-item position-relative" data-step="payment">
@@ -103,12 +103,12 @@
                         />
                     </div>
                     <div class="procress-step d-none">
-                        <!-- booking passenger -->
-                        @include('pages.booking.one-way-trip.booking-passenger')
-                    </div>
-                    <div class="procress-step d-none">
                         <!-- booking extra -->
                         @include('pages.booking.one-way-trip.booking-extra')
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking passenger -->
+                        @include('pages.booking.one-way-trip.booking-passenger')
                     </div>
                     <div class="procress-step d-none">
                         <!-- booking payment -->
@@ -117,6 +117,7 @@
                     <hr>
                     <div class="row mt-3">
                         <div class="col-6">
+                            <a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none" id="btn-back-to-home" style="margin-left: 0.5rem;"><< Back</a>
                             <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
                         </div>
                         <div class="col-6 text-end">
@@ -157,15 +158,17 @@
             <div class="your-booking-body p-3">
                 <div class="your-booking-passenger border-bottom pb-2 mb-2">
                     <p class="fw-bold mb-0">{{ $passenger[0] + $passenger[1] + $passenger[2] }} Passenger(s)</p>
-                    @if($passenger[0] != 0)
-                        <p class="mb-0 small">{{ $passenger[0] }} Adult</p>
-                    @endif
-                    @if($passenger[1] != 0)
-                        <p class="mb-0 small">{{ $passenger[1] }} Child</p>
-                    @endif
-                    @if($passenger[2] != 0)
-                        <p class="mb-0 small">{{ $passenger[2] }} Infant</p>
-                    @endif
+                    <div class="d-flex">
+                        @if($passenger[0] != 0)
+                            <p class="mb-0 small">{{ $passenger[0] }} Adult</p>
+                        @endif
+                        @if($passenger[1] != 0)
+                            <p class="mb-0 small ms-1">, {{ $passenger[1] }} Child</p>
+                        @endif
+                        @if($passenger[2] != 0)
+                            <p class="mb-0 small ms-1">, {{ $passenger[2] }} Infant</p>
+                        @endif
+                    </div>
                 </div>
                 <div class="your-booking-date">
                     @php
@@ -183,9 +186,34 @@
 
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-2 fw-bold">Fare</p>
-                            <p class="mb-2 your-booking-fare"></p>
+                        <div class="fare-passenger">
+                            @if($passenger[0] > 0)
+                                <div class="d-flex justify-content-between">
+                                    <i class="fa-solid fa-person fs-5 me-1"></i>
+                                    <span class="d-flex">
+                                        <p class="mb-0 me-2">{{ $passenger[0] }} x </p>
+                                        <p class="mb-0 your-booking-fare-adult"></p>
+                                    </span>
+                                </div>
+                            @endif
+                            @if($passenger[1] > 0)
+                                <div class="d-flex justify-content-between">
+                                    <img src="{{asset('icons/child.png')}}" width="17px" alt="" style="filter: invert(1); margin-left: -2px; height: 20px;">
+                                    <span class="d-flex">
+                                        <p class="mb-0 me-2">{{ $passenger[1] }} x </p>
+                                        <p class="mb-0 your-booking-fare-child"></p>
+                                    </span>
+                                </div>
+                            @endif
+                            @if($passenger[2] > 0)
+                                <div class="d-flex justify-content-between">
+                                    <i class="fa-solid fa-baby fs-6 me-1"></i>
+                                    <span class="d-flex">
+                                        <p class="mb-0 me-2">{{ $passenger[2] }} x </p>
+                                        <p class="mb-0 your-booking-fare-infant"></p>
+                                    </span>
+                                </div>
+                            @endif
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex d-none">
                             <p class="mb-2 fw-bold">Premium Flex</p>

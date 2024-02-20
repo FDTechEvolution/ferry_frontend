@@ -44,9 +44,16 @@ if(booking_route) {
             depart_time = route.querySelector('.depart-time').innerText
             arrive_time = route.querySelector('.arrival-time').innerText
             document.querySelector('#progress-next').disabled = false
+            let sum_c_price = document.querySelector('.your-booking-fare-child')
+            let sum_i_price = document.querySelector('.your-booking-fare-infant')
+
+            let a_per_price = document.querySelector(`.adult-per-price-depart-${index}`).innerText
+            let c_per_price = document.querySelector(`.child-per-price-depart-${index}`)
+            let i_per_price = document.querySelector(`.infant-per-price-depart-${index}`)
 
             route_price = parseToNumber(_price.innerText)
             document.querySelector('.set-time-route-select').innerHTML = `${depart_time} - ${arrive_time}`
+            document.querySelector('.your-booking-premium-flex').classList.add('d-none')
 
             // set Yout Booking
             document.querySelector('.your-booking-summary').classList.remove('d-none')
@@ -54,7 +61,10 @@ if(booking_route) {
             document.querySelector('.your-booking-destination-from').innerHTML = '<i class="fa-solid fa-ship"></i> ' + route.querySelector('.station-from-text').innerText
             document.querySelector('.your-booking-arrive-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${arrive_time}`
             document.querySelector('.your-booking-destination-to').innerHTML = '<i class="fa-solid fa-anchor"></i> ' + route.querySelector('.station-to-text').innerText
-            document.querySelector('.your-booking-fare').innerHTML = document.querySelector('.your-booking-amount').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+            document.querySelector('.your-booking-fare-adult').innerHTML = `${a_per_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+            if(sum_c_price) sum_c_price.innerHTML = `${c_per_price.innerText.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+            if(sum_i_price) sum_i_price.innerHTML = `${i_per_price.innerText.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+            document.querySelector('.your-booking-amount').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
             document.querySelector('#sum-price').innerHTML = `${route_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
             route.classList.add('active')
@@ -271,7 +281,7 @@ function progressCondition(step) {
             route_addon_lists.forEach((item) => {
                 let uncheck = item.querySelectorAll(`input[type="checkbox"]`)
                 uncheck.forEach((uc) => {
-                    uc.checked = true
+                    // uc.checked = true
                     let type = uc.dataset.type
                     let subtype = uc.dataset.subtype
                     let routeindex = uc.dataset.routeindex
@@ -282,20 +292,20 @@ function progressCondition(step) {
                 item.classList.add('d-none')
             })
             route_addons.forEach((item) => {
-                let check = item.querySelectorAll(`input[type="checkbox"]`)
-                check.forEach((c) => {
-                    c.checked = true
-                    let type = c.dataset.type
-                    let subtype = c.dataset.subtype
-                    let routeindex = c.dataset.routeindex
-                    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
-                    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
-                    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
-                    addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
-                    c.name = 'route_addon_depart[]'
-                    addon_detail.name = 'route_addon_detail_depart[]'
-                    extra_price += parseInt(addon_price.value)
-                })
+                // let check = item.querySelectorAll(`input[type="checkbox"]`)
+                // check.forEach((c) => {
+                //     c.checked = true
+                //     let type = c.dataset.type
+                //     let subtype = c.dataset.subtype
+                //     let routeindex = c.dataset.routeindex
+                //     let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
+                //     let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
+                //     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
+                //     addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
+                //     c.name = 'route_addon_depart[]'
+                //     addon_detail.name = 'route_addon_detail_depart[]'
+                //     extra_price += parseInt(addon_price.value)
+                // })
                 document.querySelector('.your-booking-extra').classList.remove('d-none')
                 item.classList.remove('d-none')
                 updateSumPrice()

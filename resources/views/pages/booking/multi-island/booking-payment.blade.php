@@ -3,10 +3,10 @@
     <div class="row bg-booking-payment-litinerary mx-3 p-3 mb-5">
         <div class="col-12">
             <div class="row depart-litinerary">
-                <div class="col-12 col-lg-8 border-end border-secondary border-2 border-end-none-mobile" id="set-litinerary">
+                <div class="col-12 col-lg-8 " id="set-litinerary">
 
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 d-none">
                     @foreach($route_arr as $index => $route)
                         <div class="set-passenger-litinerary mb-3 pb-3 border-bottom child-right">
                             <div class="row text-center fw-bold mb-2">

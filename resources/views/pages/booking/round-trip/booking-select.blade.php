@@ -135,9 +135,14 @@
                                         <button type="button"
                                             class="btn btn-sm transition-hover-top button-blue-bg btn-route-depart-list py-1 px-4 btn-route-depart-select-{{ $index }}">Select</button>
                                     </div>
-                                    <div class="col-6 col-lg-12 text-center-m">
-                                        <x-booking-select-passenger-icon :passenger="$passenger" :p_adult="$route['p_adult']"
-                                            :p_child="$route['p_child']" :p_infant="$route['p_infant']" />
+                                    <div class="col-6 col-lg-12 text-center-m d-none">
+                                        <x-booking-select-passenger-icon
+                                            :passenger="$passenger"
+                                            :p_adult="$route['p_adult']"
+                                            :p_child="$route['p_child']"
+                                            :p_infant="$route['p_infant']"
+                                            :type="_('depart')"
+                                            :index="$index"/>
                                     </div>
                                 </div>
                             </div>
@@ -292,9 +297,14 @@
                                         <button type="button"
                                             class="btn btn-sm button-orange-bg btn-route-return-list py-1 px-3 btn-route-return-select-{{ $index }}">Select</button>
                                     </div>
-                                    <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
-                                        <x-booking-select-passenger-icon :passenger="$passenger" :p_adult="$route['p_adult']"
-                                            :p_child="$route['p_child']" :p_infant="$route['p_infant']" />
+                                    <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list d-none">
+                                        <x-booking-select-passenger-icon
+                                            :passenger="$passenger"
+                                            :p_adult="$route['p_adult']"
+                                            :p_child="$route['p_child']"
+                                            :p_infant="$route['p_infant']"
+                                            :type="_('return')"
+                                            :index="$index"/>
                                     </div>
                                 </div>
                             </div>

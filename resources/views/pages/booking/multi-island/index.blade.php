@@ -42,7 +42,6 @@
 @stop
 
 @section('content')
-<a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none position-absolute" id="btn-back-to-home" style="margin-top: -40px;"><< Back</a>
 <div class="row">
     <div class="col-12 col-lg-9">
         <ol class="process-steps process-steps-primary text-muted mb-3">
@@ -64,16 +63,16 @@
                     <span class="progress-step-text-name">Premium Flex</span>
                 </span>
             </li>
-            <li class="process-step-item position-relative" data-step="passenger">
-                <span class="ps-2 progress-step-name">
-                    <img src="{{ asset('icons/booking/passenger-info.png') }}" width="24" class="me-1">
-                    <span class="progress-step-text-name">Passenger info</span>
-                </span>
-            </li>
             <li class="process-step-item position-relative" data-step="extra">
                 <span class="ps-2 progress-step-name">
                     <img src="{{ asset('icons/booking/extra-service.png') }}" width="24" class="me-1">
                     <span class="progress-step-text-name">Extra services</span>
+                </span>
+            </li>
+            <li class="process-step-item position-relative" data-step="passenger">
+                <span class="ps-2 progress-step-name">
+                    <img src="{{ asset('icons/booking/passenger-info.png') }}" width="24" class="me-1">
+                    <span class="progress-step-text-name">Passenger info</span>
                 </span>
             </li>
             <li class="process-step-item position-relative" data-step="payment">
@@ -102,12 +101,12 @@
                         />
                     </div>
                     <div class="procress-step d-none">
-                        <!-- booking passenger -->
-                        @include('pages.booking.multi-island.booking-passenger')
-                    </div>
-                    <div class="procress-step d-none">
                         <!-- booking extra -->
                         @include('pages.booking.multi-island.booking-extra')
+                    </div>
+                    <div class="procress-step d-none">
+                        <!-- booking passenger -->
+                        @include('pages.booking.multi-island.booking-passenger')
                     </div>
                     <div class="procress-step d-none">
                         <!-- booking payment -->
@@ -116,6 +115,7 @@
 
                     <div class="row mt-3">
                         <div class="col-6">
+                            <a href="{{ route('home') }}" class="btn btn-sm btn-secondary border-radius-10 d-none position-absolute" id="btn-back-to-home" style="margin-left: 0.5rem;"><< Back</a>
                             <button type="button" class="btn btn-sm btn-secondary border-radius-10" id="progress-prev" disabled><< Back</button>
                         </div>
                         <div class="col-6 text-end">

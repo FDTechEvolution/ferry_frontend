@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="col-10">
-                        <textarea class="form-control route-addon-detail-default route-addon-detail-{{ $type }} addon-detail-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}" rows="4" name="" placeholder="{{ $addon['message'] }}"></textarea>
+                        <textarea class="form-control route-addon-detail-default route-addon-detail-{{ $type }} addon-detail-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}" rows="4" name="" placeholder="{{ $addon['message'] }}" disabled></textarea>
                         <p class="small mt-2 mb-0"><span class="fw-bold">Service charge</span>
                             @if($addon['isservice_charge'] == 'Y')
                                 {{ number_format($addon['price']) }} <span class="small">THB</span>
