@@ -57,13 +57,18 @@
         </div>
         <input type="hidden" class="date-{{ $number }}-input" name="date[]" value="">
     </div>
-    <div class="col-12 col-md-6 col-lg-3 px-3 d-flex justify-content-start align-items-center">
-        @if($number < 4)
-            <div class="is-action" id="a-{{ $action_id }}" style="margin-top: -16px;">
-                <i class="fi fi-plus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Add another trip." onClick="addAmotherTrip('{{ $action_id }}', '{{ $number }}')"></i>
-                <i class="fi fi-minus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Delete this trip." onClick="removeThisTrip('{{ $action_id }}', '{{ $number }}')"></i>
+    <div class="col-12 col-md-6 col-lg-3 px-3">
+        @if($number < 5)
+            <div class="is-action" id="a-{{ $action_id }}">
+                <div class="d-flex justify-content-between" style="margin-top: 15px;">
+                    <p class="mb-0">Add Another Trip</p>
+                    <span>
+                        <i class="fi fi-plus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Add another trip." onClick="addAmotherTrip('{{ $action_id }}', '{{ $number }}')"></i>
+                        <i class="fi fi-minus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this trip." onClick="removeThisTrip('{{ $action_id }}', '{{ $number }}')"></i>
+                    </span>
+                </div>
             </div>
-        @elseif($number == 4)
+        @elseif($number == 5)
             <div class="is-action" id="a-{{ $action_id }}" style="margin-top: -16px;">
                 <i class="fi fi-minus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Delete this trip." onClick="removeThisTrip('{{ $action_id }}', '{{ $number }}')"></i>
             </div>

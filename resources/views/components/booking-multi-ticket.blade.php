@@ -38,10 +38,19 @@
                 />
                 <input type="checkbox" class="d-none multi-check-3" name="check_form[]" value="1">
             </div>
+            <div class="col-12 multi-search-form-4 d-none">
+                <x-booking-search-multi
+                    :number="5"
+                />
+                <input type="checkbox" class="d-none multi-check-4" name="check_form[]" value="1">
+            </div>
         </div>
         <div class="row">
-            <div class="col-12 text-end">
-                <i class="fi fi-plus cursor-pointer me-3" id="add-another-trip" data-bs-toggle="tooltip" data-bs-placement="left" title="Add another trip."></i>
+            <div class="col-12 col-md-6 col-lg-3 offset-md-6 offset-lg-9 text-end">
+                <div class="d-flex justify-content-between" id="add-another-trip">
+                    <p class="mb-0 me-3">Add Another Trip</p>
+                    <i class="fi fi-plus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Add another trip."></i>
+                </div>
             </div>
         </div>
         <div class="row mt-3">

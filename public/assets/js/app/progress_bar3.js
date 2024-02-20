@@ -230,12 +230,11 @@ function progressCondition(step) {
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
         let _route_price = sum_price.reduce((num1, num2) => { return num1+num2 })
         // let _premium_price = ((_route_price*110)/100) - _route_price
-        let _premium_price = (promo_premiumflex === 'Y' && _selected_promo) ? 0 : ((_route_price*110)/100) - _route_price
+        let _premium_price = promo_premiumflex === 'Y' ? 0 : ((_route_price*110)/100) - _route_price
 
         // console.log(select_promo)
         if(use_promocode.value !== '') {
-            if(promo_premiumflex === 'Y' && _selected_promo) select_promo.classList.remove('d-none')
-            if(!_selected_promo && select_promo) select_promo.classList.add('d-none')
+            if(promo_premiumflex === 'Y') select_promo.classList.remove('d-none')
         }
 
         your_booking.classList.remove('d-none')
