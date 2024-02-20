@@ -69,7 +69,7 @@
                 </div>
             </div>
         @elseif($number == 5)
-            <div class="is-action" id="a-{{ $action_id }}" style="margin-top: -16px;">
+            <div class="is-action" id="a-{{ $action_id }}" style="margin-top: 16px;">
                 <i class="fi fi-minus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Delete this trip." onClick="removeThisTrip('{{ $action_id }}', '{{ $number }}')"></i>
             </div>
         @endif
