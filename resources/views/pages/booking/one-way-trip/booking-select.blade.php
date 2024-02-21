@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-2 mb-lg-0">
                         <div class="row py-3 pb-lg-3 pb-2">
-                            @if($route['ispromocode'] == 'Y')
+                            @if($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                 <p class="mb-2 small">
                                     <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                 </p>

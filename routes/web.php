@@ -45,6 +45,8 @@ Route::controller(BookingController::class)->group(function() {
 
     Route::post('booking/book/new', 'bookingNewRoute')->name('booking-new');
     Route::post('booking/update/customer', 'updateCustomer')->name('booking-update-customer');
+
+    Route::get('booking/payment/{booking}/{email}', 'toPayment')->name('booking-payment');
 });
 
 Route::controller(TimetableController::class)->group(function() {

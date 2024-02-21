@@ -258,12 +258,6 @@ function progressCondition(step) {
             })
         }
     }
-    else if(step !== 'passenger') {
-        const passenger_next = document.querySelector('#progress-next-passenger')
-        progress_next.classList.remove('d-none')
-        passenger_next.classList.add('d-none')
-        passenger_next.disabled = true
-    }
 
     if(step === 'extra') {
         const _extra = document.querySelector('#booking-route-extra')
@@ -363,6 +357,13 @@ function progressCondition(step) {
         progress_next.classList.remove('d-none')
         progress_payment.classList.add('d-none')
         progress_payment.disabled = true
+    }
+
+    else if(step !== 'passenger') {
+        const passenger_next = document.querySelector('#progress-next-passenger')
+        progress_next.classList.remove('d-none')
+        passenger_next.classList.add('d-none')
+        passenger_next.disabled = true
     }
 
     if(step === 'payment') {
