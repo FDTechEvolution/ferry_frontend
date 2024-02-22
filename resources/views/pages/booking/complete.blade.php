@@ -6,7 +6,7 @@
         <h2>Booking complete...</h2>
         <div class="d-flex justify-content-center">
             <h4 class="me-1">Redirect to your booking in... </h4>
-            <h4 class="hide timer-countdown text-main-color-2" 
+            <h4 class="hide timer-countdown text-main-color-2"
                 data-timer-countdown-from="2000"
                 data-timer-countdown-callback-function="autoReturn"
             ></h4>
@@ -14,6 +14,7 @@
         <form class="bs-validate" id="booking-record" method="POST" action="{{ route('booking-record') }}">
             @csrf
             <input type="hidden" name="booking_number" value="{{ $bookingno }}">
+            <input type="hidden" name="booking_email" value="{{ $email }}">
         </form>
     </div>
 </div>

@@ -294,20 +294,19 @@ function progressCondition(step) {
         }
     }
     else if(step !== 'passenger') {
-        const passenger_next = document.querySelector('#progress-next-passenger')
         progress_next.classList.remove('d-none')
-        passenger_next.classList.add('d-none')
-        passenger_next.disabled = true
+        progress_payment.classList.add('d-none')
+        progress_payment.disabled = true
     }
 
     if(step === 'extra') {
         const r_extra = document.querySelector('#booking-multi-route-extra')
         const ex_route = r_extra.querySelectorAll('.booking-route-extra')
-        extra_price = 0
-        addon_route = []
+        // extra_price = 0
+        // addon_route = []
         ex_route.forEach((_extra, ex_index) => {
             let list_index = _extra.dataset.list
-            addon_route.push([])
+            // addon_route.push([])
             // const shuttlebus_list = _extra.querySelectorAll('.route-shuttle-bus')
             // const longtailboat_list = _extra.querySelectorAll('.route-longtail-boat')
             const meal_list = _extra.querySelectorAll(`.route-meal`)
@@ -355,31 +354,31 @@ function progressCondition(step) {
             route_addon_checked.forEach((route_addon) => {
                 route_addon.addEventListener('change', (e) => {
                     set_extra = 1
-                    let type = e.target.dataset.type
-                    let subtype = e.target.dataset.subtype
-                    let routeindex = e.target.dataset.routeindex
-                    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${ex_index}`)
-                    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${ex_index}`)
-                    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
-                    if(e.target.checked) {
-                        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
-                        if(addon_index < 0) addon_route[ex_index].push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${ex_index}`})
-                        extra_price += parseInt(addon_price.value)
-                        e.target.name = `route_addon[${ex_index}][]`
-                        addon_detail.name = `route_addon_detail[${ex_index}][]`
-                        addon_detail.disabled = false
-                        updateSumPrice()
-                    }
-                    else {
-                        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
-                        if(addon_index >= 0) addon_route[ex_index].splice(addon_index, 1)
-                        extra_price -= parseInt(addon_price.value)
-                        e.target.name = ''
-                        addon_detail.name = ''
-                        addon_detail.value = ''
-                        addon_detail.disabled = true
-                        updateSumPrice()
-                    }
+                    // let type = e.target.dataset.type
+                    // let subtype = e.target.dataset.subtype
+                    // let routeindex = e.target.dataset.routeindex
+                    // let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${ex_index}`)
+                    // let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${ex_index}`)
+                    // let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
+                    // if(e.target.checked) {
+                    //     let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+                    //     if(addon_index < 0) addon_route[ex_index].push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${ex_index}`})
+                    //     extra_price += parseInt(addon_price.value)
+                    //     e.target.name = `route_addon[${ex_index}][]`
+                    //     addon_detail.name = `route_addon_detail[${ex_index}][]`
+                    //     addon_detail.disabled = false
+                    //     updateSumPrice()
+                    // }
+                    // else {
+                    //     let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+                    //     if(addon_index >= 0) addon_route[ex_index].splice(addon_index, 1)
+                    //     extra_price -= parseInt(addon_price.value)
+                    //     e.target.name = ''
+                    //     addon_detail.name = ''
+                    //     addon_detail.value = ''
+                    //     addon_detail.disabled = true
+                    //     updateSumPrice()
+                    // }
                 })
             })
 
@@ -400,9 +399,10 @@ function progressCondition(step) {
             activity_select.classList.remove('d-none')
         })
 
+        const passenger_next = document.querySelector('#progress-next-passenger')
         progress_next.classList.remove('d-none')
-        progress_payment.classList.add('d-none')
-        progress_payment.disabled = true
+        passenger_next.classList.add('d-none')
+        passenger_next.disabled = true
     }
 
     if(step === 'payment') {
@@ -413,6 +413,34 @@ function progressCondition(step) {
         progress_next.classList.add('d-none')
         progress_payment.classList.remove('d-none')
         if(payment_selected) progress_payment.disabled = false
+    }
+}
+
+function selectRouteAddon(e, ex_index) {
+    let type = e.dataset.type
+    let subtype = e.dataset.subtype
+    let routeindex = e.dataset.routeindex
+    let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${ex_index}`)
+    let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${ex_index}`)
+    let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${ex_index}`)
+    if(e.checked) {
+        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+        if(addon_index < 0) addon_route[ex_index].push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${ex_index}`})
+        extra_price += parseInt(addon_price.value)
+        e.name = `route_addon[${ex_index}][]`
+        addon_detail.name = `route_addon_detail[${ex_index}][]`
+        addon_detail.disabled = false
+        updateSumPrice()
+    }
+    else {
+        let addon_index = addon_route[ex_index].findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${ex_index}` })
+        if(addon_index >= 0) addon_route[ex_index].splice(addon_index, 1)
+        extra_price -= parseInt(addon_price.value)
+        e.name = ''
+        addon_detail.name = ''
+        addon_detail.value = ''
+        addon_detail.disabled = true
+        updateSumPrice()
     }
 }
 

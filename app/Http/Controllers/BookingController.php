@@ -434,7 +434,7 @@ class BookingController extends Controller
 
         $res = $response->json();
         if($res['result']) {
-            return redirect()->route('booking-payment', ['booking' => $res['booking'], 'email' => $res['email']]);
+            return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
         // if(isset($res)) {
         //     $data = $res['data'];
@@ -551,15 +551,18 @@ class BookingController extends Controller
         ]);
 
         $res = $response->json();
-        if(isset($res)) {
-            $data = $res['data'];
-            $booking_id = $res['booking'];
-            $email = $res['email'];
-
-            if($data['respCode'] == '0000') {
-                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
-            }
+        if($res['result']) {
+            return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
+        // if(isset($res)) {
+        //     $data = $res['data'];
+        //     $booking_id = $res['booking'];
+        //     $email = $res['email'];
+
+        //     if($data['respCode'] == '0000') {
+        //         return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+        //     }
+        // }
 
         return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
@@ -608,16 +611,20 @@ class BookingController extends Controller
             'promocode' => $request->use_promocode
         ]);
         $res = $response->json();
-        if(isset($res)) {
-            $data = $res['data'];
-            $booking_id = $res['booking'];
-            $booking_id = $res['booking'];
-            $email = $res['email'];
-
-            if($data['respCode'] == '0000') {
-                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
-            }
+        Log::debug($res);
+        if($res['result']) {
+            return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
+        // if(isset($res)) {
+        //     $data = $res['data'];
+        //     $booking_id = $res['booking'];
+        //     $booking_id = $res['booking'];
+        //     $email = $res['email'];
+
+        //     if($data['respCode'] == '0000') {
+        //         return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
+        //     }
+        // }
 
         return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }

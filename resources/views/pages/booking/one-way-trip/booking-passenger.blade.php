@@ -120,6 +120,10 @@
             </div>
         </div>
         <input type="hidden" name="passenger_type[]" value="Adult">
+        @php
+            $b_date = explode('/', $booking_date)
+        @endphp
+        <input type="hidden" name="departdate" value="{{ $booking_date }}">
     </div>
 
     @php

@@ -100,12 +100,12 @@
                     <span class="progress-step-text-name">Passenger info</span>
                 </span>
             </li>
-            <li class="process-step-item position-relative" data-step="payment">
+            {{-- <li class="process-step-item position-relative" data-step="payment">
                 <span class="ps-2 progress-step-name">
                     <img src="{{ asset('icons/booking/payment.png') }}" width="24" class="me-1">
                     <span class="progress-step-text-name">Payment</span>
                 </span>
-            </li>
+            </li> --}}
         </ol>
 
         <div class="row min-h-50vh">
@@ -133,10 +133,10 @@
                         <!-- booking passenger -->
                         @include('pages.booking.round-trip.booking-passenger')
                     </div>
-                    <div class="procress-step d-none">
+                    {{-- <div class="procress-step d-none">
                         <!-- booking payment -->
                         @include('pages.booking.round-trip.booking-payment')
-                    </div>
+                    </div> --}}
 
                     <div class="row mt-3">
                         <div class="col-6">
@@ -154,8 +154,8 @@
                             <x-button-green
                                 id="progress-next-passenger"
                                 class="btn-sm d-none"
-                                :type="_('button')"
-                                :text="_('Continue >>')"
+                                :type="_('submit')"
+                                :text="_('Book / Payment')"
                                 onClick="progressPassenger()"
                                 disabled
                             />

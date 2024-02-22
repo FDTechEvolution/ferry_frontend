@@ -119,6 +119,8 @@
                 </div>
             </div>
             <input type="hidden" name="passenger_type[]" value="Adult">
+            <input type="hidden" name="departdate" value="{{ $depart_date }}">
+            <input type="hidden" name="returndate" value="{{ $return_date }}">
         </div>
 
         @php
