@@ -611,7 +611,6 @@ class BookingController extends Controller
             'promocode' => $request->use_promocode
         ]);
         $res = $response->json();
-        Log::debug($res);
         if($res['result']) {
             return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
