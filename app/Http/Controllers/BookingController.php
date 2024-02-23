@@ -31,6 +31,7 @@ class BookingController extends Controller
     public function __construct() {
         $this->IconUrl = config('services.store.image');
         $this->CodeCountry = config('services.code_country');
+        //$this->CodeCountry = json_decode(Storage::disk('public')->get('json/country.json'),true);
         $this->CountryList = config('services.country_list');
     }
 
@@ -117,8 +118,8 @@ class BookingController extends Controller
             $freepremiumflex = $promocode[0]['isfreepremiumflex'];
         }
 
-        //$code_country = $this->CodeCountry;
-        $code_country = (Storage::json('json/country.json'));
+        $code_country = $this->CodeCountry;
+        $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
         //Log::debug($code_country);
         $country_list = $this->CountryList;
         $addon_icon = $this->RouteAddonIcon;
@@ -267,10 +268,13 @@ class BookingController extends Controller
 
         $premium_flex = $this->getPremiumFlex();
 
+        $code_country = json_decode(Storage::disk('public')->get('json/country.json'));
+        //Log::debug($code_country);
+
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
-            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $this->CodeCountry, 'country_list' => $this->CountryList,
+            'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $code_country, 'country_list' => $this->CountryList,
             'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $this->RouteAddonIcon,
             'premium_flex' => $premium_flex['data']
         ]);
