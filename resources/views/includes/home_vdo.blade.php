@@ -1,8 +1,8 @@
 <div class="section pt-2 pb-2 pb-lg-6">
     <div class="row">
 
-        <div class="col-12 col-lg-4 mb-4">
-            <div class="row">
+        <div class="col-12 col-lg-4 mb-4 position-relative">
+            <div class="row position-absolute" style="width: 100%; z-index: 2;">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="150">
                     <div class="ratio ratio-16x9">
                         <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7); background-color: #fff;"></iframe>
@@ -34,7 +34,7 @@
 
                             </button>
                         @endif
-                        <div style="background-color: {{ $item['color'] }}; z-index: -1; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 3]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
+                        <div style="background-color: {{ $item['color'] }}; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 3]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
                             <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0" style="min-height: 400px;">
                                 <h2 class="blog-title">{{ $item['title'] }}</h2>
 

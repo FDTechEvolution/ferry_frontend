@@ -43,7 +43,9 @@
                                             <span class="depart-time">{{ date("H:i", strtotime($route['depart_time'])) }}</span><br/>
                                             <span class="small station-from-text-{{ $index }}-{{ $key }}">{{ $route['station_from']['name'] }} @if($route['station_from']['piername'] != NULL) ({{$route['station_from']['piername']}}) @endif
                                                 <x-booking-master-info :station_line="$route['station_lines']"
-                                                    :info="$route['master_from']"
+                                                    :s_info="$route['master_from_info']"
+                                                    :m_info="$route['master_from']"
+                                                    :i_info="$route['information_from']"
                                                     :station="$route['station_from']['name']"
                                                     :image="$route['station_from']['image']['path']"
                                                     :store="$icon_url"
@@ -62,7 +64,9 @@
                                             <span class="arrival-time">{{ date("H:i", strtotime($route['arrive_time'])) }}</span><br/>
                                             <span class="small station-to-text-{{ $index }}-{{ $key }}">{{ $route['station_to']['name'] }} @if($route['station_to']['piername'] != NULL) ({{$route['station_to']['piername']}}) @endif
                                                 <x-booking-master-info :station_line="$route['station_lines']"
-                                                    :info="$route['master_from']"
+                                                    :s_info="$route['master_to_info']"
+                                                    :m_info="$route['master_to']"
+                                                    :i_info="$route['information_to']"
                                                     :station="$route['station_to']['name']"
                                                     :googlemap="$route['station_to']['google_map']"
                                                     :image="$route['station_to']['image']['path']"

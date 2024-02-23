@@ -47,8 +47,14 @@
                                             @if ($route['station_from']['piername'] != null)
                                                 ({{ $route['station_from']['piername'] }})
                                             @endif
-                                            <x-booking-master-info :info="$route['master_from']" :station="$route['station_from']['name']" :image="$route['station_from']['image']['path']"
-                                                :store="$icon_url" :lat="$route['station_from']['g_map'][0]" :long="$route['station_from']['g_map'][1]" />
+                                            <x-booking-master-info
+                                                :s_info="$route['master_from_info']"
+                                                :m_info="$route['master_from']"
+                                                :i_info="$route['information_from']"
+                                                :station="$route['station_from']['name']"
+                                                :image="$route['station_from']['image']['path']"
+                                                :store="$icon_url" :lat="$route['station_from']['g_map'][0]"
+                                                :long="$route['station_from']['g_map'][1]" />
                                         </span>
                                     </p>
                                     <span class="mx-0 mx-md-3">
@@ -69,8 +75,15 @@
                                             @if ($route['station_to']['piername'] != null)
                                                 ({{ $route['station_to']['piername'] }})
                                             @endif
-                                            <x-booking-master-info :info="$route['master_to']" :station="$route['station_to']['name']" :googlemap="$route['station_to']['google_map']"
-                                                :image="$route['station_to']['image']['path']" :store="$icon_url" :lat="$route['station_to']['g_map'][0]"
+                                            <x-booking-master-info
+                                                :s_info="$route['master_to_info']"
+                                                :m_info="$route['master_to']"
+                                                :i_info="$route['information_to']"
+                                                :station="$route['station_to']['name']"
+                                                :googlemap="$route['station_to']['google_map']"
+                                                :image="$route['station_to']['image']['path']"
+                                                :store="$icon_url"
+                                                :lat="$route['station_to']['g_map'][0]"
                                                 :long="$route['station_to']['g_map'][1]" />
                                         </span>
                                     </p>
@@ -206,8 +219,13 @@
                                             @if ($route['station_from']['piername'] != null)
                                                 ({{ $route['station_from']['piername'] }})
                                             @endif
-                                            <x-booking-master-info :info="$route['master_from']" :station="$route['station_from']['name']"
-                                                :image="$route['station_from']['image']['path']" :store="$icon_url" :lat="$route['station_from']['g_map'][0]"
+                                            <x-booking-master-info
+                                                :s_info="$route['master_from_info']"
+                                                :m_info="$route['master_from']"
+                                                :i_info="$route['information_from']"
+                                                :station="$route['station_from']['name']"
+                                                :image="$route['station_from']['image']['path']"
+                                                :store="$icon_url" :lat="$route['station_from']['g_map'][0]"
                                                 :long="$route['station_from']['g_map'][1]" />
                                         </span>
                                     </p>
@@ -230,8 +248,14 @@
                                             @if ($route['station_to']['piername'] != null)
                                                 ({{ $route['station_to']['piername'] }})
                                             @endif
-                                            <x-booking-master-info :info="$route['master_to']" :station="$route['station_to']['name']"
-                                                :image="$route['station_to']['image']['path']" :store="$icon_url" :lat="$route['station_to']['g_map'][0]"
+                                            <x-booking-master-info
+                                                :s_info="$route['master_to_info']"
+                                                :m_info="$route['master_to']"
+                                                :i_info="$route['information_to']"
+                                                :station="$route['station_to']['name']"
+                                                :image="$route['station_to']['image']['path']"
+                                                :store="$icon_url"
+                                                :lat="$route['station_to']['g_map'][0]"
                                                 :long="$route['station_to']['g_map'][1]" />
                                         </span>
                                     </p>

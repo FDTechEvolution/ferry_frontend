@@ -1,4 +1,4 @@
-@props(['info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat' =>'' , 'long' => ''])
+@props(['s_info' => '', 'm_info' => '', 'i_info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat' =>'' , 'long' => ''])
 
 @php
     $modal_id = 'm_'.uniqid();
@@ -24,8 +24,12 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12">
-                        {!! $info !!}
+                    <div class="col-12 mb-4">
+                        @if($s_info == 'Y')
+                            {!! $m_info !!}
+                        @else
+                            {!! $i_info !!}
+                        @endif
                     </div>
                     <div class="col-12" id="map_{{ $modal_id }}">
                         <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
