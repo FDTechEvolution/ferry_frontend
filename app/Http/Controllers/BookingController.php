@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class BookingController extends Controller
 {
@@ -116,7 +117,9 @@ class BookingController extends Controller
             $freepremiumflex = $promocode[0]['isfreepremiumflex'];
         }
 
-        $code_country = $this->CodeCountry;
+        //$code_country = $this->CodeCountry;
+        $code_country = (Storage::json('json/country.json'));
+        //Log::debug($code_country);
         $country_list = $this->CountryList;
         $addon_icon = $this->RouteAddonIcon;
 
