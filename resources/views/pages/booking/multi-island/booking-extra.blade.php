@@ -18,7 +18,7 @@
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-4 booking-route-extra ps-lg-4 border-start border-2" data-list="{{ $r_index }}" style="border-color: #ff6100 !important;">
-            <div class="row border rounded p-2 ms-1 mt-2 mb-4">
+            <div class="row">
                 <div class="col-12">
                     @foreach($routes['data'] as $index => $route)
                         <x-booking-addon

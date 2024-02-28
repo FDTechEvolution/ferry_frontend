@@ -33,11 +33,11 @@
 <div class="row">
     @if($booking['do_update'])
         @if($booking['ispayment'] == 'N')
-        <div class="col-12 text-center mb-4">
-            
+        <div class="col-12 text-end mb-4 ps-0 pe-0">
+
             <button type="button" class="btn button-green-bg rounded px-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
             <div class="collapse mt-2" id="collapsePayment">
-                <div class="card card-body bg-light">
+                <div class="card card-body bg-white">
                     <form method="POST" action="{{ route('payment-link') }}">
                         @csrf
                         <div class="card">
@@ -84,10 +84,10 @@
         </div>
         @endif
     @endif
-    <div class="col-12">
+    <div class="card card-body col-12 py-4 px-5">
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12">
                 <div class="row" id="payment-passenger-detail">
                     @foreach($customers as $key => $customer)
@@ -137,7 +137,7 @@
 
         <h4 class="mb-0 fw-bold">Booking</h4>
         <p class="mb-2">Detail</p>
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12 mb-3">
                 <div class="row" id="payment-passenger-detail">
                     @foreach($booking['route'] as $route)
@@ -158,7 +158,7 @@
                                 <div class="col-3">
                                     <h6 class="fw-bold mb-1">To</h6>
                                     <p class="mb-1">
-                                        {{ $route['station_to'] }} 
+                                        {{ $route['station_to'] }}
                                         @if($route['station_to_pier'] != null) ({{$route['station_to_pier']}}) @endif
                                         @if($route['station_to_nickname'] != null) [{{ $route['station_to_nickname'] }}] @endif
                                     </p>
@@ -214,7 +214,7 @@
         </div>
 
         @if($booking['do_update'])
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5">
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12">
                 <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
                 <form method="POST" action="{{ route('booking-new') }}">

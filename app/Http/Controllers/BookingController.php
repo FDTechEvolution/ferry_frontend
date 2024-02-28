@@ -377,9 +377,10 @@ class BookingController extends Controller
         }
 
         $premium_flex = $this->getPremiumFlex();
+        $code_country = json_decode(Storage::disk('public')->get('json/country.json'));
 
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
-                        'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $this->CodeCountry,
+                        'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $code_country,
                         'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
                         'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'premium_flex' => $premium_flex['data']]);
     }

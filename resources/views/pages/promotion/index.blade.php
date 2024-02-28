@@ -13,13 +13,9 @@
 
             @foreach ($promotions as $item)
                 <div class="row">
-                    <div class="col-12 col-lg-3">
-                        @if ($item['image'] != '')
-                            <img class="img-fluid " src="{{ asset($store . '/' . $item['image']) }}" alt="{{ $item['title'] }}"
-                                style="border-radius: 15px 15px 0px 0px;">
-                        @else
-                            <img class="img-fluid rounded" src="{{ asset('assets/images/cupon/a.jpg')}}" alt="{{ $item['title'] }}">
-                        @endif
+                    <div class="col-12 col-lg-3 text-center">
+                        <i class="fa-solid fa-barcode" style="font-size: 6rem;"></i>
+                        <i class="fa-solid fa-barcode" style="font-size: 6rem;"></i>
                     </div>
                     <div class="col-12 col-lg-9">
                         <a href="{{ route('promo-view', ['promocode' => $item['code']]) }}" target="">
@@ -27,9 +23,9 @@
                         </a>
                        <p>{{$item['description']}}</p>
                     </div>
-                    
+
                 </div>
-                
+
                 <hr>
             @endforeach
         </div>

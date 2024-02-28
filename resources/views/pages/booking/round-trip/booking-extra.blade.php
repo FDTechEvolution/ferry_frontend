@@ -6,11 +6,11 @@
             <h5 class="text-primary"><span class="badge bg-booking-select-depart">Depart</span> {{ $station_depart['from'] }}</h5>
         </div>
         <div class="col-12 col-lg-6">
-            <h5 class="text-primary">{{ $station_depart['to'] }}</h5>
+            <h5 class="text-primary ps-lg-4">{{ $station_depart['to'] }}</h5>
         </div>
     </div>
 
-    <div id="depart-route-extra">
+    <div id="depart-route-extra" class="ps-lg-4 ms-lg-3 border-start border-2" style="border-color: #16aded !important;">
         @foreach($depart_routes as $index => $route)
             <x-booking-addon
                 :route_addons="$route['addon_group']"
@@ -84,14 +84,14 @@
 
     <div class="row mt-4 mb-1">
         <div class="col-12 col-lg-6">
-            <h5 class="text-primary"><span class="badge bg-booking-select-return">Return</span> {{ $station_return['from'] }}</h5>
+            <h5 class="text-main-color-2"><span class="badge bg-booking-select-return">Return</span> {{ $station_return['from'] }}</h5>
         </div>
         <div class="col-12 col-lg-6">
-            <h5 class="text-primary">{{ $station_return['to'] }}</h5>
+            <h5 class="text-main-color-2 ps-lg-4">{{ $station_return['to'] }}</h5>
         </div>
     </div>
 
-    <div id="return-route-extra">
+    <div id="return-route-extra" class="ps-lg-4 ms-lg-3 border-start border-2" style="border-color: #ff6100 !important;">
         @foreach($return_routes as $index => $route)
             <x-booking-addon
                 :route_addons="$route['addon_group']"
