@@ -268,7 +268,7 @@ class BookingController extends Controller
 
         $premium_flex = $this->getPremiumFlex();
 
-        $code_country = json_decode(Storage::disk('public')->get('json/country.json'));
+        $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
         //Log::debug($code_country);
 
         return view('pages.booking.round-trip.index', [
@@ -377,7 +377,7 @@ class BookingController extends Controller
         }
 
         $premium_flex = $this->getPremiumFlex();
-        $code_country = json_decode(Storage::disk('public')->get('json/country.json'));
+        $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
 
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $code_country,
