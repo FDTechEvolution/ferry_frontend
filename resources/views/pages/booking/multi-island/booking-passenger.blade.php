@@ -76,8 +76,8 @@
                                     <select required class="form-select" name="mobile_code">
 
                                         @foreach ($code_country as $code)
-                                        <option value="{{ $code->dial_code }}">
-                                            {{ $code->code . ' ' . $code->dial_code }}</option>
+                                        <option value="{{ $code['dial_code'] }}">
+                                            {{ $code['code'] . ' ' . $code['dial_code'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
