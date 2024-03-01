@@ -316,9 +316,37 @@
         <h4 class="mb-0 fw-bold">Extra Services</h4>
         <p class="mb-2">please select youradditional services</p>
         <div class="row mx-3 mb-5">
-            <div class="col-4">
+            <div class="col-4 mb-4">
                 <div class="card">
-                    <img src="{{ asset('pad-thai_addon.jpg') }}" class="card-img-top" alt="meal" style="min-height: 240px; max-height: 240px;">
+                    <img src="{{ asset('longtail-boat.webp') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
+                    <div class="card-body bg-booking-payment-extra">
+                        <h5 class="card-title">Longtail Boat</h5>
+                        <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
+                        @if($booking['do_update'])
+                            <div class="text-center mt-2">
+                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card mb-4">
+                    <img src="{{ asset('shuttle-bus.webp') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
+                    <div class="card-body bg-booking-payment-extra">
+                        <h5 class="card-title">Longtail Boat</h5>
+                        <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
+                        @if($booking['do_update'])
+                            <div class="text-center mt-2">
+                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mb-4">
+                <div class="card">
+                    <img src="{{ asset('pad-thai_addon.jpg') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
                     <div class="card-body bg-booking-payment-extra">
                         <h5 class="card-title">Meal</h5>
                         <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
@@ -330,9 +358,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-4 mb-4">
                 <div class="card">
-                    <img src="{{ asset('cover/cover_03.webp') }}" class="card-img-top" alt="activity" style="min-height: 240px; max-height: 240px;">
+                    <img src="{{ asset('cover/cover_03.webp') }}" class="card-img-top" alt="activity" style="min-height: 200px; max-height: 200px;">
                     <div class="card-body bg-booking-payment-extra">
                         <h5 class="card-title">Daytrip</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

@@ -763,6 +763,8 @@ class BookingController extends Controller
                 $customers = $this->setCustomer($res['data']['customer']);
                 $station_form = $res['m_from_route'];
                 $_station_to = $this->setStationToSection($res['m_route']);
+
+                // Log::debug($addons);
                 return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
                                 'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0],
