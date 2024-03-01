@@ -173,14 +173,14 @@
                                     @foreach($customer as $cus)
                                         <p class="mb-1">{{ $cus['name'] }}</p>
                                     @endforeach
-                                    @if($booking['do_update'])
+                                    {{-- @if($booking['do_update'])
                                         <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
                                         <form method="POST" id="form-confirm-merge" action="{{ route('booking-record') }}">
                                             @csrf
                                             <input type="hidden" name="booking_number" id="booking-number-current" value="{{ $booking['booking_number'] }}">
                                             <input type="hidden" name="booking_number_new" id="booking-number-new" value="">
                                         </form>
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <div class="col-3 text-center">
                                     <h6 class="fw-bold mb-1">Extra detail</h6>
