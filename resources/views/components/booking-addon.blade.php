@@ -2,13 +2,21 @@
 
 @foreach ($route_addons as $r_index => $route_addon)
 <div class="row route-addon-lists-{{ $type }} route-addon-index-{{ $route_index }}-{{ $type }}">
+    @php
+        $r_addon = count($route_addon)
+    @endphp
+
     @foreach($route_addon as $index => $addon)
         @php
             $from_id = uniqid();
         @endphp
 
         @if($addon['isactive'] == 'Y')
-            <div class="col-12 col-lg-6 mb-3 pb-4 px-2 border-bottom">
+            @if($r_addon == 1 && $addon['subtype'] == 'to')
+                <div class="col-12 col-lg-6 offset-lg-6 mb-3 pb-4 px-2 border-bottom">
+            @else
+                <div class="col-12 col-lg-6 mb-3 pb-4 px-2 border-bottom">
+            @endif
                 <h5 class="addon-name-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}">
                     {{ $addon['name'] }} @if($addon['subtype'] == 'from') {{ $station_from }} @else {{ $station_to }} @endif
                 </h5>
