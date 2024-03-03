@@ -387,10 +387,18 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
     let destination_optgroup = document.querySelectorAll(`${element} .group-list`)
     destination_optgroup.forEach((o) => { o.remove() })
 
+    const chunks = [];
+    // console.log(result)
+
+    for (let i = 0; i < result.section[0].length; i += 10) {
+        const chunk = result.section[0].slice(i, i + 10);
+        chunks.push(chunk);
+    }
+
     let destination = document.querySelector(`${element}`)
-    result.section.forEach((items) => {
+    chunks.forEach((items) => {
         let group_list = document.createElement('div')
-        group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
+        group_list.setAttribute('class', 'col-12 col-lg-4 group-list mb-4 pb-4')
         items.forEach((item, index) => {
             if(item.is_section === 'Y') {
                 let optgroup = document.createElement('p')
@@ -402,7 +410,7 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
                 let name = item.station.name
                 let pier = item.station.piername === null ? '' : ` (${item.station.piername})`
                 let p = document.createElement('p')
-                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400')
+                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400 small')
                 p.setAttribute('data-id', item.station.id)
                 p.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
                 p.innerHTML = name + pier

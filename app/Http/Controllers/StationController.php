@@ -22,7 +22,6 @@ class StationController extends Controller
         $_result = $res['data']['to'];
         $_section = $this->sectionColumn($res['data']['to']);
         $sections = $this->stationSetTen($_section);
-        // Log::debug($sections);
 
         return response()->json(['data' => $_result, 'section' => $sections], 200);
     }
@@ -34,21 +33,21 @@ class StationController extends Controller
 
         foreach($section_col as $sections) {
             foreach($sections as $key => $stations) {
-                $_loop++;
+                // $_loop++;
                 array_push($loop, ['is_section' => 'Y', 'section' => $key]);
-                if($_loop == 10) {
-                    array_push($result, $loop);
-                    $_loop = 0;
-                    $loop = [];
-                }
+                // if($_loop == 10) {
+                //     array_push($result, $loop);
+                //     $_loop = 0;
+                //     $loop = [];
+                // }
                 foreach($stations as $station) {
-                    $_loop++;
+                    // $_loop++;
                     array_push($loop, ['is_section' => 'N', 'station' => $station]);
-                    if($_loop == 10) {
-                        array_push($result, $loop);
-                        $_loop = 0;
-                        $loop = [];
-                    }
+                    // if($_loop == 10) {
+                    //     array_push($result, $loop);
+                    //     $_loop = 0;
+                    //     $loop = [];
+                    // }
                 }
             }
         }
