@@ -202,7 +202,10 @@
                             $line_amount = 0;
                         @endphp
                         @foreach($payment_lines as $line)
-                            <h6 class="d-flex justify-content-end align-items-end mb-2">{!! $line['title'] !!} : <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line['amount'], 2) }}</p> <small class="smaller">THB</small></h6>
+                            <h6 class="d-flex justify-content-end align-items-end mb-2">{!! $line['title'] !!}
+                                @if($line['description'] != '') <i class="fi fi-round-info-full cursor-pointer icon-booking-color px-2 small" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $line['description'] }}"></i> @endif :
+                                <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line['amount'], 2) }}</p> <small class="smaller">THB</small>
+                            </h6>
                             @php
                                 $line_amount += $line['amount'];
                             @endphp
@@ -316,34 +319,6 @@
         <h4 class="mb-0 fw-bold">Extra Services</h4>
         <p class="mb-2">please select youradditional services</p>
         <div class="row mx-3 mb-5">
-            <div class="col-4 mb-4">
-                <div class="card">
-                    <img src="{{ asset('longtail-boat.webp') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
-                    <div class="card-body bg-booking-payment-extra">
-                        <h5 class="card-title">Longtail Boat</h5>
-                        <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
-                        @if($booking['do_update'])
-                            <div class="text-center mt-2">
-                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card mb-4">
-                    <img src="{{ asset('shuttle-bus.webp') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
-                    <div class="card-body bg-booking-payment-extra">
-                        <h5 class="card-title">Longtail Boat</h5>
-                        <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
-                        @if($booking['do_update'])
-                            <div class="text-center mt-2">
-                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
             <div class="col-4 mb-4">
                 <div class="card">
                     <img src="{{ asset('pad-thai_addon.jpg') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">

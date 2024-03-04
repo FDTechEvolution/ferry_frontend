@@ -686,6 +686,8 @@ class BookingController extends Controller
                 $booking = $res['data'];
                 $addons = $res['addon'];
 
+                // Log::debug($booking);
+
                 $isPaid = [
                     'N' => '<span class="text-danger fw-bold">Unpaid</span>',
                     'Y' => '<span class="text-success fw-bold">Paid</span>'
@@ -695,6 +697,8 @@ class BookingController extends Controller
                 $customers = $this->setCustomer($res['data']['customer']);
                 $station_form = $res['m_from_route'];
                 $_station_to = $this->setStationToSection($res['m_route']);
+                // $longtail_boat = $this->separateRouteAddon($addons['route_addons'], 'longtail_boat');
+                // $shuttle_bus = $this->separateRouteAddon($addons['route_addons'], 'shuttle_bus');
 
                 return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
@@ -708,6 +712,21 @@ class BookingController extends Controller
         }
 
         return view('404', ['msg' => $msg]);
+    }
+
+    private function separateRouteAddon($addons, $type) {
+        $result = [
+            'from' => [],
+            'to' => []
+        ];
+        foreach($addons as $item) {
+            if($item['type'] == $type) {
+                if($item['subtype'] == 'from') array_push($result['from'], $item);
+                if($item['subtype'] == 'to') array_push($result['to'], $item);
+            }
+        }
+
+        return $result;
     }
 
     public function bookingNewRoute(Request $request) {
