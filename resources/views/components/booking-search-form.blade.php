@@ -34,7 +34,7 @@
                                 @if($item['is_section'] == 'Y')
                                     <p class="text-main-color-2 mb-1 fw-bold">{{ $item['section'] }}</p>
                                 @elseif($item['is_section'] == 'N')
-                                    <p class="station-select_{{ $item['station']['section'] }}_{{ $index }} ms-2 mb-2 cursor-pointer font-proxima-400" data-id="{{ $item['station']['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $item['station']['name'] }} @if($item['station']['piername'] != NULL) ({{$item['station']['piername']}}) @endif </p>
+                                    <p class="station-select_{{ $item['station']['section'] }}_{{ $index }} ms-2 mb-2 cursor-pointer font-proxima-400 small" data-id="{{ $item['station']['id'] }}" onClick="fromOriginalSelected2(this, '{{ $type }}', '{{ $form_type }}')">{{ $item['station']['name'] }} @if($item['station']['piername'] != NULL) ({{$item['station']['piername']}}) @endif </p>
                                 @endif
                             @endforeach
                         </div>

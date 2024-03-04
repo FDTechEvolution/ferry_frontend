@@ -33,11 +33,11 @@ class HomeController extends Controller
 
         $section_col = $this->sectionColumn($station_route['data']['from']);
         $sections = $this->stationSetTen($section_col);
-        // Log::debug($sections);
+        $_sections = array_chunk($sections[0], 10);
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
-                                'promotions' => $promotions['data'], 'section_from' => $sections,
+                                'promotions' => $promotions['data'], 'section_from' => $_sections,
                                 'billboards' => $billboard['data']]);
     }
 
@@ -53,21 +53,21 @@ class HomeController extends Controller
 
         foreach($section_col as $sections) {
             foreach($sections as $key => $stations) {
-                $_loop++;
+                // $_loop++;
                 array_push($loop, ['is_section' => 'Y', 'section' => $key]);
-                if($_loop == 10) {
-                    array_push($result, $loop);
-                    $_loop = 0;
-                    $loop = [];
-                }
+                // if($_loop == 10) {
+                //     array_push($result, $loop);
+                //     $_loop = 0;
+                //     $loop = [];
+                // }
                 foreach($stations as $station) {
-                    $_loop++;
+                    // $_loop++;
                     array_push($loop, ['is_section' => 'N', 'station' => $station]);
-                    if($_loop == 10) {
-                        array_push($result, $loop);
-                        $_loop = 0;
-                        $loop = [];
-                    }
+                    // if($_loop == 10) {
+                    //     array_push($result, $loop);
+                    //     $_loop = 0;
+                    //     $loop = [];
+                    // }
                 }
             }
         }

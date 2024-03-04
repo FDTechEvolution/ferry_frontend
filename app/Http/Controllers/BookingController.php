@@ -75,12 +75,6 @@ class BookingController extends Controller
             $routes['data'][$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
             $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
 
-            // if($route['ispromocode'] == 'Y' && $promocode != null) {
-            //     $use_promocode = $request->promotioncode;
-            //     if(intval($promocode[0]['discount']) != 0)
-            //         $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-            // }
-
             if($promocode != null) {
                 $use_promocode = $request->promotioncode;
                 $promo_route = $promocode[1]['route'];
@@ -90,23 +84,18 @@ class BookingController extends Controller
                 $r = array_search($route['id'], $promo_route);
                 $f = array_search($route['station_from_id'], $promo_from);
                 $t = array_search($route['station_to_id'], $promo_to);
-                if($r != '' && $route['ispromocode'] == 'Y' ||
-                    $f != '' && $route['ispromocode'] == 'Y' ||
-                    $t != '' && $route['ispromocode'] == 'Y'
-                )
+                if($r == '' && $f == '' && $t == '') {
+                    if($route['ispromocode'] == 'Y') {
+                        $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
+                else {
+                    if($r != '' && $route['ispromocode'] == 'Y' ||
+                        $f != '' && $route['ispromocode'] == 'Y' ||
+                        $t != '' && $route['ispromocode'] == 'Y'
+                    )
                     $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-
-                // if(!isset($routes['data'][$index]['promo_price'])) {
-                //     $f = array_search($route['station_from_id'], $promo_from);
-                //     if($f != '' && $route['ispromocode'] == 'Y')
-                //         $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
-
-                // if(!isset($routes['data'][$index]['promo_price'])) {
-                //     $t = array_search($route['station_to_id'], $promo_to);
-                //     if($t != '' && $route['ispromocode'] == 'Y')
-                //         $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
+                }
             }
 
             $routes['data'][$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
@@ -120,17 +109,10 @@ class BookingController extends Controller
 
         $code_country = $this->CodeCountry;
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
-        //Log::debug($code_country);
         $country_list = $this->CountryList;
         $addon_icon = $this->RouteAddonIcon;
 
         $premium_flex = $this->getPremiumFlex();
-
-        // Log::debug($routes['data'][0]['route_addons']);
-        // $addon_group = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
-        // Log::debug($addon_group);
-
-        // Log::debug($routes['data']);
 
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
@@ -269,7 +251,6 @@ class BookingController extends Controller
         $premium_flex = $this->getPremiumFlex();
 
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
-        //Log::debug($code_country);
 
         return view('pages.booking.round-trip.index', [
             'isType' => $_type, 'depart_routes' => $depart_routes, 'return_routes' => $return_routes, 'icon_url' => $this->IconUrl,
@@ -328,11 +309,6 @@ class BookingController extends Controller
                     $routes['data'][$key]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
                     $routes['data'][$key]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
 
-                    // if($route['ispromocode'] == 'Y' && !empty($promocode)) {
-                    //     if(intval($promocode[$index]['discount']) != 0)
-                    //         $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index]);
-                    // }
-
                     if(!empty($promocode)) {
                         $promo_route = $promocode[$index][1]['route'];
                         $promo_from = $promocode[$index][1]['from'];
@@ -342,23 +318,18 @@ class BookingController extends Controller
                         $f = array_search($route['station_from_id'], $promo_from);
                         $t = array_search($route['station_to_id'], $promo_to);
 
-                        if($r != '' && $route['ispromocode'] == 'Y' ||
-                            $f != '' && $route['ispromocode'] == 'Y' ||
-                            $t != '' && $route['ispromocode'] == 'Y'
-                        )
+                        if($r == '' && $f == '' && $t == '') {
+                            if($route['ispromocode'] == 'Y') {
+                                $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
+                            }
+                        }
+                        else {
+                            if($r != '' && $route['ispromocode'] == 'Y' ||
+                                $f != '' && $route['ispromocode'] == 'Y' ||
+                                $t != '' && $route['ispromocode'] == 'Y'
+                            )
                             $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
-
-                        // if(!isset($routes['data'][$key]['promo_price'])) {
-                        //     $f = array_search($route['station_from_id'], $promo_from);
-                        //     if($f != '' && $route['ispromocode'] == 'Y')
-                        //         $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
-                        // }
-
-                        // if(!isset($routes['data'][$key]['promo_price'])) {
-                        //     $t = array_search($route['station_to_id'], $promo_to);
-                        //     if($t != '' && $route['ispromocode'] == 'Y')
-                        //         $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
-                        // }
+                        }
                     }
 
                     $routes['data'][$key]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
@@ -444,15 +415,6 @@ class BookingController extends Controller
         if($res['result']) {
             return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
-        // if(isset($res)) {
-        //     $data = $res['data'];
-        //     $booking_id = $res['booking'];
-        //     $email = $res['email'];
-
-        //     if($data['respCode'] == '0000') {
-        //         return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
-        //     }
-        // }
 
         return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
@@ -562,15 +524,6 @@ class BookingController extends Controller
         if($res['result']) {
             return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
-        // if(isset($res)) {
-        //     $data = $res['data'];
-        //     $booking_id = $res['booking'];
-        //     $email = $res['email'];
-
-        //     if($data['respCode'] == '0000') {
-        //         return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
-        //     }
-        // }
 
         return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
@@ -622,16 +575,6 @@ class BookingController extends Controller
         if($res['result']) {
             return view('pages.booking.complete', ['bookingno' => $res['booking'], 'email' => $res['email']]);
         }
-        // if(isset($res)) {
-        //     $data = $res['data'];
-        //     $booking_id = $res['booking'];
-        //     $booking_id = $res['booking'];
-        //     $email = $res['email'];
-
-        //     if($data['respCode'] == '0000') {
-        //         return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $email]);
-        //     }
-        // }
 
         return view('404', ['msg' => "Something Wrong. Please See if You've Received Any Emails."]);
     }
@@ -674,7 +617,6 @@ class BookingController extends Controller
     }
 
     private function setStationToRoute($routes, $passenger, $booking_date, $promocode) {
-        // Log::debug($promocode);
         $_routes = $routes;
         $_station = ['from' => '', 'to' => ''];
 
@@ -701,11 +643,6 @@ class BookingController extends Controller
             $_routes[$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
             $_routes[$index]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
 
-            // if($route['ispromocode'] == 'Y' && $promocode != null) {
-            //     if(intval($promocode['discount']) != 0)
-            //         $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode);
-            // }
-
             if($promocode != null) {
                 $promo_route = $promocode[1]['route'];
                 $promo_from = $promocode[1]['from'];
@@ -714,23 +651,18 @@ class BookingController extends Controller
                 $r = array_search($route['id'], $promo_route);
                 $f = array_search($route['station_from_id'], $promo_from);
                 $t = array_search($route['station_to_id'], $promo_to);
-                if($r != '' && $route['ispromocode'] == 'Y' ||
-                    $f != '' && $route['ispromocode'] == 'Y' ||
-                    $t != '' && $route['ispromocode'] == 'Y'
-                )
+                if($r == '' && $f == '' && $t == '') {
+                    if($route['ispromocode'] == 'Y') {
+                        $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
+                else {
+                    if($r != '' && $route['ispromocode'] == 'Y' ||
+                        $f != '' && $route['ispromocode'] == 'Y' ||
+                        $t != '' && $route['ispromocode'] == 'Y'
+                    )
                     $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-
-                // if(!isset($_routes[$index]['promo_price'])) {
-                //     $f = array_search($route['station_from_id'], $promo_from);
-                //     if($f != '' && $route['ispromocode'] == 'Y')
-                //         $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
-
-                // if(!isset($_routes[$index]['promo_price'])) {
-                //     $t = array_search($route['station_to_id'], $promo_to);
-                //     if($t != '' && $route['ispromocode'] == 'Y')
-                //         $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
+                }
             }
 
             $_routes[$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
@@ -764,7 +696,6 @@ class BookingController extends Controller
                 $station_form = $res['m_from_route'];
                 $_station_to = $this->setStationToSection($res['m_route']);
 
-                // Log::debug($addons);
                 return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
                                 'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0],
@@ -780,7 +711,6 @@ class BookingController extends Controller
     }
 
     public function bookingNewRoute(Request $request) {
-        // Log::debug($request);
         Http::reqres()->post('/online-booking/add-new-route', [
             'booking_id' => $request->booking_id,
             'route_id' => $request->to,
