@@ -3,7 +3,7 @@
         <h4 class="booking-select-header">
 
             @if (!empty($depart_routes))
-                <span class="badge bg-booking-select-depart px-3 py-2">Depart,{{ $station_depart['from'] }} <span
+                <span class="badge bg-booking-select-depart px-3 py-2">Depart : {{ $station_depart['from'] }} <span
                         class="ms-2">To,</span> {{ $station_depart['to'] }}</span>
             @else
                 <span class="ms-2">Sorry. No depart route.</span>
@@ -178,7 +178,7 @@
         <h4 class="booking-select-header">
 
             @if (!empty($return_routes))
-            <span class="badge bg-booking-select-return px-3 py-2 text-light">Return,{{ $station_return['from'] }} <span class="ms-2">To,</span> {{ $station_return['to'] }}</span>
+            <span class="badge bg-booking-select-return px-3 py-2 text-light">Return : {{ $station_return['from'] }} <span class="ms-2">To,</span> {{ $station_return['to'] }}</span>
 
             @else
                 <span class="ms-2">Sorry. No return route.</span>
