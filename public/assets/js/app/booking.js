@@ -315,13 +315,23 @@ function updateDestinationSelect(result, element, number = null) {
     let destination_optgroup = document.querySelectorAll(`${element} .group-list`)
     destination_optgroup.forEach((o) => { o.remove() })
 
+    const chunks = [];
+
+    for (let i = 0; i < result.section[0].length; i += 12) {
+        const chunk = result.section[0].slice(i, i + 12);
+        chunks.push(chunk);
+    }
+
     let destination = document.querySelector(`${element}`)
     let _number = number === null ? '1' : number
-    result.section.forEach((items) => {
+    chunks.forEach((items) => {
         let group_list = document.createElement('div')
         group_list.setAttribute('class', 'col-12 col-lg-4 group-list')
         items.forEach((item, index) => {
             if(item.is_section === 'Y') {
+                if(index !=0){
+                    group_list.appendChild(document.createElement('hr'))
+                }
                 let optgroup = document.createElement('p')
                 optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
                 optgroup.innerHTML = item.section
@@ -331,10 +341,10 @@ function updateDestinationSelect(result, element, number = null) {
                 let name = item.station.name
                 let pier = item.station.piername === null ? '' : ` (${item.station.piername})`
                 let p = document.createElement('p')
-                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400')
+                p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400 small')
                 p.setAttribute('data-id', item.station.id)
                 p.setAttribute('onClick', `toDestinationSelectedAnother(this, '${_number}')`)
-                p.innerHTML = name + pier
+                p.innerHTML = '<i class="fi fi-arrow-right"></i>' + name + pier
                 group_list.appendChild(p)
             }
             destination.appendChild(group_list)

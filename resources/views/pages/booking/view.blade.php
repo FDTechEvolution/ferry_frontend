@@ -182,8 +182,15 @@
                                         </form>
                                     @endif --}}
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-3 text-start">
                                     <h6 class="fw-bold mb-1">Extra detail</h6>
+                                    @foreach ($route_addon as $r_addon)
+                                        <p class="small mb-1 pb-1 text-start border-bottom">
+                                            <span class="r-addon-name fw-bold">{{ $r_addon['name'] }}</span><br/>
+                                            <span class="r-addon-description">{{ $r_addon['description'] }}</span>
+                                        </p>
+                                    @endforeach
+
                                     @foreach($booking['extra'] as $extra)
                                         @if($extra != NULL)
                                             <p class="mb-0 small">{{ $extra['name'] }}</p>
