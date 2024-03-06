@@ -6,7 +6,7 @@
     <body>
 		<div id="wrapper">
 			<!-- Header -->
-			<header id="header" class="shadow-xs header-bg-color">
+			<header id="header" class="shadow-xs ">
 				<!-- Navbar -->
                 @include('includes.navbar')
                 <!-- /Navbar -->

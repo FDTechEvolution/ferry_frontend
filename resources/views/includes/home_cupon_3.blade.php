@@ -37,7 +37,7 @@
                     @endforeach
                     <div class="col-12 text-end mt-2">
                         <a href="{{ route('promo-index') }}" class="mt-2 text-main-color-2 fw-bold"><i
-                                class="fa-solid fa-tag"></i> More Promotions</a>
+                                class="fa-solid fa-tag"></i> Promotions Code</a>
 
                     </div>
                 </div>
