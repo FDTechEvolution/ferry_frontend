@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $section_col = $this->sectionColumn($station_route['data']['from']);
         $sections = $this->stationSetTen($section_col);
-        $_sections = array_chunk($sections[0], 10);
+        $_sections = array_chunk($sections[0], 12);
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,

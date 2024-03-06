@@ -390,8 +390,8 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
     const chunks = [];
     // console.log(result)
 
-    for (let i = 0; i < result.section[0].length; i += 10) {
-        const chunk = result.section[0].slice(i, i + 10);
+    for (let i = 0; i < result.section[0].length; i += 12) {
+        const chunk = result.section[0].slice(i, i + 12);
         chunks.push(chunk);
     }
 
@@ -401,6 +401,9 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
         group_list.setAttribute('class', 'col-12 col-lg-4 group-list mb-4 pb-4')
         items.forEach((item, index) => {
             if(item.is_section === 'Y') {
+                if(index !=0){
+                    group_list.appendChild(document.createElement('hr'))
+                }
                 let optgroup = document.createElement('p')
                 optgroup.setAttribute('class', 'text-main-color-2 mb-1 fw-bold group-name')
                 optgroup.innerHTML = item.section
@@ -413,7 +416,7 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
                 p.setAttribute('class', 'station-to-selected cursor-pointer ms-2 mb-2 font-proxima-400 small')
                 p.setAttribute('data-id', item.station.id)
                 p.setAttribute('onClick', `toDestinationSelectedFirst(this, '${type}', '${form_type}')`)
-                p.innerHTML = name + pier
+                p.innerHTML = '<i class="fi fi-arrow-right"></i>'+name + pier
                 group_list.appendChild(p)
             }
             destination.appendChild(group_list)

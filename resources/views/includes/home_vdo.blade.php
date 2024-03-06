@@ -1,7 +1,11 @@
 <div class="section pt-2 pb-2 pb-lg-6">
     <div class="row">
-
-        <div class="col-12 col-lg-4 mb-4 position-relative">
+        <div class="col-12 mb-3 d-md-none">
+            <div class="ratio ratio-16x9">
+                <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7); background-color: #fff;"></iframe>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mb-4 position-relative d-none d-md-block">
             <div class="row position-absolute" style="width: 100%; z-index: 2;">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="150">
                     <div class="ratio ratio-16x9">
@@ -24,13 +28,8 @@
                                 data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
                                 aria-expanded="true" aria-controls="billboard-content-{{ $index }}"
                             >
-                                <!--
-                                <i class="fa-solid fa-bullhorn text-light icon-announce"
-                                    style="margin-left: -8px; -webkit-transform: scaleX(-1); transform: scaleX(-1);"
-                                >
-                                </i>
-                            -->
-                            <img class="avatar avatar-xs icon-announce" style="margin-left: -13px; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="{{asset($store.'/'.$item['icon'])}}" />
+
+                            <img class="avatar avatar-xs icon-announce" style="margin-left: -13px; " src="{{asset($store.'/'.$item['icon'])}}" />
 
                             </button>
                         @endif
@@ -38,7 +37,9 @@
                             <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0" style="min-height: 400px;">
                                 <h2 class="blog-title">{{ $item['title'] }}</h2>
 
-                                {!! $item['description'] !!}
+                                <span class="">
+                                    {!! $item['description'] !!}
+                                </span>
                             </div>
                         </div>
 
