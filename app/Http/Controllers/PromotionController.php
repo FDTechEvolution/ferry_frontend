@@ -12,8 +12,25 @@ class PromotionController extends Controller
         $response = Http::reqres()->get('/promotion/get');
         $res = $response->json();
         $store =  config('services.store.image');
-        
-        return view('pages.promotion.index', ['promotions' => $res['data'],'store' => $store]);
+        $promotions = $this->setColorToPromotion($res['data']);
+
+        return view('pages.promotion.index', ['promotions' => $promotions, 'store' => $store]);
+    }
+
+    private function setColorToPromotion($promo) {
+        $promo_font_color = ['#ddc704', '#706d6d', '#2297cd', '#2cab31', '#bd2828'];
+
+        $promotions = $promo;
+        $color_length = sizeof($promo_font_color) -1;
+        $color_index = 0;
+        foreach($promotions as $index => $promo) {
+            if($color_index > $color_length) $color_index = 0;
+            $promotions[$index]['color'] = $promo_font_color[$color_index];
+
+            $color_index++;
+        }
+
+        return $promotions;
     }
 
     public function view($promocode) {
@@ -23,7 +40,7 @@ class PromotionController extends Controller
             $store =  config('services.store.image');
             return view('pages.promotion.view', ['promotion' => $res['data'], 'store' => $store]);
         }
-        else 
+        else
             return view('404', ['msg' => 'No promotion code or promotion code ran out.']);
     }
 }

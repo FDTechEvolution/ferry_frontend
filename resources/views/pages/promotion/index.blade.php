@@ -13,7 +13,7 @@
 
             @foreach ($promotions as $item)
                 <div class="row">
-                    <div class="col-12 col-lg-3 text-center">
+                    <div class="col-12 col-lg-3 text-center" style="color: {{ $item['color'] }}">
                         <h1 class="mb-0 pb-0">{{$item['code']}}</h1>
                         <i class="fa-solid fa-barcode" style="font-size: 6rem;"></i>
                         <i class="fa-solid fa-barcode" style="font-size: 6rem;"></i>

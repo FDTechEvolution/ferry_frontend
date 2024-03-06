@@ -6,7 +6,7 @@
 
 @section('cover-content')
     <div class="section bg-theme-color-light overlay-dark overlay-opacity-2 bg-cover lazy cover-home"
-        data-background-image="{{ asset('/cover/' . $cover) }}">
+        data-background-image="{{ asset('/cover/' . $cover) }}" style="background-position: top center !important;">
 
         <div class="container">
             <div class="row text-center-md text-center d-middle justify-content-center font-proxima mb-4">

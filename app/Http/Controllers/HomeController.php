@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function __construct() {
         $this->ImageUrl = config('services.store.image');
         // $this->ImageCover = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
-        $this->ImageCover = ['cover.webp'];
+        $this->ImageCover = ['cover_v2.webp'];
         $this->PromoColor = ['#FFF59D', '#EEEEEE', '#81D4FA', '#A5D6A7', '#ef9a9a'];
         $this->PromoFontColor = ['#ddc704', '#706d6d', '#2297cd', '#2cab31', '#bd2828'];
     }
