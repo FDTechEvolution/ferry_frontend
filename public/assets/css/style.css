@@ -320,7 +320,12 @@ h1,h2,h3,h4,h5{
     .slide-desc-desktop h2 {
         color: #fff;
     }
-
+    .w--none {
+        width: auto !important;
+    }
+    .border-bottom-sm {
+        border-bottom: 1px solid #dde4ea;
+    }
 }
 
 /* Mobile */
@@ -628,6 +633,9 @@ img.img-logo-style {
 }
 .w--20 {
     width: 20%;
+}
+.w--15 {
+    width: 15%;
 }
 
 .booking-route-list.active .station-name,

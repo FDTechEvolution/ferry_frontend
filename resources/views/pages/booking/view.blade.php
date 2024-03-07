@@ -7,12 +7,12 @@
 @section('cover-content')
 <div class="px-3 py-2 bg-primary lazy text-light">
     <div class="row">
-        <div class="col-9 offset-1 d-flex align-items-center">
+        <div class="col-6 col-lg-9 offset-lg-1 d-flex align-items-center">
             <h4 class="my-2" style="line-height: 20px;">View your booking<br/>
                 <span class="smaller mb-0" id="booking-number">{{ $booking['booking_number'] }}</span>
             </h4>
         </div>
-        <div class="col-2 text-center">
+        <div class="col-6 col-lg-2 text-center">
             <p class="mb-1">status</p>
             <span @class([
                 'bg-light',
@@ -35,7 +35,7 @@
         @if($booking['ispayment'] == 'N')
         <div class="col-12 text-end mb-4 ps-0 pe-0">
 
-            <button type="button" class="btn button-green-bg rounded px-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
+            <button type="button" class="btn button-green-bg rounded px-1 px-lg-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
             <div class="collapse mt-2" id="collapsePayment">
                 <div class="card card-body bg-white">
                     <form method="POST" action="{{ route('payment-link') }}">
@@ -84,21 +84,21 @@
         </div>
         @endif
     @endif
-    <div class="card card-body col-12 py-4 px-5">
+    <div class="card card-body col-12 py-4 px-1 px-lg-5">
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12">
-                <div class="row" id="payment-passenger-detail">
+                <div class="row mb-2" id="payment-passenger-detail">
                     @foreach($customers as $key => $customer)
                         @if($key === 'ADULT')
                             <h6 class="fw-bold mb-1">Adult</h6>
                             @foreach($customer as $cus)
-                                <div class="d-flex">
-                                    <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
+                                <div class="d-block d-lg-flex">
+                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
+                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                     @if($cus['email'] != null)
-                                        <p class="ms-3"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
+                                        <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
                                     @endif
                                 </div>
                             @endforeach
@@ -109,8 +109,8 @@
                             <h6 class="fw-bold mb-1">Child</h6>
                             @foreach($customer as $cus)
                                 <div class="d-flex">
-                                    <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
+                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
+                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                 </div>
                             @endforeach
                         @endif
@@ -120,8 +120,8 @@
                             <h6 class="fw-bold mb-1">Infan</h6>
                             @foreach($customer as $cus)
                                 <div class="d-flex">
-                                    <p class="ms-3">{{ $cus['name'] }}</p>
-                                    <p class="ms-3"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
+                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
+                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
                                 </div>
                             @endforeach
                         @endif
@@ -143,35 +143,35 @@
                     @foreach($booking['route'] as $route)
                         <div class="col-12 mb-4">
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-12 col-lg-3">
                                     <h6 class="fw-bold mb-1">From</h6>
-                                    <p class="mb-1">
+                                    <p class="mb-1 ms-2">
                                         {{ $route['station_from'] }}
                                         @if($route['station_from_pier'] != null) ({{ $route['station_from_pier'] }}) @endif
                                         @if($route['station_from_nickname'] != null) [{{ $route['station_from_nickname'] }}] @endif
                                     </p>
                                     <div style="line-height: 15px;">
-                                        <p class="small mb-1">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
-                                        <p class="small mb-0">{{ date_format(date_create($route['depart_time']), 'H:i') }}</p>
+                                        <p class="small mb-1 ms-2">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
+                                        <p class="small mb-0 ms-2">{{ date_format(date_create($route['depart_time']), 'H:i') }}</p>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-12 col-lg-3 mb-3">
                                     <h6 class="fw-bold mb-1">To</h6>
-                                    <p class="mb-1">
+                                    <p class="mb-1 ms-2">
                                         {{ $route['station_to'] }}
                                         @if($route['station_to_pier'] != null) ({{$route['station_to_pier']}}) @endif
                                         @if($route['station_to_nickname'] != null) [{{ $route['station_to_nickname'] }}] @endif
                                     </p>
                                     <div style="line-height: 15px;">
-                                        <p class="small mb-1 depart-last-date">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
-                                        <p class="small mb-0">{{ date_format(date_create($route['arrive_time']), 'H:i') }}</p>
+                                        <p class="small mb-1 ms-2 depart-last-date">{{ date_format(date_create($booking['depart_date']), 'd/m/Y') }}</p>
+                                        <p class="small mb-0 ms-2">{{ date_format(date_create($route['arrive_time']), 'H:i') }}</p>
                                     </div>
                                     <div class=" mt-2 text-end border-bottom">Total : {{ number_format($route['amount']) }} THB</div>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-12 col-lg-3 mb-3 pb-2 border-bottom-sm">
                                     <h6 class="fw-bold mb-1">Passenger</h6>
                                     @foreach($customer as $cus)
-                                        <p class="mb-1">{{ $cus['name'] }}</p>
+                                        <p class="mb-1 ms-2">{{ $cus['name'] }}</p>
                                     @endforeach
                                     {{-- @if($booking['do_update'])
                                         <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
@@ -182,10 +182,10 @@
                                         </form>
                                     @endif --}}
                                 </div>
-                                <div class="col-3 text-start">
+                                <div class="col-12 col-lg-3 text-start">
                                     <h6 class="fw-bold mb-1">Extra detail</h6>
                                     @foreach ($route_addon as $r_addon)
-                                        <p class="small mb-1 pb-1 text-start border-bottom">
+                                        <p class="small mb-1 pb-1 text-start border-bottom ms-2">
                                             <span class="r-addon-name fw-bold">{{ $r_addon['name'] }}</span><br/>
                                             <span class="r-addon-description">{{ $r_addon['description'] }}</span>
                                         </p>
@@ -209,15 +209,16 @@
                             $line_amount = 0;
                         @endphp
                         @foreach($payment_lines as $line)
-                            <h6 class="d-flex justify-content-end align-items-end mb-2">{!! $line['title'] !!}
-                                @if($line['description'] != '') <i class="fi fi-round-info-full cursor-pointer icon-booking-color px-2 small" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $line['description'] }}"></i> @endif :
-                                <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line['amount'], 2) }}</p> <small class="smaller">THB</small>
+                            <h6 class="d-lg-flex justify-content-end align-items-end mb-2 pb-2 border-sm-bottom">{!! $line['title'] !!} :
+                                <p class="sum-of-payment w--15 w--none me-2 mb-0"><span class="fw-bold border-bottom-amount">{{number_format($line['amount'], 2) }}</span> <small class="smaller border-bottom-amount">THB</small></p>
                             </h6>
                             @php
                                 $line_amount += $line['amount'];
                             @endphp
                         @endforeach
-                        <h6 class="d-flex justify-content-end align-items-end pt-3 border-top">Total : <p class="sum-of-payment w--10 me-2 mb-0">{{ number_format($line_amount + $booking['amount_extra'], 2) }}</p> <small class="smaller">THB</small></h6>
+                        <h6 class="d-flex justify-content-end align-items-end pt-3 border-top"><span class="fw-bold">Total :</span>
+                            <p class="sum-of-payment w--15 w--none me-2 mb-0"><span class="fw-bold ms-3">{{ number_format($line_amount + $booking['amount_extra'], 2) }}</span> <small class="smaller">THB</small></p>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -232,7 +233,7 @@
                     <input type="hidden" name="bookingno" value="{{ $booking['booking_number'] }}">
                     <input type="hidden" name="booking_id" value="{{ $booking['id'] }}">
                     <div class="row px-3 mt-2">
-                        <div class="col-3">
+                        <div class="col-12 col-lg-3">
                             <div class="form-floating mb-3">
                                 <select required class="form-select form-select-sm" name="from" id="form-select" aria-label="booking station">
                                     <option value="" disabled>Select Original</option>
@@ -241,7 +242,7 @@
                                 <label for="form-select">From</label>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-lg-3">
                             <div class="form-floating mb-3">
                                 <select required class="form-select form-select-sm" name="to" id="to-select" aria-label="booking station">
                                     <option value="" selected disabled>Select Destination</option>
@@ -260,7 +261,7 @@
                                 <label for="to-select">To</label>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-lg-3">
                             <div class="form-floating mb-3">
                                 <input required type="text" name="depart_date" class="form-control form-control-sm datepicker add-multi-trip-depart"
                                     data-show-weeks="true"
@@ -274,7 +275,7 @@
                                 <label class="text-secondary">Departure date</label>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-lg-3">
                             <div class="form-floating mb-3">
                                 <input required type="text" name="return_date" class="form-control form-control-sm datepicker add-multi-trip-return"
                                     data-show-weeks="true"
@@ -326,7 +327,7 @@
         <h4 class="mb-0 fw-bold">Extra Services</h4>
         <p class="mb-2">please select youradditional services</p>
         <div class="row mx-3 mb-5">
-            <div class="col-4 mb-4">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="card">
                     <img src="{{ asset('pad-thai_addon.jpg') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
                     <div class="card-body bg-booking-payment-extra">
@@ -340,7 +341,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 mb-4">
+            <div class="col-12 col-lg-4 mb-4">
                 <div class="card">
                     <img src="{{ asset('cover/cover_03.webp') }}" class="card-img-top" alt="activity" style="min-height: 200px; max-height: 200px;">
                     <div class="card-body bg-booking-payment-extra">
