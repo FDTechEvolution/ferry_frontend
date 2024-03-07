@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit navbar-bg-color">
 
-        <div class="align-items-start">
+        <div class="align-items-start" style="background-color: #FFFFFF;">
 
             <!-- mobile menu button : show -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainNav" aria-controls="navbarMainNav" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
