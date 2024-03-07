@@ -879,3 +879,8 @@ img.img-logo-style {
     max-height: 560px;
     overflow-y: hidden;
 }
+
+.cover-home {
+    background-position: center top !important;
+    padding: 200px 0 100px !important;
+}
