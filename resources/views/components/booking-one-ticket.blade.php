@@ -14,7 +14,7 @@
             <div class="col-6 text-start">
                 <a href="javascript:void(0);" class="text-light add-promotioncode-{{ $type }} pt-2" onClick="addPromotionCode(this, '{{ $type }}')"><i class="fa-solid fa-tag fs-4 me-1"></i>Promotion Code</a>
                 <div class="div-promotioncode-{{ $type }} position-relative promo-input-w d-none">
-                    <input type="hidden" class="form-control form-control-sm input-promotioncode-{{ $type }} button-orange-bg" name="promotioncode">
+                    <input type="hidden" class="form-control form-control-sm input-promotioncode-{{ $type }} text-main-color-2" name="promotioncode">
                     <i class="fi fi-round-close text-dark cursor-pointer position-absolute top--9 end--9" onClick="clearPromotionCode('{{ $type }}')"></i>
                 </div>
             </div>
