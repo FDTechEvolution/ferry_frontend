@@ -43,4 +43,12 @@ class PromotionController extends Controller
         else
             return view('404', ['msg' => 'No promotion code or promotion code ran out.']);
     }
+
+    public function getPromotion(Request $request) {
+        $_date = str_replace('/', '-', $request->depart_date);
+        $response = Http::reqres()->get('/promotion/check-v2/'.$request->promocode.'/'.$_date.'/'.$request->route.'/'.$request->trip_type);
+        $res = $response->json();
+
+        return response()->json(['result' => true, 'data' => $res], 200);
+    }
 }

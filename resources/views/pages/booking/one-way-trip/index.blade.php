@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('head_meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -15,7 +19,7 @@
             </div>
             <div class="col-10 col-lg-7 d-flex align-items-center">
                 <p class="mb-1"><span class="fw-bold">Depart : </span> {{ $is_station['from'] }}
-                <span class="mx-2">To</span>
+                <span class="mx-2 fw-bold">To : </span>
                 {{ $is_station['to'] }} <span class="ms-2"> | {{ date('l M d, Y', strtotime($booking_date_1[2].'-'.$booking_date_1[1].'-'.$booking_date_1[0])) }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
@@ -185,7 +189,7 @@
                     @php
                         $booking_date_2 = explode('/', $booking_date);
                     @endphp
-                    <p class="fw-bold mb-2"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date_2[2].'-'.$booking_date_2[1].'-'.$booking_date_2[0])) }}</p>
+                    <p class="fw-bold mb-2 is-booking-date"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date_2[2].'-'.$booking_date_2[1].'-'.$booking_date_2[0])) }}</p>
                 </div>
                 <div class="your-booking-destination ms-2">
                     <small class="your-booking-depart-time"></small>
@@ -193,6 +197,15 @@
 
                     <small class="your-booking-arrive-time"></small>
                     <p class="your-booking-destination-to"></p>
+                </div>
+
+                <div class="your-booking-promocode mb-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
+                        <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
+                            <i class="fa-solid fa-circle-check m-0"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="card your-booking-summary d-none">

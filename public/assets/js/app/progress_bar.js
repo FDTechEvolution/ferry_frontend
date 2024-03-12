@@ -884,3 +884,46 @@ function setExtra(icon, name, amount, qty, type) {
         is_extra.splice(index, 1)
     }
 }
+
+const promoSubmit = document.querySelector('#button-promocode-submit')
+if(promoSubmit) {
+    const promocode = document.querySelector('.booking-promocode-input')
+    const booking_date = document.querySelector('.is-booking-date')
+    promoSubmit.addEventListener('click', async () => {
+        let _promocode = promocode.value
+        let _route = document.querySelector('[name="booking_route_selected"]').value
+        if(_promocode !== '') {
+            let _departdate = await dateFormatSet(booking_date.innerText)
+            let result = await getPromoCode(_promocode, _departdate, _route)
+
+            console.log(result)
+        }
+    })
+}
+
+async function dateFormatSet(date) {
+    let f_date = new Date(date)
+    let year = f_date.toLocaleString("en-US", { year: "numeric" })
+    let month = f_date.toLocaleString("en-US", { month: "2-digit" })
+    let day = f_date.toLocaleString("en-US", { day: "2-digit" })
+
+    return `${year}/${month}/${day}`
+}
+
+async function getPromoCode(promocode, depart_date, route) {
+    let data = new FormData()
+    data.append('promocode', promocode)
+    data.append('trip_type', 'one-way')
+    data.append('depart_date', depart_date)
+    data.append('route', route)
+
+    let response = await fetch('/ajax/promotion', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        body: data
+                    })
+    let res = await response.json()
+    return res
+}

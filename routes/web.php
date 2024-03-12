@@ -80,6 +80,8 @@ Route::controller(ReviewController::class)->group(function() {
 Route::controller(PromotionController::class)->group(function() {
     Route::get('promotion/', 'index')->name('promo-index');
     Route::get('promotion/view/{promocode}', 'view')->name('promo-view');
+
+    Route::post('ajax/promotion', 'getPromotion');
 });
 
 Route::controller(NewsController::class)->group(function() {
