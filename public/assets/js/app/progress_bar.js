@@ -14,6 +14,11 @@ let extra_id = [] // extra id to post
 let is_extra = [] // extra service select
 let is_passenger = [] // passenger info
 let addon_route = []
+let promocode_from = []
+let promocode_to = []
+let promocode_route = []
+let promocode_premiumflex = 'N'
+let promocode_select = 'N'
 if(booking_route) {
     let route_list = booking_route.querySelectorAll('.booking-route-list')
     let btn_route_list = document.querySelectorAll('.btn-route-list')
@@ -32,6 +37,8 @@ if(booking_route) {
             })
             btn_select.disabled = true
             btn_select.innerText = 'Selected'
+
+            promocode_select = route.querySelector('.route-status').value
 
             let is_promo_selected = route.querySelector('.promo-avaliable')
             if(is_promo_selected) selected_promo = true
@@ -55,7 +62,7 @@ if(booking_route) {
             document.querySelector('.set-time-route-select').innerHTML = `${depart_time} - ${arrive_time}`
             document.querySelector('.your-booking-premium-flex').classList.add('d-none')
 
-            // set Yout Booking
+            // set Your Booking
             document.querySelector('.your-booking-summary').classList.remove('d-none')
             document.querySelector('.your-booking-depart-time').innerHTML = `<i class="fa-regular fa-clock"></i> ${depart_time}`
             document.querySelector('.your-booking-destination-from').innerHTML = '<i class="fa-solid fa-ship"></i> ' + route.querySelector('.station-from-text').innerText
@@ -97,6 +104,9 @@ if(booking_route) {
             is_extra = []
 
             document.querySelector('[name="booking_route_selected"]').value = route.querySelector('.selected-route').value
+            document.querySelector('[name="booking_route_active"]').value = route.querySelector('.route-status').value
+
+            updateDiscount()
         })
     })
 }
@@ -203,7 +213,12 @@ function progressCondition(step) {
         }
 
         your_booking.classList.remove('d-none')
-        txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        if(promocode_premiumflex === 'Y') {
+            txt_price.innerHTML = '0'
+        }
+        else {
+            txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        }
 
         if(nonePremiumFlex.checked) {
             premium_price = 0
@@ -851,15 +866,24 @@ function dec(element, index) {
 }
 
 function updateSumPrice() {
+    let result_premuim_price = 0
     let your_booking = {
         premium_flex: document.querySelector('.your-booking-premium-flex-price'),
         extra: document.querySelector('.your-booking-extra-price'),
         total: document.querySelector('.your-booking-amount')
     }
-    your_booking.premium_flex.innerHTML = `${premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    if(promocode_premiumflex === 'N') {
+        result_premuim_price = premium_price
+        your_booking.premium_flex.innerHTML = `${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    }
+    else {
+        result_premuim_price = 0
+        your_booking.premium_flex.innerHTML = `0 <small class="smaller">THB</small>`
+    }
+
     your_booking.extra.innerHTML = `${extra_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
-    let sum_amount = route_price + extra_price + premium_price
+    let sum_amount = route_price + extra_price + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
     document.querySelector('#sum-price').innerHTML = sum_amount_digit
     your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
@@ -886,19 +910,109 @@ function setExtra(icon, name, amount, qty, type) {
 }
 
 const promoSubmit = document.querySelector('#button-promocode-submit')
+let promo = null
+const current_price = []
 if(promoSubmit) {
     const promocode = document.querySelector('.booking-promocode-input')
     const booking_date = document.querySelector('.is-booking-date')
+    const route_list = booking_route.querySelectorAll('.booking-route-list')
     promoSubmit.addEventListener('click', async () => {
-        let _promocode = promocode.value
-        let _route = document.querySelector('[name="booking_route_selected"]').value
+        const _promocode = promocode.value
+        const use_promocode = document.querySelector('[name="use_promocode"]')
+        const booking_discount = document.querySelector('.your-booking-discount')
+        const _route = document.querySelector('[name="booking_route_selected"]').value
+        const _promo = document.querySelector('[name="booking_route_active"]').value
         if(_promocode !== '') {
-            let _departdate = await dateFormatSet(booking_date.innerText)
-            let result = await getPromoCode(_promocode, _departdate, _route)
+            const _departdate = await dateFormatSet(booking_date.innerText)
+            const result = await getPromoCode(_promocode, _departdate)
 
-            console.log(result)
+            if(result.data.result) {
+                booking_discount.classList.remove('d-none')
+                promocode_from = result.data.promo_line.from
+                promocode_to = result.data.promo_line.to
+                promocode_route = result.data.promo_line.route
+
+                promo = result.data.data
+                promocode_premiumflex = promo.isfreepremiumflex === 'Y' ? 'Y' : 'N'
+                if(promo.isfreepremiumflex === 'Y') {
+                    document.querySelector('.is-premium-price').innerHTML = '0'
+                    document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
+                }
+
+                route_list.forEach((route, index) => {
+                    const route_ispromo = route.querySelector('.route-status').value
+                    const promo_price = route.querySelector('.route-price')
+                    if(current_price.length < route_list.length) current_price.push(promo_price.innerText)
+
+                    if(route_ispromo === 'Y') {
+                        const discount = promotionPriceCal(current_price[index], promo.discount, promo.discount_type)
+                        promo_price.classList.add('text-warning')
+                        promo_price.innerHTML = numberFormat(discount)
+                    }
+                })
+
+                if(route_selected !== null) {
+                    const discount = promotionPriceCal(current_price[route_selected], promo.discount, promo.discount_type)
+                    const is_discount = parseInt(current_price[route_selected].replace(/,/g, "")) - discount
+                    document.querySelector('.your-booking-discount-price').innerHTML = `${numberFormat(is_discount)} <small class="smaller">THB</small>`
+                    route_price = discount
+                    updateSumPrice()
+                }
+
+                use_promocode.value = _promocode
+            }
+            else {
+                if(current_price.length > 0) {
+                    route_list.forEach((route, index) => {
+                        const promo_price = route.querySelector('.route-price')
+                        promo_price.classList.remove('text-warning')
+                        promo_price.innerHTML = numberFormat(current_price[index])
+                    })
+                }
+
+                if(route_selected !== null) {
+                    if(current_price.length > 0) {
+                        route_price = parseInt(current_price[route_selected].replace(/,/g, ""))
+                        updateSumPrice()
+                    }
+                }
+
+                // console.log(route_price)
+
+                promo = null
+                promocode_premiumflex = 'N'
+                use_promocode.value = ''
+                updateDiscount()
+            }
+
+            // console.log(current_price)
+            // console.log(station_to)
+            // console.log(route)
         }
+
+        // console.log(route_selected)
     })
+}
+
+function updateDiscount() {
+    if(promocode_select === 'Y' && promo !== null) {
+        const discount = promotionPriceCal(current_price[route_selected], promo.discount, promo.discount_type)
+        const is_discount = parseInt(current_price[route_selected].replace(/,/g, "")) - discount
+        document.querySelector('.your-booking-discount-price').innerHTML = `${numberFormat(is_discount)} <small class="smaller">THB</small>`
+    }
+    else {
+        document.querySelector('.your-booking-discount-price').innerHTML = `0 <small class="smaller">THB</small>`
+    }
+}
+
+function promotionPriceCal(price, discount, type) {
+    const stripped = price.replace(/,/g, "")
+    const _price = parseInt(stripped)
+    const _discount = parseInt(discount)
+    if(type === 'PERCENT')
+        return _price - ((_discount/100) * _price)
+    if(type === 'THB')
+        return _price - _discount
 }
 
 async function dateFormatSet(date) {
@@ -910,12 +1024,11 @@ async function dateFormatSet(date) {
     return `${year}/${month}/${day}`
 }
 
-async function getPromoCode(promocode, depart_date, route) {
+async function getPromoCode(promocode, depart_date) {
     let data = new FormData()
     data.append('promocode', promocode)
     data.append('trip_type', 'one-way')
     data.append('depart_date', depart_date)
-    data.append('route', route)
 
     let response = await fetch('/ajax/promotion', {
                         method: 'POST',
@@ -926,4 +1039,8 @@ async function getPromoCode(promocode, depart_date, route) {
                     })
     let res = await response.json()
     return res
+}
+
+function numberFormat(number) {
+    return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }

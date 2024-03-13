@@ -46,7 +46,7 @@ class PromotionController extends Controller
 
     public function getPromotion(Request $request) {
         $_date = str_replace('/', '-', $request->depart_date);
-        $response = Http::reqres()->get('/promotion/check-v2/'.$request->promocode.'/'.$_date.'/'.$request->route.'/'.$request->trip_type);
+        $response = Http::reqres()->get('/promotion/check-v2/'.$request->promocode.'/'.$_date.'/'.$request->trip_type);
         $res = $response->json();
 
         return response()->json(['result' => true, 'data' => $res], 200);

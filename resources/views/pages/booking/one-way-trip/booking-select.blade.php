@@ -1,7 +1,6 @@
 <div id="booking-route-select">
     <h4 class="booking-select-header">
         <span class="badge bg-booking-select-depart px-3 py-2">Depart : {{ $is_station['from'] }} <span class="ms-2">To : </span> {{ $is_station['to'] }}</span>
-
     </h4>
     @foreach($routes as $index => $route)
         <div class="row p-2 px-4 mx-1 mb-2 border bg-white shadow rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif">
@@ -94,7 +93,7 @@
                             <div class="row">
                                 <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
                                     <p class="mb-0 position-relative">
-                                        <span class="small me-2">THB</span>
+                                        <span class="small me-2">THB </span>
                                         @if(isset($route['promo_price']) && $route['promo_price'] != 0)
                                             <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
                                             <span class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
@@ -126,8 +125,10 @@
             <input type="hidden" class="selected-child-price" value="{{ $route['child_price'] }}">
             <input type="hidden" class="selected-infant-price" value="{{ $route['infant_price'] }}">
             <input type="hidden" class="selected-route" value="{{ $route['id'] }}">
+            <input type="hidden" class="route-status" value="{{ $route['ispromocode'] }}">
         </div>
     @endforeach
     <input type="hidden" name="booking_route_selected" value="">
+    <input type="hidden" name="booking_route_active" value="">
     <input type="hidden" name="use_promocode" value="{{ $promocode }}">
 </div>

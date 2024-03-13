@@ -163,6 +163,12 @@ h1,h2,h3,h4,h5{
     .progress-step-text-name {
         display: none;
     }
+    .footer-logo-partner {
+        display: none;
+    }
+    #footer {
+        background: linear-gradient( to top, #eeeeee 0%, #eeeeee 100%, transparent 50%, transparent 100% ) !important;
+    }
 }
 
 /* Ipad */

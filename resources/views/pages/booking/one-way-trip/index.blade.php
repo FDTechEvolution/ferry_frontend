@@ -199,14 +199,16 @@
                     <p class="your-booking-destination-to"></p>
                 </div>
 
-                <div class="your-booking-promocode mb-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
-                        <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
-                            <i class="fa-solid fa-circle-check m-0"></i>
-                        </button>
+                @if($promocode == '')
+                    <div class="your-booking-promocode mb-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
+                            <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
+                                <i class="fa-solid fa-circle-check m-0"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">
@@ -238,6 +240,10 @@
                                     </span>
                                 </div>
                             @endif
+                        </div>
+                        <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
+                            <p class="mb-2 fw-bold">Discount</p>
+                            <p class="mb-2 your-booking-discount-price"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex d-none">
                             <p class="mb-2 fw-bold">Premium Flex</p>
