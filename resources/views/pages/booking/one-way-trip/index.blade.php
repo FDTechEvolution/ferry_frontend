@@ -19,8 +19,7 @@
             </div>
             <div class="col-10 col-lg-7 d-flex align-items-center">
                 <p class="mb-1"><span class="fw-bold">Depart : </span> {{ $is_station['from'] }}
-                <span class="mx-2 fw-bold">To : </span>
-                {{ $is_station['to'] }} <span class="ms-2"> | {{ date('l M d, Y', strtotime($booking_date_1[2].'-'.$booking_date_1[1].'-'.$booking_date_1[0])) }}</span> <span class="ms-2 set-time-route-select"></span></p>
+                <span class="ms-2 fw-bold">To : </span> {{ $is_station['to'] }} <span class="ms-2"> | {{ date('l M d, Y', strtotime($booking_date_1[2].'-'.$booking_date_1[1].'-'.$booking_date_1[0])) }}</span> <span class="ms-2 set-time-route-select"></span></p>
             </div>
             <div class="col-6 col-lg-2 py-0 border-start-none-mobile border-start text-center">
                 <p class="mb-1">Passenger</p>
@@ -204,7 +203,8 @@
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
                             <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
-                                <i class="fa-solid fa-circle-check m-0"></i>
+                                <i class="fa-solid fa-circle-check m-0 promocode-loading"></i>
+                                <i class="fi fi-circle-spin fi-spin m-0 promocode-loaded d-none"></i>
                             </button>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                             @endif
                         </div>
                         <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
-                            <p class="mb-2 fw-bold">Discount</p>
+                            <p class="mb-2 fw-bold">Discount <small class="your-booking-promocode-discount" style="font-size: .65rem;"></small></p>
                             <p class="mb-2 your-booking-discount-price"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex d-none">
