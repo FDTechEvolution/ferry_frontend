@@ -930,8 +930,9 @@ if(promoSubmit) {
             clearRouteToDefault()
 
             if(result.data !== null && result.data.result) {
+                // edit button
                 const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
-                document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}] ${btn_cancel}`
+                document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}]`
 
                 booking_discount.classList.remove('d-none')
                 promocode_from = result.data.promo_line.from

@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('head_meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -210,7 +214,7 @@
                         $booking_return_date = explode('/', $return_date);
                     @endphp
                     <span class="badge bg-booking-select-depart px-2 py-1 smaller">Depart</span>
-                    <p class="fw-bold mb-1"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_depart_date[2].'-'.$booking_depart_date[1].'-'.$booking_depart_date[0])) }}</p>
+                    <p class="fw-bold mb-1 is-booking-date-depart"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_depart_date[2].'-'.$booking_depart_date[1].'-'.$booking_depart_date[0])) }}</p>
                 </div>
                 <div class="your-booking-depar ps-2">
                     <small class="your-booking-depart-time"></small>
@@ -222,7 +226,7 @@
 
                 <div class="your-booking-return-date">
                     <span class="badge bg-booking-select-return px-2 py-1 smaller">Return</span>
-                    <p class="fw-bold mb-1"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_return_date[2].'-'.$booking_return_date[1].'-'.$booking_return_date[0])) }}</p>
+                    <p class="fw-bold mb-1 is-booking-date-return"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_return_date[2].'-'.$booking_return_date[1].'-'.$booking_return_date[0])) }}</p>
                 </div>
                 <div class="your-booking-return ps-2">
                     <small class="your-booking-return-depart-time"></small>
@@ -231,6 +235,18 @@
                     <small class="your-booking-return-arrive-time"></small>
                     <p class="your-booking-return-to"></p>
                 </div>
+
+                @if($promocode == '')
+                    <div class="your-booking-promocode mb-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
+                            <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
+                                <i class="fa-solid fa-circle-check m-0 promocode-loading"></i>
+                                <i class="fi fi-circle-spin fi-spin m-0 promocode-loaded d-none"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endif
 
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">
@@ -297,6 +313,10 @@
                                     </div>
                                 @endif
                             </div>
+                        </div>
+                        <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
+                            <p class="mb-2 fw-bold">Discount <small class="your-booking-promocode-discount" style="font-size: .65rem;"></small></p>
+                            <p class="mb-2 your-booking-discount-price"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex pt-2 border-top d-none">
                             <p class="mb-2 fw-bold">Premium Flex</p>
