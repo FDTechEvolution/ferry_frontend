@@ -250,7 +250,7 @@
 
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">
-                        <div class="fare-passenger-depart">
+                        <div class="fare-passenger-depart d-none">
                             <span class="badge bg-booking-select-depart px-2 py-1 smaller">Depart</span>
                             <div class="px-2 py-1">
                                 @if($passenger[0] > 0)
@@ -282,7 +282,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="fare-passenger-return">
+                        <div class="fare-passenger-return d-none">
                             <span class="badge bg-booking-select-return px-2 py-1 smaller">Return</span>
                             <div class="px-2 py-1">
                                 @if($passenger[0] > 0)

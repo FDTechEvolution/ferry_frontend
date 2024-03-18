@@ -133,7 +133,7 @@
                                 <div class="text-end">
                                     <div class="row">
                                         <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
-                                            <p class="mb-0 position-relative">
+                                            <p class="mb-0 position-relative price-position-set-depart">
                                                 <span class="small me-2">THB</span>
                                                 @if (isset($route['promo_price']) && $route['promo_price'] != 0)
                                                     <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
@@ -189,16 +189,18 @@
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 pb-lg-4 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
             @foreach ($return_routes as $index => $route)
                 <div
-                    class="row p-2 px-4 mx-1 mb-2 bg-white shadow border rounded booking-return-list @if (!$route['do_booking']) over-time bg-dark-light @endif">
+                    class="row p-2 px-4 mx-1 mb-2 bg-white shadow border rounded booking-return-list @if (!$route['do_booking']) over-time bg-dark-light @endif" data-id="{{ $route['id'] }}">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 col-lg-10">
                                 <div class="row py-3 pb-lg-3 pb-2">
                                     @if ($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                         <p class="mb-2 small">
-                                            <img src="promo_icon.png" width="40"> <small
-                                                class="text-main-color-2 promo-avaliable-return">PromoCode
-                                                Avaliable!</small>
+                                            <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable-return">PromoCode Avaliable!</small>
+                                        </p>
+                                    @else
+                                        <p class="mb-2 small summary-promo-avaliable d-none">
+                                            <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                         </p>
                                     @endif
                                     <div class="col-1 d-flex justify-content-center align-items-center">
@@ -221,7 +223,7 @@
                                             <span
                                                 class="depart-time">{{ date('H:i', strtotime($route['depart_time'])) }}</span><br />
                                             <span
-                                                class="small station-return-from-text">{{ $route['station_from']['name'] }}
+                                                class="small station-return-from-text" data-id="{{ $route['station_from_id'] }}">{{ $route['station_from']['name'] }}
                                                 @if ($route['station_from']['piername'] != null)
                                                     ({{ $route['station_from']['piername'] }})
                                                 @endif
@@ -250,7 +252,7 @@
                                         <p class="mb-0 ms-2">
                                             <span
                                                 class="arrival-time">{{ date('H:i', strtotime($route['arrive_time'])) }}</span><br />
-                                            <span class="small station-return-to-text">{{ $route['station_to']['name'] }}
+                                            <span class="small station-return-to-text" data-id="{{ $route['station_to_id'] }}">{{ $route['station_to']['name'] }}
                                                 @if ($route['station_to']['piername'] != null)
                                                     ({{ $route['station_to']['piername'] }})
                                                 @endif
@@ -308,16 +310,14 @@
                                 <div class="text-end">
                                     <div class="row">
                                         <div class="col-6 col-lg-12 mb-0 text-center-m" style="line-height: 18px;">
-                                            <p class="mb-0 position-relative">
+                                            <p class="mb-0 position-relative price-position-set-return">
                                                 <span class="small me-2">THB</span>
                                                 @if (isset($route['promo_price']) && $route['promo_price'] != 0)
-                                                    <span
-                                                        class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
-                                                    <span
-                                                        class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
+                                                    <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
+                                                    <span class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
                                                 @else
-                                                    <span
-                                                        class="route-price fs-4">{{ number_format($route['amount']) }}</span>
+                                                    <span class="smaller text-danger summary-current-price d-none"><s class="current-price"></s></span>
+                                                    <span class="route-price fs-4">{{ number_format($route['amount']) }}</span>
                                                 @endif
                                             </p>
                                             <p class="mb-1 smaller">For
@@ -345,6 +345,7 @@
                     <input type="hidden" class="selected-child-price" value="{{ $route['child_price'] }}">
                     <input type="hidden" class="selected-infant-price" value="{{ $route['infant_price'] }}">
                     <input type="hidden" class="selected-route" value="{{ $route['id'] }}">
+                    <input type="hidden" class="route-status-return" value="{{ $route['ispromocode'] }}">
                 </div>
             @endforeach
         </div>
