@@ -61,7 +61,7 @@
         @if($number < 5)
             <div class="is-action" id="a-{{ $action_id }}">
                 <div class="d-flex justify-content-between" style="margin-top: 15px;">
-                    <p class="mb-0">Add Another Trip</p>
+                    <p class="mb-0 cursor-pointer" onClick="addAmotherTrip('{{ $action_id }}', '{{ $number }}')">Add Another Trip</p>
                     <span>
                         <i class="fi fi-plus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Add another trip." onClick="addAmotherTrip('{{ $action_id }}', '{{ $number }}')"></i>
                         <i class="fi fi-minus cursor-pointer me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this trip." onClick="removeThisTrip('{{ $action_id }}', '{{ $number }}')"></i>

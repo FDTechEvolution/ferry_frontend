@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('head_meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -195,11 +199,27 @@
                     </div>
                 @endforeach
 
+                @if($promocode == '')
+                    <div class="your-booking-promocode mb-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
+                            <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
+                                <i class="fa-solid fa-circle-check m-0 promocode-loading"></i>
+                                <i class="fi fi-circle-spin fi-spin m-0 promocode-loaded d-none"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 fw-bold">Fare</p>
                             <p class="mb-2 your-booking-fare"></p>
+                        </div>
+                        <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
+                            <p class="mb-2 fw-bold">Discount <small class="your-booking-promocode-discount" style="font-size: .65rem;"></small></p>
+                            <p class="mb-2 your-booking-discount-price"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex d-none">
                             <p class="mb-2 fw-bold">Premium Flex</p>

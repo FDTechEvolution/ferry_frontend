@@ -1430,7 +1430,8 @@ function updateDiscountByBookingSummary(type) {
         if(type === 'depart') summary_discount.depart = parseInt(c_price[r_select].replace(/,/g, "")) - discount
         if(type === 'return') summary_discount.return = parseInt(c_price[r_select].replace(/,/g, "")) - discount
         const summary = summary_discount.depart + summary_discount.return
-        document.querySelector('.your-booking-discount-price').innerHTML = `- ${numberFormat(summary)} <small class="smaller">THB</small>`
+        const neg = summary === 0 ? '' : '-'
+        document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(summary)} <small class="smaller">THB</small>`
     }
     else {
         if(type === 'depart') summary_discount.depart = 0
@@ -1472,7 +1473,8 @@ function updateDiscountBySearchForm(type) {
             if(type === 'depart') _summary.depart = discount - route_price
             if(type === 'return') _summary.return = discount - route_price
             let summary = _summary.depart + _summary.return
-            booking_discount_price.innerHTML = `- ${numberFormat(summary)} <small class="smaller">THB</small>`
+            const neg = summary === 0 ? '' : '-'
+            booking_discount_price.innerHTML = `${neg} ${numberFormat(summary)} <small class="smaller">THB</small>`
         }
         else {
             if(type === 'depart') _summary.depart = 0
