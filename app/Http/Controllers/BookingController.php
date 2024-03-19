@@ -86,7 +86,8 @@ class BookingController extends Controller
                 $t = array_search($route['station_to_id'], $promo_to);
                 $ispromocode = $route['ispromocode'] == 'Y' ? true : false;
 
-                if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+
+                if(empty($promo_route) && empty($promo_from) && empty($promo_to)) {
                     if($ispromocode) {
                         $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
                     }
@@ -319,7 +320,7 @@ class BookingController extends Controller
                         $t = array_search($route['station_to_id'], $promo_to);
                         $ispromocode = $route['ispromocode'] == 'Y' ? true : false;
 
-                        if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+                        if(empty($promo_route) && empty($promo_from) && empty($promo_to)) {
                             if($ispromocode) {
                                 $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
                             }
@@ -652,7 +653,7 @@ class BookingController extends Controller
                 $t = array_search($route['station_to_id'], $promo_to);
                 $ispromotion = $route['ispromocode'] == 'Y' ? true : false;
 
-                if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+                if(empty($promo_route) && empty($promo_from) && empty($promo_to)) {
                     if($ispromotion) {
                         $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
                     }
