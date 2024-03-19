@@ -1286,24 +1286,26 @@ function updateDiscountBySearchForm(index) {
             else is_current_price[index].push(c.querySelector('.route-price').innerText)
         })
 
+        booking_discount.classList.remove('d-none')
         if(promocode_select[index] === 'Y' && promocode_select[index]) {
-            booking_discount.classList.remove('d-none')
             const _promocode = document.querySelector('[name="use_promocode"]').value
             document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}]`
 
-            const discount = parseInt(is_current_price[index][route_selected[index]].replace(/,/g, ""))
-            _summary[index] = discount - sum_price[index]
+            const _is_current_price = is_current_price[index][route_selected[index]]
+            const discount = _is_current_price ? parseInt(is_current_price[index][route_selected[index]].replace(/,/g, "")) : 0
+            _summary[index] = discount !== 0 ? discount - sum_price[index] : 0
             sum_discount = 0
             sum_discount = _summary.reduce((num1, num2) => { return num1+num2 })
             const neg = sum_discount === 0 ? '' : '-'
             booking_discount_price.innerHTML = `${neg} ${numberFormat(sum_discount)} <small class="smaller">THB</small>`
         }
-        else
+        else {
             _summary[index] = 0
             sum_discount = 0
             sum_discount = _summary.reduce((num1, num2) => { return num1+num2 })
             const neg = sum_discount === 0 ? '' : '-'
             booking_discount_price.innerHTML = `${neg} ${numberFormat(sum_discount)} <small class="smaller">THB</small>`
+        }
     }
 }
 

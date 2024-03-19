@@ -84,24 +84,18 @@ class BookingController extends Controller
                 $r = array_search($route['id'], $promo_route);
                 $f = array_search($route['station_from_id'], $promo_from);
                 $t = array_search($route['station_to_id'], $promo_to);
-                if($r != '' && $route['ispromocode'] == 'Y' ||
-                    $f != '' && $route['ispromocode'] == 'Y' ||
-                    $t != '' && $route['ispromocode'] == 'Y'
-                )
-                $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                $ispromocode = $route['ispromocode'] == 'Y' ? true : false;
 
-                // if($r == '' && $f == '' && $t == '') {
-                //     if($route['ispromocode'] == 'Y') {
-                //         $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                //     }
-                // }
-                // else {
-                //     if($r != '' && $route['ispromocode'] == 'Y' ||
-                //         $f != '' && $route['ispromocode'] == 'Y' ||
-                //         $t != '' && $route['ispromocode'] == 'Y'
-                //     )
-                //     $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
+                if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+                    if($ispromocode) {
+                        $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
+                else {
+                    if($r != '' && $ispromocode || $f != '' && $ispromocode || $t != '' && $ispromocode) {
+                        $routes['data'][$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
             }
 
             $routes['data'][$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
@@ -323,24 +317,18 @@ class BookingController extends Controller
                         $r = array_search($route['id'], $promo_route);
                         $f = array_search($route['station_from_id'], $promo_from);
                         $t = array_search($route['station_to_id'], $promo_to);
-                        if($r != '' && $route['ispromocode'] == 'Y' ||
-                            $f != '' && $route['ispromocode'] == 'Y' ||
-                            $t != '' && $route['ispromocode'] == 'Y'
-                        )
-                        $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
+                        $ispromocode = $route['ispromocode'] == 'Y' ? true : false;
 
-                        // if($r == '' && $f == '' && $t == '') {
-                        //     if($route['ispromocode'] == 'Y') {
-                        //         $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
-                        //     }
-                        // }
-                        // else {
-                        //     if($r != '' && $route['ispromocode'] == 'Y' ||
-                        //         $f != '' && $route['ispromocode'] == 'Y' ||
-                        //         $t != '' && $route['ispromocode'] == 'Y'
-                        //     )
-                        //     $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
-                        // }
+                        if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+                            if($ispromocode) {
+                                $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
+                            }
+                        }
+                        else {
+                            if($r != '' && $ispromocode || $f != '' && $ispromocode || $t != '' && $ispromocode) {
+                                $routes['data'][$key]['promo_price'] = $this->promoDiscount($_amount, $promocode[$index][0]);
+                            }
+                        }
                     }
 
                     $routes['data'][$key]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
@@ -662,24 +650,18 @@ class BookingController extends Controller
                 $r = array_search($route['id'], $promo_route);
                 $f = array_search($route['station_from_id'], $promo_from);
                 $t = array_search($route['station_to_id'], $promo_to);
+                $ispromotion = $route['ispromocode'] == 'Y' ? true : false;
 
-                if($r != '' && $route['ispromocode'] == 'Y' ||
-                    $f != '' && $route['ispromocode'] == 'Y' ||
-                    $t != '' && $route['ispromocode'] == 'Y'
-                )
-                $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // if($r == '' && $f == '' && $t == '') {
-                //     if($route['ispromocode'] == 'Y') {
-                //         $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                //     }
-                // }
-                // else {
-                //     if($r != '' && $route['ispromocode'] == 'Y' ||
-                //         $f != '' && $route['ispromocode'] == 'Y' ||
-                //         $t != '' && $route['ispromocode'] == 'Y'
-                //     )
-                //     $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
-                // }
+                if(!empty($promo_route) && !empty($promo_from) && !empty($promo_to)) {
+                    if($ispromotion) {
+                        $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
+                else {
+                    if($r != '' && $ispromotion || $f != '' && $ispromotion || $t != '' && $ispromotion) {
+                        $_routes[$index]['promo_price'] = $this->promoDiscount($_amount, $promocode[0]);
+                    }
+                }
             }
 
             $_routes[$index]['station_from']['g_map'] = $this->setGoogleMapPosition($route['station_from']['google_map'])[0];
