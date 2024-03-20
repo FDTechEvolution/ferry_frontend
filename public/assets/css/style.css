@@ -458,7 +458,8 @@ nav.navbar-light a.nav-link:not(.active):not(:hover){
     background-color: #fdf31a !important;
 }
 .navbar-bg-color {
-    background-color: #f30512;
+    background: rgb(255,255,255);
+background: linear-gradient(to right, rgba(255,255,255,1) 13%, rgba(243,5,18,1) 10%);
 }
 .header-style {
     margin: 0 auto;
