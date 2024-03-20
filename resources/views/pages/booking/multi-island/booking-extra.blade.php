@@ -95,3 +95,14 @@
     </div>
     @endforeach
 </div>
+
+<style>
+    .tooltip {
+        --bs-tooltip-max-width: 400px;
+    }
+    .is-no-addon {
+        position: absolute;
+        width: 100%;
+        top: 40%;
+    }
+</style>

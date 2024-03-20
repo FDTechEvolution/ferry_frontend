@@ -39,14 +39,18 @@ class BookingController extends Controller
         $_type = $this->Type[$request->_type];
         $promocode = null;
         $use_promocode = null;
-        $freecredit = 'N';
         $freepremiumflex = 'N';
+        // $freecredit = 'N';
+        // $freelongtailboat = 'N';
+        // $freeshuttlebus = 'N';
+        // $freeprivatetaxi = 'N';
         $g_date = $this->setDateToGlobal($request->date[0]);
 
         $routes = $this->getRouteList($request->from[0], $request->to[0], $g_date);
         if($request->promotioncode != NULL) {
+            $use_promocode = $request->promotioncode;
             // promo_code, trip_type, station_from_id, station_to_id, depart_date
-            $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0]);
+            // $promocode = $this->checkPromotionCode($request->promotioncode, 'one-way', $request->from[0], $request->to[0], $request->date[0]);
         }
         $passenger = $this->setInputType($request);
         $_station = ['from' => '', 'to' => ''];
@@ -103,10 +107,13 @@ class BookingController extends Controller
             $routes['data'][$index]['station_to']['g_map'] = $this->setGoogleMapPosition($route['station_to']['google_map'])[0];
         }
 
-        if($promocode != null) {
-            $freecredit = $promocode[0]['isfreecreditcharge'];
-            $freepremiumflex = $promocode[0]['isfreepremiumflex'];
-        }
+        // if($promocode != null) {
+        //     $freecredit = $promocode[0]['isfreecreditcharge'];
+        //     $freepremiumflex = $promocode[0]['isfreepremiumflex'];
+        //     $freelongtailboat = $promocode[0]['isfreelongtailboat'];
+        //     $freeshuttlebus = $promocode[0]['isfreeshuttlebus'];
+        //     $freeprivatetaxi = $promocode[0]['isfreeprivatetaxi'];
+        // }
 
         $code_country = $this->CodeCountry;
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
@@ -119,9 +126,15 @@ class BookingController extends Controller
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode,
-                'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $addon_icon,
-                'premium_flex' => $premium_flex['data']
+                'addon_icon' => $addon_icon, 'premium_flex' => $premium_flex['data'], 'freepremiumflex' => $freepremiumflex,
             ]);
+            // backup
+            // 'freecredit' => $freecredit,
+            // 'freepremiumflex' => $freepremiumflex,
+            // 'freeshuttlebus' => $freeshuttlebus,
+            // 'freeprivatetaxi' => $freeprivatetaxi
+            // 'freelongtailboat' => $freelongtailboat,
+
     }
 
     private function setGoogleMapPosition($google_map) {
@@ -211,7 +224,7 @@ class BookingController extends Controller
 
         if($request->promotioncode != NULL) {
             // promo_code, trip_type, station_from_id, station_to_id, depart_date
-            $promocode = $this->checkPromotionCode($request->promotioncode, 'round-trip', $request->from[0], $request->to[0], $request->date[0]);
+            // $promocode = $this->checkPromotionCode($request->promotioncode, 'round-trip', $request->from[0], $request->to[0], $request->date[0]);
             $use_promocode = $request->promotioncode;
         }
 

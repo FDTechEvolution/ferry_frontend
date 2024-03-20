@@ -13,20 +13,25 @@
 
         @if($addon['isactive'] == 'Y')
             @if($r_addon == 1 && $addon['subtype'] == 'to')
-                <div class="col-12 col-lg-6 offset-lg-6 mb-3 pb-4 px-2 border-bottom">
+                <div class="col-12 col-lg-6 d-none d-lg-block mb-3 pb-4 px-2 position-relative">
+                    <span class="is-no-addon">
+                        <hr>
+                    </span>
+                </div>
+                <div class="col-12 col-lg-6 mb-3 pb-4 px-2">
             @else
-                <div class="col-12 col-lg-6 mb-3 pb-4 px-2 border-bottom">
+                <div class="col-12 col-lg-6 mb-3 pb-4 px-2">
             @endif
                 <h5 class="addon-name-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}">
                     {{ $addon['name'] }} @if($addon['subtype'] == 'from') {{ $station_from }} @else {{ $station_to }} @endif
                 </h5>
                 <div class="card">
-                    <div @class(["card-body", "row", "border-end" => $addon['subtype'] == 'from'])>
+                    <div @class(["card-body", "row"])>
                         <div class="col-2 d-flex justify-content-center align-items-center">
                             <div class="mb-2 d-grid" style="justify-items: center;">
                                 <label class="form-check-label mb-2" for="x-{{ $from_id }}">
                                     <img src="{{ asset('icons/'.$addon_icon[$addon['type']]) }}"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $addon['mouseover'] }}"
+                                        data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $addon['mouseover'] }}"
                                         width="70" />
                                 </label>
                                 <span class="route-addon-checked-{{ $type }}">
@@ -37,30 +42,34 @@
                                             onClick="selectRouteAddon(this, '{{ $type }}')">
                                 </span>
 
-                                <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}"
+                                <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }} {{ $addon['type'] }}-is-service-charge"
                                         value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}">
                             </div>
                         </div>
                         <div class="col-10">
                             <textarea class="form-control route-addon-detail-default route-addon-detail-{{ $type }} addon-detail-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}" rows="4" name="" placeholder="{{ $addon['message'] }}" disabled></textarea>
                             <p class="small mt-2 mb-0"><span class="fw-bold">Service charge</span>
-                                @if($addon['isservice_charge'] == 'Y')
-                                    {{ number_format($addon['price']) }} <span class="small">THB</span>
-                                @else
-                                    <span class="text-second-color">Free</span>
-                                @endif
+                                <span class="addon-service-charge-{{ $addon['type'] }}">
+                                    @if($addon['isservice_charge'] == 'Y')
+                                        {{ number_format($addon['price']) }} <span class="small">THB</span>
+                                    @else
+                                        <span class="text-second-color">Free</span>
+                                    @endif
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            @if($r_addon == 1 && $addon['subtype'] == 'from')
+                <div class="col-12 col-lg-6 d-none d-lg-block mb-3 pb-4 px-2 position-relative">
+                    <span class="is-no-addon">
+                        <hr>
+                    </span>
+                </div>
+            @endif
         @endif
     @endforeach
 </div>
 @endforeach
-
-<style>
-    .tooltip {
-        --bs-tooltip-max-width: 400px;
-    }
-</style>
