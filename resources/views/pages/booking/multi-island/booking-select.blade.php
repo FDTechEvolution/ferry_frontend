@@ -119,7 +119,7 @@
                                                     <span class="smaller text-danger current-price"><s>{{ number_format($route['amount']) }}</s></span>
                                                     <span class="route-price promo-price fs-4">{{ number_format($route['promo_price']) }}</span>
                                                 @else
-                                                    <span class="smaller text-danger summary-current-price d-none"><s class="current-price"></s></span>
+                                                    <span class="smaller text-danger summary-current-price d-none"><s class="current-price">{{ number_format($route['amount']) }}</s></span>
                                                     <span class="route-price fs-4">{{ number_format($route['amount']) }}</span>
                                                 @endif
                                             </p>

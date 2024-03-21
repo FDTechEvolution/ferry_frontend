@@ -9,6 +9,7 @@
     @foreach($route_addon as $index => $addon)
         @php
             $from_id = uniqid();
+            $addon_id = uniqid();
         @endphp
 
         @if($addon['isactive'] == 'Y')
@@ -36,7 +37,7 @@
                                 </label>
                                 <span class="route-addon-checked-{{ $type }}">
                                     <input class="form-check-input form-check-input-default"
-                                            type="checkbox" id="x-{{ $from_id }}" name=""
+                                            type="checkbox" id="x-{{ $from_id }}" name="" data-addon="a-{{ $addon_id }}"
                                             data-type="{{ $addon['type'] }}" data-subtype="{{ $addon['subtype'] }}"
                                             data-routeindex="{{ $route_index }}" value="{{ $addon['id'] }}"
                                             onClick="selectRouteAddon(this, '{{ $type }}')">
@@ -44,6 +45,8 @@
 
                                 <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }} {{ $addon['type'] }}-is-service-charge"
                                         value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}">
+                                <input type="hidden" class="{{ $addon['type'] }}-is-service-charge-current-{{ $type }}" value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}"
+                                        data-routeindex="{{ $route_index }}" data-ex_index="{{ $type }}" data-subtype="{{ $addon['subtype'] }}" data-type="{{ $addon['type'] }}" data-addon="a-{{ $addon_id }}">
                             </div>
                         </div>
                         <div class="col-10">

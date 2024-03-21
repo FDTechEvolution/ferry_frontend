@@ -199,17 +199,15 @@
                     </div>
                 @endforeach
 
-                @if($promocode == '')
-                    <div class="your-booking-promocode mb-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
-                            <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
-                                <i class="fa-solid fa-circle-check m-0 promocode-loading"></i>
-                                <i class="fi fi-circle-spin fi-spin m-0 promocode-loaded d-none"></i>
-                            </button>
-                        </div>
+                <div class="your-booking-promocode mb-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm booking-promocode-input" placeholder="PromoCode" aria-label="PromoCode" aria-describedby="button-promocode">
+                        <button class="btn btn-sm btn-outline-secondary text-center" type="button" id="button-promocode-submit">
+                            <i class="fa-solid fa-circle-check m-0 promocode-loading"></i>
+                            <i class="fi fi-circle-spin fi-spin m-0 promocode-loaded d-none"></i>
+                        </button>
                     </div>
-                @endif
+                </div>
 
                 <div class="card your-booking-summary d-none">
                     <div class="card-body">

@@ -293,10 +293,10 @@ class BookingController extends Controller
 
                 if($request->promotioncode != NULL) {
                     // promo_code, trip_type, station_from_id, station_to_id, depart_date
-                    $_promocode = $this->checkPromotionCode($request->promotioncode, 'multi-trip', $from, $request->to[$index], $request['date'][$index]);
+                    // $_promocode = $this->checkPromotionCode($request->promotioncode, 'multi-trip', $from, $request->to[$index], $request['date'][$index]);
                     $use_promocode = $request->promotioncode;
-                    if($_promocode[0] !== null) array_push($promocode, $_promocode);
-                    else array_push($promocode, []);
+                    // if($_promocode[0] !== null) array_push($promocode, $_promocode);
+                    // else array_push($promocode, []);
                 }
 
                 $g_date = $this->setDateToGlobal($request['date'][$index]);

@@ -102,7 +102,7 @@
     }
     .is-no-addon {
         position: absolute;
-        width: 100%;
+        width: 95%;
         top: 40%;
     }
 </style>
