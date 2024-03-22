@@ -582,13 +582,14 @@ function selectRouteAddon(e, _type) {
     let type = e.dataset.type
     let subtype = e.dataset.subtype
     let routeindex = e.dataset.routeindex
+    let addon_id = e.dataset.addon
     let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-${_type}`)
     let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-${_type}`)
     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-${_type}`)
     if(e.checked) {
         if(_type === 'depart') {
             let addon_index = addon_route.depart.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
-            if(addon_index < 0) addon_route.depart.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
+            if(addon_index < 0) addon_route.depart.push({'id': addon_id, 'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
 
             extra_price.depart += parseInt(addon_price.value)
             e.name = `route_addon_${_type}[]`
@@ -597,7 +598,7 @@ function selectRouteAddon(e, _type) {
         }
         if(_type === 'return') {
             let addon_index = addon_route.return.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}-${_type}` })
-            if(addon_index < 0) addon_route.return.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
+            if(addon_index < 0) addon_route.return.push({'id': addon_id, 'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}-${_type}`})
 
             extra_price.return += parseInt(addon_price.value)
             e.name = `route_addon_${_type}[]`
@@ -711,6 +712,8 @@ function dec(type, element, index) {
 
 function updateSumPrice() {
     let result_premuim_price = 0
+    let result_extra_depart = 0
+    let result_extra_return = 0
     let your_booking = {
         premium_flex: document.querySelector('.your-booking-premium-flex-price'),
         extra: document.querySelector('.your-booking-extra-price'),
@@ -726,9 +729,15 @@ function updateSumPrice() {
         your_booking.premium_flex.innerHTML = `0 <small class="smaller">THB</small>`
     }
 
-    your_booking.extra.innerHTML = `${(extra_price.depart + extra_price.return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    // console.log(addon_route.depart)
+    // console.log(addon_route.return)
 
-    let sum_amount = (price.depart + price.return) + (extra_price.depart + extra_price.return) + result_premuim_price
+    addon_route.depart.forEach((item) => { result_extra_depart += parseInt(item.price) })
+    addon_route.return.forEach((item) => { result_extra_return += parseInt(item.price) })
+
+    your_booking.extra.innerHTML = `${(result_extra_depart + result_extra_return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
+    let sum_amount = (price.depart + price.return) + (result_extra_depart + result_extra_return) + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
     document.querySelector('#sum-price').innerHTML = sum_amount_digit
     your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
@@ -1253,6 +1262,7 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
     const _promocode = promocode
     const use_promocode = document.querySelector('[name="use_promocode"]')
     const booking_discount = document.querySelector('.your-booking-discount')
+    promocode_premiumflex = 'N'
 
     if(_promocode !== '') {
         const _departdate = await dateFormatSet(booking_date_depart.innerText)
@@ -1267,16 +1277,11 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
                 document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
             }
 
-            if(promo.isfreeshuttlebus === 'Y') updateFreeAddon('shuttle_bus')
-            if(promo.isfreelongtailboat === 'Y') updateFreeAddon('longtail_boat')
-            if(promo.isfreeprivatetaxi === 'Y') updateFreeAddon('private_taxi')
-
             booking_discount.classList.remove('d-none')
             document.querySelector('.your-booking-promocode').classList.add('d-none')
             $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
         }
         else {
-            promocode_premiumflex = 'N'
             use_promocode.value = ''
             p_active = []
 
@@ -1293,7 +1298,7 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
     }
 }
 
-function updateFreeAddon(type) {
+function updateFreeAddon(type, status) {
     const _extra = document.querySelector('#booking-route-extra')
     const route_addon_list_depart = _extra.querySelectorAll('.route-addon-lists-depart')
     const route_addon_list_return = _extra.querySelectorAll('.route-addon-lists-return')
@@ -1302,9 +1307,25 @@ function updateFreeAddon(type) {
         if(!item.classList.contains('d-none')) {
             const charge = item.querySelector(`.addon-service-charge-${type}`)
             const price = item.querySelector(`.${type}-is-service-charge`)
+            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
             if(charge && price) {
-                charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                price.value = 0
+                const _d = price_current.dataset
+                if(status === 'Y') {
+                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
+                    price.value = 0
+                    if(addon_route.depart.length > 0) {
+                        addon_route.depart.forEach((r, i) => {
+                            if(r.id === _d.addon) { addon_route.depart[i].price = '0' }
+                        })
+                    }
+                }
+                else {
+                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
+                    price.value = price_current.value
+                    addon_route.depart.forEach((r, i) => {
+                        if(r.id === _d.addon) { addon_route.depart[i].price = `${price_current.value}` }
+                    })
+                }
             }
         }
     })
@@ -1313,9 +1334,25 @@ function updateFreeAddon(type) {
         if(!item.classList.contains('d-none')) {
             const charge = item.querySelector(`.addon-service-charge-${type}`)
             const price = item.querySelector(`.${type}-is-service-charge`)
+            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
             if(charge && price) {
-                charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                price.value = 0
+                const _d = price_current.dataset
+                if(status === 'Y') {
+                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
+                    price.value = 0
+                    if(addon_route.return.length > 0) {
+                        addon_route.return.forEach((r, i) => {
+                            if(r.id === _d.addon) { addon_route.return[i].price = '0' }
+                        })
+                    }
+                }
+                else {
+                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
+                    price.value = price_current.value
+                    addon_route.return.forEach((r, i) => {
+                        if(r.id === _d.addon) { addon_route.return[i].price = `${price_current.value}` }
+                    })
+                }
             }
         }
     })
@@ -1337,6 +1374,9 @@ async function promoSetDiscount(_date, route_list, use_promocode, _promocode, ty
         promocode_route = result.data.promo_line.route
 
         promo = result.data.data
+        updateFreeAddon('shuttle_bus', promo.isfreeshuttlebus)
+        updateFreeAddon('longtail_boat', promo.isfreelongtailboat)
+        updateFreeAddon('private_taxi', promo.isfreeprivatetaxi)
 
         route_list.forEach((route, index) => {
             const station_from_id = route.querySelector(`.station-${type}-from-text`).dataset.id
@@ -1395,6 +1435,10 @@ async function promoSetDiscount(_date, route_list, use_promocode, _promocode, ty
                 promo_price.innerHTML = numberFormat(c_price[index])
             })
         }
+
+        updateFreeAddon('shuttle_bus', 'N')
+        updateFreeAddon('longtail_boat', 'N')
+        updateFreeAddon('private_taxi', 'N')
 
         if(r_index !== null) {
             if(c_price.length > 0) {

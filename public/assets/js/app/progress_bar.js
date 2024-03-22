@@ -413,16 +413,14 @@ function selectRouteAddon(e, _type) {
     let type = e.dataset.type
     let subtype = e.dataset.subtype
     let routeindex = e.dataset.routeindex
+    let addon_id = e.dataset.addon
     let addon_name = document.querySelector(`.addon-name-${type}-${subtype}-${routeindex}-depart`)
     let addon_price = document.querySelector(`.${type}-${subtype}-${routeindex}-depart`)
     let addon_detail = document.querySelector(`.addon-detail-${type}-${subtype}-${routeindex}-depart`)
-    const freelongtailboat = document.querySelector('.is-addon-longtailboat')
-    const freeshuttlebus = document.querySelector('.is-addon-shuttlebus')
-    const freeprivatetaxi = document.querySelector('.is-addon-privatetaxi')
 
     if(e.checked) {
         let addon_index = addon_route.findIndex((addon) => { return addon.type === `${type}-${subtype}-${routeindex}` })
-        if(addon_index < 0) addon_route.push({'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
+        if(addon_index < 0) addon_route.push({'id': addon_id, 'name': addon_name.innerText, 'price': addon_price.value, 'type': `${type}-${subtype}-${routeindex}`})
         extra_price += parseInt(addon_price.value)
         e.name = 'route_addon_depart[]'
         addon_detail.name = 'route_addon_detail_depart[]'
@@ -889,11 +887,13 @@ function dec(element, index) {
 
 function updateSumPrice() {
     let result_premuim_price = 0
+    let result_extra = 0
     let your_booking = {
         premium_flex: document.querySelector('.your-booking-premium-flex-price'),
         extra: document.querySelector('.your-booking-extra-price'),
         total: document.querySelector('.your-booking-amount')
     }
+    // console.log(promocode_premiumflex)
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
         your_booking.premium_flex.innerHTML = `${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
@@ -903,9 +903,11 @@ function updateSumPrice() {
         your_booking.premium_flex.innerHTML = `0 <small class="smaller">THB</small>`
     }
 
-    your_booking.extra.innerHTML = `${extra_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    addon_route.forEach((item) => { result_extra += parseInt(item.price) })
 
-    let sum_amount = route_price + extra_price + result_premuim_price
+    your_booking.extra.innerHTML = `${result_extra.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+
+    let sum_amount = route_price + result_extra + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
     document.querySelector('#sum-price').innerHTML = sum_amount_digit
     your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
@@ -947,6 +949,7 @@ async function promocodeProcess(promocode, booking_date, route_list) {
     const _promocode = promocode
     const use_promocode = document.querySelector('[name="use_promocode"]')
     const booking_discount = document.querySelector('.your-booking-discount')
+    promocode_premiumflex = 'N'
 
     if(_promocode !== '') {
         const _departdate = await dateFormatSet(booking_date.innerText)
@@ -971,9 +974,9 @@ async function promocodeProcess(promocode, booking_date, route_list) {
                 document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
             }
 
-            if(promo.isfreeshuttlebus === 'Y') updateFreeAddon('shuttle_bus')
-            if(promo.isfreelongtailboat === 'Y') updateFreeAddon('longtail_boat')
-            if(promo.isfreeprivatetaxi === 'Y') updateFreeAddon('private_taxi')
+            updateFreeAddon('shuttle_bus', promo.isfreeshuttlebus)
+            updateFreeAddon('longtail_boat', promo.isfreelongtailboat)
+            updateFreeAddon('private_taxi', promo.isfreeprivatetaxi)
 
             route_list.forEach((route, index) => {
                 const station_from_id = route.querySelector('.station-from-text').dataset.id
@@ -1037,6 +1040,10 @@ async function promocodeProcess(promocode, booking_date, route_list) {
                 })
             }
 
+            updateFreeAddon('shuttle_bus', 'N')
+            updateFreeAddon('longtail_boat', 'N')
+            updateFreeAddon('private_taxi', 'N')
+
             if(route_selected !== null) {
                 if(current_price.length > 0) {
                     route_price = parseInt(current_price[route_selected].replace(/,/g, ""))
@@ -1045,7 +1052,6 @@ async function promocodeProcess(promocode, booking_date, route_list) {
             }
 
             promo = null
-            promocode_premiumflex = 'N'
             use_promocode.value = ''
             promo_active = []
             booking_discount.classList.add('d-none')
@@ -1062,7 +1068,7 @@ async function promocodeProcess(promocode, booking_date, route_list) {
     }
 }
 
-function updateFreeAddon(type) {
+function updateFreeAddon(type, status) {
     const _extra = document.querySelector('#booking-route-extra')
     const route_addon_lists = _extra.querySelectorAll('.route-addon-lists-depart')
 
@@ -1070,9 +1076,27 @@ function updateFreeAddon(type) {
         if(!item.classList.contains('d-none')) {
             const charge = item.querySelector(`.addon-service-charge-${type}`)
             const price = item.querySelector(`.${type}-is-service-charge`)
+            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
             if(charge && price) {
-                charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                price.value = 0
+                const _d = price_current.dataset
+                if(status === 'Y') {
+                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
+                    price.value = 0
+                    if(addon_route.length > 0) {
+                        addon_route.forEach((r, i) => {
+                            if(r.id === _d.addon) { addon_route[i].price = '0' }
+                        })
+                    }
+                }
+                else {
+                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
+                    price.value = price_current.value
+                    if(addon_route.length > 0) {
+                        addon_route.forEach((r, i) => {
+                            if(r.id === _d.addon) { addon_route[i].price = `${price_current.value}` }
+                        })
+                    }
+                }
             }
         }
     })

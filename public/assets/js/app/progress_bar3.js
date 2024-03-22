@@ -1118,6 +1118,7 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
     const multi_route = main_route.querySelectorAll('.booking-multi-route')
     const last_route = multi_route.length
     promocode_active = false
+    promocode_premiumflex = 'N'
 
     multi_route.forEach(async (sub_route, index) => {
         const booking_date = sub_route.querySelector('.is-booking-date')
@@ -1225,7 +1226,6 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
             }
 
             promo = null
-            promocode_premiumflex = 'N'
             use_promocode.value = ''
             promo_active[index] = []
             booking_discount.classList.add('d-none')
@@ -1247,7 +1247,7 @@ function updateFreeAddon(type, index, key, status) {
         if(!item.classList.contains('d-none')) {
             const charge = item.querySelector(`.addon-service-charge-${type}`)
             const price = item.querySelector(`.${type}-is-service-charge`)
-            const price_current = item.querySelector(`.${type}-is-service-charge-current-${index}`)
+            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
 
             if(charge && price) {
                 const _d = price_current.dataset

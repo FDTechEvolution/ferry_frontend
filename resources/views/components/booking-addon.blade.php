@@ -45,7 +45,7 @@
 
                                 <input type="hidden" class="{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }} {{ $addon['type'] }}-is-service-charge"
                                         value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}">
-                                <input type="hidden" class="{{ $addon['type'] }}-is-service-charge-current-{{ $type }}" value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}"
+                                <input type="hidden" class="{{ $addon['type'] }}-is-service-charge-current" value="{{ $addon['isservice_charge'] == 'Y' ? $addon['price'] : 0 }}"
                                         data-routeindex="{{ $route_index }}" data-ex_index="{{ $type }}" data-subtype="{{ $addon['subtype'] }}" data-type="{{ $addon['type'] }}" data-addon="a-{{ $addon_id }}">
                             </div>
                         </div>
