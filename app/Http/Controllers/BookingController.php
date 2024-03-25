@@ -709,6 +709,7 @@ class BookingController extends Controller
                 $station_form = $res['m_from_route'];
                 $_station_to = $this->setStationToSection($res['m_route']);
                 $route_addon = $booking['extra_addons'][0]['addons'];
+                $passenger = $booking['adult'] + $booking['child'] + $booking['infant'];
                 // $longtail_boat = $this->separateRouteAddon($addons['route_addons'], 'longtail_boat');
                 // $shuttle_bus = $this->separateRouteAddon($addons['route_addons'], 'shuttle_bus');
 
@@ -716,7 +717,7 @@ class BookingController extends Controller
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
                                 'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0],
                                 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
-                                'payment_lines' => $payment_lines, 'route_addon' => $route_addon
+                                'payment_lines' => $payment_lines, 'route_addon' => $route_addon, 'passenger' => $passenger
                             ]);
             }
 

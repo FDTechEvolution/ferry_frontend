@@ -19,6 +19,7 @@
                 :type="_('depart')"
                 :station_from="$station_depart['from']"
                 :station_to="$station_depart['to']"
+                :passenger="$passenger"
             />
 
             <div @class(['d-none' => empty($route['meal_lines'])])>
@@ -100,6 +101,7 @@
                 :type="_('return')"
                 :station_from="$station_return['from']"
                 :station_to="$station_return['to']"
+                :passenger="$passenger"
             />
 
             <div @class(['d-none' => empty($route['meal_lines'])])>

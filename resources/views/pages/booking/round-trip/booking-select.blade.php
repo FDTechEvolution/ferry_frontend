@@ -18,12 +18,17 @@
                         <div class="row">
                             <div class="col-12 col-lg-10">
                                 <div class="row py-3 pb-lg-3 pb-2">
-                                    @if ($route['ispromocode'] == 'Y' && isset($route['promo_price']))
+                                    {{-- @if ($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                         <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable-depart">PromoCode Avaliable!</small>
                                         </p>
                                     @else
                                         <p class="mb-2 small summary-promo-avaliable d-none">
+                                            <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
+                                        </p>
+                                    @endif --}}
+                                    @if($route['ispromocode'] == 'Y')
+                                        <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                         </p>
                                     @endif
@@ -150,7 +155,7 @@
                                             <button type="button"
                                                 class="btn btn-sm transition-hover-top button-blue-bg btn-route-depart-list py-1 px-3 btn-route-depart-select-{{ $index }}">Select</button>
                                         </div>
-                                        <div class="col-6 col-lg-12 text-center-m d-none">
+                                        <div class="col-6 col-lg-12 text-center-m">
                                             <x-booking-select-passenger-icon
                                                 :passenger="$passenger"
                                                 :p_adult="$route['p_adult']"
@@ -194,12 +199,17 @@
                         <div class="row">
                             <div class="col-12 col-lg-10">
                                 <div class="row py-3 pb-lg-3 pb-2">
-                                    @if ($route['ispromocode'] == 'Y' && isset($route['promo_price']))
+                                    {{-- @if ($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                         <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable-return">PromoCode Avaliable!</small>
                                         </p>
                                     @else
                                         <p class="mb-2 small summary-promo-avaliable d-none">
+                                            <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
+                                        </p>
+                                    @endif --}}
+                                    @if($route['ispromocode'] == 'Y')
+                                        <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                         </p>
                                     @endif
@@ -327,7 +337,7 @@
                                             <button type="button"
                                                 class="btn btn-sm transition-hover-top button-orange-bg btn-route-return-list py-1 px-3 btn-route-return-select-{{ $index }}">Select</button>
                                         </div>
-                                        <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list d-none">
+                                        <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
                                             <x-booking-select-passenger-icon
                                                 :passenger="$passenger"
                                                 :p_adult="$route['p_adult']"

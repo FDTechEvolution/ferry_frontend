@@ -9,12 +9,17 @@
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-2 mb-lg-0">
                         <div class="row py-3 pb-lg-3 pb-2">
-                            @if($route['ispromocode'] == 'Y' && isset($route['promo_price']))
+                            {{-- @if($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                 <p class="mb-2 small">
                                     <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                 </p>
                             @else
                                 <p class="mb-2 small summary-promo-avaliable d-none">
+                                    <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
+                                </p>
+                            @endif --}}
+                            @if($route['ispromocode'] == 'Y')
+                                <p class="mb-2 small">
                                     <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                 </p>
                             @endif
@@ -111,7 +116,7 @@
                                 <div class="col-6 col-lg-12 mt-2 mt-lg-0 mb-lg-2 text-center-m">
                                     <button type="button" class="btn transition-hover-top btn-sm button-blue-bg btn-route-list py-1 px-3 btn-route-select-{{ $index }}">Select</button>
                                 </div>
-                                <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list d-none">
+                                <div class="col-6 col-lg-12 text-center-m passenger-icon-price-list">
                                     <x-booking-select-passenger-icon
                                         :passenger="$passenger"
                                         :p_adult="$route['p_adult']"

@@ -1042,6 +1042,11 @@ function updateSumPrice() {
         extra: document.querySelector('.your-booking-extra-price'),
         total: document.querySelector('.your-booking-amount')
     }
+    const person_adult = document.querySelector('.person-adult-icon').innerText
+    const person_child = document.querySelector('.person-child-icon').innerText
+    const person_infant = document.querySelector('.person-infant-icon').innerText
+    const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
+
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
         your_booking.premium_flex.innerHTML = `${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
@@ -1057,11 +1062,11 @@ function updateSumPrice() {
         }
     })
 
-    your_booking.extra.innerHTML = `${result_extra.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    your_booking.extra.innerHTML = `${person_all} x ${result_extra.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
     // console.log(is_current_price)
     let total_route = sum_price.reduce((num1, num2) => { return num1+num2 })
-    let sum_amount = total_route + result_extra + result_premuim_price
+    let sum_amount = total_route + (person_all * result_extra) + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
     document.querySelector('#sum-price').innerHTML = sum_amount_digit
     your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
@@ -1166,9 +1171,9 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
                     promo_active[index][key] = true
                     if(route_ispromo === 'Y') {
                         const scp = route.querySelector('.summary-current-price')
-                        const spa = route.querySelector('.summary-promo-avaliable')
+                        // const spa = route.querySelector('.summary-promo-avaliable')
                         scp.classList.remove('d-none')
-                        spa.classList.remove('d-none')
+                        // spa.classList.remove('d-none')
                         scp.querySelector('.current-price').innerHTML = current_price[index][key]
                         const discount = promotionPriceCal(current_price[index][key], promo.discount, promo.discount_type)
                         promo_price.innerHTML = numberFormat(discount)
@@ -1205,9 +1210,9 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
                 clearRouteToDefault(main_route, index)
                 route_list.forEach((route, key) => {
                     const scp = route.querySelector('.summary-current-price')
-                    const spa = route.querySelector('.summary-promo-avaliable')
+                    // const spa = route.querySelector('.summary-promo-avaliable')
                     scp.classList.add('d-none')
-                    spa.classList.add('d-none')
+                    // spa.classList.add('d-none')
 
                     const promo_price = route.querySelector('.route-price')
                     promo_price.innerHTML = numberFormat(current_price[index][key])
@@ -1242,36 +1247,55 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
 
 function updateFreeAddon(type, index, key, status) {
     const route_addon_lists = document.querySelectorAll(`.route-addon-lists-${index}`)
+    const person_adult = document.querySelector('.person-adult-icon').innerText
+    const person_child = document.querySelector('.person-child-icon').innerText
+    const person_infant = document.querySelector('.person-infant-icon').innerText
+    const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
 
     route_addon_lists.forEach((item) => {
         if(!item.classList.contains('d-none')) {
-            const charge = item.querySelector(`.addon-service-charge-${type}`)
-            const price = item.querySelector(`.${type}-is-service-charge`)
-            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
+            const charge_from = item.querySelector(`.addon-service-charge-${type}-from`)
+            const price_from = item.querySelector(`.${type}-is-service-charge-from`)
+            const price_current_from = item.querySelector(`.${type}-is-service-charge-current-from`)
 
-            if(charge && price) {
-                const _d = price_current.dataset
-                if(status === 'Y') {
-                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                    price.value = 0
-                    if(addon_route[index].length > 0) {
-                        addon_route[index].forEach((r, i) => {
-                            if(r.id === _d.addon) { addon_route[index][i].price = '0' }
-                        })
-                    }
-                }
-                else {
-                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
-                    price.value = price_current.value
-                    if(addon_route[index].length > 0) {
-                        addon_route[index].forEach((r, i) => {
-                            if(r.id === _d.addon) { addon_route[index][i].price = `${price_current.value}` }
-                        })
-                    }
-                }
+            const charge_to = item.querySelector(`.addon-service-charge-${type}-to`)
+            const price_to = item.querySelector(`.${type}-is-service-charge-to`)
+            const price_current_to = item.querySelector(`.${type}-is-service-charge-current-to`)
+
+            if(charge_from && price_from && price_current_from) {
+                setAddonPrice(price_current_from, charge_from, price_from, status, person_all, index)
+            }
+
+            if(charge_to && price_to && price_current_to) {
+                setAddonPrice(price_current_to, charge_to, price_to, status, person_all, index)
             }
         }
     })
+}
+
+function setAddonPrice(price_current, charge, price, status, person, index) {
+    const _d = price_current.dataset
+
+    if(status === 'Y') {
+        charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
+        price.value = 0
+
+        if(addon_route[index].length > 0) {
+            addon_route[index].forEach((r, i) => {
+                if(r.id === _d.addon) { addon_route[index][i].price = '0' }
+            })
+        }
+    }
+    else {
+        let set_price = price_current.value == '0' ? '0' : `${numberFormat(price_current.value * 1)} x ${person} = ${price_current.value * person} <span class="small">THB</span>`
+        charge.innerHTML = `${set_price}`
+        price.value = price_current.value
+        if(addon_route[index].length > 0) {
+            addon_route[index].forEach((r, i) => {
+                if(r.id === _d.addon) { addon_route[index][i].price = `${price_current.value}` }
+            })
+        }
+    }
 }
 
 async function promoResponse() {
@@ -1321,9 +1345,9 @@ function clearRouteToDefault(main_route, index) {
     if(current_price[index].length > 0) {
         route_list.forEach((route, key) => {
             const scp = route.querySelector('.summary-current-price')
-            const spa = route.querySelector('.summary-promo-avaliable')
+            // const spa = route.querySelector('.summary-promo-avaliable')
             scp.classList.add('d-none')
-            spa.classList.add('d-none')
+            // spa.classList.add('d-none')
 
             const promo_price = route.querySelector('.route-price')
             promo_price.innerHTML = numberFormat(current_price[index][key])
@@ -1345,23 +1369,25 @@ function editPromotionCode() {
 let is_discount = 0
 function updateDiscountByBookingSummary(index) {
     const booking_discount = document.querySelector('.your-booking-discount')
-    if(promocode_select[index] === 'Y' && promo_active[index][route_selected[index]]) {
+    if(promo_active.length > 0) {
+        if(promocode_select[index] === 'Y' && promo_active[index][route_selected[index]]) {
 
-        booking_discount.classList.remove('d-none')
-        const discount = promotionPriceCal(current_price[index][route_selected[index]], promo.discount, promo.discount_type)
-        summary_discount[index] = parseInt(current_price[index][route_selected[index]].replace(/,/g, "")) - discount
+            booking_discount.classList.remove('d-none')
+            const discount = promotionPriceCal(current_price[index][route_selected[index]], promo.discount, promo.discount_type)
+            summary_discount[index] = parseInt(current_price[index][route_selected[index]].replace(/,/g, "")) - discount
 
-        is_discount = 0
-        is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
-        const neg = is_discount === 0 ? '' : '-'
-        document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
-    }
-    else {
-        is_discount = 0
-        summary_discount[index] = 0
-        is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
-        const neg = is_discount === 0 ? '' : '-'
-        document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
+            is_discount = 0
+            is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
+            const neg = is_discount === 0 ? '' : '-'
+            document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
+        }
+        else {
+            is_discount = 0
+            summary_discount[index] = 0
+            is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
+            const neg = is_discount === 0 ? '' : '-'
+            document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
+        }
     }
 }
 

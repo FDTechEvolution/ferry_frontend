@@ -719,6 +719,10 @@ function updateSumPrice() {
         extra: document.querySelector('.your-booking-extra-price'),
         total: document.querySelector('.your-booking-amount')
     }
+    const person_adult = document.querySelector('.person-adult-icon').innerText
+    const person_child = document.querySelector('.person-child-icon').innerText
+    const person_infant = document.querySelector('.person-infant-icon').innerText
+    const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
 
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
@@ -735,9 +739,9 @@ function updateSumPrice() {
     addon_route.depart.forEach((item) => { result_extra_depart += parseInt(item.price) })
     addon_route.return.forEach((item) => { result_extra_return += parseInt(item.price) })
 
-    your_booking.extra.innerHTML = `${(result_extra_depart + result_extra_return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    your_booking.extra.innerHTML = `${person_all} x ${(result_extra_depart + result_extra_return).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
-    let sum_amount = (price.depart + price.return) + (result_extra_depart + result_extra_return) + result_premuim_price
+    let sum_amount = (price.depart + price.return) + ((result_extra_depart + result_extra_return) * person_all) + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
     document.querySelector('#sum-price').innerHTML = sum_amount_digit
     your_booking.total.innerHTML = `${sum_amount_digit} <small class="smaller">THB</small>`
@@ -1302,60 +1306,67 @@ function updateFreeAddon(type, status) {
     const _extra = document.querySelector('#booking-route-extra')
     const route_addon_list_depart = _extra.querySelectorAll('.route-addon-lists-depart')
     const route_addon_list_return = _extra.querySelectorAll('.route-addon-lists-return')
+    const person_adult = document.querySelector('.person-adult-icon').innerText
+    const person_child = document.querySelector('.person-child-icon').innerText
+    const person_infant = document.querySelector('.person-infant-icon').innerText
+    const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
 
     route_addon_list_depart.forEach((item) => {
         if(!item.classList.contains('d-none')) {
-            const charge = item.querySelector(`.addon-service-charge-${type}`)
-            const price = item.querySelector(`.${type}-is-service-charge`)
-            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
-            if(charge && price) {
-                const _d = price_current.dataset
-                if(status === 'Y') {
-                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                    price.value = 0
-                    if(addon_route.depart.length > 0) {
-                        addon_route.depart.forEach((r, i) => {
-                            if(r.id === _d.addon) { addon_route.depart[i].price = '0' }
-                        })
-                    }
-                }
-                else {
-                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
-                    price.value = price_current.value
-                    addon_route.depart.forEach((r, i) => {
-                        if(r.id === _d.addon) { addon_route.depart[i].price = `${price_current.value}` }
-                    })
-                }
+            const charge_from = item.querySelector(`.addon-service-charge-${type}-from`)
+            const price_from = item.querySelector(`.${type}-is-service-charge-from`)
+            const price_current_from = item.querySelector(`.${type}-is-service-charge-current-from`)
+            const charge_to = item.querySelector(`.addon-service-charge-${type}-to`)
+            const price_to = item.querySelector(`.${type}-is-service-charge-to`)
+            const price_current_to = item.querySelector(`.${type}-is-service-charge-current-to`)
+
+            if(charge_from && price_from && price_current_from) {
+                setAddonPrice(price_current_from, charge_from, price_from, status, person_all)
+            }
+            if(charge_to, price_to, price_current_to) {
+                setAddonPrice(price_current_to, charge_to, price_to, status, person_all)
             }
         }
     })
 
     route_addon_list_return.forEach((item) => {
         if(!item.classList.contains('d-none')) {
-            const charge = item.querySelector(`.addon-service-charge-${type}`)
-            const price = item.querySelector(`.${type}-is-service-charge`)
-            const price_current = item.querySelector(`.${type}-is-service-charge-current`)
-            if(charge && price) {
-                const _d = price_current.dataset
-                if(status === 'Y') {
-                    charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
-                    price.value = 0
-                    if(addon_route.return.length > 0) {
-                        addon_route.return.forEach((r, i) => {
-                            if(r.id === _d.addon) { addon_route.return[i].price = '0' }
-                        })
-                    }
-                }
-                else {
-                    charge.innerHTML = `${numberFormat(price_current.value)} <span class="small">THB</span>`
-                    price.value = price_current.value
-                    addon_route.return.forEach((r, i) => {
-                        if(r.id === _d.addon) { addon_route.return[i].price = `${price_current.value}` }
-                    })
-                }
+            const charge_from = item.querySelector(`.addon-service-charge-${type}-from`)
+            const price_from = item.querySelector(`.${type}-is-service-charge-from`)
+            const price_current_from = item.querySelector(`.${type}-is-service-charge-current-from`)
+            const charge_to = item.querySelector(`.addon-service-charge-${type}-to`)
+            const price_to = item.querySelector(`.${type}-is-service-charge-to`)
+            const price_current_to = item.querySelector(`.${type}-is-service-charge-current-to`)
+
+            if(charge_from && price_from && price_current_from) {
+                setAddonPrice(price_current_from, charge_from, price_from, status, person_all)
+            }
+            if(charge_to && price_to && price_current_to) {
+
             }
         }
     })
+}
+
+function setAddonPrice(price_current, charge, price, status, person) {
+    const _d = price_current.dataset
+    if(status === 'Y') {
+        charge.innerHTML = `<span class="text-second-color">Free By Promocode</span>`
+        price.value = 0
+        if(addon_route.depart.length > 0) {
+            addon_route.depart.forEach((r, i) => {
+                if(r.id === _d.addon) { addon_route.depart[i].price = '0' }
+            })
+        }
+    }
+    else {
+        let set_price = price_current.value == '0' ? '0' : `${numberFormat(price_current.value * 1)} x ${person} = ${price_current.value * person} <span class="small">THB</span>`
+        charge.innerHTML = `${set_price}`
+        price.value = price_current.value
+        addon_route.depart.forEach((r, i) => {
+            if(r.id === _d.addon) { addon_route.depart[i].price = `${price_current.value}` }
+        })
+    }
 }
 
 async function promoSetDiscount(_date, route_list, use_promocode, _promocode, type) {
@@ -1392,9 +1403,9 @@ async function promoSetDiscount(_date, route_list, use_promocode, _promocode, ty
                 p_active[index] = true
                 if(route_ispromo === 'Y') {
                     const scp = route.querySelector('.summary-current-price')
-                    const spa = route.querySelector('.summary-promo-avaliable')
+                    // const spa = route.querySelector('.summary-promo-avaliable')
                     scp.classList.remove('d-none')
-                    spa.classList.remove('d-none')
+                    // spa.classList.remove('d-none')
                     scp.querySelector('.current-price').innerHTML = c_price[index]
                     const discount = promotionPriceCal(c_price[index], promo.discount, promo.discount_type)
                     promo_price.innerHTML = numberFormat(discount)
@@ -1426,9 +1437,9 @@ async function promoSetDiscount(_date, route_list, use_promocode, _promocode, ty
         if(c_price.length > 0) {
             route_list.forEach((route, index) => {
                 const scp = route.querySelector('.summary-current-price')
-                const spa = route.querySelector('.summary-promo-avaliable')
+                // const spa = route.querySelector('.summary-promo-avaliable')
                 scp.classList.add('d-none')
-                spa.classList.add('d-none')
+                // spa.classList.add('d-none')
 
                 const promo_price = route.querySelector('.route-price')
                 promo_price.classList.remove('text-warning')
@@ -1490,9 +1501,9 @@ function clearRouteToDefault(route_list, type) {
     if(c_price.length > 0) {
         route_list.forEach((route, index) => {
             const scp = route.querySelector('.summary-current-price')
-            const spa = route.querySelector('.summary-promo-avaliable')
+            // const spa = route.querySelector('.summary-promo-avaliable')
             scp.classList.add('d-none')
-            spa.classList.add('d-none')
+            // spa.classList.add('d-none')
 
             const promo_price = route.querySelector('.route-price')
             promo_price.innerHTML = numberFormat(c_price[index])

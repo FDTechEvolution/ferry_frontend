@@ -4,15 +4,20 @@
         <div class="col-12 mb-2">
             @php
                 $_depart_date = explode('/', $routes['depart']);
+                $_route_size = count($route_arr);
             @endphp
-            <h5 class="mb-0 text-main-color-2">Route {{ $index + 1 }}</h5>
+            <h5 class="mb-0">
+                <span class="text-main-color-2">
+                    Route {{ $index + 1 }} / {{ $_route_size }}
+                </span>
+                <span class="me-0" style="font-size: medium;">Date :
+                    <span class="travel-date-{{ $index }} d-none" style="font-size: medium;">{{ $routes['depart'] }}</span>
+                    <span class="is-booking-date" style="font-size: medium;">{{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span>
+                </span>
+            </h5>
             <p class="mb-0 fw-bolder booking-select-header d-lg-block d-grid">
                 <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4">{{ $routes['station_from'] }}</span></span>
                 <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4">{{ $routes['station_to'] }}</span></span>
-                <span class="me-0">Date :
-                    <span class="station-name travel-date-{{ $index }} d-none">{{ $routes['depart'] }}</span>
-                    <span class="station-name is-booking-date">{{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span>
-                </span>
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
@@ -23,12 +28,17 @@
                         <div class="row">
                             <div class="col-12 col-lg-10">
                                 <div class="row py-3 pb-lg-3 pb-2">
-                                    @if($route['ispromocode'] == 'Y' && isset($route['promo_price']))
+                                    {{-- @if($route['ispromocode'] == 'Y' && isset($route['promo_price']))
                                         <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                         </p>
                                     @else
                                         <p class="mb-2 small summary-promo-avaliable d-none">
+                                            <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
+                                        </p>
+                                    @endif --}}
+                                    @if($route['ispromocode'] == 'Y')
+                                        <p class="mb-2 small">
                                             <img src="promo_icon.png" width="40"> <small class="text-main-color-2 promo-avaliable">PromoCode Avaliable!</small>
                                         </p>
                                     @endif

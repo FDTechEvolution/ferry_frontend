@@ -317,8 +317,8 @@ function updateDestinationSelect(result, element, number = null) {
 
     const chunks = [];
 
-    for (let i = 0; i < result.section[0].length; i += 12) {
-        const chunk = result.section[0].slice(i, i + 12);
+    for (let i = 0; i < result.section[0].length; i += 15) {
+        const chunk = result.section[0].slice(i, i + 15);
         chunks.push(chunk);
     }
 
@@ -400,8 +400,8 @@ function updateDestinationSelectFirst(result, element, type, form_type) {
     const chunks = [];
     // console.log(result)
 
-    for (let i = 0; i < result.section[0].length; i += 12) {
-        const chunk = result.section[0].slice(i, i + 12);
+    for (let i = 0; i < result.section[0].length; i += 15) {
+        const chunk = result.section[0].slice(i, i + 15);
         chunks.push(chunk);
     }
 

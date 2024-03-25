@@ -1,20 +1,24 @@
 <div id="booking-multi-route-extra">
-    <h4 class="mb-0">Extra Service</h4>
-    <span>Please selecte additional services</span>
+    <h4 class="mb-0">Extra Service <span class="text-main-color-2" style="font-size: medium;">Please selecte additional services</span></h4>
     @foreach($route_arr as $r_index => $routes)
     <div class="row mb-4">
         <div class="col-12 mb-2">
             @php
                 $_depart_date = explode('/', $routes['depart']);
+                $_route_size = count($route_arr);
             @endphp
-            <h5 class="mb-0 text-main-color-2">Route {{ $r_index + 1 }}</h5>
+            <h5 class="mb-0">
+                <span class="text-main-color-2">
+                    Route {{ $r_index + 1 }} / {{ $_route_size }}
+                </span>
+                <span class="ms-2 me-0" style="font-size: medium;">Date : </span>
+                <span style="font-size: medium;">{{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span>
+            </h5>
             <p class="mb-0 fw-bolder">
-                <span class="me-0">Depart : </span>
+                <span class="me-0">From : </span>
                 <span class="station-name me-4">{{ $routes['station_from'] }}</span>
-                <span class="me-0">Arrival : </span>
+                <span class="me-0">To : </span>
                 <span class="station-name me-4">{{ $routes['station_to'] }}</span>
-                <span class="me-0">Date : </span>
-                <span class="station-name">{{ date('l M d, Y', strtotime($_depart_date[2].'-'.$_depart_date[1].'-'.$_depart_date[0])) }}</span>
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-4 booking-route-extra ps-lg-4 border-start border-2" data-list="{{ $r_index }}" style="border-color: #ff6100 !important;">
@@ -28,6 +32,7 @@
                             :type="$r_index"
                             :station_from="$routes['station_from']"
                             :station_to="$routes['station_to']"
+                            :passenger="$passenger"
                         />
 
                         <div @class(['d-none' => empty($route['meal_lines'])])>
