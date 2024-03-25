@@ -85,10 +85,10 @@ function clearPromotionCode(type) {
     const add_promo = document.querySelector(`.add-promotioncode-${type}`)
     const input_promo = document.querySelector(`.input-promotioncode-${type}`)
     const div_promo = document.querySelector(`.div-promotioncode-${type}`)
-
-    add_promo.classList.remove('d-none')
-    input_promo.type = 'hidden'
-    div_promo.classList.add('d-none')
+    input_promo.value = '';
+    //add_promo.classList.remove('d-none')
+    //input_promo.type = 'hidden'
+    //div_promo.classList.add('d-none')
 }
 
 const view_booking = document.querySelector('#view-your-booking')

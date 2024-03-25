@@ -452,6 +452,9 @@ nav.navbar-light a.nav-link:not(.active):not(:hover){
     text-decoration: none !important;
 }
 
+.promo-input-w input::-webkit-input-placeholder {
+    color: #ff6100 ;
+  }
 
 /* Logo & Header Style */
 .header-bg-color {
