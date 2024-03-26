@@ -85,9 +85,6 @@
         @endif
     @endif
     <div class="card card-body col-12 py-4 px-1 px-lg-5">
-        @php
-            $passenger = count($customers);
-        @endphp
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
