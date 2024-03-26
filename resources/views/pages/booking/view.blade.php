@@ -85,6 +85,9 @@
         @endif
     @endif
     <div class="card card-body col-12 py-4 px-1 px-lg-5">
+        @php
+            $passenger = count($customers);
+        @endphp
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
@@ -210,7 +213,19 @@
                         @endphp
                         @foreach($payment_lines as $line)
                             <h6 class="d-lg-flex justify-content-end align-items-end mb-2 pb-2 border-sm-bottom">{!! $line['title'] !!} :
-                                <p class="sum-of-payment w--15 w--none me-2 mb-0"><span class="fw-bold border-bottom-amount">{{number_format($line['amount'], 2) }}</span> <small class="smaller border-bottom-amount">THB</small></p>
+                                <p class="sum-of-payment w--15 w--none me-2 mb-0">
+                                    <span class="fw-bold border-bottom-amount">
+                                        @if($line['type'] == 'ADDON' && strpos($line['title'],"bus") != '' ||
+                                            $line['type'] == 'ADDON' && strpos($line['title'],"boat") != '' ||
+                                            $line['type'] == 'ADDON' && strpos($line['title'],"taxi") != ''
+                                        )
+                                            {{ $passenger }} x {{ number_format(($line['amount']/$passenger), 2) }}
+                                        @else
+                                            {{ number_format($line['amount'], 2) }}
+                                        @endif
+                                    </span>
+                                    <small class="smaller border-bottom-amount">THB</small>
+                                </p>
                             </h6>
                             @php
                                 $line_amount += $line['amount'];
