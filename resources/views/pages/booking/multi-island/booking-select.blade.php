@@ -16,8 +16,8 @@
                 </span>
             </h5>
             <p class="mb-0 fw-bolder booking-select-header d-lg-block d-grid">
-                <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4">{{ $routes['station_from'] }}</span></span>
-                <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4">{{ $routes['station_to'] }}</span></span>
+                <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4 is-station-from">{{ $routes['station_from'] }}</span></span>
+                <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4 is-station-to">{{ $routes['station_to'] }}</span></span>
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">

@@ -1,6 +1,6 @@
 <div id="booking-route-select">
     <h4 class="booking-select-header">
-        <span class="badge bg-booking-select-depart px-3 py-2">Depart : {{ $is_station['from'] }} <span class="ms-2">To : </span> {{ $is_station['to'] }}</span>
+        <span class="badge bg-booking-select-depart px-3 py-2">Depart : <span class="is-station-from">{{ $is_station['from'] }}</span> <span class="ms-2">To : </span> <span class="is-station-to">{{ $is_station['to'] }}</span></span>
     </h4>
     @foreach($routes as $index => $route)
         <div class="row p-2 px-4 mx-1 mb-2 border bg-white shadow rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif" data-id="{{ $route['id'] }}">

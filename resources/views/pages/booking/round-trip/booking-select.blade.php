@@ -3,8 +3,8 @@
         <h4 class="booking-select-header">
 
             @if (!empty($depart_routes))
-                <span class="badge bg-booking-select-depart px-3 py-2">Depart : {{ $station_depart['from'] }} <span
-                        class="ms-2">To : </span> {{ $station_depart['to'] }}</span>
+                <span class="badge bg-booking-select-depart px-3 py-2">Depart : <span class="is-station-from">{{ $station_depart['from'] }}</span> <span
+                        class="ms-2">To : </span> <span class="is-station-to">{{ $station_depart['to'] }}</span></span>
             @else
                 <span class="ms-2">Sorry. No depart route.</span>
             @endif
@@ -184,7 +184,7 @@
         <h4 class="booking-select-header">
 
             @if (!empty($return_routes))
-            <span class="badge bg-booking-select-return px-3 py-2 text-light">Return : {{ $station_return['from'] }} <span class="ms-2">To : </span> {{ $station_return['to'] }}</span>
+            <span class="badge bg-booking-select-return px-3 py-2 text-light">Return : <span class="is-station-from">{{ $station_return['from'] }}</span> <span class="ms-2">To : </span> <span class="is-station-to">{{ $station_return['to'] }}</span></span>
 
             @else
                 <span class="ms-2">Sorry. No return route.</span>

@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
-                                'promotions' => $promotions['data'], 'section_from' => $_sections,
+                                'promotions' => $promotions, 'section_from' => $_sections,
                                 'billboards' => $billboard['data']]);
     }
 
@@ -116,15 +116,22 @@ class HomeController extends Controller
         $promo_font_color = $this->PromoFontColor;
         $color_length = sizeof($this->PromoColor) -1;
         $color_index = 0;
+        $result = [];
         foreach($promotions['data'] as $index => $promo) {
-            if($color_index > $color_length) $color_index = 0;
-            $promotions['data'][$index]['bg_color'] = $promo_color[$color_index];
-            $promotions['data'][$index]['font_color'] = $promo_font_color[$color_index];
+            if($promo['code'] != 'Cg4z8qUMS') {
+                if($color_index > $color_length) $color_index = 0;
+                $promo['bg_color'] = $promo_color[$color_index];
+                $promo['font_color'] = $promo_font_color[$color_index];
+                array_push($result, $promo);
 
-            $color_index++;
+                // $promotions['data'][$index]['bg_color'] = $promo_color[$color_index];
+                // $promotions['data'][$index]['font_color'] = $promo_font_color[$color_index];
+
+                $color_index++;
+            }
         }
 
-        return $promotions;
+        return $result;
     }
 
     private function getStation() {

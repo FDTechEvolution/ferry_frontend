@@ -23,14 +23,19 @@ class PromotionController extends Controller
         $promotions = $promo;
         $color_length = sizeof($promo_font_color) -1;
         $color_index = 0;
+        $result = [];
         foreach($promotions as $index => $promo) {
-            if($color_index > $color_length) $color_index = 0;
-            $promotions[$index]['color'] = $promo_font_color[$color_index];
+            if($promo['code'] != 'Cg4z8qUMS') {
+                if($color_index > $color_length) $color_index = 0;
+                $promo['color'] = $promo_font_color[$color_index];
+                array_push($result, $promo);
+                // $promotions[$index]['color'] = $promo_font_color[$color_index];
 
-            $color_index++;
+                $color_index++;
+            }
         }
 
-        return $promotions;
+        return $result;
     }
 
     public function view($promocode) {
