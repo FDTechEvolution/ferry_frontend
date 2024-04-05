@@ -972,6 +972,8 @@ async function promocodeProcess(promocode, booking_date, route_list) {
             promocode_route = result.data.promo_line.route
 
             promo = result.data.data
+            const discount_type = promo.discount_type === 'PERCENT' ? '%' : 'THB'
+            document.querySelector('.your-booking-promocode-discount-amount').innerHTML = `${parseInt(promo.discount)}${discount_type}`
             promocode_premiumflex = promo.isfreepremiumflex === 'Y' ? 'Y' : 'N'
             if(promo.isfreepremiumflex === 'Y') {
                 document.querySelector('.is-premium-price').innerHTML = '0'

@@ -247,7 +247,7 @@
                 </div>
 
                 <div class="card your-booking-summary d-none">
-                    <div class="card-body">
+                    <div class="card-body px-2">
                         <div class="fare-passenger-depart d-none">
                             <span class="badge bg-booking-select-depart px-2 py-1 smaller">Depart</span>
                             <div class="px-2 py-1">
@@ -313,7 +313,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
-                            <p class="mb-2 fw-bold">Discount <small class="your-booking-promocode-discount" style="font-size: .65rem;"></small></p>
+                            <p class="mb-2 fw-bold">Discount <small class="your-booking-promocode-discount-amount text-danger"></small> <small class="your-booking-promocode-discount" style="font-size: .65rem;"></small></p>
                             <p class="mb-2 your-booking-discount-price"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-premium-flex pt-2 border-top d-none">

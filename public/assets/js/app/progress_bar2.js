@@ -1295,6 +1295,8 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
 
         const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
         document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}] ${btn_cancel}`
+        const discount_type = promo.discount_type === 'PERCENT' ? '%' : 'THB'
+        document.querySelector('.your-booking-promocode-discount-amount').innerHTML = `${parseInt(promo.discount)}${discount_type}`
     }
     else {
         document.querySelector('.booking-promocode-input').classList.add('border-danger')
