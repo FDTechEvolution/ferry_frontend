@@ -121,12 +121,14 @@ class BookingController extends Controller
         $addon_icon = $this->RouteAddonIcon;
 
         $premium_flex = $this->getPremiumFlex();
+        $isNoRoute = $this->routeAvailabel($routes['data']);
 
         return view('pages.booking.one-way-trip.index',
             ['isType' => $_type, 'routes' => $routes['data'], 'icon_url' => $this->IconUrl,
                 'is_station' => $_station, 'booking_date' => $booking_date, 'code_country' => $code_country,
                 'country_list' => $country_list, 'passenger' => $passenger, 'promocode' => $use_promocode,
                 'addon_icon' => $addon_icon, 'premium_flex' => $premium_flex['data'], 'freepremiumflex' => $freepremiumflex,
+                'isNoRoute' => $isNoRoute
             ]);
             // backup
             // 'freecredit' => $freecredit,
@@ -135,6 +137,16 @@ class BookingController extends Controller
             // 'freeprivatetaxi' => $freeprivatetaxi
             // 'freelongtailboat' => $freelongtailboat,
 
+    }
+
+    private function routeAvailabel($routes) {
+        $route_count = count($routes);
+        $do_booking = 0;
+        foreach($routes as $r) {
+            if(!$r['do_booking']) $do_booking++;
+        }
+
+        return $route_count == $do_booking ? true : false;
     }
 
     private function setGoogleMapPosition($google_map) {
@@ -271,7 +283,7 @@ class BookingController extends Controller
             'station_depart' => $station_depart, 'station_return' => $station_return, 'depart_date' => $depart_date,
             'return_date' => $return_date, 'passenger' => $passenger, 'code_country' => $code_country, 'country_list' => $this->CountryList,
             'promocode' => $use_promocode, 'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'addon_icon' => $this->RouteAddonIcon,
-            'premium_flex' => $premium_flex['data']
+            'premium_flex' => $premium_flex['data'],
         ]);
     }
 
@@ -362,12 +374,23 @@ class BookingController extends Controller
 
         $premium_flex = $this->getPremiumFlex();
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
+        $route_arr = $this->routeMultiAvailabel($route_arr);
 
         return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $code_country,
                         'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
                         'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'premium_flex' => $premium_flex['data']]);
     }
+
+    private function routeMultiAvailabel($routes) {
+        foreach($routes as $index => $route) {
+            $status = $this->routeAvailabel($route['data']);
+            $routes[$index]['is_no_route'] = $status;
+        }
+
+        return $routes;
+    }
+
 
     private function checkPromotionCode($promo_code, $trip_type, $station_from_id, $station_to_id, $depart_date) {
         $response = Http::reqres()->post('/promotion/check', [
@@ -712,6 +735,7 @@ class BookingController extends Controller
                 $passenger = $booking['adult'] + $booking['child'] + $booking['infant'];
                 // $longtail_boat = $this->separateRouteAddon($addons['route_addons'], 'longtail_boat');
                 // $shuttle_bus = $this->separateRouteAddon($addons['route_addons'], 'shuttle_bus');
+                $payment_lines = $this->setNewPaymentLines($payment_lines, $booking['booking_number']);
 
                 return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
@@ -725,6 +749,24 @@ class BookingController extends Controller
         }
 
         return view('404', ['msg' => $msg]);
+    }
+
+    private function setNewPaymentLines($payment_line, $bookingno) {
+        $order = ['ROUTE', 'PREMIUM', 'ADDON'];
+        foreach($payment_line as $index => $line) {
+            if(strpos($line['title'], $bookingno)) {
+                $ex = explode(',', $line['title']);
+                $payment_line[$index]['title'] = $ex[1];
+            }
+        }
+
+        usort($payment_line, function ($a, $b) use ($order) {
+            $pos_a = array_search($a['type'], $order);
+            $pos_b = array_search($b['type'], $order);
+            return $pos_a - $pos_b;
+        });
+
+        return $payment_line;
     }
 
     private function separateRouteAddon($addons, $type) {

@@ -341,19 +341,21 @@ function progressCondition(step) {
         let _selected_promo = false;
         if(selected_promo.depart) _selected_promo = true
         if(selected_promo.return) _selected_promo = true
-        let _premium_price = promo_premiumflex === 'Y' ? 0 : ((route_price*110)/100) - route_price
+        // let _premium_price = promo_premiumflex === 'Y' ? 0 : ((route_price*110)/100) - route_price
+        let _premium_price = ((route_price*110)/100) - route_price
 
         if(use_promocode.value !== '') {
             if(promo_premiumflex === 'Y') select_promo.classList.remove('d-none')
         }
 
         your_booking.classList.remove('d-none')
-        if(promocode_premiumflex === 'Y') {
-            txt_price.innerHTML = '0'
-        }
-        else {
-            txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-        }
+        txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        // if(promocode_premiumflex === 'Y') {
+        //     txt_price.innerHTML = '0'
+        // }
+        // else {
+        //     txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        // }
 
         if(nonePremiumFlex.checked) {
             premium_price = 0
@@ -726,11 +728,13 @@ function updateSumPrice() {
 
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
-        your_booking.premium_flex.innerHTML = `${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        let price_status = result_premuim_price > 0 ? '+ ' : ''
+        your_booking.premium_flex.innerHTML = `${price_status}${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
     }
     else {
         result_premuim_price = 0
-        your_booking.premium_flex.innerHTML = `0 <small class="smaller">THB</small>`
+        let price_status = premium_price > 0 ? '- ' : ''
+        your_booking.premium_flex.innerHTML = `${price_status}${premium_price} <small class="smaller">THB</small>`
     }
 
     // console.log(addon_route.depart)
@@ -1282,7 +1286,7 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
             }
 
             booking_discount.classList.remove('d-none')
-            document.querySelector('.your-booking-promocode').classList.add('d-none')
+            // document.querySelector('.your-booking-promocode').classList.add('d-none')
             $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
         }
         else {
@@ -1290,11 +1294,11 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
             p_active = []
 
             booking_discount.classList.add('d-none')
-            $.SOW.core.toast.show('danger', '', 'Promotion code incorrect or promotion code ran out.', 'bottom-end', 3, true);
+            $.SOW.core.toast.show('danger', '', 'Invalid Coupon Code. Promotion code incorrect or unavailable.', 'bottom-end', 3, true);
         }
 
-        const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
-        document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}] ${btn_cancel}`
+        // const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
+        // document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}] ${btn_cancel}`
         const discount_type = promo.discount_type === 'PERCENT' ? '%' : 'THB'
         document.querySelector('.your-booking-promocode-discount-amount').innerHTML = `${parseInt(promo.discount)}${discount_type}`
     }
@@ -1521,7 +1525,7 @@ function clearRouteToDefault(route_list, type) {
 }
 
 function editPromotionCode() {
-    document.querySelector('.your-booking-promocode').classList.remove('d-none')
+    // document.querySelector('.your-booking-promocode').classList.remove('d-none')
 }
 
 let summary_discount = { depart: 0, return: 0 }

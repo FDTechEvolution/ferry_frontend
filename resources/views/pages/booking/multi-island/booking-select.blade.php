@@ -22,7 +22,7 @@
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
             @foreach($routes['data'] as $key => $route)
-                <div class="row p-2 px-4 mx-1 mb-2 bg-white shadow border rounded booking-route-list list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light @endif" data-list="{{ $index }}" data-key="{{ $key }}" data-id="{{ $route['id'] }}">
+                <div class="row p-2 px-4 mx-1 mb-2 bg-white shadow border rounded booking-route-list list-index_{{ $index }} list-position_{{ $index }}_{{ $key }} @if(!$route['do_booking']) over-time bg-dark-light d-none @endif" data-list="{{ $index }}" data-key="{{ $key }}" data-id="{{ $route['id'] }}">
 
                     <div class="col-12">
                         <div class="row">
@@ -158,6 +158,15 @@
                     <input type="hidden" class="route-status" value="{{ $route['ispromocode'] }}">
                 </div>
             @endforeach
+
+            @if($routes['is_no_route'])
+                <div class="row py-4">
+                    <div class="col-12 text-center">
+                        <h2 class="text-danger">NON-AVAILABLE</h2>
+                        <h4 class="text-danger">Try changing your departure date?</h4>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <input type="hidden" name="booking_route_selected[{{ $index }}]" id="booking-route-selected" value="">

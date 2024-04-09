@@ -4,7 +4,6 @@
     </h4>
     @foreach($routes as $index => $route)
         <div class="row p-2 px-4 mx-1 mb-2 border bg-white shadow rounded booking-route-list @if(!$route['do_booking']) over-time bg-dark-light d-none @endif" data-id="{{ $route['id'] }}">
-
             <div class="col-12">
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-2 mb-lg-0">
@@ -141,4 +140,13 @@
     <input type="hidden" name="booking_route_selected" value="">
     <input type="hidden" name="booking_route_active" value="">
     <input type="hidden" name="use_promocode" value="{{ $promocode }}">
+
+    @if($isNoRoute)
+        <div class="row py-4">
+            <div class="col-12 text-center">
+                <h2 class="text-danger">NON-AVAILABLE</h2>
+                <h4 class="text-danger">Try changing your departure date?</h4>
+            </div>
+        </div>
+    @endif
 </div>

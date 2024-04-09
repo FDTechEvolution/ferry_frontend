@@ -28,11 +28,13 @@
                 </h5>
                 <div class="card">
                     <div @class(["card-body", "row"])>
+                        <div class="col-12">
+                            <p class="small mb-2" style="line-height: 18px;">{{ $addon['mouseover'] }}</p>
+                        </div>
                         <div class="col-2 d-flex justify-content-center align-items-center">
                             <div class="mb-2 d-grid" style="justify-items: center;">
                                 <label class="form-check-label mb-2" for="x-{{ $from_id }}">
                                     <img src="{{ asset('icons/'.$addon_icon[$addon['type']]) }}"
-                                        data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $addon['mouseover'] }}"
                                         width="70" />
                                 </label>
                                 <span class="route-addon-checked-{{ $type }}">

@@ -215,7 +215,8 @@ function progressCondition(step) {
         const your_booking = document.querySelector('.your-booking-premium-flex')
         const ispremiumflex = document.querySelector('#is-premiumflex')
         const nonePremiumFlex = document.querySelector('#none-premiumflex')
-        let _premium_price = promo_premiumflex === 'Y' ? 0 : ((route_price*110)/100) - route_price
+        // let _premium_price = promo_premiumflex === 'Y' ? 0 : ((route_price*110)/100) - route_price
+        let _premium_price = ((route_price*110)/100) - route_price
 
         // console.log(promo_premiumflex)
         if(use_promocode.value !== '') {
@@ -223,12 +224,13 @@ function progressCondition(step) {
         }
 
         your_booking.classList.remove('d-none')
-        if(promocode_premiumflex === 'Y') {
-            txt_price.innerHTML = '0'
-        }
-        else {
-            txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-        }
+        txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        // if(promocode_premiumflex === 'Y') {
+        //     txt_price.innerHTML = '0'
+        // }
+        // else {
+        //     txt_price.innerHTML = _premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+        // }
 
         if(nonePremiumFlex.checked) {
             premium_price = 0
@@ -900,11 +902,13 @@ function updateSumPrice() {
 
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
-        your_booking.premium_flex.innerHTML = `${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        let price_status = result_premuim_price > 0 ? '+ ' : ''
+        your_booking.premium_flex.innerHTML = `${price_status}${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
     }
     else {
         result_premuim_price = 0
-        your_booking.premium_flex.innerHTML = `0 <small class="smaller">THB</small>`
+        let price_status = premium_price > 0 ? '- ' : ''
+        your_booking.premium_flex.innerHTML = `${price_status}${premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
     }
 
     addon_route.forEach((item) => { result_extra += parseInt(item.price) })
@@ -963,8 +967,8 @@ async function promocodeProcess(promocode, booking_date, route_list) {
 
         if(result.data !== null && result.data.result) {
             // edit button
-            const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
-            document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}] ${btn_cancel}`
+            // const btn_cancel = `<i class="fa-solid fa-pen-to-square text-primary cursor-pointer cancel-promocode" onClick="editPromotionCode()" title="Edit Promocode"></i>`
+            // document.querySelector('.your-booking-promocode-discount').innerHTML = `[${_promocode}]`
 
             booking_discount.classList.remove('d-none')
             promocode_from = result.data.promo_line.from
@@ -1027,7 +1031,7 @@ async function promocodeProcess(promocode, booking_date, route_list) {
 
             use_promocode.value = _promocode
             // document.querySelector('.your-booking-promocode').remove()
-            document.querySelector('.your-booking-promocode').classList.add('d-none')
+            // document.querySelector('.your-booking-promocode').classList.add('d-none')
             setTimeout(() => {
                 $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
             }, 100)
@@ -1062,7 +1066,7 @@ async function promocodeProcess(promocode, booking_date, route_list) {
             promo_active = []
             booking_discount.classList.add('d-none')
             setTimeout(() => {
-                $.SOW.core.toast.show('danger', '', 'Promotion code incorrect or promotion code ran out.', 'bottom-end', 3, true);
+                $.SOW.core.toast.show('danger', '', 'Invalid Coupon Code. Promotion code incorrect or unavailable', 'bottom-end', 3, true);
             }, 100)
             updateDiscountByBookingSummary()
         }
@@ -1178,7 +1182,7 @@ function clearRouteToDefault() {
 }
 
 function editPromotionCode() {
-    document.querySelector('.your-booking-promocode').classList.remove('d-none')
+    // document.querySelector('.your-booking-promocode').classList.remove('d-none')
     // const route_list = booking_route.querySelectorAll('.booking-route-list')
     // route_list.forEach((route, index) => {
     //     const scp = route.querySelector('.summary-current-price')

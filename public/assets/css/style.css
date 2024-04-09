@@ -421,6 +421,10 @@ h1,h2,h3,h4,h5{
         color: #333 !important;
         background: transparent !important;
     }
+    .navbar-bg-color {
+        background: rgb(255, 255, 255) !important;
+        background: linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(243, 5, 18, 1) 60%) !important;
+    }
 }
 @media (max-width: 400px) {
     img.img-logo-style {

@@ -33,7 +33,7 @@
 <div class="row">
     @if($booking['do_update'])
         @if($booking['ispayment'] == 'N')
-        <div class="col-12 text-end mb-4 ps-0 pe-0">
+        <div class="col-12 text-center mb-4 ps-0 pe-0">
 
             <button type="button" class="btn button-green-bg rounded px-1 px-lg-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
             <div class="collapse mt-2" id="collapsePayment">
@@ -117,7 +117,7 @@
                     @endforeach
                     @foreach($customers as $key => $customer)
                         @if($key === 'INFANT')
-                            <h6 class="fw-bold mb-1">Infan</h6>
+                            <h6 class="fw-bold mb-1">Infant</h6>
                             @foreach($customer as $cus)
                                 <div class="d-flex">
                                     <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
@@ -135,7 +135,7 @@
             </div>
         </div>
 
-        <h4 class="mb-0 fw-bold">Booking</h4>
+        <h4 class="mb-0 fw-bold">Booking No.{{ $booking['booking_number'] }}</h4>
         <p class="mb-2">Detail</p>
         <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12 mb-3">
