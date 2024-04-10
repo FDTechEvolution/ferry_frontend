@@ -10,13 +10,17 @@
         @php
             $from_id = uniqid();
             $addon_id = uniqid();
+            $addon_name = explode(' ', explode($addon['subtype'], $addon['name'])[0]);
+            $str_insert = $addon['subtype'] == 'from' ? 'pick-up' : 'drop-off';
+            $no_addon = $addon['subtype'] == 'from' ? 'drop-off' : 'pick-up';
+            $name = ucfirst($addon_name[0]).' '.ucfirst($addon_name[1]).' '.ucfirst($str_insert).' '.ucfirst($addon['subtype']).':';
         @endphp
 
         @if($addon['isactive'] == 'Y')
             @if($r_addon == 1 && $addon['subtype'] == 'to')
                 <div class="col-12 col-lg-6 d-none d-lg-block mb-3 pb-4 px-2 position-relative">
                     <span class="is-no-addon text-danger text-center">
-                        <strong>No add-on service option pick-up!</strong>
+                        <strong>No add-on service option {{ $no_addon }}!</strong>
                     </span>
                 </div>
                 <div class="col-12 col-lg-6 mb-3 pb-4 px-2">
@@ -24,7 +28,7 @@
                 <div class="col-12 col-lg-6 mb-3 pb-4 px-2">
             @endif
                 <h5 class="addon-name-{{ $addon['type'] }}-{{ $addon['subtype'] }}-{{ $route_index }}-{{ $type }}">
-                    {{ $addon['name'] }} @if($addon['subtype'] == 'from') {{ $station_from }} @else {{ $station_to }} @endif
+                    {{ $name }}
                 </h5>
                 <div class="card">
                     <div @class(["card-body", "row"])>
@@ -73,7 +77,7 @@
             @if($r_addon == 1 && $addon['subtype'] == 'from')
                 <div class="col-12 col-lg-6 d-none d-lg-block mb-3 pb-4 px-2 position-relative">
                     <span class="is-no-addon text-danger text-center">
-                        <strong>No add-on service option pick-up!</strong>
+                        <strong>No add-on service option {{ $no_addon }}!</strong>
                     </span>
                 </div>
             @endif

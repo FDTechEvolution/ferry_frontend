@@ -181,23 +181,25 @@
                     @endif
                 </div>
 
-                @foreach($route_arr as $index => $routes)
-                    <div class="your-booking-route-list mb-4">
-                        <div class="your-booking-date">
-                            @php
-                                $booking_date = explode('/', $routes['depart']);
-                            @endphp
-                            <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date[2].'-'.$booking_date[1].'-'.$booking_date[0])) }}</p>
-                        </div>
-                        <div class="your-booking-destination ps-2">
-                            <small class="your-booking-depart-time-{{ $index }}"></small>
-                            <p class="your-booking-destination-from-{{ $index }} mb-1"></p>
+                <div class="booking-route-list">
+                    @foreach($route_arr as $index => $routes)
+                        <div class="your-booking-route-list mb-4">
+                            <div class="your-booking-date">
+                                @php
+                                    $booking_date = explode('/', $routes['depart']);
+                                @endphp
+                                <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date[2].'-'.$booking_date[1].'-'.$booking_date[0])) }}</p>
+                            </div>
+                            <div class="your-booking-destination ps-2">
+                                <small class="your-booking-depart-time-{{ $index }}"></small>
+                                <p class="your-booking-destination-from-{{ $index }} mb-1"></p>
 
-                            <small class="your-booking-arrive-time-{{ $index }}"></small>
-                            <p class="your-booking-destination-to-{{ $index }}"></p>
+                                <small class="your-booking-arrive-time-{{ $index }}"></small>
+                                <p class="your-booking-destination-to-{{ $index }}"></p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
 
                 <div class="your-booking-promocode mb-2">
                     <div class="input-group">
@@ -212,7 +214,7 @@
                 <div class="card your-booking-summary d-none">
                     <div class="card-body px-2">
                         <div class="d-flex justify-content-between">
-                            <p class="mb-2 fw-bold">Fare</p>
+                            <p class="mb-2 fw-bold">Subtotal</p>
                             <p class="mb-2 your-booking-fare"></p>
                         </div>
                         <div class="d-flex justify-content-between your-booking-discount border-top pt-2 d-none">
@@ -249,6 +251,15 @@
     }
     p.popover-destination-list:last-child {
         margin-bottom: 0;
+    }
+    .your-booking-route-list {
+        border-bottom: 1px solid #ff6100;
+    }
+    /* div.your-booking-body.your-booking-route-list:last-child {
+        border-bottom: 0;
+    } */
+    div.booking-route-list > *:last-child {
+        border-bottom: 0;
     }
     @media (min-width: 1200px) {
         .container {
