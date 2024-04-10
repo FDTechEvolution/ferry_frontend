@@ -898,3 +898,12 @@ img.img-logo-style {
     background-position: center top !important;
     padding: 200px 0 100px !important;
 }
+
+.promo-success {
+    color: #70ad47;
+    border-color: #70ad47;
+}
+.promo-fail {
+    color: #a5a5a5;
+    border-color: #a5a5a5;
+}

@@ -1270,6 +1270,7 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
     const _promocode = promocode
     const use_promocode = document.querySelector('[name="use_promocode"]')
     const booking_discount = document.querySelector('.your-booking-discount')
+    const btn_promo = document.querySelector('#button-promocode-submit')
     promocode_premiumflex = 'N'
 
     if(_promocode !== '') {
@@ -1287,6 +1288,8 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
 
             booking_discount.classList.remove('d-none')
             // document.querySelector('.your-booking-promocode').classList.add('d-none')
+            btn_promo.classList.remove('promo-fail')
+            btn_promo.classList.add('promo-success')
             $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
         }
         else {
@@ -1294,6 +1297,8 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
             p_active = []
 
             booking_discount.classList.add('d-none')
+            btn_promo.classList.add('promo-fail')
+            btn_promo.classList.remove('promo-success')
             $.SOW.core.toast.show('danger', '', 'Invalid Coupon Code. Promotion code incorrect or unavailable.', 'bottom-end', 3, true);
         }
 

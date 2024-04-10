@@ -1305,13 +1305,18 @@ function setAddonPrice(price_current, charge, price, status, person, index) {
 }
 
 async function promoResponse() {
+    const btn = document.querySelector('#button-promocode-submit')
     setTimeout(() => {
         if(promocode_active) {
             // document.querySelector('.your-booking-promocode').classList.add('d-none')
+            btn.classList.remove('promo-fail')
+            btn.classList.add('promo-success')
             $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
         }
         else {
             // document.querySelector('.your-booking-promocode').classList.remove('d-none')
+            btn.classList.add('promo-fail')
+            btn.classList.remove('promo-success')
             $.SOW.core.toast.show('danger', '', 'Invalid Coupon Code. Promotion code incorrect or unavailable.', 'bottom-end', 3, true);
         }
     }, 100)
