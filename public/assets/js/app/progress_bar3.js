@@ -28,6 +28,7 @@ let is_current_price = []
 let _summary = []
 let promocode_active = false
 let full_price = []
+const current_price = []
 
 if(booking_routes) {
     const destination = document.querySelector('.popover-destinations')
@@ -1100,7 +1101,6 @@ function setExtra(icon, name, amount, qty, type, route_index) {
 
 // promotion controller
 const promoSubmit = document.querySelector('#button-promocode-submit')
-const current_price = []
 let promo_active = []
 if(promoSubmit) {
     const promocode = document.querySelector('.booking-promocode-input')
@@ -1161,6 +1161,7 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
             const route_list = sub_route.querySelectorAll('.booking-route-list')
 
             clearRouteToDefault(main_route, index)
+            let promo_all_route = (promo.route_id === null && promo.station_from_id === null && promo.station_to_id === null) ? true : false
             route_list.forEach((route, key) => {
                 const station_from_id = route.querySelector(`.station-from-text-${index}-${key}`).dataset.id
                 const station_to_id = route.querySelector(`.station-to-text-${index}-${key}`).dataset.id
@@ -1174,7 +1175,7 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
                 const route_promo_condition = promoCondition(route_id, station_from_id, station_to_id)
                 if(route_promo_condition._route || route_promo_condition._from || route_promo_condition._to) {
                     promo_active[index][key] = true
-                    if(route_ispromo === 'Y') {
+                    if(route_ispromo === 'Y' || promo_all_route) {
                         const scp = route.querySelector('.summary-current-price')
                         // const spa = route.querySelector('.summary-promo-avaliable')
                         scp.classList.remove('d-none')
@@ -1474,7 +1475,7 @@ async function getPromoCode(promocode, depart_date) {
 }
 
 function numberFormat(number) {
-    return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    if(number) return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
 function getPromocodeLoading() {
