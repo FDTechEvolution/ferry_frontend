@@ -29,6 +29,7 @@ let _summary = []
 let promocode_active = false
 let full_price = []
 const current_price = []
+let promo_active = []
 
 if(booking_routes) {
     const destination = document.querySelector('.popover-destinations')
@@ -1066,7 +1067,9 @@ function updateSumPrice() {
         }
     })
 
-    your_booking.extra.innerHTML = `${person_all} x ${result_extra.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    const extra_price = person_all*result_extra
+    const extra_type = extra_price > 0 ? '+ ' : ''
+    your_booking.extra.innerHTML = `${extra_type}${extra_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
     // console.log(is_current_price)
     let total_route = sum_price.reduce((num1, num2) => { return num1+num2 })
@@ -1101,7 +1104,6 @@ function setExtra(icon, name, amount, qty, type, route_index) {
 
 // promotion controller
 const promoSubmit = document.querySelector('#button-promocode-submit')
-let promo_active = []
 if(promoSubmit) {
     const promocode = document.querySelector('.booking-promocode-input')
     const main_route = document.querySelector('#booking-multi-route-select')
@@ -1127,12 +1129,16 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
     const last_route = multi_route.length
     promocode_active = false
     promocode_premiumflex = 'N'
+    for(let i = 0; i <= last_route; i++) {
+        current_price.push([])
+        promo_active.push([])
+    }
 
     multi_route.forEach(async (sub_route, index) => {
         const booking_date = sub_route.querySelector('.is-booking-date')
         const _departdate = await dateFormatSet(booking_date.innerText)
         const result = await getPromoCode(_promocode, _departdate)
-        current_price.push([])
+        await clearRouteToDefault(main_route, index)
 
         if(result.data !== null && result.data.result) {
             // edit button
@@ -1157,10 +1163,8 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
                 }
             }
 
-            promo_active.push([])
             const route_list = sub_route.querySelectorAll('.booking-route-list')
 
-            clearRouteToDefault(main_route, index)
             let promo_all_route = (promo.route_id === null && promo.station_from_id === null && promo.station_to_id === null) ? true : false
             route_list.forEach((route, key) => {
                 const station_from_id = route.querySelector(`.station-from-text-${index}-${key}`).dataset.id
@@ -1169,7 +1173,7 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
 
                 const route_ispromo = route.querySelector('.route-status').value
                 const promo_price = route.querySelector('.route-price')
-                if(current_price[index].length < route_list.length)
+                if(current_price[index].length <= route_list.length)
                     current_price[index].push(promo_price.innerText)
 
                 const route_promo_condition = promoCondition(route_id, station_from_id, station_to_id)
@@ -1213,7 +1217,7 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
         else {
             const route_list = sub_route.querySelectorAll('.booking-route-list')
             if(current_price[index].length > 0) {
-                clearRouteToDefault(main_route, index)
+                // clearRouteToDefault(main_route, index)
                 route_list.forEach((route, key) => {
                     const scp = route.querySelector('.summary-current-price')
                     // const spa = route.querySelector('.summary-promo-avaliable')
@@ -1350,7 +1354,7 @@ function findPromocodeCondition(promo_array, promo_item) {
     return false
 }
 
-function clearRouteToDefault(main_route, index) {
+async function clearRouteToDefault(main_route, index) {
     const multi_route = main_route.querySelectorAll('.booking-multi-route')
     const route_list = multi_route[index].querySelectorAll('.booking-route-list')
     if(current_price[index].length > 0) {

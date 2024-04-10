@@ -913,7 +913,9 @@ function updateSumPrice() {
 
     addon_route.forEach((item) => { result_extra += parseInt(item.price) })
 
-    your_booking.extra.innerHTML = `${person_all} x ${result_extra.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+    const extra_price = person_all*result_extra
+    const extra_type = extra_price > 0 ? '+ ' : ''
+    your_booking.extra.innerHTML = `${extra_type}${extra_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
 
     let sum_amount = route_price + (person_all * result_extra) + result_premuim_price
     let sum_amount_digit = `${sum_amount.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
