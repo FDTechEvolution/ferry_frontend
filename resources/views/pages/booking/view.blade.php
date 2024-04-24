@@ -32,59 +32,46 @@
 @section('content')
 <div class="row">
     <div class="card card-body col-12 py-4 px-1 px-lg-5">
-        <h4 class="mb-0 fw-bold">Passenger(s)</h4>
-        <p class="mb-2">Passenger detail</p>
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
+        {{-- Booking Detail --}}
+        <h4 class="mb-2 fw-bold">Itinerary Booking NO {{ $booking['booking_number'] }}</h4>
+        <div class="row bg-booking-payment-passenger mx-3 p-3 mb-5 rounded">
             <div class="col-12">
-                <div class="row mb-2" id="payment-passenger-detail">
-                    @foreach($customers as $key => $customer)
-                        @if($key === 'ADULT')
-                            <h6 class="fw-bold mb-1">Adult</h6>
-                            @foreach($customer as $cus)
-                                <div class="d-block d-lg-flex">
-                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
-                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
-                                    @if($cus['email'] != null)
-                                        <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Email :</strong> {{ $cus['email'] }} <span class="badge bg-primary-soft">Lead passenger</span></p>
-                                    @endif
-                                </div>
-                            @endforeach
-                        @endif
-                    @endforeach
-                    @foreach($customers as $key => $customer)
-                        @if($key === 'CHILD')
-                            <h6 class="fw-bold mb-1">Child</h6>
-                            @foreach($customer as $cus)
-                                <div class="d-flex">
-                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
-                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
-                                </div>
-                            @endforeach
-                        @endif
-                    @endforeach
-                    @foreach($customers as $key => $customer)
-                        @if($key === 'INFANT')
-                            <h6 class="fw-bold mb-1">Infant</h6>
-                            @foreach($customer as $cus)
-                                <div class="d-flex">
-                                    <p class="ms-1 ms-lg-3 mb-0">{{ $cus['name'] }}</p>
-                                    <p class="ms-1 ms-lg-3 mb-0"><strong class="fw-bold">Date of birth :</strong> {{ date_format(date_create($cus['birth_day']), 'd/m/Y') }}</p>
-                                </div>
-                            @endforeach
-                        @endif
-                    @endforeach
+                <div class="row depart-litinerary">
+                    @php
+                        $_route = $booking['route'][0]
+                    @endphp
+                    <div class="col-12">
+                        <h4>{{ $_route['station_from'] }} @if($_route['station_from_pier'] != null) ({{ $_route['station_from_pier'] }}) @endif -
+                            {{ $_route['station_to'] }} @if($_route['station_to_pier'] != null) ({{ $_route['station_to_pier'] }}) @endif
+                        </h4>
+                    </div>
+                    <div class="col-12">
+                        @foreach ($booking['route'] as $index => $route)
+                            <x-booking-view-itinerary
+                                :trip="$booking['trip_type']"
+                                :type="_('Depart')"
+                                :route="$_route"
+                                :passengers="$passengers"
+                                :trip_date="$booking['depart_date']"
+                                :addons="$route_addon"
+                                :icon_url="$icon_url"
+                                :icons="$route['icons']"
+                                :totalamt="$booking['payment'][0]['totalamt']"
+                            />
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 text-end">
-                @if($booking['do_update'])
-                    <button class="btn btn-sm button-orange-bg rounded py-1 px-5" data-bs-toggle="modal" data-bs-target="#edit-customer">Edit</button>
-                @endif
+
+                <div class="row pt-2 pe-0 pe-lg-0">
+                    <div class="col-12 col-lg-8 offset-lg-4 pe-0 pe-lg-5">
+                        <h5 class="d-flex justify-content-end align-items-end">Total THB <p class="sum-amount text-end mb-0 ms-3">{{ number_format($booking['payment'][0]['totalamt']) }}</p></h5>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h4 class="mb-0 fw-bold">Booking No.{{ $booking['booking_number'] }}</h4>
-        <p class="mb-2">Detail</p>
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
+        {{-- old version --}}
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded d-none">
             <div class="col-12 mb-3">
                 <div class="row" id="payment-passenger-detail">
                     @foreach($booking['route'] as $route)
@@ -117,9 +104,9 @@
                                 </div>
                                 <div class="col-12 col-lg-3 mb-3 pb-2 border-bottom-sm">
                                     <h6 class="fw-bold mb-1">Passenger</h6>
-                                    @foreach($customer as $cus)
+                                    {{-- @foreach($customer as $cus)
                                         <p class="mb-1 ms-2">{{ $cus['name'] }}</p>
-                                    @endforeach
+                                    @endforeach --}}
                                     {{-- @if($booking['do_update'])
                                         <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" data-bs-toggle="modal" data-bs-target="#add-person">Add person</button>
                                         <form method="POST" id="form-confirm-merge" action="{{ route('booking-record') }}">
@@ -183,154 +170,19 @@
             </div>
         </div>
 
-        @if($booking['do_update'])
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded d-none">
+
+        {{-- Passenger --}}
+        <h4 class="mb-0 fw-bold">Passenger(s)</h4>
+        <p class="mb-2">Passenger detail</p>
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
             <div class="col-12">
-                <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
-                <form method="POST" action="{{ route('booking-new') }}">
-                    @csrf
-                    <input type="hidden" name="bookingno" value="{{ $booking['booking_number'] }}">
-                    <input type="hidden" name="booking_id" value="{{ $booking['id'] }}">
-                    <div class="row px-3 mt-2">
-                        <div class="col-12 col-lg-3">
-                            <div class="form-floating mb-3">
-                                <select required class="form-select form-select-sm" name="from" id="form-select" aria-label="booking station">
-                                    <option value="" disabled>Select Original</option>
-                                    <option value="{{ $station_from['id'] }}" selected>{{ $station_from['name'] }} @if($station_from['piername'] != null) ({{$station_from['piername']}}) @endif</option>
-                                </select>
-                                <label for="form-select">From</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <div class="form-floating mb-3">
-                                <select required class="form-select form-select-sm" name="to" id="to-select" aria-label="booking station">
-                                    <option value="" selected disabled>Select Destination</option>
-                                    @if(!empty($station_to))
-                                        @foreach($station_to as $section_key => $stations)
-                                            <optgroup label="{{ $section_key }}">
-                                                @foreach($stations as $index => $station)
-                                                    <option value="{{ $station['id'] }}">{{ $station['name'] }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                        @endforeach
-                                    @else
-                                        <option value="" disabled>No route.</option>
-                                    @endif
-                                </select>
-                                <label for="to-select">To</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <div class="form-floating mb-3">
-                                <input required type="text" name="depart_date" class="form-control form-control-sm datepicker add-multi-trip-depart"
-                                    data-show-weeks="true"
-                                    data-today-highlight="false"
-                                    data-clear-btn="false"
-                                    data-autoclose="true"
-                                    data-format="DD/MM/YYYY"
-                                    autocomplete="off"
-                                    placeholder="Departure date"
-                                    disabled>
-                                <label class="text-secondary">Departure date</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <div class="form-floating mb-3">
-                                <input required type="text" name="return_date" class="form-control form-control-sm datepicker add-multi-trip-return"
-                                    data-show-weeks="true"
-                                    data-today-highlight="false"
-                                    data-clear-btn="false"
-                                    data-autoclose="true"
-                                    data-format="DD/MM/YYYY"
-                                    autocomplete="off"
-                                    placeholder="Return date"
-                                    disabled>
-                                <label class="text-secondary">Return date</label>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-3">
-                            @foreach($station_to_time as $station_key => $times)
-                            <div class="row station-depart-hide station-index-{{ $station_key }} d-none">
-                                <div class="col-12 mb-1">
-                                    <div class="row fw-bold">
-                                        <div class="col-3">From</div>
-                                        <div class="col-3">To</div>
-                                        <div class="col-2 text-center">Depart Time</div>
-                                        <div class="col-2 text-center">Arrive Time</div>
-                                        <div class="col-1 text-center">Select</div>
-                                    </div>
-                                </div>
-                                @foreach($times as $t_index => $time)
-                                <div class="col-12 mb-2">
-                                    <div class="row">
-                                        <div class="col-3">{{ $station_from['name'] }} @if($station_from['piername'] != null) ({{$station_from['piername']}}) @endif</div>
-                                        <div class="col-3">{{ $time['station_name'] }}</div>
-                                        <div class="col-2 text-center">{{ date_format(date_create($time['depart']), 'H:i') }}</div>
-                                        <div class="col-2 text-center">{{ date_format(date_create($time['arrive']), 'H:i') }}</div>
-                                        <div class="col-1 text-center"><input required type="radio" class="radio-input" name="route_id" value="{{ $time['id'] }}"></div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-sm btn-light text-main-color rounded-pill fw-bold py-1">Book Now</button>
-                        </div>
-                    </div>
-                </form>
+                <x-booking-view-passenger
+                    :customers="$customers"
+                />
             </div>
         </div>
-        @endif
-
-        <h4 class="mb-0 fw-bold">Extra Services</h4>
-        <p class="mb-2">please select youradditional services</p>
-        <div class="row mx-3 mb-5">
-            <div class="col-12 col-lg-4 mb-4">
-                <div class="card">
-                    <img src="{{ asset('pad-thai_addon.jpg') }}" class="card-img-top" alt="meal" style="min-height: 200px; max-height: 200px;">
-                    <div class="card-body bg-booking-payment-extra">
-                        <h5 class="card-title">Meal</h5>
-                        <p class="card-text">Keep up your energy level with reserved meals and beverages.</p>
-                        @if($booking['do_update'])
-                            <div class="text-center mt-2">
-                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['meals'])) disabled @endif data-bs-toggle="modal" data-bs-target="#extra-services">Select</button>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 mb-4">
-                <div class="card">
-                    <img src="{{ asset('cover/cover_03.webp') }}" class="card-img-top" alt="activity" style="min-height: 200px; max-height: 200px;">
-                    <div class="card-body bg-booking-payment-extra">
-                        <h5 class="card-title">Daytrip</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        @if($booking['do_update'])
-                            <div class="text-center mt-2">
-                                <button class="btn btn-sm button-orange-bg rounded py-1 mt-1" @if(empty($addons['activities'])) disabled @endif>Select</button>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @if($booking['do_update'])
-        <div class="row bg-warning-soft mx-3 p-4 mb-5">
-            <div class="col-12">
-                <h4 class="mb-1 text-dark fw-bold">Contact Services</h4>
-                <textarea class="form-control" rows="6"></textarea>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-12 text-end">
-                <button class="btn btn-sm button-green-bg">Update</button>
-            </div>
-        </div>
-        @endif
     </div>
+
 
     {{-- Payment method --}}
     @if($booking['do_update'])
