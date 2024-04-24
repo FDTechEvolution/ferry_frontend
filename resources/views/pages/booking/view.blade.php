@@ -31,59 +31,6 @@
 
 @section('content')
 <div class="row">
-    @if($booking['do_update'])
-        @if($booking['ispayment'] == 'N')
-        <div class="col-12 text-center mb-4 ps-0 pe-0">
-
-            <button type="button" class="btn button-green-bg rounded px-1 px-lg-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
-            <div class="collapse mt-2" id="collapsePayment">
-                <div class="card card-body bg-white">
-                    <form method="POST" action="{{ route('payment-link') }}">
-                        @csrf
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row fw-bold mb-2">
-                                    <div class="col-1 text-center">#</div>
-                                    <div class="col-3">Payment Number</div>
-                                    <div class="col-2">Amount</div>
-                                    <div class="col-1">Status</div>
-                                </div>
-
-                                @foreach($booking['payment'] as $index => $payment)
-                                    <label class="row">
-                                        <div class="col-1 text-center">
-                                            <input class="form-check-input form-check-input-primary" type="radio" name="payments" id="payment-method-{{ $index }}" value="{{ $payment['payment_id'] }}" checked>
-                                        </div>
-                                        <div class="col-3">{{ $payment['paymentno'] }}</div>
-                                        <div class="col-2">{{ number_format($payment['totalamt']) }}</div>
-                                        <div class="col-1">{!! $is_paid[$payment['ispaid']] !!}</div>
-                                    </label>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <hr class="my-3"/>
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="mb-0 text-start">Select a payment to complete booking</p>
-                                <div class="text-start">
-                                    <x-booking-payment-list />
-                                </div>
-                                <div class="text-end mt-2">
-                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Confirm</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @elseif($booking['ispayment'] == 'Y')
-        <div class="col-12 text-center mb-3">
-            <a href="{{ route('payment-print', ['bookingno' => $booking['booking_number']]) }}" class="btn button-blue-bg rounded px-5 py-2" target="_blank">Print Bill</a>
-        </div>
-        @endif
-    @endif
     <div class="card card-body col-12 py-4 px-1 px-lg-5">
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
@@ -237,7 +184,7 @@
         </div>
 
         @if($booking['do_update'])
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded d-none">
             <div class="col-12">
                 <h4 class="mb-0 fw-bold">Add Multiple Trip</h4>
                 <form method="POST" action="{{ route('booking-new') }}">
@@ -384,6 +331,61 @@
         </div>
         @endif
     </div>
+
+    {{-- Payment method --}}
+    @if($booking['do_update'])
+        @if($booking['ispayment'] == 'N')
+        <div class="col-12 text-center mb-4 ps-0 pe-0 mt-4">
+
+            <button type="button" class="btn button-green-bg rounded px-1 px-lg-5 py-2" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="false" aria-controls="collapsePayment">Payment</button>
+            <div class="collapse mt-2" id="collapsePayment">
+                <div class="card card-body bg-white">
+                    <form method="POST" action="{{ route('payment-link') }}">
+                        @csrf
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row fw-bold mb-2">
+                                    <div class="col-1 text-center">#</div>
+                                    <div class="col-3">Payment Number</div>
+                                    <div class="col-2">Amount</div>
+                                    <div class="col-1">Status</div>
+                                </div>
+
+                                @foreach($booking['payment'] as $index => $payment)
+                                    <label class="row">
+                                        <div class="col-1 text-center">
+                                            <input class="form-check-input form-check-input-primary" type="radio" name="payments" id="payment-method-{{ $index }}" value="{{ $payment['payment_id'] }}" checked>
+                                        </div>
+                                        <div class="col-3">{{ $payment['paymentno'] }}</div>
+                                        <div class="col-2">{{ number_format($payment['totalamt']) }}</div>
+                                        <div class="col-1">{!! $is_paid[$payment['ispaid']] !!}</div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <hr class="my-3"/>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="mb-0 text-start">Select a payment to complete booking</p>
+                                <div class="text-start">
+                                    <x-booking-payment-list />
+                                </div>
+                                <div class="text-end mt-2">
+                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @elseif($booking['ispayment'] == 'Y')
+        <div class="col-12 text-center mb-3">
+            <a href="{{ route('payment-print', ['bookingno' => $booking['booking_number']]) }}" class="btn button-blue-bg rounded px-5 py-2" target="_blank">Print Bill</a>
+        </div>
+        @endif
+    @endif
 </div>
 @stop
 
