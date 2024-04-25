@@ -737,6 +737,10 @@ class BookingController extends Controller
                 // $longtail_boat = $this->separateRouteAddon($addons['route_addons'], 'longtail_boat');
                 // $shuttle_bus = $this->separateRouteAddon($addons['route_addons'], 'shuttle_bus');
                 $payment_lines = $this->setNewPaymentLines($payment_lines, $booking['booking_number']);
+                $trip_type = $this->setTripType($booking['trip_type'], $booking['route']);
+                $route_payment_lines = $this->setSummaryDiscount($payment_lines, 'ROUTE');
+                $premium_payment_lines = $this->setSummaryDiscount($payment_lines, 'PREMIUM');
+                $addon_payment_lines = $this->setSummaryDiscount($payment_lines, 'ADDON');
 
                 // Log::debug($booking);
 
@@ -745,7 +749,8 @@ class BookingController extends Controller
                                 'addons' => $addons, 'station_from' => $station_form, 'station_to' => $_station_to[0],
                                 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
                                 'payment_lines' => $payment_lines, 'route_addon' => $route_addon, 'passenger' => $passenger,
-                                'passengers' => $passengers
+                                'passengers' => $passengers, 'trip_type' => $trip_type, 'route_payments' => $route_payment_lines,
+                                'premium_payments' => $premium_payment_lines, 'addon_payments' => $addon_payment_lines
                             ]);
             }
 
@@ -753,6 +758,22 @@ class BookingController extends Controller
         }
 
         return view('404', ['msg' => $msg]);
+    }
+
+    private function setTripType($trip_type, $route) {
+        if($trip_type == 'one-way') return ['One Way Trip'];
+        if($trip_type == 'round-trip') return ['Round Trip', 'Return'];
+        if($trip_type == 'multi-trip') {
+            $trip = [];
+            for($i = 0; $i < count($route); $i++) array_push($trip, 'Trip '.$i+1);
+            return $trip;
+        }
+    }
+
+    private function setSummaryDiscount($lines, $type) {
+        $_lines = [];
+        foreach($lines as $line) if($line['type'] == $type) array_push($_lines, $line);
+        return $_lines;
     }
 
     private function setNewPaymentLines($payment_line, $bookingno) {
