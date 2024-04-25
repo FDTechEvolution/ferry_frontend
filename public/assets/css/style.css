@@ -73,6 +73,10 @@ h1,h2,h3,h4,h5{
     border-radius: 0 5px 5px 0;
 }
 
+.border-end-desktop {
+    border-right: 2px solid;
+}
+
 /* desktop */
 @media only screen and (min-width: 1440px) {
     nav.navbar:not(.h-auto) {
@@ -292,6 +296,15 @@ h1,h2,h3,h4,h5{
     }
     .border-bottom-mobile {
         border-bottom: 2px solid;
+    }
+    .border-bottom-route-mobile {
+        border-bottom: 1px solid #bbb9b9;
+    }
+    .w--m-img {
+        width: 36px;
+    }
+    .border-end-desktop {
+        border-right: none;
     }
     .progress-step-name {
         top: 50% !important;

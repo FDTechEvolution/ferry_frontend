@@ -33,7 +33,10 @@
 <div class="row">
     <div class="col-12 py-4 px-1 px-lg-5">
         {{-- Booking Detail --}}
-        <h4 class="mb-2 fw-bold">Itinerary Booking NO {{ $booking['booking_number'] }}</h4>
+        <div class="d-block d-lg-flex">
+            <h4 class="mb-0 mb-lg-2 me-2 fw-bold">Itinerary</h4>
+            <h4 class="mb-2 fw-bold">Booking NO {{ $booking['booking_number'] }}</h4>
+        </div>
         <div class="row bg-booking-payment-passenger mx-3 p-3 mb-5 rounded">
             <div class="col-12">
                 <div class="row depart-litinerary">
@@ -66,7 +69,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-end pt-3 pe-4">
+                    <div class="col-12 text-end pt-3 pe-0 pe-lg-4">
                         @foreach ($route_payments as $rp)
                             @if ($rp['amount'] < 0)
                                 <h6 class="d-flex justify-content-end align-items-end">
@@ -89,10 +92,13 @@
 
                         @foreach ($addon_payments as $ap)
                             @if ($ap['amount'] < 0)
+                            @php
+                                $all_passenger = $booking['adult'] + $booking['child'] + $booking['infant'];
+                            @endphp
                                 <h6 class="d-flex justify-content-end align-items-end">
                                     {!! $ap['title'] !!}
                                     <p class="sum-amount text-end mb-0 ms-3">
-                                        {{ number_format($ap['amount']) }}
+                                        {{ number_format($all_passenger * $ap['amount']) }}
                                     </p>
                                 </h6>
                             @endif

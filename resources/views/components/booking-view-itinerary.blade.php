@@ -4,7 +4,7 @@
     $extra_amount = 0
 @endphp
 
-<div class="row">
+<div class="row border-bottom-mobile mb-4 mb-lg-0">
     <div class="col-12 mb-4">
         <div class="row">
             <div class="col-12">
@@ -13,7 +13,7 @@
                     <span class="trip-date-format">{{ date_format(date_create($trip_date), 'l d F Y') }}</span>
                 </p>
             </div>
-            <div class="col-12 col-lg-8 pb-2 pb-lg-0 border-end border-secondary border-2 border-bottom-mobile">
+            <div class="col-12 col-lg-8 pb-2 pb-lg-0 border-end-desktop">
                 <div class="ps-3">
                     <div class="station-from-depart">
                         <p class="is_depart_time mb-0">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3 mt-lg-0 px-0 px-lg-4">
+            <div class="col-12 col-lg-4 mt-3 mt-lg-0 px-2 px-lg-4 border-bottom-route-mobile">
                 <div class="row text-center fw-bold mb-2">
                     <div class="col-4 text-start">Depart</div>
                     <div class="col-4">FARE</div>
@@ -95,19 +95,19 @@
                     $extra_amount += $extra_price;
                 @endphp
                 <div class="row mb-2">
-                    <div class="col-12 col-lg-8 pb-2 pb-lg-0">
+                    <div class="col-7 col-lg-8 pb-2 pb-lg-0">
                         @php
                             $subtype = $addon['subtype'] == 'from' ? 'pick up' : 'drop off';
                         @endphp
                         <p class="mb-0 addon-name-setup">{{ str_replace($addon['subtype'], $subtype, $addon['name']) }}</p>
-                        <p class="ps-2 mb-0 small">{{ $addon['description'] }}</p>
+                        <p class="ps-0 ps-lg-2 mb-0 small">{{ $addon['description'] }}</p>
                     </div>
-                    <div class="col-12 col-lg-4 mt-3 mt-lg-0 px-0 px-lg-4">
+                    <div class="col-5 col-lg-4 mt-3 mt-lg-0 px-0 px-lg-4">
                         <div class="row">
-                            <div class="col-4 offset-lg-4 text-end">
+                            <div class="col-6 col-lg-4 offset-lg-4 text-end">
                                 {{ $_passenger }} x {{ number_format($addon['price']) }}
                             </div>
-                            <div class="col-4 text-end">
+                            <div class="col-6 col-lg-4 text-end pe-4 pe-lg-3">
                                 {{ number_format($_passenger * $addon['price']) }}
                             </div>
                         </div>
