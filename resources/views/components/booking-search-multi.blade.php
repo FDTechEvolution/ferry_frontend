@@ -48,7 +48,7 @@
                 data-today-btn="true"
                 data-clear-btn="false"
                 data-autoclose="true"
-                data-date-start="today"
+                data-date-start="2024-05-01"
                 data-format="DD/MM/YYYY"
                 autocomplete="off"
                 placeholder="Travel Date"
