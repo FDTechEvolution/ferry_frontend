@@ -17,7 +17,7 @@
                     <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'Q&A']) }}">Q&A</a> |
                     <a class="text-main-color-2" href="{{ route('term-index', ['type' => 'PRIVATE_CHATER_BOAT']) }}">Private Chater Boat</a></p>
                 <p class="text-main-color-2 mb-3 mb-lg-2 right-on-mobile">
-                    Tiger Line Ferry Company Limited. All Right Reserved.
+                    Siri Lanta Company Limited. All Right Reserved.
                 </p>
 
             </div>

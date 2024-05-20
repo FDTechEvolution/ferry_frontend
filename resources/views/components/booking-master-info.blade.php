@@ -1,7 +1,9 @@
-@props(['s_info' => '', 'm_info' => '', 'i_info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat' =>'' , 'long' => ''])
+@props(['s_info' => '', 'm_info' => '', 'i_info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat_long' => []])
 
 @php
     $modal_id = 'm_'.uniqid();
+    $lat = isset($lat_long[0]) ? $lat_long[0] : '';
+    $long = isset($lat_long[1]) ? $lat_long[1] : '';
 @endphp
 
 <i class="fi fi-round-info-full cursor-pointer icon-booking-color" title="Station info." data-bs-toggle="modal" data-bs-target="#{{ $modal_id }}" onClick="updateMap(`{{ $modal_id }}`, `{{ $lat }}`, `{{ $long }}`)"></i>
@@ -32,7 +34,9 @@
                         @endif
                     </div>
                     <div class="col-12" id="map_{{ $modal_id }}">
-                        <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
+                        @if($lat != '' || $long != '')
+                            <div id="s_{{ $modal_id }}" class="mb-3 w-100" style="height: 400px;"></div>
+                        @endif
                     </div>
                 </div>
 			</div>

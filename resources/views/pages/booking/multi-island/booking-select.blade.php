@@ -63,9 +63,8 @@
                                                     :station="$route['station_from']['name']"
                                                     :image="$route['station_from']['image']['path']"
                                                     :store="$icon_url"
-                                                    :lat="$route['station_from']['g_map'][0]"
-                                                    :long="$route['station_from']['g_map'][1]"
-                                            />
+                                                    :lat_long="$route['station_from']['g_map']"
+                                                />
                                             </span>
                                         </p>
                                         <span class="mx-1">
@@ -85,8 +84,7 @@
                                                     :googlemap="$route['station_to']['google_map']"
                                                     :image="$route['station_to']['image']['path']"
                                                     :store="$icon_url"
-                                                    :lat="$route['station_to']['g_map'][0]"
-                                                    :long="$route['station_to']['g_map'][1]"
+                                                    :lat_long="$route['station_to']['g_map']"
                                                 />
                                             </span>
                                         </p>

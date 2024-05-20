@@ -65,8 +65,9 @@
                                                     :i_info="$route['information_from']"
                                                     :station="$route['station_from']['name']"
                                                     :image="$route['station_from']['image']['path']"
-                                                    :store="$icon_url" :lat="$route['station_from']['g_map'][0]"
-                                                    :long="$route['station_from']['g_map'][1]" />
+                                                    :store="$icon_url"
+                                                    :lat_long="$route['station_from']['g_map']"
+                                                />
                                             </span>
                                         </p>
                                         <span class="mx-0 mx-md-3">
@@ -95,8 +96,8 @@
                                                     :googlemap="$route['station_to']['google_map']"
                                                     :image="$route['station_to']['image']['path']"
                                                     :store="$icon_url"
-                                                    :lat="$route['station_to']['g_map'][0]"
-                                                    :long="$route['station_to']['g_map'][1]" />
+                                                    :lat_long="$route['station_to']['g_map']"
+                                                />
                                             </span>
                                         </p>
                                     </div>
@@ -249,8 +250,9 @@
                                                     :i_info="$route['information_from']"
                                                     :station="$route['station_from']['name']"
                                                     :image="$route['station_from']['image']['path']"
-                                                    :store="$icon_url" :lat="$route['station_from']['g_map'][0]"
-                                                    :long="$route['station_from']['g_map'][1]" />
+                                                    :store="$icon_url"
+                                                    :lat_long="$route['station_from']['g_map']"
+                                                />
                                             </span>
                                         </p>
                                         <span class="mx-0 mx-md-3">
@@ -279,8 +281,8 @@
                                                     :station="$route['station_to']['name']"
                                                     :image="$route['station_to']['image']['path']"
                                                     :store="$icon_url"
-                                                    :lat="$route['station_to']['g_map'][0]"
-                                                    :long="$route['station_to']['g_map'][1]" />
+                                                    :lat_long="$route['station_to']['g_map']"
+                                                />
                                             </span>
                                         </p>
                                     </div>
