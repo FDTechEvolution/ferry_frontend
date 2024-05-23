@@ -65,7 +65,7 @@
                     data-today-btn="true"
                     data-clear-btn="false"
                     data-autoclose="true"
-                    data-date-start="2024-05-01"
+                    data-date-start="today"
                     data-format="DD/MM/YYYY"
                     autocomplete="off"
                     placeholder="Travel Date">
@@ -77,8 +77,8 @@
                     data-bs-placement="left"
                     data-ranges="false"
                     data-disable-past-dates="true"
-                    data-date-start="{{ date('d/m/Y', strtotime('2024-05-01')) }}"
-                    data-date-end="{{ date('d/m/Y', strtotime('2024-05-01')) }}"
+                    data-date-start="{{ date('d/m/Y', strtotime('+1 day')) }}"
+                    data-date-end="{{ date('d/m/Y', strtotime('+2 day')) }}"
                     data-date-format="DD/MM/YYYY"
                     data-quick-locale='{
                         "lang_apply"	: "Apply",

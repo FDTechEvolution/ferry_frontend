@@ -70,8 +70,7 @@
                 <div class="col-12 col-lg-5">
                     <div class="row">
                         <div class="col-12">
-                            <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i
-                                    class="fi fi-phone"></i> )</label>
+                            <label class="form-label">Telephone number<span class="text-danger">*</span> ( <i class="fa-brands fa-whatsapp"></i> )</label>
                             <div class="row">
                                 <div class="col-5">
                                     <select required class="form-select" name="mobile_code">

@@ -31,7 +31,7 @@ class PaymentController extends Controller
         $booking_id = $res['booking'];
 
         if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id]);
+            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $request->passenger_email]);
         }
 
         return redirect()->route('home');

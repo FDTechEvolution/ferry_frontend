@@ -50,56 +50,57 @@
                                     </div>
 
                                     <div
-                                        class="col-11 col-lg-7 d-flex align-items-center mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m fs--14-m">
-                                        <p class="mb-0 me-2">
-                                            <span
-                                                class="depart-time">{{ date('H:i', strtotime($route['depart_time'])) }}</span><br />
-                                            <span
-                                                class="small station-depart-from-text" data-id="{{ $route['station_from_id'] }}">{{ $route['station_from']['name'] }}
-                                                @if ($route['station_from']['piername'] != null)
-                                                    ({{ $route['station_from']['piername'] }})
-                                                @endif
-                                                <x-booking-master-info
-                                                    :s_info="$route['master_from_info']"
-                                                    :m_info="$route['master_from']"
-                                                    :i_info="$route['information_from']"
-                                                    :station="$route['station_from']['name']"
-                                                    :image="$route['station_from']['image']['path']"
-                                                    :store="$icon_url"
-                                                    :lat_long="$route['station_from']['g_map']"
-                                                />
+                                        class="col-11 col-lg-7 mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m fs--14-m">
+                                        <div class="d-flex align-items-center">
+                                            <div class="mb-0 me-2">
+                                                <span
+                                                    class="small station-depart-from-text" data-id="{{ $route['station_from_id'] }}">{{ $route['station_from']['name'] }}
+                                                    @if ($route['station_from']['piername'] != null)
+                                                        ({{ $route['station_from']['piername'] }})
+                                                    @endif
+                                                    <x-booking-master-info
+                                                        :s_info="$route['master_from_info']"
+                                                        :m_info="$route['master_from']"
+                                                        :i_info="$route['information_from']"
+                                                        :station="$route['station_from']['name']"
+                                                        :image="$route['station_from']['image']['path']"
+                                                        :store="$icon_url"
+                                                        :lat_long="$route['station_from']['g_map']"
+                                                    />
+                                                </span><br/>
+                                                <span class="depart-time">{{ date('H:i', strtotime($route['depart_time'])) }}</span>
+                                            </div>
+                                            <span class="mx-0 mx-md-3">
+                                                <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z">
+                                                    </path>
+                                                    <path fill-rule="evenodd"
+                                                        d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z">
+                                                    </path>
+                                                </svg>
                                             </span>
-                                        </p>
-                                        <span class="mx-0 mx-md-3">
-                                            <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg"
-                                                fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z">
-                                                </path>
-                                                <path fill-rule="evenodd"
-                                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <p class="mb-0 ms-2">
-                                            <span
-                                                class="arrival-time">{{ date('H:i', strtotime($route['arrive_time'])) }}</span><br />
-                                            <span class="small station-depart-to-text" data-id="{{ $route['station_to_id'] }}">{{ $route['station_to']['name'] }}
-                                                @if ($route['station_to']['piername'] != null)
-                                                    ({{ $route['station_to']['piername'] }})
-                                                @endif
-                                                <x-booking-master-info
-                                                    :s_info="$route['master_to_info']"
-                                                    :m_info="$route['master_to']"
-                                                    :i_info="$route['information_to']"
-                                                    :station="$route['station_to']['name']"
-                                                    :googlemap="$route['station_to']['google_map']"
-                                                    :image="$route['station_to']['image']['path']"
-                                                    :store="$icon_url"
-                                                    :lat_long="$route['station_to']['g_map']"
-                                                />
-                                            </span>
-                                        </p>
+                                            <div class="mb-0 ms-2">
+                                                <span class="small station-depart-to-text" data-id="{{ $route['station_to_id'] }}">{{ $route['station_to']['name'] }}
+                                                    @if ($route['station_to']['piername'] != null)
+                                                        ({{ $route['station_to']['piername'] }})
+                                                    @endif
+                                                    <x-booking-master-info
+                                                        :s_info="$route['master_to_info']"
+                                                        :m_info="$route['master_to']"
+                                                        :i_info="$route['information_to']"
+                                                        :station="$route['station_to']['name']"
+                                                        :googlemap="$route['station_to']['google_map']"
+                                                        :image="$route['station_to']['image']['path']"
+                                                        :store="$icon_url"
+                                                        :lat_long="$route['station_to']['g_map']"
+                                                    />
+                                                </span><br/>
+                                                <span
+                                                    class="arrival-time">{{ date('H:i', strtotime($route['arrive_time'])) }}</span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div @class([
@@ -235,56 +236,58 @@
                                     </div>
 
                                     <div
-                                        class="col-11 col-lg-7 d-flex align-items-center mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m fs--14-m">
-                                        <p class="mb-0 me-2">
-                                            <span
-                                                class="depart-time">{{ date('H:i', strtotime($route['depart_time'])) }}</span><br />
-                                            <span
-                                                class="small station-return-from-text" data-id="{{ $route['station_from_id'] }}">{{ $route['station_from']['name'] }}
-                                                @if ($route['station_from']['piername'] != null)
-                                                    ({{ $route['station_from']['piername'] }})
-                                                @endif
-                                                <x-booking-master-info
-                                                    :s_info="$route['master_from_info']"
-                                                    :m_info="$route['master_from']"
-                                                    :i_info="$route['information_from']"
-                                                    :station="$route['station_from']['name']"
-                                                    :image="$route['station_from']['image']['path']"
-                                                    :store="$icon_url"
-                                                    :lat_long="$route['station_from']['g_map']"
-                                                />
+                                        class="col-11 col-lg-7 mb-2 pb-2 pb-lg-0 mb-lg-0 border-bottom-m fs--14-m">
+                                        <div class="d-flex align-items-center">
+                                            <div class="mb-0 me-2">
+                                                <span
+                                                    class="small station-return-from-text" data-id="{{ $route['station_from_id'] }}">{{ $route['station_from']['name'] }}
+                                                    @if ($route['station_from']['piername'] != null)
+                                                        ({{ $route['station_from']['piername'] }})
+                                                    @endif
+                                                    <x-booking-master-info
+                                                        :s_info="$route['master_from_info']"
+                                                        :m_info="$route['master_from']"
+                                                        :i_info="$route['information_from']"
+                                                        :station="$route['station_from']['name']"
+                                                        :image="$route['station_from']['image']['path']"
+                                                        :store="$icon_url"
+                                                        :lat_long="$route['station_from']['g_map']"
+                                                    />
+                                                </span><br/>
+                                                <span
+                                                    class="depart-time">{{ date('H:i', strtotime($route['depart_time'])) }}</span>
+                                            </div>
+                                            <span class="mx-0 mx-md-3">
+                                                <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" class="bi bi-chevron-double-right"
+                                                    viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z">
+                                                    </path>
+                                                    <path fill-rule="evenodd"
+                                                        d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z">
+                                                    </path>
+                                                </svg>
                                             </span>
-                                        </p>
-                                        <span class="mx-0 mx-md-3">
-                                            <svg width="18px" height="18px" xmlns="http://www.w3.org/2000/svg"
-                                                fill="currentColor" class="bi bi-chevron-double-right"
-                                                viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z">
-                                                </path>
-                                                <path fill-rule="evenodd"
-                                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <p class="mb-0 ms-2">
-                                            <span
-                                                class="arrival-time">{{ date('H:i', strtotime($route['arrive_time'])) }}</span><br />
-                                            <span class="small station-return-to-text" data-id="{{ $route['station_to_id'] }}">{{ $route['station_to']['name'] }}
-                                                @if ($route['station_to']['piername'] != null)
-                                                    ({{ $route['station_to']['piername'] }})
-                                                @endif
-                                                <x-booking-master-info
-                                                    :s_info="$route['master_to_info']"
-                                                    :m_info="$route['master_to']"
-                                                    :i_info="$route['information_to']"
-                                                    :station="$route['station_to']['name']"
-                                                    :image="$route['station_to']['image']['path']"
-                                                    :store="$icon_url"
-                                                    :lat_long="$route['station_to']['g_map']"
-                                                />
-                                            </span>
-                                        </p>
+                                            <div class="mb-0 ms-2">
+                                                <span class="small station-return-to-text" data-id="{{ $route['station_to_id'] }}">{{ $route['station_to']['name'] }}
+                                                    @if ($route['station_to']['piername'] != null)
+                                                        ({{ $route['station_to']['piername'] }})
+                                                    @endif
+                                                    <x-booking-master-info
+                                                        :s_info="$route['master_to_info']"
+                                                        :m_info="$route['master_to']"
+                                                        :i_info="$route['information_to']"
+                                                        :station="$route['station_to']['name']"
+                                                        :image="$route['station_to']['image']['path']"
+                                                        :store="$icon_url"
+                                                        :lat_long="$route['station_to']['g_map']"
+                                                    />
+                                                </span><br />
+                                                <span
+                                                    class="arrival-time">{{ date('H:i', strtotime($route['arrive_time'])) }}</span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div @class([

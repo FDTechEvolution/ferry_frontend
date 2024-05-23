@@ -141,6 +141,7 @@
                             <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
                             <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Payment</button>
                         </div>
+                        <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
                     </form>
                 </div>
             @elseif($booking['ispayment'] == 'Y')

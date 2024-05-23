@@ -185,10 +185,7 @@
                     @foreach($route_arr as $index => $routes)
                         <div class="your-booking-route-list mb-4">
                             <div class="your-booking-date">
-                                @php
-                                    $booking_date = explode('/', $routes['depart']);
-                                @endphp
-                                <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($booking_date[2].'-'.$booking_date[1].'-'.$booking_date[0])) }}</p>
+                                <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($route_station['date'])) }}</p>
                             </div>
                             <div class="your-booking-destination ps-2">
                                 <small class="your-booking-depart-time-{{ $index }}"></small>

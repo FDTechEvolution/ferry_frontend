@@ -315,6 +315,7 @@ class BookingController extends Controller
 
                 $routes = $this->getRouteList($from, $request->to[$index], $g_date);
                 $_diff = $this->checkDateDiff($request['date'][$index]);
+
                 foreach($routes['data'] as $key => $route) {
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
                     $route_arr[$index]['station_to'] = $this->setStation($route['station_to']['name'], $route['station_to']['piername']);
@@ -376,7 +377,7 @@ class BookingController extends Controller
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
         $route_arr = $this->routeMultiAvailabel($route_arr);
 
-        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr,
+        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr, 'route_station' => $routes['station'],
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $code_country,
                         'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
                         'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'premium_flex' => $premium_flex['data']]);
@@ -750,7 +751,8 @@ class BookingController extends Controller
                                 'station_to_time' => $_station_to[1], 'icon_url' => $this->IconUrl, 'is_paid' => $isPaid,
                                 'payment_lines' => $payment_lines, 'route_addon' => $route_addon, 'passenger' => $passenger,
                                 'passengers' => $passengers, 'trip_type' => $trip_type, 'route_payments' => $route_payment_lines,
-                                'premium_payments' => $premium_payment_lines, 'addon_payments' => $addon_payment_lines
+                                'premium_payments' => $premium_payment_lines, 'addon_payments' => $addon_payment_lines,
+                                'passenger_email' => $request->booking_email
                             ]);
             }
 
