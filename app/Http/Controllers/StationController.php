@@ -107,11 +107,25 @@ class StationController extends Controller
         $response = Http::reqres()->get('stations/route');
         $res =  $response->json();
 
-        $image_station = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
-        $station_to = $this->sectionGroup('section', $res['data']['to']);
-        // Log::debug($station_to);
+        $all_routes = $this->arrayMerge($res['data']['from'], $res['data']['to']);
+        $route_uniq = array_unique($all_routes, SORT_REGULAR);
+        $route_sort = $this->arraySortA($route_uniq, 'name');
+        // Log::debug($route_sort);
+        // $image_station = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
+        // $station_to = $this->sectionGroup('section', $res['data']['to']);
 
-        return view('pages.station.index', ['section' => $station_to, 'image_station' => $image_station]);
+        return view('pages.station.index', ['stations' => $route_sort, 'store' => $this->ImageUrl]);
+    }
+
+    private function arrayMerge($arr_1, $arr_2) {
+        return array_merge($arr_1, $arr_2);
+    }
+
+    private function arraySortA($array, $sortBy) {
+        $by = [];
+        foreach($array as $key => $arr) { $by[$key] = $arr[$sortBy]; }
+        array_multisort($by, SORT_ASC, $array);
+        return $array;
     }
 
     public function detail($nickname){
