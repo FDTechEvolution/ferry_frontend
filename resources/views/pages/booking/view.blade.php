@@ -34,8 +34,8 @@
     <div class="col-12 py-4 px-1 px-lg-5">
         {{-- Booking Detail --}}
         <div class="d-block d-lg-flex">
-            <h4 class="mb-0 mb-lg-2 me-2 fw-bold">Itinerary</h4>
-            <h4 class="mb-2 fw-bold">Booking NO {{ $booking['booking_number'] }}</h4>
+            <h4 class="mb-0 mb-lg-2 me-2 fw-bold" style="color: #574fec;">Itinerary</h4>
+            <h4 class="mb-2 fw-bold" style="color: #ff6100;">Booking NO {{ $booking['booking_number'] }}</h4>
         </div>
         <div class="row bg-booking-payment-passenger mx-3 p-3 mb-5 rounded">
             <div class="col-12">
@@ -114,7 +114,7 @@
         {{-- Passenger --}}
         <h4 class="mb-0 fw-bold">Passenger(s)</h4>
         <p class="mb-2">Passenger detail</p>
-        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 border rounded">
+        <div class="row bg-booking-payment-passenger mx-3 p-4 mb-5 rounded">
             <div class="col-12">
                 <x-booking-view-passenger
                     :customers="$customers"
@@ -125,24 +125,91 @@
         {{-- Payment method --}}
         @if($booking['do_update'])
             @if($booking['ispayment'] == 'N')
-            <h4 class="mb-0 fw-bold">Payment</h4>
-            <p class="mb-0">Select payment method</p>
-            <div class="row mx-3 mb-5 mt-3">
-                <div class="col-12 text-center mb-4 ps-0 pe-0">
-                    <form method="POST" action="{{ route('payment-link') }}">
-                        @csrf
-                        <p class="mb-0 text-start ms-0 ms-lg-4">Select a payment to complete booking</p>
-                        <div class="text-start">
-                            <x-booking-payment-list
-                                :bg="_('#fae5d7')"
-                            />
+                <h4 class="mb-0 fw-bold">Payment</h4>
+                <p class="mb-0">Select payment method</p>
+                    <div class="accordion" id="accordionShadow">
+                        <div class="card mb-2" style="background-color: #f5e9ff;">
+                            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="accPaymentOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 btn-lg text-align-start text-decoration-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#paymentOne" aria-expanded="true" aria-controls="paymentOne">
+                                        Siam Commercial Bank PCL (2C2P)
+                                        <span class="group-icon float-end">
+                                            <i class="fi fi-arrow-start-slim"></i>
+                                            <i class="fi fi-arrow-down-slim"></i>
+                                        </span>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="paymentOne" class="collapse" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
+                                <div class="card-body pt-0">
+                                    <div class="row mx-3">
+                                        <div class="col-12 col-lg-7 text-center ps-0">
+                                            <form method="POST" action="{{ route('payment-link') }}">
+                                                @csrf
+                                                <div class="text-start">
+                                                    <x-booking-payment-list
+                                                        :bg="_('#fae5d7')"
+                                                    />
+                                                </div>
+                                                <div class="text-end mt-2">
+                                                    <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
+                                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment d-none" disabled>Payment</button>
+                                                </div>
+                                                <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
+                                                <input type="hidden" name="payment_type" value="2c2p">
+                                            </form>
+                                        </div>
+                                        <div class="col-12 col-lg-5">
+                                            <x-booking-payment-summary
+                                                :total="$booking['payment'][0]['totalamt']"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text-end mt-2">
-                            <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
-                            <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Payment</button>
+
+                        <div class="card mb-2" style="background-color: #d0e5ff;">
+                            <div class="card-header mb-0 p-0 border-0 bg-transparent" id="accPaymentTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 btn-lg text-align-start text-decoration-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#paymentTwo" aria-expanded="true" aria-controls="paymentTwo">
+                                        Pay of All By All Ticket
+                                        <span class="group-icon float-end">
+                                            <i class="fi fi-arrow-start-slim"></i>
+                                            <i class="fi fi-arrow-down-slim"></i>
+                                        </span>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="paymentTwo" class="collapse" aria-labelledby="accPaymentTwo" data-bs-parent="#accordionShadow">
+                                <div class="card-body pt-0">
+                                    <div class="row mx-3 mb-2">
+                                        <div class="col-12 col-lg-7 text-center ps-0 ">
+                                            <form method="POST" action="{{ route('payment-link') }}">
+                                                @csrf
+                                                <div class="text-start">
+                                                    <x-booking-payment-list-ctsv
+                                                        :bg="_('#fae5d7')"
+                                                    />
+                                                </div>
+                                                <div class="text-end mt-2">
+                                                    <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
+                                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment-ctsv">Payment</button>
+                                                </div>
+                                                <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
+                                                <input type="hidden" name="payment_type" value="ctsv">
+                                            </form>
+                                        </div>
+                                        <div class="col-12 col-lg-5">
+                                            <x-booking-payment-summary
+                                                :total="$booking['payment'][0]['totalamt']"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
-                    </form>
+                    </div>
                 </div>
             @elseif($booking['ispayment'] == 'Y')
                 <div class="col-12 text-center mb-3">

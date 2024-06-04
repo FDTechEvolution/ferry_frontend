@@ -21,6 +21,24 @@ class PaymentController extends Controller
             return view('pages.payment.updated', ['message' => 'Nothing...', 'bookingno' => $request->bookingno]);
         }
 
+        if(isset($request->payment_type) && $request->payment_type == '2c2p') {
+            $res  = $this->payment_2c2p($request);
+            if($res) {
+                $data = $res['data'];
+                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $res['booking'], '_e' => $request->passenger_email]);
+            }
+        }
+
+        if(isset($request->payment_type) && $request->payment_type == 'ctsv') {
+            $res = $this->payment_ctsv($request);
+            Log::debug($res);
+            return redirect()->route('home');
+        }
+
+        return redirect()->route('home');
+    }
+
+    private function payment_2c2p($request) {
         $response = Http::reqres()->post('/payment/create', [
             'payment_id' => $request->payments,
             'payment_method' => $request->payment_method
@@ -31,10 +49,21 @@ class PaymentController extends Controller
         $booking_id = $res['booking'];
 
         if($data['respCode'] == '0000') {
-            return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $request->passenger_email]);
+            return ['_p' => $data['webPaymentUrl'], '_b' => $booking_id, '_e' => $request->passenger_email];
         }
+        return false;
+    }
 
-        return redirect()->route('home');
+    private function payment_ctsv($request) {
+        $response = Http::reqres()->post('/payment/create-ctsv', [
+            'payment_id' => $request->payments,
+            'payment_method' => $request->payment_method
+        ]);
+
+        $res = $response->json();
+        $data = $res['data'];
+
+        return $data;
     }
 
     public function print($bookingno = null) {

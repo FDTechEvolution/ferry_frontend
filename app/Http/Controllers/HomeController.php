@@ -28,10 +28,10 @@ class HomeController extends Controller
         $cover_index = array_rand($this->ImageCover, 1);
         $cover = $this->ImageCover[$cover_index];
         // $station_from = $this->sectionGroup('section', $station_route['data']['from']);
-        $station_to = $this->sectionGroup('section', $station_route['data']['to']);
+        $station_to = $this->sectionGroup('section', $station_route['data']['to'] ?? []);
         $promotions = $this->getPromotion();
 
-        $section_col = $this->sectionColumn($station_route['data']['from']);
+        $section_col = $this->sectionColumn($station_route['data']['from'] ?? []);
         $sections = $this->stationSetTen($section_col);
         $_sections = array_chunk($sections[0], 15);
 

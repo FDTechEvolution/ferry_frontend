@@ -44,6 +44,30 @@ return [
         'image' => env('STORE_URL'),
     ],
 
+    'payments' => [
+        '2c2p' => [
+            [
+                'name' => 'Siam Commercial Bank PCL (2C2P)',
+                'lists' => [
+                    [
+                        'name' => 'Credit Card / Debit Card',
+                        'code' => 'CC',
+                        'fee' => '3.5',
+                        'fee_desc' => 'Credit card fee',
+                        'image' => [
+                            ['name' => 'VISA', 'path' => 'visa_icon.svg', 'width' => '40'],
+                            ['name' => 'Master Card', 'path' => 'mastercard_icon.svg', 'width' => '40'],
+                            ['name' => 'JCB', 'path' => 'jcb_icon.svg', 'width' => '40'],
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'ctsv' => [
+
+        ]
+    ],
+
     'code_country' => ['[DZ] +213','[AD] +376','[AO] +244','[AI] +1264','[AG] +1268','[AR] +54','[AM] +374','[AW] +297',
                         '[AU] +61','[AT] +43','[AZ] +994','[BS] +1242','[BH] +973','[BD] +880','[BB] +1246','[BY] +375',
                         '[BE] +32','[BZ] +501','[BJ] +229','[BM] +1441','[BT] +975','[BO] +591','[BA] +387','[BW] +267',

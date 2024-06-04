@@ -591,7 +591,8 @@ img.img-logo-style {
     background-color: #fae5d7;
 }
 .bg-booking-payment-passenger {
-    background-color: #dbdad9;
+    /* background-color: #dbdad9; */
+    border: 2px solid #ffa66b;
 }
 
 .button-blue-bg {

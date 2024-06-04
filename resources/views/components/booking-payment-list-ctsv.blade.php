@@ -4,7 +4,7 @@
     <div class="col-12">
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-1" value="CC">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-1" value="CARD">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -33,12 +33,12 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="GCARD">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="CASH">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
                     <p class="mb-0">
-                        <span class="me-3 fw-bold">Global Card</span>
+                        <span class="me-3 fw-bold">CASH</span>
                         <img src="{{ asset('icons/unionpay_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="UnionPay"
                         >
@@ -52,12 +52,12 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="DPAY">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="INST">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
                     <p class="mb-0">
-                        <span class="me-3 fw-bold">Digital Payment</span>
+                        <span class="me-3 fw-bold">INST</span>
                         <img src="{{ asset('icons/alipay_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Alipay"
                         >
@@ -77,7 +77,39 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="THQR">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="7CARD">
+            </div>
+            <div class="col-9 col-lg-11 card">
+                <div class="card-body p-2">
+                    <p class="mb-0">
+                        <span class="me-3 fw-bold">7CARD</span>
+                        <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
+                        >
+                    </p>
+                </div>
+            </div>
+        </label>
+
+        <label class="row mb-2">
+            <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="TMW">
+            </div>
+            <div class="col-9 col-lg-11 card">
+                <div class="card-body p-2">
+                    <p class="mb-0">
+                        <span class="me-3 fw-bold">TMW</span>
+                        <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
+                        >
+                    </p>
+                </div>
+            </div>
+        </label>
+
+        <label class="row mb-2">
+            <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="TQR">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -93,20 +125,14 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="GQR">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="MOB">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
                     <p class="mb-0">
-                        <span class="me-3 fw-bold">QR Payment</span>
-                        <img src="{{ asset('icons/visa_qr_icon.svg') }}" class="me-2 w--m-img border border-secondary rounded" width="90"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Visa QR Payment"
-                        >
-                        <img src="{{ asset('icons/mastercard_qr_icon.svg') }}" class="me-2 w--m-img border border-secondary rounded" width="90"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Master Card QR Payment"
-                        >
-                        <img src="{{ asset('icons/unionpay_qr_icon.svg') }}" class="me-2 w--m-img border border-secondary rounded" width="90"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="UnionPay QR Payment"
+                        <span class="me-3 fw-bold">Mobile Banking</span>
+                        <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
                         >
                     </p>
                 </div>
