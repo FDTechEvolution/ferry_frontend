@@ -102,7 +102,7 @@ function setDataCustomer(booking_customers) {
     const row_customer = document.querySelector('.person-detail')
     row_customer.classList.remove('d-none')
     while (row_customer.firstChild) { row_customer.removeChild(row_customer.lastChild) }
-    
+
     booking_customers.forEach((item) => {
         let col_12_customer = document.createElement('div')
         col_12_customer.setAttribute('class', 'col-12 customer-detail')
@@ -252,4 +252,61 @@ if(btn_confirm_payment) {
             btn_confirm_payment.disabled = false
         })
     })
+}
+
+const payment_2c2p = document.querySelector('._2c2p')
+const payment_ctsv = document.querySelector('.ctsv')
+const payment_select = document.querySelectorAll('.payment-methods')
+const btn_payment = document.querySelector('.btn-confirm-payment')
+let payment_type = ''
+if(payment_select) {
+    payment_select.forEach(p => {
+        p.addEventListener('click', (e) => {
+            clearAllPaymentRadio(payment_2c2p)
+            clearAllPaymentRadio(payment_ctsv)
+
+            e.target.checked = true
+            payment_type = e.target.dataset.type
+            document.querySelector('.btn-confirm-payment').disabled = false
+
+            if(e.target.dataset.fee) creditCardFee()
+            else noCreditCardFee()
+        })
+    })
+}
+
+function clearAllPaymentRadio(element) {
+    const payment_select = element.querySelectorAll('.payment-methods')
+    payment_select.forEach(p => { p.checked = false })
+}
+
+if(btn_payment) {
+    btn_payment.addEventListener('click', () => {
+        if(payment_type !== '') document.querySelector(`#${payment_type}`).submit()
+    })
+}
+
+function creditCardFee() {
+    document.querySelector('.is-credit-fee').classList.remove('d-none')
+    const fee = document.querySelector('.cc-fee').innerText
+    const total = document.querySelector('.summary-total-payment')
+    let _total = document.querySelector('.main-total-payment').innerText
+
+    document.querySelector('.is-show-fee').innerHTML = fee
+    _total = parseInt(_total.replace(',', ''))
+    const isFee = parseInt(_total * 0.035)
+
+    document.querySelector('.fee-result').innerHTML = numberFormat(isFee)
+    total.innerHTML = numberFormat(_total + isFee)
+}
+
+function noCreditCardFee() {
+    document.querySelector('.is-credit-fee').classList.add('d-none')
+    const total = document.querySelector('.summary-total-payment')
+    let _total = document.querySelector('.main-total-payment').innerText
+    total.innerHTML = _total
+}
+
+function numberFormat(number) {
+    return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }

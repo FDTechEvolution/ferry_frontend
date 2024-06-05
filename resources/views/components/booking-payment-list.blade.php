@@ -4,7 +4,7 @@
     <div class="col-12">
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-1" value="CC">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="_2c2p" data-fee="Y" name="payment_method" id="payment-method-1" value="CC">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -25,7 +25,7 @@
                             <span class="text-success">Free by promoCode</span>
                         </small>
                     @else
-                        <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee 3.5%</small>
+                        <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee <span class="cc-fee">3.5</span>%</small>
                     @endif
                 </div>
             </div>
@@ -33,7 +33,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="GCARD">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="_2c2p" name="payment_method" id="payment-method-2" value="GCARD">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -52,7 +52,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="DPAY">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="_2c2p" name="payment_method" id="payment-method-3" value="DPAY">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -77,7 +77,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="THQR">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="_2c2p" name="payment_method" id="payment-method-4" value="THQR">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -93,7 +93,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="GQR">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="_2c2p" name="payment_method" id="payment-method-5" value="GQR">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">

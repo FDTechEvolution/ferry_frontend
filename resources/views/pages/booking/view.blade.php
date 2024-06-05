@@ -140,20 +140,19 @@
                                     </button>
                                 </h2>
                             </div>
-                            <div id="paymentOne" class="collapse" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
+                            <div id="paymentOne" class="collapse show" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
                                 <div class="card-body pt-0">
                                     <div class="row mx-3">
                                         <div class="col-12 col-lg-7 text-center ps-0">
-                                            <form method="POST" action="{{ route('payment-link') }}">
+                                            <form method="POST" id="_2c2p" action="{{ route('payment-link') }}">
                                                 @csrf
-                                                <div class="text-start">
+                                                <div class="text-start _2c2p">
                                                     <x-booking-payment-list
                                                         :bg="_('#fae5d7')"
                                                     />
                                                 </div>
                                                 <div class="text-end mt-2">
                                                     <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
-                                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment d-none" disabled>Payment</button>
                                                 </div>
                                                 <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
                                                 <input type="hidden" name="payment_type" value="2c2p">
@@ -169,7 +168,7 @@
                             </div>
                         </div>
 
-                        <div class="card mb-2" style="background-color: #d0e5ff;">
+                        <div class="card mb-2 d-none" style="background-color: #d0e5ff;">
                             <div class="card-header mb-0 p-0 border-0 bg-transparent" id="accPaymentTwo">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link w-100 btn-lg text-align-start text-decoration-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#paymentTwo" aria-expanded="true" aria-controls="paymentTwo">
@@ -185,16 +184,15 @@
                                 <div class="card-body pt-0">
                                     <div class="row mx-3 mb-2">
                                         <div class="col-12 col-lg-7 text-center ps-0 ">
-                                            <form method="POST" action="{{ route('payment-link') }}">
+                                            <form method="POST" id="ctsv" action="{{ route('payment-link') }}">
                                                 @csrf
-                                                <div class="text-start">
+                                                <div class="text-start ctsv">
                                                     <x-booking-payment-list-ctsv
                                                         :bg="_('#fae5d7')"
                                                     />
                                                 </div>
                                                 <div class="text-end mt-2">
                                                     <input type="hidden" name="payments" value="{{ $booking['payment'][0]['payment_id'] }}">
-                                                    <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment-ctsv">Payment</button>
                                                 </div>
                                                 <input type="hidden" name="passenger_email" value="{{ $passenger_email }}">
                                                 <input type="hidden" name="payment_type" value="ctsv">
@@ -209,6 +207,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn button-green-bg rounded px-5 py-2 btn-confirm-payment" disabled>Payment</button>
                     </div>
                 </div>
             @elseif($booking['ispayment'] == 'Y')

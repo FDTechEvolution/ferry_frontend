@@ -23,16 +23,16 @@ class PaymentController extends Controller
 
         if(isset($request->payment_type) && $request->payment_type == '2c2p') {
             $res  = $this->payment_2c2p($request);
-            if($res) {
-                $data = $res['data'];
-                return redirect()->route('payment-index', ['_p' => $data['webPaymentUrl'], '_b' => $res['booking'], '_e' => $request->passenger_email]);
+            if($res != false) {
+                return redirect()->route('payment-index', ['_p' => $res['_p'], '_b' => $res['_b'], '_e' => $request->passenger_email]);
             }
         }
 
         if(isset($request->payment_type) && $request->payment_type == 'ctsv') {
             $res = $this->payment_ctsv($request);
-            Log::debug($res);
-            return redirect()->route('home');
+            // $de_res = json_decode($res, true);
+            // Log::debug($de_res);
+            return view('pages.payment.ctsv_payment', ['_p' => $res, '_b' => $request->bookingno, '_e' => $request->passenger_email]);
         }
 
         return redirect()->route('home');

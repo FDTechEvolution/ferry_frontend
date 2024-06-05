@@ -4,7 +4,7 @@
     <div class="col-12">
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-1" value="CARD">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-1" value="CARD">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -33,7 +33,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="CASH">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-2" value="CASH">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -52,7 +52,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="INST">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-3" value="INST">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -77,7 +77,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="7CARD">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-4" value="7CARD">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -93,7 +93,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="TMW">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-5" value="TMW">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -109,7 +109,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="TQR">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-6" value="TQR">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
@@ -125,7 +125,7 @@
 
         <label class="row mb-2">
             <div class="col-2 col-lg-1 d-flex justify-content-center align-items-center">
-                <input class="form-check-input form-check-input-primary payment-methods" type="radio" name="payment_method" id="payment-method-2" value="MOB">
+                <input class="form-check-input form-check-input-primary payment-methods" type="radio" data-type="ctsv" name="payment_method" id="payment-method-7" value="MOB">
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">

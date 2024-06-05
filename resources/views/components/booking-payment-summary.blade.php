@@ -7,7 +7,7 @@
                 <span class="fw-bold">Total Payment</span>
             </div>
             <div class="col-12 col-lg-7 text-end">
-                <h3 class="mb-0">{{ number_format($total) }} THB</h3>
+                <h3 class="mb-0"><span class="summary-total-payment">{{ number_format($total) }}</span> THB</h3>
                 <small>Lorem Ipsum is simply dummy.</small>
             </div>
             <div class="col-12 mt-3">
@@ -22,17 +22,17 @@
                         Lorem Ipsum
                     </div>
                     <div class="col-6 text-end">
-                        {{ number_format($total) }} THB
+                        <span class="main-total-payment">{{ number_format($total) }}</span> THB
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 is-credit-fee d-none">
                 <div class="row">
                     <div class="col-6">
-                        Lorem Ipsum Fee 3.5%
+                        Processing Fee <span class="is-show-fee"></span>%
                     </div>
                     <div class="col-6 text-end">
-                        {{ number_format($total) }} THB
+                        <span class="fee-result"></span> THB
                     </div>
                 </div>
             </div>
