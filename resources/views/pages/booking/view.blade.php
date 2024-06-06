@@ -143,7 +143,7 @@
                             <div id="paymentOne" class="collapse show" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
                                 <div class="card-body pt-0">
                                     <div class="row mx-3">
-                                        <div class="col-12 col-lg-7 text-center ps-0">
+                                        <div class="col-12 col-lg-12 text-center ps-0">
                                             <form method="POST" id="_2c2p" action="{{ route('payment-link') }}">
                                                 @csrf
                                                 <div class="text-start _2c2p">
@@ -158,7 +158,7 @@
                                                 <input type="hidden" name="payment_type" value="2c2p">
                                             </form>
                                         </div>
-                                        <div class="col-12 col-lg-5">
+                                        <div class="col-12 col-lg-5 d-none">
                                             <x-booking-payment-summary
                                                 :total="$booking['payment'][0]['totalamt']"
                                             />

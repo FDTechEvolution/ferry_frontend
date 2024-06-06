@@ -26,8 +26,7 @@
     </div>
     <div class="col-12 text-center">
         @if(!empty($_p))
-            <button type="button" id="checkout-button-1">Cash</button>
-            <button type="button" id="checkout-button-2">Card</button>
+
         @endif
     </div>
 </div>
@@ -37,16 +36,8 @@
 <script src="https://qasecure.counterservicepay.com/cspay.js"></script>
 
 <script>
-    document.querySelector("#checkout-button-1").addEventListener('click', () => {
-        CSPay.configure({
-            paymentData: `{{ $_p }}`
-        })
+    CSPay.configure({
+        paymentData: `{{ $_p }}`
     })
-    // document.querySelector("#checkout-button-1").onclick = function() {
-    //     console.log('xxxxx');
-    //     CSPay.configure({
-    //         paymentData: {{ $_p }},
-    //     })
-    // }
 </script>
 @stop
