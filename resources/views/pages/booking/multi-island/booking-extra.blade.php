@@ -11,13 +11,13 @@
                     Route {{ $r_index + 1 }} / {{ $_route_size }}
                 </span>
                 <span class="ms-2 me-0" style="font-size: medium;">Date : </span>
-                <span style="font-size: medium;">{{ date('l M d, Y', strtotime($route_station['date'])) }}</span>
+                <span style="font-size: medium;">{{ date('l M d, Y', strtotime($route_station[$r_index]['date'])) }}</span>
             </h5>
             <p class="mb-0 fw-bolder">
                 <span class="me-0">From : </span>
-                <span class="station-name me-4">{{ $route_station['depart'] }}</span>
+                <span class="station-name me-4">{{ $route_station[$r_index]['depart'] }}</span>
                 <span class="me-0">To : </span>
-                <span class="station-name me-4">{{ $route_station['arrive'] }}</span>
+                <span class="station-name me-4">{{ $route_station[$r_index]['arrive'] }}</span>
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-4 booking-route-extra ps-lg-4 border-start border-2" data-list="{{ $r_index }}" style="border-color: #ff6100 !important;">

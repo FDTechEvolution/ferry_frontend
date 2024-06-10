@@ -299,6 +299,7 @@ class BookingController extends Controller
         $use_promocode = null;
         $freecredit = 'N';
         $freepremiumflex = 'N';
+        $r_station = [];
 
         foreach($request->from as $index => $from) {
             if($from != NULL) {
@@ -315,6 +316,8 @@ class BookingController extends Controller
 
                 $routes = $this->getRouteList($from, $request->to[$index], $g_date);
                 $_diff = $this->checkDateDiff($request['date'][$index]);
+
+                array_push($r_station, $routes['station']);
 
                 foreach($routes['data'] as $key => $route) {
                     $route_arr[$index]['station_from'] = $this->setStation($route['station_from']['name'], $route['station_from']['piername']);
@@ -377,7 +380,7 @@ class BookingController extends Controller
         $code_country = json_decode(Storage::disk('public')->get('json/country.json'),true);
         $route_arr = $this->routeMultiAvailabel($route_arr);
 
-        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr, 'route_station' => $routes['station'],
+        return view('pages.booking.multi-island.index', ['isType' => $_type, 'route_arr' => $route_arr, 'route_station' => $r_station,
                         'icon_url' => $this->IconUrl, 'passenger' => $passenger, 'code_country' => $code_country,
                         'country_list' => $this->CountryList, 'addon_icon' => $this->RouteAddonIcon, 'promocode' => $use_promocode,
                         'freecredit' => $freecredit, 'freepremiumflex' => $freepremiumflex, 'premium_flex' => $premium_flex['data']]);
@@ -568,16 +571,16 @@ class BookingController extends Controller
     public function bookingMultiConfirm(Request $request) {
         $fullname = $this->setPassengerBooking($request->first_name, $request->last_name);
         $passenger = $this->numberOfPassenger($request->passenger_type);
-        $depart_date = $request->departdate;
-        $departdate = array_map(function ($depart_date) {
-            $ex = explode('/', $depart_date);
-            return  $ex[2].'-'.$ex[1].'-'.$ex[0];
-        }, $depart_date);
+        // $depart_date = $request->departdate;
+        // $departdate = array_map(function ($depart_date) {
+        //     $ex = explode('/', $depart_date);
+        //     return  $ex[2].'-'.$ex[1].'-'.$ex[0];
+        // }, $depart_date);
         $_birthday = $this->setBirthday($request->birth_day);
 
         $response = Http::reqres()->post('/online-booking/create/multi', [
             'route_id' => $request->booking_route_selected,
-            'departdate' => $departdate,
+            'departdate' => $request->departdate,
             'titlename' => $request->title,
             'fullname' => $fullname,
             'passenger_type' => $request->passenger_type,
@@ -604,7 +607,7 @@ class BookingController extends Controller
             'book_channel' => 'ONLINE',
             'payment_method' => $request->payment_method,
             'ispremiumflex' => $request->ispremiumflex,
-            'route_addon' => $request->route_addon,
+            'route_addon' => $request->route_addon ?? [],
             'route_addon_detail' => $request->route_addon_detail,
             'promocode' => $request->use_promocode
         ]);

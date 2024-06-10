@@ -185,7 +185,7 @@
                     @foreach($route_arr as $index => $routes)
                         <div class="your-booking-route-list mb-4">
                             <div class="your-booking-date">
-                                <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($route_station['date'])) }}</p>
+                                <p class="fw-bold mb-0"><i class="fa-regular fa-calendar-days"></i> {{ date('l M d, Y', strtotime($route_station[$index]['date'])) }}</p>
                             </div>
                             <div class="your-booking-destination ps-2">
                                 <small class="your-booking-depart-time-{{ $index }}"></small>

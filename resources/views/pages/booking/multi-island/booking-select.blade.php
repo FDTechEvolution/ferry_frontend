@@ -3,7 +3,7 @@
     <div class="row mb-4 booking-multi-route">
         <div class="col-12 mb-2">
             @php
-                $_depart_date = explode('/', $route_station['date']);
+                $_depart_date = explode('/', $route_station[$index]['date']);
                 $_route_size = count($route_arr);
             @endphp
             <h5 class="mb-0">
@@ -11,13 +11,13 @@
                     Route {{ $index + 1 }} / {{ $_route_size }}
                 </span>
                 <span class="me-0" style="font-size: medium;">Date :
-                    <span class="travel-date-{{ $index }} d-none" style="font-size: medium;">{{ $route_station['date'] }}</span>
-                    <span class="is-booking-date" style="font-size: medium;">{{ date('l M d, Y', strtotime($route_station['date'])) }}</span>
+                    <span class="travel-date-{{ $index }} d-none" style="font-size: medium;">{{ $route_station[$index]['date'] }}</span>
+                    <span class="is-booking-date" style="font-size: medium;">{{ date('l M d, Y', strtotime($route_station[$index]['date'])) }}</span>
                 </span>
             </h5>
             <p class="mb-0 fw-bolder booking-select-header d-lg-block d-grid">
-                <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4 is-station-from">{{ $route_station['depart'] }}</span></span>
-                <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4 is-station-to">{{ $route_station['arrive'] }}</span></span>
+                <span class="me-0">Depart : <span class="station-name depart-station-name-{{ $index }} me-4 is-station-from">{{ $route_station[$index]['depart'] }}</span></span>
+                <span class="me-0">Arrival : <span class="station-name arrive-station-name-{{ $index }} me-4 is-station-to">{{ $route_station[$index]['arrive'] }}</span></span>
             </p>
         </div>
         <div class="col-12 col-lg-11 ms-0 ms-lg-5 ps-lg-3 border-start border-2 booking-route-select" style="border-color: #ff6100 !important;">
