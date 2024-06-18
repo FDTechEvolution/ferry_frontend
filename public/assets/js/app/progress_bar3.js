@@ -247,6 +247,8 @@ function updateProgress() {
 function progressCondition(step) {
     if(step === 'select') {
         // let route_list = booking_routes.querySelectorAll('.booking-route-list')
+        const your_booking = document.querySelector('.your-booking-premium-flex')
+        if(your_booking) your_booking.classList.add('d-none')
         document.querySelector('#btn-back-to-home').classList.remove('d-none')
         document.querySelector('#progress-prev').classList.add('d-none')
 
@@ -259,11 +261,14 @@ function progressCondition(step) {
 
         progress_payment.classList.add('d-none')
         progress_payment.disabled = true
+        premium_price = 0
+        updateSumPrice()
     }
 
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
+        document.querySelector('.your-booking-extra').classList.add('d-none')
         let promo_premiumflex = document.querySelector('.ispremiumflex').value
         let use_promocode = document.querySelector('[name="use_promocode"]')
         let select_promo = document.querySelector('.selected-route-promocode')
@@ -937,7 +942,7 @@ function progressPassenger() {
 
     if(input_required === 0 && select_required === 0 && email_confirm === 0) {
         setPassengerPayment()
-        progress_next.click()
+        document.querySelector('#booking-form').submit()
     }
 }
 
@@ -1158,8 +1163,8 @@ async function promocodeProcess(_promocode, main_route, booking_discount) {
             if(index === 0) {
                 promocode_premiumflex = promo.isfreepremiumflex === 'Y' ? 'Y' : 'N'
                 if(promo.isfreepremiumflex === 'Y') {
-                    document.querySelector('.is-premium-price').innerHTML = '0'
-                    document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
+                    // document.querySelector('.is-premium-price').innerHTML = '0'
+                    // document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
                 }
             }
 
@@ -1393,15 +1398,15 @@ function updateDiscountByBookingSummary(index) {
 
             is_discount = 0
             is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
-            const neg = is_discount === 0 ? '' : '-'
-            document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
+            // const neg = is_discount === 0 ? '' : '-'
+            document.querySelector('.your-booking-discount-price').innerHTML = `- ${numberFormat(is_discount)} <small class="smaller">THB</small>`
         }
         else {
             is_discount = 0
             summary_discount[index] = 0
             is_discount = summary_discount.reduce((num1, num2) => { return num1+num2 })
-            const neg = is_discount === 0 ? '' : '-'
-            document.querySelector('.your-booking-discount-price').innerHTML = `${neg} ${numberFormat(is_discount)} <small class="smaller">THB</small>`
+            // const neg = is_discount === 0 ? '' : '-'
+            document.querySelector('.your-booking-discount-price').innerHTML = `- ${numberFormat(is_discount)} <small class="smaller">THB</small>`
         }
     }
 }
@@ -1484,7 +1489,7 @@ async function getPromoCode(promocode, depart_date) {
 }
 
 function numberFormat(number) {
-    if(number) return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    return number.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
 function getPromocodeLoading() {

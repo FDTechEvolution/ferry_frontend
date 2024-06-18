@@ -12,7 +12,7 @@
     <input type="hidden" name="_from_type[]" value="multi">
     <div class="col-12 col-md-6 col-lg-3 px-0">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control from-{{ $number }}-selected" id="from-{{ $from_id }}" aria-label="booking station">
+            <input type="text" class="form-control from-{{ $number }}-selected" id="from-{{ $from_id }}" aria-label="booking station" autocomplete="off">
             <label for="from-{{ $from_id }}">From</label>
         </div>
         <input type="hidden" class="from-{{ $number }}-input" name="from[]" value="">
@@ -27,7 +27,7 @@
 
             <div class="form-floating mb-3 dropdown">
                 <i class="fi fi-loading fi-spin loading-destination loading-destination-{{ $number }} d-none"></i>
-                <input required type="text" class="dropdown-toggle form-control input-to-{{ $number }}-selected" id="to-{{ $to_id }}" data-bs-toggle="dropdown" placeholder="To" disabled>
+                <input required type="text" class="dropdown-toggle form-control input-to-{{ $number }}-selected" id="to-{{ $to_id }}" data-bs-toggle="dropdown" placeholder="To" autocomplete="off" disabled>
                 <label class="text-secondary" for="to-{{ $to_id }}">To</label>
 
                 <div class="dropdown-menu dropdown-booking-destinamtion-width dropdown-md p-3">

@@ -75,7 +75,7 @@
                                     <select required class="form-select" name="mobile_code">
 
                                         @foreach ($code_country as $code)
-                                        <option value="{{ $code['dial_code'] }}">
+                                        <option value="{{ $code['dial_code'] }}" @if($code['dial_code'] == '+66') selected @endif>
                                             {{ $code['code'] . ' ' . $code['dial_code'] }}</option>
                                         @endforeach
                                     </select>
@@ -105,9 +105,8 @@
                 <div class="col-12 col-lg-5 form-floating mb-3">
                     <select required class="form-select form-select-sm" name="country" id="passenger-country"
                         aria-label="Floating label select example" autocomplete="true">
-                        <option value="" selected disabled>Select Country</option>
                         @foreach ($country_list as $country)
-                            <option value="{{ $country }}">{{ $country }}</option>
+                            <option value="{{ $country }}" @if($country == 'Thailand') selected @endif>{{ $country }}</option>
                         @endforeach
                     </select>
                     <label for="passenger-country">Country<span class="text-danger">*</span></label>

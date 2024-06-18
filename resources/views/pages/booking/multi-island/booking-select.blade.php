@@ -61,7 +61,7 @@
                                                         :m_info="$route['master_from']"
                                                         :i_info="$route['information_from']"
                                                         :station="$route['station_from']['name']"
-                                                        :image="$route['station_from']['image']['path']"
+                                                        :image="$route['station_from']['image']"
                                                         :store="$icon_url"
                                                         :lat_long="$route['station_from']['g_map']"
                                                     />
@@ -82,7 +82,7 @@
                                                         :i_info="$route['information_to']"
                                                         :station="$route['station_to']['name']"
                                                         :googlemap="$route['station_to']['google_map']"
-                                                        :image="$route['station_to']['image']['path']"
+                                                        :image="$route['station_to']['image']"
                                                         :store="$icon_url"
                                                         :lat_long="$route['station_to']['g_map']"
                                                     />

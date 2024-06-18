@@ -1,9 +1,10 @@
-@props(['s_info' => '', 'm_info' => '', 'i_info' => '', 'station' => '', 'image' => '', 'store' => '', 'lat_long' => []])
+@props(['s_info' => '', 'm_info' => '', 'i_info' => '', 'station' => '', 'image' => [], 'store' => '', 'lat_long' => []])
 
 @php
     $modal_id = 'm_'.uniqid();
-    $lat = isset($lat_long[0]) ? $lat_long[0] : '';
-    $long = isset($lat_long[1]) ? $lat_long[1] : '';
+    $lat = !empty($lat_long) ? $lat_long[0] : '';
+    $long = !empty($lat_long) ? $lat_long[1] : '';
+    $img = !empty($image) ? $image['path'] : '';
 @endphp
 
 <i class="fi fi-round-info-full cursor-pointer icon-booking-color" title="Station info." data-bs-toggle="modal" data-bs-target="#{{ $modal_id }}" onClick="updateMap(`{{ $modal_id }}`, `{{ $lat }}`, `{{ $long }}`)"></i>
@@ -20,11 +21,11 @@
 			<div class="modal-body">
                 <div class="row">
                     <div class="col-12 mb-4">
-                        <div class="p-3 border rounded">
-                            @if($image != '')
-                                <img class="w-100" src="{{ $store.'/'.$image }}">
-                            @endif
-                        </div>
+                        @if($img != '')
+                            <div class="p-3 border rounded">
+                                <img class="w-100" src="{{ $store.'/'.$img }}">
+                            </div>
+                        @endif
                     </div>
                     <div class="col-12 mb-4">
                         @if($s_info == 'Y')

@@ -311,6 +311,8 @@ function progressCondition(step) {
     if(step === 'select') {
         document.querySelector('#btn-back-to-home').classList.remove('d-none')
         document.querySelector('#progress-prev').classList.add('d-none')
+        const your_booking = document.querySelector('.your-booking-premium-flex')
+        if(your_booking) your_booking.classList.add('d-none')
 
         let depart_list = booking_route.querySelectorAll('.booking-depart-list')
         let return_list = booking_route.querySelectorAll('.booking-return-list')
@@ -323,11 +325,14 @@ function progressCondition(step) {
 
         progress_payment.classList.add('d-none')
         progress_payment.disabled = true
+        premium_price = 0
+        updateSumPrice()
     }
 
     if(step === 'premium') {
         document.querySelector('#btn-back-to-home').classList.add('d-none')
         document.querySelector('#progress-prev').classList.remove('d-none')
+        document.querySelector('.your-booking-extra').classList.add('d-none')
         let promo_premiumflex = document.querySelector('.ispremiumflex').value
         let use_promocode = document.querySelector('[name="use_promocode"]')
         let select_promo = document.querySelector('.selected-route-promocode')
@@ -840,7 +845,7 @@ function progressPassenger() {
 
     if(input_required === 0 && select_required === 0 && email_confirm === 0) {
         setPassengerPayment()
-        progress_next.click()
+        document.querySelector('#booking-form').submit()
     }
 }
 
@@ -1284,8 +1289,9 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
         if(promo !== null) {
             promocode_premiumflex = promo.isfreepremiumflex === 'Y' ? 'Y' : 'N'
             if(promo.isfreepremiumflex === 'Y') {
-                document.querySelector('.is-premium-price').innerHTML = '0'
-                document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
+                // document.querySelector('.is-premium-price').innerHTML = '0'
+                // document.querySelector('.your-booking-premium-flex-price').innerHTML = '0 <small class="smaller">THB</small>'
+                updateSumPrice()
             }
 
             booking_discount.classList.remove('d-none')

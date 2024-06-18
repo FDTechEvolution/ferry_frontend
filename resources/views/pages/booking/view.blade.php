@@ -140,10 +140,10 @@
                                     </button>
                                 </h2>
                             </div>
-                            <div id="paymentOne" class="collapse show" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
+                            <div id="paymentOne" class="collapse" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
                                 <div class="card-body pt-0">
                                     <div class="row mx-3">
-                                        <div class="col-12 col-lg-12 text-center ps-0">
+                                        <div class="col-12 col-lg-7 text-center ps-0">
                                             <form method="POST" id="_2c2p" action="{{ route('payment-link') }}">
                                                 @csrf
                                                 <div class="text-start _2c2p">
@@ -158,7 +158,7 @@
                                                 <input type="hidden" name="payment_type" value="2c2p">
                                             </form>
                                         </div>
-                                        <div class="col-12 col-lg-5 d-none">
+                                        <div class="col-12 col-lg-5">
                                             <x-booking-payment-summary
                                                 :total="$booking['payment'][0]['totalamt']"
                                             />
@@ -168,7 +168,7 @@
                             </div>
                         </div>
 
-                        <div class="card mb-2 d-none" style="background-color: #d0e5ff;">
+                        <div class="card mb-2" style="background-color: #d0e5ff;">
                             <div class="card-header mb-0 p-0 border-0 bg-transparent" id="accPaymentTwo">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link w-100 btn-lg text-align-start text-decoration-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#paymentTwo" aria-expanded="true" aria-controls="paymentTwo">
