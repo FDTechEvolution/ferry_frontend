@@ -35,7 +35,7 @@
                     <input required type="text" name="birth_day[]"
                         class="form-control form-control-sm datepicker lead-passenger-b-day" data-show-weeks="true"
                         data-today-highlight="true" data-today-btn="false" data-clear-btn="false" data-autoclose="true"
-                        data-format="DD/MM/YYYY" data-date-start="1924-01-01" autocomplete="off"
+                        data-format="DD/MM/YYYY" autocomplete="off"
                         placeholder="Date of Birth">
                     <label class="ms-2">Date of Birth<span class="text-danger">*</span></label>
                 </div>

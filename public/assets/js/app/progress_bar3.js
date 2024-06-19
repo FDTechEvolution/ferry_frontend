@@ -325,6 +325,7 @@ function progressCondition(step) {
         progress_payment.disabled = true
 
         const sub_passenger = document.querySelectorAll('.sub-passenger-b-date')
+        // start date
         let startDate_adult = new Date()
         startDate_adult.setFullYear(startDate_adult.getFullYear() - 100)
         let startDate_child = new Date()
@@ -332,20 +333,29 @@ function progressCondition(step) {
         let startDate_infant = new Date()
         startDate_infant.setFullYear(startDate_infant.getFullYear() - 2)
 
+        // end date
+        let endDate_adult = new Date()
+        endDate_adult.setFullYear(endDate_adult.getFullYear() - 12)
+        let endDate_child = new Date()
+        endDate_child.setFullYear(endDate_child.getFullYear() - 2)
+
         $('.lead-passenger-b-day').datepicker()
-        $('.lead-passenger-b-day').datepicker('setEndDate', new Date())
+        $('.lead-passenger-b-day').datepicker('setEndDate', endDate_adult)
         $('.lead-passenger-b-day').datepicker('setStartDate', startDate_adult)
+        $('.lead-passenger-b-day').datepicker('setDaysOfWeekDisabled')
 
         if(sub_passenger) {
             sub_passenger.forEach((item) => {
-                let is_startDate = null
-                if(item.dataset.type == 'Adult') is_startDate = startDate_adult
-                if(item.dataset.type == 'Child') is_startDate = startDate_child
-                if(item.dataset.type == 'Infant') is_startDate = startDate_infant
+                let is_rangeDate = []
+                if(item.dataset.type == 'Adult') is_rangeDate = [startDate_adult, endDate_adult]
+                if(item.dataset.type == 'Child') is_rangeDate = [startDate_child, endDate_child]
+                if(item.dataset.type == 'Infant') is_rangeDate = [startDate_infant, new Date()]
 
+                console.log(is_rangeDate)
                 $(`#${item.id}`).datepicker()
-                $(`#${item.id}`).datepicker('setEndDate', new Date())
-                $(`#${item.id}`).datepicker('setStartDate', is_startDate)
+                $(`#${item.id}`).datepicker('setEndDate', is_rangeDate[1])
+                $(`#${item.id}`).datepicker('setStartDate', is_rangeDate[0])
+                $(`#${item.id}`).datepicker('setDaysOfWeekDisabled')
             })
         }
     }

@@ -46,9 +46,15 @@
                                     style="background-color: transparent;"
                                 >
                                     <div class="clearfix">
-                                        <img class="w-100"
-                                            src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
-                                            alt="" style="border-radius: 15px; height: 220px;">
+                                        @if($slide['image'] != NULL)
+                                            <img class="w-100"
+                                                src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
+                                                alt="" style="border-radius: 15px; height: 220px;">
+                                        @else
+                                            <img class="w-100"
+                                                src="{{ asset('assets/images/no_image_icon.svg') }}"
+                                                alt="" style="border-radius: 15px; height: 220px;">
+                                        @endif
                                     </div>
                                 </div>
                                 <h2 class="h6 card-title">

@@ -33,7 +33,7 @@
 
                             </button>
                         @endif
-                        <div style="background-color: {{ $item['color'] }}; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $item['sort'] == 3]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
+                        <div style="background-color: {{ $item['color'] }}; border-radius: 10px;" id="billboard-content-{{ $index }}" @class(['collapse', 'show' => $index == 0]) aria-labelledby="cleanHeadingOne" data-bs-parent="#billboardContent">
                             <div class="col-12 col-lg-10 offset-lg-1 py-3 text-center" data-aos="fade-up" data-aos-delay="0" style="min-height: 400px;">
                                 <h2 class="blog-title">{{ $item['title'] }}</h2>
 
