@@ -18,8 +18,8 @@
                     <i class="fi fi-round-close text-dark cursor-pointer position-absolute top--9 end--9" onClick="clearPromotionCode('{{ $type }}')"></i>
                 </div>
             </div>
-            <div class="col-8 col-md-6 text-end">
-                <button type="submit" class="btn btn-sm button-orange-bg">Search</button>
+            <div class="col-4 col-md-6 text-end">
+                <button type="button" class="btn btn-sm button-orange-bg btn-search-{{ $type }}">Search</button>
             </div>
         </div>
     </fieldset>

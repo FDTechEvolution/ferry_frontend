@@ -20,7 +20,7 @@
                             <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" class="col-12 col-lg-5 mb-4 me-4 text-dark">
                                 <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 position-relative">
                                     <div class="clearfix">
-                                        <img class="w-100"
+                                        <img class="w-100 slide-image-home"
                                             src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
                                             alt="" style="border-radius: 15px">
                                     </div>
@@ -41,17 +41,17 @@
                                 </div>
                             </a>
                         @else
-                            <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" class="col-12 col-lg-3 mb-4 me-4 text-dark">
+                            <a href="{{ route('blog-view', ['slug' => $slide['slug']]) }}" class="col-12 col-lg-3 mb-4 me-4 text-dark sub-slide">
                                 <div class="card border-0 shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top h-100 mb-2"
                                     style="background-color: transparent;"
                                 >
                                     <div class="clearfix">
                                         @if($slide['image'] != NULL)
-                                            <img class="w-100"
+                                            <img class="w-100 slide-image-home"
                                                 src="{{ asset($store . $slide['image']['path'] . '/' . $slide['image']['name']) }}"
                                                 alt="" style="border-radius: 15px; height: 220px;">
                                         @else
-                                            <img class="w-100"
+                                            <img class="w-100 slide-image-home"
                                                 src="{{ asset('assets/images/no_image_icon.svg') }}"
                                                 alt="" style="border-radius: 15px; height: 220px;">
                                         @endif
@@ -60,7 +60,7 @@
                                 <h2 class="h6 card-title">
                                     <h5 class="mb-2">{{ $slide['title'] }}</h5>
                                     <p class="mb-0">
-                                        <span>{!! Str::limit(strip_tags($slide['description']), 60) !!}</span>
+                                        <span>{!! Str::limit(strip_tags($slide['description']), 100) !!}</span>
                                         <span class="text-main-color-2 fw-bold small">See More.</span>
                                     </p>
                                 </h2>

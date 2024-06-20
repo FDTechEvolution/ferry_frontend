@@ -14,7 +14,7 @@
 
                                 <div class="card-body fw-light" style="height: 250px;border-radius: 10px 10px 10px 10px;color:#181818;background-color: {{ $promotion['bg_color']}};">
                                     <div class="d-table">
-                                        <div class="d-table-cell align-middle text-center p-3">
+                                        <div class="d-table-cell align-middle text-center">
 
                                             <h2 class="h5 font-proxima-400 card-title mb-4">
                                                 {{ $promotion['title'] }}

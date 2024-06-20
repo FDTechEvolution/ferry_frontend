@@ -390,6 +390,7 @@ async function fromOriginalSelected2(e, type, form_type) {
     if(_result) {
         destination_loading.classList.add('d-none')
         destination.disabled = false
+        document.querySelector(`.btn-search-${type}`).type = 'submit'
     }
 }
 

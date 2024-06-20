@@ -54,15 +54,15 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-6 text-start">
+            <div class="col-8 col-md-6 text-start">
 
                 <div class="div-promotioncode-{{ $type }} position-relative promo-input-w">
                     <input type="text" class="form-control form-control-sm input-promotioncode-{{ $type }} text-main-color-2" name="promotioncode" placeholder="Promotion Code">
                     <i class="fi fi-round-close text-dark cursor-pointer position-absolute top--9 end--9" onClick="clearPromotionCode('{{ $type }}')"></i>
                 </div>
             </div>
-            <div class="col-6 text-end">
-                <button type="submit" class="btn btn-sm button-orange-bg">Search</button>
+            <div class="col-4 col-md-6 text-end">
+                <button type="button" class="btn btn-sm button-orange-bg btn-search-{{ $type }}">Search</button>
             </div>
         </div>
     </fieldset>

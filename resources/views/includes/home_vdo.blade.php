@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 mb-4 position-relative d-none d-md-block">
-            <div class="row position-absolute" style="width: 100%; z-index: 2;">
+            <div class="row position-absolute position-md-relative" style="width: 100%; z-index: 2;">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="150">
                     <div class="ratio ratio-16x9">
                         <iframe class="embed-responsive-item" src="//player.vimeo.com/video/898274896?autoplay=1&loop=1&muted=1&sidedock=0&title=0" width="800" height="450" style="border-radius: 10px; box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.7); background-color: #fff;"></iframe>
