@@ -16,10 +16,10 @@
                                     <div class="d-table">
                                         <div class="d-table-cell align-middle text-center">
 
-                                            <h2 class="h5 font-proxima-400 card-title mb-4">
+                                            <h2 class="h5 font-proxima-400 card-title mb-4 title-promo-mobile">
                                                 {{ $promotion['title'] }}
                                             </h2>
-                                            <h1>{{$promotion['code']}}</h1>
+                                            <h1 class="code-promo-mobile">{{$promotion['code']}}</h1>
                                             <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i>
                                             <i class="fa-solid fa-barcode" style="font-size: 3rem;"></i>
                                         </div>
