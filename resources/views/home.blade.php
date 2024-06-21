@@ -124,7 +124,7 @@
         background: linear-gradient( to top, #eeeeee 0%, #eeeeee 50%, transparent 50%, transparent 100% );
     }
 </style>
-<script src="{{ asset('assets/js/app/booking.js') }}"></script>
+<script src="{{ asset('assets/js/app/booking.js') }}?v=@php echo date('YmdHis'); @endphp"></script>
 <script>
     const btn_announce = document.querySelectorAll('.btn-content-announce')
     if(btn_announce) {

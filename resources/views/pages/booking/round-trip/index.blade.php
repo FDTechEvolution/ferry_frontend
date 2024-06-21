@@ -347,5 +347,5 @@
 <script>
     let isStep = {{ $isType == '' ? 0 : 1 }}
 </script>
-<script src="{{ asset('assets/js/app/progress_bar2.js') }}"></script>
+<script src="{{ asset('assets/js/app/progress_bar2.js') }}?v=@php echo date('YmdHis'); @endphp"></script>
 @stop

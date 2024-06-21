@@ -265,5 +265,5 @@
     }
 </style>
 
-<script src="{{ asset('assets/js/app/progress_bar3.js') }}"></script>
+<script src="{{ asset('assets/js/app/progress_bar3.js') }}?v=@php echo date('YmdHis'); @endphp"></script>
 @stop

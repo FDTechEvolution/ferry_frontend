@@ -45,7 +45,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- /Footer -->
 
         <script src="{{ asset('assets/js/core.min.js') }}"></script>
-        <script src="{{ asset('assets/js/app/app.js') }}"></script>
+        <script src="{{ asset('assets/js/app/app.js') }}?v=@php echo date('YmdHis'); @endphp"></script>
         @yield('script')
     </body>
 </html>

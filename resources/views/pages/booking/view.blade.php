@@ -229,5 +229,5 @@
 <script>
     const booking_current = `{{ $booking['booking_number'] }}`
 </script>
-<script src="{{ asset('assets/js/app/payment.js') }}"></script>
+<script src="{{ asset('assets/js/app/payment.js') }}?v=@php echo date('YmdHis'); @endphp"></script>
 @stop
