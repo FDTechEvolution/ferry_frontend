@@ -68,8 +68,8 @@ h1,h2,h3,h4,h5{
 .btn-billboard {
     position: absolute;
     z-index: 9;
-    width: 30px;
-    right: -34px;
+    width: 42px;
+    right: -42px;
     border-radius: 0 5px 5px 0;
 }
 
@@ -205,7 +205,7 @@ h1,h2,h3,h4,h5{
         height: auto;
     }
     .navbar .navbar-nav .nav-link {
-        padding: 13px 6px !important;
+        padding: 10px 6px !important;
         font-size: inherit;
     }
     .addon-menu-style {
@@ -298,10 +298,10 @@ h1,h2,h3,h4,h5{
     .booking-select-header {
         font-weight: bold;
     }
-    .navbar-toggler {
+    /* .navbar-toggler {
         margin-right: -5px;
         padding-left: 13px;
-    }
+    } */
     .border-top-m {
         border-top: 1px solid #dde4ea;
     }
@@ -376,6 +376,31 @@ h1,h2,h3,h4,h5{
     }
     img.slide-image-home {
         height: 280px !important;
+    }
+    a.navbar-brand {
+        display: none;
+    }
+    .navbar-collapse.show {
+        background-color: #0000005e;
+    }
+    .navbar-collapse.show>.navbar-nav {
+        top: 55px;
+        border-radius: 10px;
+    }
+    #navbarMainNav button.navbar-toggler {
+        background-color: #FFF;
+        width: 48px;
+        height: 45px;
+        margin-right: 2%;
+        margin-top: 2%;
+        border-radius: 5px;
+    }
+    .display-menu-setting {
+        justify-content: space-between;
+        width: 100%;
+    }
+    span.menu-title {
+        line-height: 15px;
     }
 }
 
@@ -478,6 +503,10 @@ h1,h2,h3,h4,h5{
     }
     h1.code-promo-mobile {
         font-size: 20px;
+    }
+    #navbarMainNav button.navbar-toggler {
+        margin-right: 4%;
+        margin-top: 4%;
     }
 }
 @media (max-width: 400px) {

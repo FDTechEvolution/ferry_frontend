@@ -29,7 +29,7 @@
                                 aria-expanded="true" aria-controls="billboard-content-{{ $index }}"
                             >
 
-                            <img class="avatar avatar-xs icon-announce" style="margin-left: -13px; " src="{{asset($store.'/'.$item['icon'])}}" />
+                            <img class="avatar avatar-xs icon-announce" style="margin-left: -10px; margin-top: -5px;" src="{{asset($store.'/'.$item['icon'])}}" />
 
                             </button>
                         @endif
@@ -71,11 +71,11 @@
 </div>
 
 <style>
-    .icon-shake {
+    /* .icon-shake {
         animation: shake 1s;
         animation-iteration-count: 1;
-    }
-    @keyframes shake {
+    } */
+    /* @keyframes shake {
         0% { transform: translate(1px, 1px) rotate(0deg) scaleX(-1); }
         10% { transform: translate(-1px, -2px) rotate(-1deg) scaleX(-1); }
         20% { transform: translate(-3px, 0px) rotate(1deg) scaleX(-1); }
@@ -87,5 +87,5 @@
         80% { transform: translate(-1px, -1px) rotate(1deg) scaleX(-1); }
         90% { transform: translate(1px, 2px) rotate(0deg) scaleX(-1); }
         100% { transform: translate(1px, -2px) rotate(-1deg) scaleX(-1); }
-    }
+    } */
 </style>

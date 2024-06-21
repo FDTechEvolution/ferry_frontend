@@ -23,45 +23,69 @@
 
         <!-- viw booking -->
         <li class="nav-item">
-            <a class="nav-link fw-bold" href="{{ route('timetable-index') }}" style="text-decoration: none;">
-                Timetable
+            <a class="nav-link fw-normal" href="{{ route('timetable-index') }}" style="text-decoration: none;">
+                <div class="d-flex align-items-end">
+                    <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                    <span class="menu-title">Timetable</span>
+                </div>
             </a>
         </li>
 
         <!-- meal -->
         <li class="nav-item">
             <a class="nav-link fw-bold" href="{{ route('routemap-index') }}">
-                Route map
+                <div class="d-flex align-items-end">
+                    <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                    <span class="menu-title">Route map</span>
+                </div>
             </a>
         </li>
 
         <!-- station -->
         <li class="nav-item">
             <a class="nav-link fw-bold" href="{{ route('station-index') }}">
-                Check-in Station
+                <div class="d-flex align-items-end">
+                    <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                    <span class="menu-title">Check-in Station</span>
+                </div>
             </a>
         </li>
 
         <li class="nav-item ">
             <ul class="navbar-nav py-2 font-proxima">
                 <li class="nav-item border-start border-2 addon-menu-style" style="line-height: 14px;">
-                    <span class="smaller text-addon-color px-2">+ Add on</span>
-                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
-                        Meal on board
+                    <a class="nav-link py-0 fw-bold" href="#">
+                        <div class="d-flex align-items-end">
+                            <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                            <span class="menu-title">
+                                <span class="smaller text-addon-color">+ Add on</span><br/>
+                                Meal on board
+                            </span>
+                        </div>
                     </a>
                 </li>
 
                 <li class="nav-item" style="line-height: 14px;">
-                    <span class="smaller text-addon-color px-2">+ Add on</span>
-                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
-                        Shuttle Bus & Boat
+                    <a class="nav-link py-0 fw-bold" href="#">
+                        <div class="d-flex align-items-end">
+                            <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                            <span class="menu-title">
+                                <span class="smaller text-addon-color">+ Add on</span><br/>
+                                Shuttle Bus & Boat
+                            </span>
+                        </div>
                     </a>
                 </li>
 
                 <li class="nav-item" style="line-height: 14px;">
-                    <span class="smaller text-addon-color px-2">+ Add on</span>
-                    <a class="nav-link py-0 fw-bold" href="#" style="height: 30px;">
-                        Activity
+                    <a class="nav-link py-0 fw-bold" href="#">
+                        <div class="d-flex align-items-end">
+                            <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                            <span class="menu-title">
+                                <span class="smaller text-addon-color">+ Add on</span><br/>
+                                Activity
+                            </span>
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -69,7 +93,10 @@
 
         <li class="nav-item ms-lg-3">
             <a class="nav-link fw-bold" href="#">
-                <i class="fa-solid fa-motorcycle me-1 fs-2"></i> Rent a Bike!!
+                <div class="d-flex align-items-end">
+                    <img src="{{ asset('icons/mobile-menu-icon.png') }}" width="28" class="d-block d-lg-none me-3">
+                    <span class="menu-title"><i class="fa-solid fa-motorcycle me-1 fs-2"></i> Rent a Bike!!</span>
+                </div>
             </a>
         </li>
 
