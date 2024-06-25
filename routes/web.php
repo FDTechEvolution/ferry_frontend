@@ -61,6 +61,9 @@ Route::controller(PaymentController::class)->group(function() {
     Route::get('payment', 'index')->name('payment-index');
     Route::get('payment/print/{bookingno}', 'print')->name('payment-print');
     Route::post('payment/create', 'payment')->name('payment-link');
+
+    // No csrf
+    Route::post('payment/ctsv-response', 'paymentCtsvResponse');
 });
 
 Route::controller(StationController::class)->group(function() {

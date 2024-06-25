@@ -69,4 +69,17 @@ class PaymentController extends Controller
         $link = config('services.store.image');
         return redirect()->away($link.'/print/ticket/'.$bookingno);
     }
+
+    public function paymentCtsvResponse(Request $request) {
+        if(isset($request['code']) && isset($request['message']) && isset($request['desc']) && isset($request['email'])) {
+            return view('pages.payment.ctsv_response', [
+                'payment_code' => $request['code'],
+                'payment_result' => $request['message'],
+                'bookingno' => $request['desc'],
+                'email' => $request['email']
+            ]);
+        }
+
+        return redirect()->route('home');
+    }
 }
