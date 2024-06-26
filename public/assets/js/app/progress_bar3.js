@@ -351,7 +351,7 @@ function progressCondition(step) {
                 if(item.dataset.type == 'Child') is_rangeDate = [startDate_child, endDate_child]
                 if(item.dataset.type == 'Infant') is_rangeDate = [startDate_infant, new Date()]
 
-                console.log(is_rangeDate)
+                // console.log(is_rangeDate)
                 $(`#${item.id}`).datepicker()
                 $(`#${item.id}`).datepicker('setEndDate', is_rangeDate[1])
                 $(`#${item.id}`).datepicker('setStartDate', is_rangeDate[0])
@@ -1065,15 +1065,18 @@ function updateSumPrice() {
     const person_infant = document.querySelector('.person-infant-icon').innerText
     const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
 
+    let s_price = sum_price.reduce((num1, num2) => { return num1+num2 })
+    let new_pflex_price = numberFormat(s_price - (s_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
         let price_status = result_premuim_price > 0 ? '+ ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
     else {
         result_premuim_price = 0
         let price_status = premium_price > 0 ? '- ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${premium_price} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
 
     addon_route.forEach((item) => {
@@ -1325,6 +1328,11 @@ function setAddonPrice(price_current, charge, price, status, person, index) {
 
 async function promoResponse() {
     const btn = document.querySelector('#button-promocode-submit')
+    const pflex_price = document.querySelector('.is-premium-price')
+    let s_price = sum_price.reduce((num1, num2) => { return num1+num2 })
+    let new_pflex_price = numberFormat(s_price - (s_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    pflex_price.innerHTML = new_pflex_price
+
     setTimeout(() => {
         if(promocode_active) {
             // document.querySelector('.your-booking-promocode').classList.add('d-none')

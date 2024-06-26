@@ -293,7 +293,7 @@ function progressCondition(step) {
                 if(item.dataset.type == 'Child') is_rangeDate = [startDate_child, endDate_child]
                 if(item.dataset.type == 'Infant') is_rangeDate = [startDate_infant, new Date()]
 
-                console.log(is_rangeDate)
+                // console.log(is_rangeDate)
                 $(`#${item.id}`).datepicker()
                 $(`#${item.id}`).datepicker('setEndDate', is_rangeDate[1])
                 $(`#${item.id}`).datepicker('setStartDate', is_rangeDate[0])
@@ -915,16 +915,17 @@ function updateSumPrice() {
     const person_child = document.querySelector('.person-child-icon').innerText
     const person_infant = document.querySelector('.person-infant-icon').innerText
     const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
+    let new_pflex_price = numberFormat(route_price - (route_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
         let price_status = result_premuim_price > 0 ? '+ ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
     else {
         result_premuim_price = 0
         let price_status = premium_price > 0 ? '- ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${premium_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
 
     addon_route.forEach((item) => { result_extra += parseInt(item.price) })
@@ -976,6 +977,7 @@ async function promocodeProcess(promocode, booking_date, route_list) {
     const use_promocode = document.querySelector('[name="use_promocode"]')
     const booking_discount = document.querySelector('.your-booking-discount')
     const btn_promo = document.querySelector('#button-promocode-submit')
+    const pflex_price = document.querySelector('.is-premium-price')
     promocode_premiumflex = 'N'
 
     if(_promocode !== '') {
@@ -1042,6 +1044,8 @@ async function promocodeProcess(promocode, booking_date, route_list) {
                 if(promocode_select === 'Y' && promo_active[route_selected]) {
                     discount_price.innerHTML = `- ${numberFormat(is_discount)} <small class="smaller">THB</small>`
                     route_price = discount
+                    let new_pflex_price = numberFormat(route_price - (route_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                    pflex_price.innerHTML = new_pflex_price
                     updateSumPrice()
                 }
                 else
@@ -1086,6 +1090,10 @@ async function promocodeProcess(promocode, booking_date, route_list) {
             use_promocode.value = ''
             promo_active = []
             booking_discount.classList.add('d-none')
+
+            let new_pflex_price = numberFormat(route_price - (route_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+            pflex_price.innerHTML = new_pflex_price
+
             setTimeout(() => {
                 btn_promo.classList.add('promo-fail')
                 btn_promo.classList.remove('promo-success')

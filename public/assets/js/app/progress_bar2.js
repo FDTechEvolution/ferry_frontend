@@ -417,7 +417,7 @@ function progressCondition(step) {
                 if(item.dataset.type == 'Child') is_rangeDate = [startDate_child, endDate_child]
                 if(item.dataset.type == 'Infant') is_rangeDate = [startDate_infant, new Date()]
 
-                console.log(is_rangeDate)
+                // console.log(is_rangeDate)
                 $(`#${item.id}`).datepicker()
                 $(`#${item.id}`).datepicker('setEndDate', is_rangeDate[1])
                 $(`#${item.id}`).datepicker('setStartDate', is_rangeDate[0])
@@ -741,15 +741,18 @@ function updateSumPrice() {
     const person_infant = document.querySelector('.person-infant-icon').innerText
     const person_all = parseInt(person_adult) + parseInt(person_child) + parseInt(person_infant)
 
+    let s_price = price.depart + price.return
+    let new_pflex_price = numberFormat(s_price - (s_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+
     if(promocode_premiumflex === 'N') {
         result_premuim_price = premium_price
         let price_status = result_premuim_price > 0 ? '+ ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${result_premuim_price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
     else {
         result_premuim_price = 0
         let price_status = premium_price > 0 ? '- ' : ''
-        your_booking.premium_flex.innerHTML = `${price_status}${premium_price} <small class="smaller">THB</small>`
+        your_booking.premium_flex.innerHTML = `${price_status}${new_pflex_price} <small class="smaller">THB</small>`
     }
 
     // console.log(addon_route.depart)
@@ -1288,6 +1291,7 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
     const use_promocode = document.querySelector('[name="use_promocode"]')
     const booking_discount = document.querySelector('.your-booking-discount')
     const btn_promo = document.querySelector('#button-promocode-submit')
+    const pflex_price = document.querySelector('.is-premium-price')
     promocode_premiumflex = 'N'
 
     if(_promocode !== '') {
@@ -1308,6 +1312,11 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
             // document.querySelector('.your-booking-promocode').classList.add('d-none')
             btn_promo.classList.remove('promo-fail')
             btn_promo.classList.add('promo-success')
+
+            let s_price = price.depart + price.return
+            let new_pflex_price = numberFormat(s_price - (s_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+            pflex_price.innerHTML = new_pflex_price
+
             $.SOW.core.toast.show('success', '', 'Promocode Active.', 'bottom-end', 3, true);
         }
         else {
@@ -1317,6 +1326,11 @@ async function promocodeProcess(promocode, booking_date_depart, booking_date_ret
             booking_discount.classList.add('d-none')
             btn_promo.classList.add('promo-fail')
             btn_promo.classList.remove('promo-success')
+
+            let s_price = price.depart + price.return
+            let new_pflex_price = numberFormat(s_price - (s_price*(100 - 10))/100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+            pflex_price.innerHTML = new_pflex_price
+
             $.SOW.core.toast.show('danger', '', 'Invalid Coupon Code. Promotion code incorrect or unavailable.', 'bottom-end', 3, true);
         }
 
