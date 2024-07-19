@@ -104,17 +104,36 @@ class StationController extends Controller
     }
 
     public function index() {
-        $response = Http::reqres()->get('stations/route');
-        $res =  $response->json();
+        // $response = Http::reqres()->get('stations/route');
+        // $res =  $response->json();
 
-        $all_routes = $this->arrayMerge($res['data']['from'], $res['data']['to']);
-        $route_uniq = array_unique($all_routes, SORT_REGULAR);
-        $route_sort = $this->arraySortA($route_uniq, 'name');
+        // $all_routes = $this->arrayMerge($res['data']['from'], $res['data']['to']);
+        // $route_uniq = array_unique($all_routes, SORT_REGULAR);
+        // $route_sort = $this->arraySortA($route_uniq, 'name');
         // Log::debug($route_sort);
         // $image_station = ['cover_01.webp', 'cover_02.webp', 'cover_03.webp', 'cover_04.webp'];
         // $station_to = $this->sectionGroup('section', $res['data']['to']);
 
-        return view('pages.station.index', ['stations' => $route_sort, 'store' => $this->ImageUrl]);
+        $response2 = Http::reqres()->get('stations/get/type');
+        $res2 = $response2->json();
+        $stations = $this->group_by('type', $res2['data']);
+        // Log::debug($stations);
+
+        return view('pages.station.index', ['stations' => $stations, 'store' => $this->ImageUrl]);
+    }
+
+    private function group_by($key, $data) {
+        $result = array();
+
+        foreach($data as $val) {
+            if(array_key_exists($key, $val)){
+                $result[$val[$key]][] = $val;
+            }else{
+                $result[""][] = $val;
+            }
+        }
+
+        return $result;
     }
 
     private function arrayMerge($arr_1, $arr_2) {

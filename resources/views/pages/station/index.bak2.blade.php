@@ -7,7 +7,7 @@
     <div class="row gx-5 min-h-50vh">
         <div class="col-12 border-bottom border-2 mt-3 d-block d-lg-none">
             <div class="flickity-preloader flickity-white flickity-dot-line" data-flickity='{ "autoPlay": false, "cellAlign": "left", "pageDots": false, "rightToLeft": false }'>
-                {{-- @foreach ($stations as $index => $station)
+                @foreach ($stations as $index => $station)
                 @php
                     $_image = $station['image'] != '' ? $store.'/'.$station['image'] : '/apple-touch-icon.png';
                 @endphp
@@ -17,57 +17,26 @@
                             <p class="text-center mt-1 mb-0 --lh-20 small s_m_name name-m-{{ $index }}">{{ $station['name'] }}</p>
                         </div>
                     </div>
-                @endforeach --}}
-            </div>
-        </div>
-        <div class="col-12 col-lg-9 border-end border-3 d-none d-lg-block">
-            <div class="row">
-                @foreach ($stations as $type => $station)
-                    @if($type == 'island')
-                        <x-station-check-in-type
-                            :title="_('Island')"
-                            :stations="$station"
-                            :store="$store"
-                            :bg="_('#fdfbca')"
-                        />
-                    @endif
-                    @if($type == 'pier')
-                        <x-station-check-in-type
-                            :title="_('Pier')"
-                            :stations="$station"
-                            :store="$store"
-                            :bg="_('#f7f6f1')"
-                        />
-                    @endif
-                    @if($type == 'airport')
-                        <x-station-check-in-type
-                            :title="_('Airport Transfer')"
-                            :stations="$station"
-                            :store="$store"
-                            :bg="_('#cfedf5')"
-                        />
-                    @endif
-                    @if($type == 'hotel')
-                        <x-station-check-in-type
-                            :title="_('Hotel Transfer')"
-                            :stations="$station"
-                            :store="$store"
-                            :bg="_('#cfe8d3')"
-                        />
-                    @endif
-                    @if($type == 'other')
-                        <x-station-check-in-type
-                            :title="_('Other Location')"
-                            :stations="$station"
-                            :store="$store"
-                            :bg="_('#fccbc7')"
-                        />
-                    @endif
                 @endforeach
             </div>
         </div>
-        <div class="col-12 col-lg-3 mt-2">
-            {{-- @php
+        <div class="col-12 col-lg-7 border-end border-3 d-none d-lg-block">
+            <div class="row">
+                @foreach ($stations as $index => $station)
+                @php
+                    $_image = $station['image'] != '' ? $store.'/'.$station['image'] : '/tiger-line-partner.jpg';
+                @endphp
+                    <div class="col-6 col-lg-4 mb-3">
+                        <div class="cursor-pointer" onClick="updateMap(`{{ $station['map'] }}`, {{ $index }})">
+                            <img src="{{ $_image }}" class="w-100 station-img rounded img-{{ $index }}">
+                            <p class="text-center mt-2 fw-bold --lh-20 s_name name-{{ $index }}">{{ $station['name'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 mt-2">
+            @php
                 $_img = $stations[0]['image'] != '' ? $store.'/'.$stations[0]['image'] : '/tiger-line-partner.jpg';
             @endphp
             <div class="div-sticky pb-4">
@@ -82,12 +51,12 @@
                         <a href="https://www.google.com/maps/dir/?api=1&destination={{ $stations[0]['map'] }}" class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 @stop
 
-{{-- @section('script')
+@section('script')
 <script>
     const div = document.querySelector('.geo-map')
     let geo = div.dataset.geo
@@ -149,4 +118,4 @@
 
     updateMap(geo, 0)
 </script>
-@stop --}}
+@stop
