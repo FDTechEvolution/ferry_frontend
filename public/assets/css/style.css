@@ -1002,6 +1002,9 @@ div.div-sticky {
 .--lh-20 {
     line-height: 20px;
 }
+.--lh-16 {
+    line-height: 16px;
+}
 .show-img {
     max-height: 340px;
 }

@@ -4,7 +4,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 @section('content')
-    <div class="row gx-5 min-h-50vh">
+    <div class="row gx-5 min-h-140vh">
         <div class="col-12 border-bottom border-2 mt-3 d-block d-lg-none">
             <div class="flickity-preloader flickity-white flickity-dot-line" data-flickity='{ "autoPlay": false, "cellAlign": "left", "pageDots": false, "rightToLeft": false }'>
                 {{-- @foreach ($stations as $index => $station)
@@ -20,7 +20,7 @@
                 @endforeach --}}
             </div>
         </div>
-        <div class="col-12 col-lg-9 border-end border-3 d-none d-lg-block">
+        <div class="col-12 col-lg-8 border-end border-3 mb-4">
             <div class="row">
                 @foreach ($stations as $type => $station)
                     @if($type == 'island')
@@ -29,6 +29,8 @@
                             :stations="$station"
                             :store="$store"
                             :bg="_('#fdfbca')"
+                            :type="$type"
+                            :color="_('#17aded')"
                         />
                     @endif
                     @if($type == 'pier')
@@ -37,6 +39,8 @@
                             :stations="$station"
                             :store="$store"
                             :bg="_('#f7f6f1')"
+                            :type="$type"
+                            :color="_('#d76a00')"
                         />
                     @endif
                     @if($type == 'airport')
@@ -45,6 +49,8 @@
                             :stations="$station"
                             :store="$store"
                             :bg="_('#cfedf5')"
+                            :type="$type"
+                            :color="_('#0082b9')"
                         />
                     @endif
                     @if($type == 'hotel')
@@ -53,6 +59,8 @@
                             :stations="$station"
                             :store="$store"
                             :bg="_('#cfe8d3')"
+                            :type="$type"
+                            :color="_('#333333')"
                         />
                     @endif
                     @if($type == 'other')
@@ -61,33 +69,94 @@
                             :stations="$station"
                             :store="$store"
                             :bg="_('#fccbc7')"
+                            :type="$type"
+                            :color="_('#bf000a')"
                         />
                     @endif
                 @endforeach
             </div>
         </div>
-        <div class="col-12 col-lg-3 mt-2">
-            {{-- @php
-                $_img = $stations[0]['image'] != '' ? $store.'/'.$stations[0]['image'] : '/tiger-line-partner.jpg';
+        <div class="col-12 col-lg-4 mt-2">
+            @php
+                $_img = $stations['island'][0]['image'] != '' ? $store.'/'.$stations['island'][0]['image'] : '/tiger-line-partner.jpg';
             @endphp
             <div class="div-sticky pb-4">
-                <h3 class="main-station">{{ $stations[0]['name'] }}</h3>
+                <h3 class="main-station text-center">{{ $stations['island'][0]['name'] }}</h3>
                 <img src="{{ $_img }}" class="w-100 rounded mb-3 show-img">
+                <p class="station-show-detail small"></p>
                 <div class="map-zone">
-                    <div class="geo-map" data-geo="{{ $stations[0]['map'] }}">
+                    <div class="geo-map" data-geo="{{ $stations['island'][0]['map'] }}">
                         <div id="s_geo_map" class="mb-3 w-100" style="height: 300px;"></div>
                     </div>
                     <div class="google-map d-flex justify-content-start align-items-center">
                         <h4 class="me-3 mb-0"><i class="fa-solid fa-map-location-dot"></i> Google Map</h4>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination={{ $stations[0]['map'] }}" class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination={{ $stations['island'][0]['map'] }}" class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 @stop
 
-{{-- @section('script')
+@section('script')
+<style>
+    .check-in-col {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+    }
+    .min-h-140vh {
+        min-height: 140vh;
+    }
+    p.station-show-detail {
+        height: 140px;
+        margin-bottom: 30px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+    /* width */
+    .station-show-detail::-webkit-scrollbar {
+        width: 5px;
+    }
+    /* Track */
+    .station-show-detail::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    /* Handle */
+    .station-show-detail::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+    /* Handle on hover */
+    .station-show-detail::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .flickity-white .flickity-button {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .flickity-prev-next-button.next {
+        right: -10px;
+    }
+    .flickity-prev-next-button.previous {
+        left: -10px;
+    }
+    .flickity-button:before {
+        line-height: 26px;
+    }
+    .flickity-button.previous:before {
+        margin-left: -3px;
+    }
+
+    /* @media only screen and (min-width: 1000px) {
+        .col-md-custom {
+            width: 28%;
+        }
+    } */
+</style>
+
 <script>
     const div = document.querySelector('.geo-map')
     let geo = div.dataset.geo
@@ -98,11 +167,12 @@
     const _direction = document.querySelector('.get-direction')
     const _names = document.querySelectorAll('.s_name')
     const _m_names = document.querySelectorAll('.s_m_name')
+    const _detail = document.querySelector('.station-show-detail')
 
-    async function updateMap(geo, index) {
+    async function updateMap(geo, type, index) {
         const _geo = geo !== '' ? geo.split(',') : ''
         await clearStationSelect(index)
-        await setStationSelect(index)
+        await setStationSelect(type, index)
 
         if(_geo !== '') {
             if(map !== null) {
@@ -129,24 +199,28 @@
     }
 
     function clearStationSelect(index) {
+        _detail.innerHTML = ''
         _names.forEach(n => { n.classList.remove('text-primary') })
-        _m_names.forEach(m => {
-            m.classList.remove('text-primary')
-            m.classList.remove('fw-bold')
-        })
+        // _m_names.forEach(m => {
+        //     m.classList.remove('text-primary')
+        //     m.classList.remove('fw-bold')
+        // })
     }
 
-    function setStationSelect(index) {
-        const s_name = document.querySelector(`.name-${index}`)
-        const m_name = document.querySelector(`.name-m-${index}`)
+    function setStationSelect(type, index) {
+        const s_name = document.querySelector(`.name-${type}-${index}`)
+        // const m_name = document.querySelector(`.name-m-${index}`)
+        const detail = document.querySelector(`.station-${type}-${index}-detail`)
+
         _name.innerHTML = s_name.innerText
-        _show.src = document.querySelector(`.img-${index}`).src
+        _detail.innerHTML = detail.dataset.detail
+        _show.src = document.querySelector(`.img-${type}-${index}`).dataset.img
 
         s_name.classList.add('text-primary')
-        m_name.classList.add('text-primary')
-        m_name.classList.add('fw-bold')
+        // m_name.classList.add('text-primary')
+        // m_name.classList.add('fw-bold')
     }
 
-    updateMap(geo, 0)
+    updateMap(geo, 'island', 0)
 </script>
-@stop --}}
+@stop

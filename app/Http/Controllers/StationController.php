@@ -117,9 +117,21 @@ class StationController extends Controller
         $response2 = Http::reqres()->get('stations/get/type');
         $res2 = $response2->json();
         $stations = $this->group_by('type', $res2['data']);
-        // Log::debug($stations);
+        $stations = $this->orderCustom($stations);
 
         return view('pages.station.index', ['stations' => $stations, 'store' => $this->ImageUrl]);
+    }
+
+    private function orderCustom($array) {
+        $order = ['island' => [], 'pier' => [], 'airport' => [], 'hotel' => [], 'other' => []];
+
+        foreach($order as $ord => $o) {
+            foreach($array as $index => $arr) {
+                if($ord == $index) $order[$ord] = $array[$index];
+            }
+        }
+
+        return $order;
     }
 
     private function group_by($key, $data) {
