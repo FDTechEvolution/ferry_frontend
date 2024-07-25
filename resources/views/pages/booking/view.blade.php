@@ -168,7 +168,7 @@
                             </div>
                         </div>
 
-                        <div class="card mb-2 d-none" style="background-color: #d0e5ff;">
+                        <div class="card mb-2" style="background-color: #d0e5ff;">
                             <div class="card-header mb-0 p-0 border-0 bg-transparent" id="accPaymentTwo">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link w-100 btn-lg text-align-start text-decoration-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#paymentTwo" aria-expanded="true" aria-controls="paymentTwo">
