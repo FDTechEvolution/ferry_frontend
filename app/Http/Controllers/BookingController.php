@@ -745,6 +745,7 @@ class BookingController extends Controller
                 $route_payment_lines = $this->setSummaryDiscount($payment_lines, 'ROUTE');
                 $premium_payment_lines = $this->setSummaryDiscount($payment_lines, 'PREMIUM');
                 $addon_payment_lines = $this->setSummaryDiscount($payment_lines, 'ADDON');
+                $fee_payment_lines = $this->setSummaryDiscount($payment_lines, 'FEE');
 
                 // Log::debug($booking);
                 $fee = $this->getFeeSetting($passengers, $booking);
@@ -756,7 +757,7 @@ class BookingController extends Controller
                                 'payment_lines' => $payment_lines, 'route_addon' => $route_addon, 'passenger' => $passenger,
                                 'passengers' => $passengers, 'trip_type' => $trip_type, 'route_payments' => $route_payment_lines,
                                 'premium_payments' => $premium_payment_lines, 'addon_payments' => $addon_payment_lines,
-                                'passenger_email' => $request->booking_email, 'fee' => $fee
+                                'passenger_email' => $request->booking_email, 'fee_payments' => $fee_payment_lines, 'fee' => $fee
                             ]);
             }
 
@@ -779,6 +780,8 @@ class BookingController extends Controller
             $type = $f['type'];
             $_f[$type]['type'] = $f['type'];
             $_f[$type]['total'] = 0;
+            $_f[$type]['isuse_pf'] = 'N';
+            $_f[$type]['isuse_sc'] = 'N';
             if($f['isuse_pf'] == 'Y') {
                 if($f['is_pf_perperson'] == 'Y') {
                     $_f[$type]['adult'] = $f['regular_pf'];
@@ -794,6 +797,7 @@ class BookingController extends Controller
                     $_f[$type]['percent'] = $f['percent_pf'];
                     $_f[$type]['total'] += $total;
                 }
+                $_f[$type]['isuse_pf'] = 'Y';
             }
 
             if($f['isuse_sc'] == 'Y') {
@@ -811,6 +815,7 @@ class BookingController extends Controller
                     $_f[$type]['percent'] = $f['percent_sc'];
                     $_f[$type]['total'] += $total;
                 }
+                $_f[$type]['isuse_sc'] = 'Y';
             }
         }
 

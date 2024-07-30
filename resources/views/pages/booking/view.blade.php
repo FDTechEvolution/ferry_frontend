@@ -104,6 +104,15 @@
                             @endif
                         @endforeach
 
+                        @foreach ($fee_payments as $fp)
+                            <h6 class="d-flex justify-content-end align-items-end">
+                                {!! $fp['title'] !!}
+                                <p class="sum-amount text-end mb-0 ms-3">
+                                    {{ number_format($fp['amount']) }}
+                                </p>
+                            </h6>
+                        @endforeach
+
                         <hr/>
                         <h5 class="d-flex justify-content-end align-items-end">Total THB <p class="sum-amount text-end mb-0 ms-3">{{ number_format($booking['payment'][0]['totalamt']) }}</p></h5>
                     </div>

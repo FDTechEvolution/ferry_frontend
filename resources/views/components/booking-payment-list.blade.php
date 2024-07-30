@@ -22,6 +22,8 @@
                     </p>
                     <x-payment-service-fee
                         :fee_total="$fee['total']"
+                        :isuse_pf="$fee['isuse_pf']"
+                        :isuse_sc="$fee['isuse_sc']"
                     />
                     {{-- @if($isfreecredit == 'Y')
                         <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee 0%
@@ -51,6 +53,8 @@
                     </p>
                     <x-payment-service-fee
                         :fee_total="$fee['total']"
+                        :isuse_pf="$fee['isuse_pf']"
+                        :isuse_sc="$fee['isuse_sc']"
                     />
                 </div>
             </div>
@@ -79,6 +83,8 @@
                     </p>
                     <x-payment-service-fee
                         :fee_total="$fee['total']"
+                        :isuse_pf="$fee['isuse_pf']"
+                        :isuse_sc="$fee['isuse_sc']"
                     />
                 </div>
             </div>
@@ -98,6 +104,8 @@
                     </p>
                     <x-payment-service-fee
                         :fee_total="$fee['total']"
+                        :isuse_pf="$fee['isuse_pf']"
+                        :isuse_sc="$fee['isuse_sc']"
                     />
                 </div>
             </div>
@@ -123,6 +131,8 @@
                     </p>
                     <x-payment-service-fee
                         :fee_total="$fee['total']"
+                        :isuse_pf="$fee['isuse_pf']"
+                        :isuse_sc="$fee['isuse_sc']"
                     />
                 </div>
             </div>
