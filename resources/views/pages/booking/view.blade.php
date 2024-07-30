@@ -141,7 +141,7 @@
                                 </h2>
                             </div>
                             <div id="paymentOne" class="collapse show" aria-labelledby="accPaymentOne" data-bs-parent="#accordionShadow">
-                                <div class="card-body pt-0">
+                                <div class="card-body pt-0 px-2">
                                     <div class="row mx-3">
                                         <div class="col-12 col-lg-12 text-center ps-0">
                                             <form method="POST" id="_2c2p" action="{{ route('payment-link') }}">
@@ -149,6 +149,7 @@
                                                 <div class="text-start _2c2p">
                                                     <x-booking-payment-list
                                                         :bg="_('#fae5d7')"
+                                                        :fee="$fee['2C2P']"
                                                     />
                                                 </div>
                                                 <div class="text-end mt-2">
@@ -181,7 +182,7 @@
                                 </h2>
                             </div>
                             <div id="paymentTwo" class="collapse" aria-labelledby="accPaymentTwo" data-bs-parent="#accordionShadow">
-                                <div class="card-body pt-0">
+                                <div class="card-body pt-0 px-2">
                                     <div class="row mx-3 mb-2">
                                         <div class="col-12 col-lg-12 text-center ps-0 ">
                                             <form method="POST" id="ctsv" action="{{ route('payment-link') }}">
@@ -189,6 +190,7 @@
                                                 <div class="text-start ctsv">
                                                     <x-booking-payment-list-ctsv
                                                         :bg="_('#fae5d7')"
+                                                        :fee="$fee['PATALL']"
                                                     />
                                                 </div>
                                                 <div class="text-end mt-2">

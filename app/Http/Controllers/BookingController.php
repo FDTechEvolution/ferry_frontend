@@ -747,6 +747,7 @@ class BookingController extends Controller
                 $addon_payment_lines = $this->setSummaryDiscount($payment_lines, 'ADDON');
 
                 // Log::debug($booking);
+                $fee = $this->getFeeSetting($passengers, $booking);
 
                 return view('pages.booking.view',
                             ['booking' => $booking, 'customers' => $customers, 'booking_status' => $this->BookingStatus,
@@ -755,7 +756,7 @@ class BookingController extends Controller
                                 'payment_lines' => $payment_lines, 'route_addon' => $route_addon, 'passenger' => $passenger,
                                 'passengers' => $passengers, 'trip_type' => $trip_type, 'route_payments' => $route_payment_lines,
                                 'premium_payments' => $premium_payment_lines, 'addon_payments' => $addon_payment_lines,
-                                'passenger_email' => $request->booking_email
+                                'passenger_email' => $request->booking_email, 'fee' => $fee
                             ]);
             }
 
@@ -763,6 +764,58 @@ class BookingController extends Controller
         }
 
         return view('404', ['msg' => $msg]);
+    }
+
+    private function getFeeSetting($passengers, $booking) {
+        $response = Http::reqres()->get('/fee-manage');
+        $res = $response->json();
+
+        $fee = $res['data'];
+        $_f = [];
+
+        // Log::debug($fee);
+
+        foreach($fee as $f) {
+            $type = $f['type'];
+            $_f[$type]['type'] = $f['type'];
+            $_f[$type]['total'] = 0;
+            if($f['isuse_pf'] == 'Y') {
+                if($f['is_pf_perperson'] == 'Y') {
+                    $_f[$type]['adult'] = $f['regular_pf'];
+                    $_f[$type]['adult_fee'] = $passengers['adult'] * $f['regular_pf'];
+                    $_f[$type]['child'] = $f['child_pf'];
+                    $_f[$type]['child_fee'] = $passengers['child'] * $f['child_pf'];
+                    $_f[$type]['infant'] = $f['infant_pf'];
+                    $_f[$type]['infant_fee'] = $passengers['infant'] * $f['infant_pf'];
+                    $_f[$type]['total'] += $_f[$type]['adult_fee'] + $_f[$type]['child_fee'] + $_f[$type]['infant_fee'];
+                }
+                else {
+                    $total = $booking['payment'][0]['totalamt']*($f['percent_pf']/100);
+                    $_f[$type]['percent'] = $f['percent_pf'];
+                    $_f[$type]['total'] += $total;
+                }
+            }
+
+            if($f['isuse_sc'] == 'Y') {
+                if($f['is_sc_perperson'] == 'Y') {
+                    $_f[$type]['adult'] = $f['regular_sc'];
+                    $_f[$type]['adult_fee'] = $passengers['adult'] * $f['regular_sc'];
+                    $_f[$type]['child'] = $f['child_sc'];
+                    $_f[$type]['child_fee'] = $passengers['child'] * $f['child_sc'];
+                    $_f[$type]['infant'] = $f['infant_sc'];
+                    $_f[$type]['infant_fee'] = $passengers['infant'] * $f['infant_sc'];
+                    $_f[$type]['total'] += $_f[$type]['adult_fee'] + $_f[$type]['child_fee'] + $_f[$type]['infant_fee'];
+                }
+                else {
+                    $total = $booking['payment'][0]['totalamt']*($f['percent_sc']/100);
+                    $_f[$type]['percent'] = $f['percent_sc'];
+                    $_f[$type]['total'] += $total;
+                }
+            }
+        }
+
+        // Log::debug($_f);
+        return $_f;
     }
 
     private function setTripType($trip_type, $route) {

@@ -508,6 +508,9 @@ h1,h2,h3,h4,h5{
         margin-right: 4%;
         margin-top: 4%;
     }
+    .w-m-100 {
+        width: 100%;
+    }
 }
 @media (max-width: 400px) {
     img.img-logo-style {

@@ -1,4 +1,4 @@
-@props(['isfreecredit' => 'N', 'bg' => ''])
+@props(['isfreecredit' => 'N', 'bg' => '', 'fee' => []])
 
 <div class="row mt-2">
     <div class="col-11 offset-1 px-0 mb-2 d-none">
@@ -11,8 +11,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 d-lg-inline d-block fw-bold">Credit Card / Debit Card</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 d-lg-inline d-block fw-bold w-m-100">Credit Card / Debit Card</span>
                         <img src="{{ asset('icons/visa_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="VISA"
                         >
@@ -23,13 +23,16 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="JCB"
                         >
                     </p>
-                    @if($isfreecredit == 'Y')
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
+                    {{-- @if($isfreecredit == 'Y')
                         <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee 0%
                             <span class="text-success">Free by promoCode</span>
                         </small>
                     @else
                         <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee 3.5%</small>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </label>
@@ -40,8 +43,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">CASH</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">CASH</span>
                         <img src="{{ asset('icons/counter-service-icon.svg') }}" class="me-1 w--m-img rounded" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Counter Service"
                         >
@@ -49,6 +52,9 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="7-Eleven"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -59,8 +65,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">INST</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">INST</span>
                         <img src="{{ asset('icons/alipay_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Alipay"
                         >
@@ -74,6 +80,9 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="TrueMoney"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -84,12 +93,15 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">7CARD</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">7CARD</span>
                         <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -100,12 +112,15 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">TrueMoney Wallet</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">TrueMoney Wallet</span>
                         <img src="{{ asset('icons/truemoney_wallet_icon.svg') }}" class="me-2 w--m-img" width="50"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="TrueMoney"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -116,12 +131,15 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">Thai QR Payment</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">Thai QR Payment</span>
                         <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -132,12 +150,15 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">Mobile Banking</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">Mobile Banking</span>
                         <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>

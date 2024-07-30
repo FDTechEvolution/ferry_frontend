@@ -1,4 +1,4 @@
-@props(['isfreecredit' => 'N', 'bg' => ''])
+@props(['isfreecredit' => 'N', 'bg' => '', 'fee' => []])
 
 <div class="row mt-2">
     <div class="col-12">
@@ -8,8 +8,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 d-lg-inline d-block fw-bold">Credit Card / Debit Card</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 d-lg-inline d-block fw-bold w-m-100">Credit Card / Debit Card</span>
                         <img src="{{ asset('icons/visa_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="VISA"
                         >
@@ -20,13 +20,16 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="JCB"
                         >
                     </p>
-                    @if($isfreecredit == 'Y')
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
+                    {{-- @if($isfreecredit == 'Y')
                         <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee 0%
                             <span class="text-success">Free by promoCode</span>
                         </small>
                     @else
                         <small class="d-block mt-minus-creditfee" style="margin-top: -10px;">Credit card fee <span class="cc-fee">3.5</span>%</small>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </label>
@@ -37,8 +40,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">Global Card</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">Global Card</span>
                         <img src="{{ asset('icons/unionpay_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="UnionPay"
                         >
@@ -46,6 +49,9 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Diners"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -56,8 +62,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">Digital Payment</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">Digital Payment</span>
                         <img src="{{ asset('icons/alipay_icon.svg') }}" class="me-2 w--m-img" width="40"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Alipay"
                         >
@@ -71,6 +77,9 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="TrueMoney"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -81,12 +90,15 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">Thai QR Payment</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">Thai QR Payment</span>
                         <img src="{{ asset('icons/promptpay_icon.svg') }}" class="me-2 w--m-img" width="90"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Prompt Pay"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
@@ -97,8 +109,8 @@
             </div>
             <div class="col-9 col-lg-11 card">
                 <div class="card-body p-2">
-                    <p class="mb-0">
-                        <span class="me-3 fw-bold">QR Payment</span>
+                    <p class="mb-2 d-flex align-items-center flex-wrap">
+                        <span class="me-3 fw-bold w-m-100">QR Payment</span>
                         <img src="{{ asset('icons/visa_qr_icon.svg') }}" class="me-2 w--m-img border border-secondary rounded" width="90"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Visa QR Payment"
                         >
@@ -109,6 +121,9 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="UnionPay QR Payment"
                         >
                     </p>
+                    <x-payment-service-fee
+                        :fee_total="$fee['total']"
+                    />
                 </div>
             </div>
         </label>
