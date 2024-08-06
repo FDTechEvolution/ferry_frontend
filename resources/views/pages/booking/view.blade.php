@@ -58,7 +58,7 @@
                                 :type="$_type[$index]"
                                 :route="$route"
                                 :passengers="$passengers"
-                                :trip_date="$booking['depart_date']"
+                                :trip_date="$route['travel_date']"
                                 :addons="$booking['extra_addons'][$index]['addons']"
                                 :icon_url="$icon_url"
                                 :icons="$route['icons']"

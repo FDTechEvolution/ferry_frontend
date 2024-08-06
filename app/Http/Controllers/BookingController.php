@@ -77,7 +77,7 @@ class BookingController extends Controller
             $routes['data'][$index]['do_booking'] = $_diff > 0 ? true : $this->checkTimeDiff($route['depart_time']);
 
             $routes['data'][$index]['travel_time'] = $this->timeTravelDiff($route['depart_time'], $route['arrive_time']);
-            $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $routes['data'][0]['route_addons']);
+            $routes['data'][$index]['addon_group'] = $this->sectionGroup('type', $route['route_addons']);
 
             if($promocode != null) {
                 $use_promocode = $request->promotioncode;
