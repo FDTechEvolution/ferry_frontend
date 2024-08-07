@@ -747,7 +747,6 @@ class BookingController extends Controller
                 $addon_payment_lines = $this->setSummaryDiscount($payment_lines, 'ADDON');
                 $fee_payment_lines = $this->setSummaryDiscount($payment_lines, 'FEE');
 
-                // Log::debug($booking);
                 $fee = $this->getFeeSetting($passengers, $booking);
 
                 return view('pages.booking.view',

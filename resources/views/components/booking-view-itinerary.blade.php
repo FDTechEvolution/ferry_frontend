@@ -1,9 +1,9 @@
 @props(['trip' => '', 'type' => '', 'route' => [], 'passengers' => [], 'trip_date' => '',
         'addons' => [], 'icon_url' => '', 'icons' => [], 'totalamt' => ''])
-@php
-    $extra_amount = 0
-@endphp
 
+@php
+    $_addon_price = 0;
+@endphp
 <div class="row border-bottom-mobile mb-4 mb-lg-0">
     <div class="col-12 mb-4">
         <div class="row">
@@ -91,8 +91,7 @@
             @foreach ($addons as $addon)
                 @php
                     $_passenger = $passengers['adult'] + $passengers['child'] + $passengers['infant'];
-                    $extra_price = $_passenger * $addon['price'];
-                    $extra_amount += $extra_price;
+                    $_addon_price += $addon['price'];
                 @endphp
                 <div class="row mb-2">
                     <div class="col-7 col-lg-8 pb-2 pb-lg-0">
@@ -105,10 +104,10 @@
                     <div class="col-5 col-lg-4 mt-3 mt-lg-0 px-0 px-lg-4">
                         <div class="row">
                             <div class="col-6 col-lg-4 offset-lg-4 text-end">
-                                {{ $_passenger }} x {{ number_format($addon['price']) }}
+                                {{ $_passenger }} x {{ number_format($addon['price'] / $_passenger) }}
                             </div>
                             <div class="col-6 col-lg-4 text-end pe-4 pe-lg-3">
-                                {{ number_format($_passenger * $addon['price']) }}
+                                {{ number_format($addon['price']) }}
                             </div>
                         </div>
                     </div>
@@ -118,6 +117,6 @@
     @endif
 
     <div class="col-12 pe-0 pe-lg-4 mb-3">
-        <h5 class="text-end"><strong><span class="me-3">{{ $type }}</span> {{ number_format($route['amount'] + $extra_amount) }}</strong></h5>
+        <h5 class="text-end"><strong><span class="me-3">{{ $type }}</span> {{ number_format($route['amount'] + $_addon_price) }}</strong></h5>
     </div>
 </div>
