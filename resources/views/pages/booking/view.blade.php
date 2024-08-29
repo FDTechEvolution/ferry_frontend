@@ -75,7 +75,7 @@
                                 <h6 class="d-flex justify-content-end align-items-end">
                                     {!! $rp['title'] !!}
                                     <p class="sum-amount text-end mb-0 ms-3">
-                                        {{ number_format($rp['amount']) }}
+                                        {{ number_format($rp['amount'], 2) }}
                                     </p>
                                 </h6>
                             @endif
@@ -85,7 +85,7 @@
                             <h6 class="d-flex justify-content-end align-items-end">
                                 {!! $pp['title'] !!}
                                 <p class="sum-amount text-end mb-0 ms-3">
-                                    {{ number_format($pp['amount']) }}
+                                    {{ number_format($pp['amount'], 2) }}
                                 </p>
                             </h6>
                         @endforeach
@@ -98,7 +98,7 @@
                                 <h6 class="d-flex justify-content-end align-items-end">
                                     {!! $ap['title'] !!}
                                     <p class="sum-amount text-end mb-0 ms-3">
-                                        {{ number_format($all_passenger * $ap['amount']) }}
+                                        {{ number_format($all_passenger * $ap['amount'], 2) }}
                                     </p>
                                 </h6>
                             @endif
@@ -108,13 +108,13 @@
                             <h6 class="d-flex justify-content-end align-items-end">
                                 {!! $fp['title'] !!}
                                 <p class="sum-amount text-end mb-0 ms-3">
-                                    {{ number_format($fp['amount']) }}
+                                    {{ number_format($fp['amount'], 2) }}
                                 </p>
                             </h6>
                         @endforeach
 
                         <hr/>
-                        <h5 class="d-flex justify-content-end align-items-end">Total THB <p class="sum-amount text-end mb-0 ms-3">{{ number_format($booking['payment'][0]['totalamt']) }}</p></h5>
+                        <h5 class="d-flex justify-content-end align-items-end">Total THB <p class="sum-amount text-end mb-0 ms-3">{{ number_format($booking['payment'][0]['totalamt'], 2) }}</p></h5>
                     </div>
                 </div>
             </div>

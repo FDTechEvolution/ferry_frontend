@@ -104,10 +104,10 @@
                     <div class="col-5 col-lg-4 mt-3 mt-lg-0 px-0 px-lg-4">
                         <div class="row">
                             <div class="col-6 col-lg-4 offset-lg-4 text-end">
-                                {{ $_passenger }} x {{ number_format($addon['price'] / $_passenger) }}
+                                {{ $_passenger }} x {{ number_format($addon['price'] / $_passenger, 2) }}
                             </div>
                             <div class="col-6 col-lg-4 text-end pe-4 pe-lg-3">
-                                {{ number_format($addon['price']) }}
+                                {{ number_format($addon['price'], 2) }}
                             </div>
                         </div>
                     </div>
@@ -117,6 +117,6 @@
     @endif
 
     <div class="col-12 pe-0 pe-lg-4 mb-3">
-        <h5 class="text-end"><strong><span class="me-3">{{ $type }}</span> {{ number_format($route['amount'] + $_addon_price) }}</strong></h5>
+        <h5 class="text-end"><strong><span class="me-3">{{ $type }}</span> {{ number_format($route['amount'] + $_addon_price, 2) }}</strong></h5>
     </div>
 </div>
