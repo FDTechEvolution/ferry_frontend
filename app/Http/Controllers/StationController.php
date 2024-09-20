@@ -116,10 +116,28 @@ class StationController extends Controller
 
         $response2 = Http::reqres()->get('stations/get/type');
         $res2 = $response2->json();
-        $stations = $this->group_by('type', $res2['data']);
-        $stations = $this->orderCustom($stations);
+        if(!empty($res2['data'])) {
+            $stations = $this->group_by('type', $res2['data']);
+            $stations = $this->orderCustom($stations);
+        }
+        else $stations = [];
 
-        return view('pages.station.index', ['stations' => $stations, 'store' => $this->ImageUrl]);
+        $station_default = !empty($this->setStationDefault($stations)) ? $this->setStationDefault($stations) : [null, null];
+
+        return view('pages.station.index', ['stations' => $stations,
+                    'station_default' => $station_default[1],
+                    'station_key' => $station_default[0],
+                    'store' => $this->ImageUrl]);
+    }
+
+    private function setStationDefault($stations) {
+        if(!empty($stations)) {
+            foreach($stations as $key => $st) {
+                if(!empty($st[0])) { return array($key, $st[0]); }
+            }
+        }
+
+        return [];
     }
 
     private function orderCustom($array) {

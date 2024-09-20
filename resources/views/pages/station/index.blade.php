@@ -76,25 +76,27 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-12 col-lg-4 mt-2">
-            @php
-                $_img = $stations['island'][0]['image'] != '' ? $store.'/'.$stations['island'][0]['image'] : '/tiger-line-partner.jpg';
-            @endphp
-            <div class="div-sticky pb-4">
-                <h3 class="main-station text-center">{{ $stations['island'][0]['name'] }}</h3>
-                <img src="{{ $_img }}" class="w-100 rounded mb-3 show-img">
-                <p class="station-show-detail small"></p>
-                <div class="map-zone">
-                    <div class="geo-map" data-geo="{{ $stations['island'][0]['map'] }}">
-                        <div id="s_geo_map" class="mb-3 w-100" style="height: 300px;"></div>
-                    </div>
-                    <div class="google-map d-flex justify-content-start align-items-center">
-                        <h4 class="me-3 mb-0"><i class="fa-solid fa-map-location-dot"></i> Google Map</h4>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination={{ $stations['island'][0]['map'] }}" class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
+        @if($station_default !== null)
+            <div class="col-12 col-lg-4 mt-2">
+                @php
+                    $_img = $station_default['image'] != '' ? $store.'/'.$station_default['image'] : '/tiger-line-partner.jpg';
+                @endphp
+                <div class="div-sticky pb-4">
+                    <h3 class="main-station text-center">{{ $station_default['name'] }}</h3>
+                    <img src="{{ $_img }}" class="w-100 rounded mb-3 show-img">
+                    <p class="station-show-detail small"></p>
+                    <div class="map-zone">
+                        <div class="geo-map" data-geo="{{ $station_default['map'] }}">
+                            <div id="s_geo_map" class="mb-3 w-100" style="height: 300px;"></div>
+                        </div>
+                        <div class="google-map d-flex justify-content-start align-items-center">
+                            <h4 class="me-3 mb-0"><i class="fa-solid fa-map-location-dot"></i> Google Map</h4>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination={{ $station_default['map'] }}" class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 @stop
 
@@ -221,6 +223,6 @@
         // m_name.classList.add('fw-bold')
     }
 
-    updateMap(geo, 'island', 0)
+    if(`{{ $station_key }}` !== null) updateMap(geo, `{{ $station_key }}`, 0)
 </script>
 @stop
