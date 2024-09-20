@@ -17,7 +17,20 @@ class TimetableController extends Controller
     public function index() {
         $tt = $this->getTimetable();
 
-        return view('pages.timetable.index', ['timetable' => $tt['data'], 'img_url' => $this->ImageUrl]);
+        $id = request()->id;
+        $timeTables = $tt['data'];
+        $default = sizeof($timeTables)==0?[]:$timeTables[0];
+
+        if(!empty($id)){
+            foreach($timeTables as $item){
+                if($id == $item['id']){
+                    $default = $item;
+                    break;
+                }
+            }
+        }
+
+        return view('pages.timetable.index', ['timetable' =>$timeTables, 'img_url' => $this->ImageUrl,'default'=>$default]);
     }
 
     private function getTimetable() {
