@@ -2,8 +2,13 @@
 
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-6 col-lg-10">
         <h1 class="text-main-color">Route map</h1>
+    </div>
+    <div class="col-6 col-lg-2 text-end">
+        <a href="/">
+            <img src="{{ asset('images/book_button.webp') }}" alt="" class="img-fluid">
+        </a>
     </div>
 </div>
 <hr>
