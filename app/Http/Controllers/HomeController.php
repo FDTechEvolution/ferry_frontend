@@ -35,14 +35,27 @@ class HomeController extends Controller
         $sections = $this->stationSetTen($section_col);
         $_sections = array_chunk($sections[0], 15);
 
+        $anouncement = $this->getAnouncement();
+        if($anouncement['result']){
+            $anouncement = $anouncement['data']['body'];
+        }else{
+            $anouncement = '';
+        }
+
+
         return view('home', ['station_to' => $station_to,
                                 'slides' => $slide['data'], 'store' => $this->ImageUrl, 'cover' => $cover,
                                 'promotions' => $promotions, 'section_from' => $_sections,
-                                'billboards' => $billboard['data']]);
+                                'billboards' => $billboard['data'],'anouncement'=>$anouncement]);
     }
 
     private function getBillboard() {
         $response = Http::reqres()->get('/billboard/get');
+        return $response->json();
+    }
+
+    private function getAnouncement() {
+        $response = Http::reqres()->get('infomation/get/announcement');
         return $response->json();
     }
 
