@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -51,6 +52,10 @@ Route::controller(BookingController::class)->group(function() {
 
 Route::controller(TimetableController::class)->group(function() {
     Route::get('time-table', 'index')->name('timetable-index');
+});
+
+Route::controller(PageController::class)->group(function() {
+    Route::get('page/premium-flex', 'premiumFlex')->name('page.premiumFlex');
 });
 
 Route::controller(RouteMapController::class)->group(function() {

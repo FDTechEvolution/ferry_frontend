@@ -827,7 +827,9 @@ class BookingController extends Controller
         if($trip_type == 'round-trip') return ['Round Trip', 'Return'];
         if($trip_type == 'multi-trip') {
             $trip = [];
-            for($i = 0; $i < count($route); $i++) array_push($trip, 'Trip '.$i+1);
+            for($i = 0; $i < count($route); $i++){
+                array_push($trip, sprintf('Trip %s/%s',$i+1,sizeof($route)));
+            }
             return $trip;
         }
     }
