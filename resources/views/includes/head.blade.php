@@ -1,7 +1,9 @@
 <meta charset="UTF-8">
-<title>TIGER LINE FERRY:ferryPhuket FerryKrabi  FerryPhiPhi  FerryLanta  FerryLipe  FerryNagi  FerryKradan  FerryMook  FerryLangkawi</title>
-<meta name="description" content="Tigerline high speed ferries go Direct and Daily to all islands in Andaman Sea, Phuket+Krabi+Ao Nang+Phi Phi +Lanta+Ngai+Kradan+Mook+Lipe+Langkawi Book Now">
-<meta name="keywords" content="ferry,Phuket,FerryKrabi ,FerryPhiPhi,FerryLanta,FerryLipe ,FerryNagi  FerryKradan,FerryMook,FerryLangkawi">
+<title>TIGER LINE FERRY, Offical Website</title>
+<meta name="description"
+    content="Tigerline high speed ferries go Direct and Daily to all islands in Andaman Sea, Phuket+Krabi+Ao Nang+Phi Phi +Lanta+Ngai+Kradan+Mook+Lipe+Langkawi Book Now">
+<meta name="keywords"
+    content="ferry,Phuket,Ferry Krabi ,Ferry PhiPhi,Ferry Lanta,Ferry Lipe ,Ferry Nagi,Ferry Kradan,Ferry Mook,Ferry Langkawi">
 
 <meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1">
 <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->

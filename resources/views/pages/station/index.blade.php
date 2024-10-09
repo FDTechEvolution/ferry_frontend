@@ -66,6 +66,9 @@
             @endforeach
         </div>
     </div>
+    @php
+    dd($station_default);
+    @endphp
     @if($station_default !== null)
     <div class="col-12 col-lg-6 mt-2">
         @php

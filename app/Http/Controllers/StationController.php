@@ -116,6 +116,7 @@ class StationController extends Controller
 
         $response2 = Http::reqres()->get('stations/get/type');
         $res2 = $response2->json();
+        dd($response2);
         if(!empty($res2['data'])) {
             $stations = $this->group_by('type', $res2['data']);
             $stations = $this->orderCustom($stations);
