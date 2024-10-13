@@ -94,7 +94,7 @@
                     @if ($anouncement != '')
                     <div class="row">
                         <div class="col-12">
-                            <div class="" style="background-color: #CFD8DC;">
+                            <div class="rounded" style="background-color: #FFFFFF;color: red;">
                                 {!! $anouncement !!}
                             </div>
                         </div>
@@ -126,19 +126,19 @@
 
 @section('footer-logo')
 <div class="footer-logo-partner col-lg-10 offset-lg-1 text-center d-lg-flex mb-0 justify-content-center">
-    <img src="{{ asset('assets/images/SiriLanta_Speedboat.jpg') }}"
+    <img src="{{ asset('assets/images/SiriLanta_Speedboat.webp') }}"
         class="px-2 transition-hover-zoom footer-logo-height" width="" height="">
-    <img src="{{ asset('assets/images/spd-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width=""
+    <img src="{{ asset('assets/images/spd-logo.webp') }}" class="px-2 transition-hover-zoom footer-logo-height" width=""
         height="">
-    <img src="{{ asset('assets/images/aisasia.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width=""
+    <img src="{{ asset('assets/images/aisasia.webp') }}" class="px-2 transition-hover-zoom footer-logo-height" width=""
         height="">
-    <img src="{{ asset('assets/images/nokair-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height"
+    <img src="{{ asset('assets/images/nokair-logo.webp') }}" class="px-2 transition-hover-zoom footer-logo-height"
         width="" height="">
-    <img src="{{ asset('assets/images/cp-all-logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height"
+    <img src="{{ asset('assets/images/cp-all-logo.webp') }}" class="px-2 transition-hover-zoom footer-logo-height"
         width="" height="">
-    <img src="{{ asset('assets/images/7-11_logo.png') }}" class="px-2 transition-hover-zoom footer-logo-height" width=""
-        height="">
-    <img src="{{ asset('assets/images/123travel-logo.jpg') }}" class="px-2 transition-hover-zoom footer-logo-height"
+    <img src="{{ asset('assets/images/7-11_logo.webp') }}" class="px-2 transition-hover-zoom footer-logo-height"
+        width="" height="">
+    <img src="{{ asset('assets/images/123travel-logo.webp') }}" class="px-2 transition-hover-zoom footer-logo-height"
         width="" height="">
 </div>
 @stop

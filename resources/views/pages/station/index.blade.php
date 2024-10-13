@@ -40,6 +40,11 @@
             @endforeach --}}
         </div>
     </div>
+    @if($station_default !== null)
+    <div class="col-12">
+        <h3 class="main-station text-center">{{ $station_default['name'] }}</h3>
+    </div>
+    @endif
     <div class="col-12 col-lg-6 border-end border-3 mb-4">
         <div class="row">
             @foreach ($stations as $type => $station)
@@ -66,16 +71,13 @@
             @endforeach
         </div>
     </div>
-    @php
-    dd($station_default);
-    @endphp
     @if($station_default !== null)
-    <div class="col-12 col-lg-6 mt-2">
+    <div class="col-12 col-lg-6">
         @php
         $_img = $station_default['image'] != '' ? $store.'/'.$station_default['image'] : '/tiger-line-partner.jpg';
         @endphp
         <div class="div-sticky pb-4">
-            <h3 class="main-station text-center">{{ $station_default['name'] }}</h3>
+
             <img src="{{ $_img }}" class="w-100 rounded mb-3 show-img">
             <p class="station-show-detail small"></p>
             <div class="map-zone">
