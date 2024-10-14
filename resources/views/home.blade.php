@@ -115,9 +115,9 @@
 @section('content')
 @include('includes.home_vdo')
 
-<div class="row mt-lg-2">
+<div class="row mt-lg-2 my-5">
     <div class="col-12 d-flex justify-content-center">
-        <hr class="border-4 rounded w-25" />
+        <hr class="border-4 rounded w-50 d-none" />
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-<div class="section pt-2 pb-2 pb-lg-6">
+<div class="section pt-2 pb-2 mb-3 pb-lg-6">
     <div class="row">
         <div class="col-12 mb-3 d-md-none">
             <div class="ratio ratio-16x9">
@@ -23,13 +23,13 @@
                     <div class="row">
                         @if($bb_index > 1)
                             <button
-                                style="background-color: {{ $item['color'] }}; top: {{40 * $index}}px; margin-top: 10px;"
+                                style="background-color: {{ $item['color'] }}; left: {{(40 * $index) + 10}}px; margin-top: 10px;"
                                 class="btn btn-link btn-sm btn-billboard btn-content-announce " type="button"
                                 data-bs-toggle="collapse" data-bs-target="#billboard-content-{{ $index }}"
                                 aria-expanded="true" aria-controls="billboard-content-{{ $index }}"
                             >
 
-                            <img class="avatar avatar-xs icon-announce" style="margin-left: -10px; margin-top: -5px;" src="{{asset($store.'/'.$item['icon'])}}" />
+                            <img class="avatar avatar-custom icon-announce" style="margin-left: -12px; margin-top: -5px;" src="{{asset($store.'/'.$item['icon'])}}" />
 
                             </button>
                         @endif

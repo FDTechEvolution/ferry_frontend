@@ -84,8 +84,9 @@ h5 {
     position: absolute;
     z-index: 9;
     width: 42px;
-    right: -42px;
-    border-radius: 0 5px 5px 0;
+    bottom: -42px;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4), 0 1px 0px rgba(0, 0, 0, 0.6);
 }
 
 .border-end-desktop {
@@ -104,6 +105,12 @@ h5 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.avatar-custom {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: -4px;
 }
 
 /* desktop */
@@ -419,7 +426,7 @@ h5 {
         background-color: transparent;
         color: #333;
         box-shadow: none;
-        width: 89%;
+        width: 96%;
         /* margin: 0 auto; */
     }
 
