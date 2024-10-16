@@ -94,7 +94,7 @@
                     @if ($anouncement != '')
                     <div class="row">
                         <div class="col-12">
-                            <div class="rounded" style="background-color: #FFFFFF;color: red;">
+                            <div class="rounded text-main-color-2" style="background-color: #FFFFFF;">
                                 {!! $anouncement !!}
                             </div>
                         </div>
