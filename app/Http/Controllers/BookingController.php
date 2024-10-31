@@ -713,6 +713,8 @@ class BookingController extends Controller
     }
 
     public function findBookingRecord(Request $request) {
+
+
         $_booking_number = (isset($request->booking_number) && $request->booking_number != '') ? true : false;
         $_booking_email = (isset($request->booking_email) && $request->booking_email != '') ? true : false;
         $msg = '';
@@ -722,6 +724,7 @@ class BookingController extends Controller
             }
             $response = Http::reqres()->get('/online-booking/record/'.$request->booking_number.'/'.$request->booking_email);
             $res = $response->json();
+            //dd($res);
             if($res['result']) {
                 $booking = $res['data'];
                 $addons = $res['addon'];

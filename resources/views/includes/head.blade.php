@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <title>TIGER LINE FERRY, Offical Website</title>
 <meta name="description"
-    content="Tigerline high speed ferries go Direct and Daily to all islands in Andaman Sea, Phuket+Krabi+Ao Nang+Phi Phi +Lanta+Ngai+Kradan+Mook+Lipe+Langkawi Book Now">
+    content="Tigerline Ferry & SiriLanta Speedboat go to all islands in Andaman Sea.  The Best Thailand Ferries, Phuket Ferry, Ao Nang Ferry, Railay Speedboat, Phi Phi Ferries, Lanta Ferry, Lipe Ferry, Langkawi Ferries">
 <meta name="keywords"
     content="ferry,Phuket,Ferry Krabi ,Ferry PhiPhi,Ferry Lanta,Ferry Lipe ,Ferry Nagi,Ferry Kradan,Ferry Mook,Ferry Langkawi">
 

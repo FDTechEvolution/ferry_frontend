@@ -26,7 +26,7 @@
                 $_name = strpos($_name, 'Airport') != '' ? explode('Airport', $_name)[1] : '';
                 }
                 @endphp
-                <div class="col-5 col-md-3 col-md-custom px-1">
+                <div class="col-3 col-md-3 col-md-custom px-1">
                     <div class="cursor-pointer text-center check-in-list"
                         onClick="updateMap(`{{ $item['map'] }}`, '{{ $type }}', {{ $index }})">
                         <p class="text-center mt-1 mb-0 --lh-16 fw-medium small s_name name-{{ $type }}-{{ $index }}"
