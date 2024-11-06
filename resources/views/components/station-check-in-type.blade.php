@@ -18,7 +18,7 @@
                 @foreach ($stations as $index => $item)
                 @php
                 $_name = '';
-                $_image = $item['image'] != '' ? $store.'/'.$item['image'] : '/apple-touch-icon.png';
+                $_image = !empty($item['image']) ? $store.'/'.$item['image']['path'] : '/apple-touch-icon.png';
                 if($item['type'] == 'airport') {
                 $_name = $item['name'];
                 $item['name'] = strpos($item['name'], 'Airport') != '' ? explode('Airport', $item['name'])[0].' Airport'
@@ -28,7 +28,7 @@
                 @endphp
                 <div class="col-3 col-md-3 col-md-custom px-1">
                     <div class="cursor-pointer text-center check-in-list"
-                        onClick="updateMap(`{{ $item['map'] }}`, '{{ $type }}', {{ $index }})">
+                        onClick="updateMap(`{{ $item['google_map'] }}`, '{{ $type }}', {{ $index }})">
                         <p class="text-center mt-1 mb-0 --lh-16 fw-medium small s_name name-{{ $type }}-{{ $index }}"
                             style="min-height: 38px;">{{ $item['name'] }}</p>
                         <img src="{{ asset('icons/check-in/'.$type.'.png') }}" class="w-50">
@@ -49,7 +49,7 @@
                         </p>
                         @endif
                         <div class="img-{{ $type }}-{{ $index }}" data-img="{{ $_image }}"></div>
-                        <div class="station-{{ $type }}-{{ $index }}-detail" data-detail="{{ $item['detail'] }}"></div>
+                        <div class="station-{{ $type }}-{{ $index }}-detail" data-detail="{{ $item['master_from'] }}"></div>
                     </div>
                 </div>
                 @endforeach

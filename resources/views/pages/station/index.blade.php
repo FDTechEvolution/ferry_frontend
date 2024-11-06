@@ -74,19 +74,19 @@
     @if($station_default !== null)
     <div class="col-12 col-lg-6">
         @php
-        $_img = $station_default['image'] != '' ? $store.'/'.$station_default['image'] : '/tiger-line-partner.jpg';
+        $_img = !empty($station_default['image']) ? $store.'/'.$station_default['image']['path'] : '/tiger-line-partner.jpg';
         @endphp
-        <div class="div-sticky pb-4">
+        <div class="div-sticky pb-4 d-block">
 
             <img src="{{ $_img }}" class="w-100 rounded mb-3 show-img">
             <p class="station-show-detail small"></p>
             <div class="map-zone">
-                <div class="geo-map" data-geo="{{ $station_default['map'] }}">
+                <div class="geo-map" data-geo="{{ $station_default['google_map'] }}">
                     <div id="s_geo_map" class="mb-3 w-100" style="height: 300px;"></div>
                 </div>
                 <div class="google-map d-flex justify-content-start align-items-center">
                     <h4 class="me-3 mb-0"><i class="fa-solid fa-map-location-dot"></i> Google Map</h4>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ $station_default['map'] }}"
+                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ $station_default['google_map'] }}"
                         class="btn btn-sm btn-primary rounded-5 fw-bold get-direction" target="_blank">Get Direction</a>
                 </div>
             </div>

@@ -118,8 +118,9 @@ class StationController extends Controller
         $res2 = $response2->json();
         //dd($response2);
         if(!empty($res2['data'])) {
-            $stations = $this->group_by('type', $res2['data']);
-            $stations = $this->orderCustom($stations);
+            // $stations = $this->group_by('type', $res2['data']);
+            // $stations = $this->orderCustom($stations);
+            $stations = $res2['data'];
         }
         else $stations = [];
 
