@@ -259,9 +259,10 @@ function progressCondition(step) {
 
     if(step === 'passenger') {
         const passenger_next = document.querySelector('#progress-next-passenger')
+        const terms_checkbox = document.querySelector('#terms-checkbox')
         progress_next.classList.add('d-none')
         passenger_next.classList.remove('d-none')
-        passenger_next.disabled = false
+        passenger_next.disabled = terms_checkbox ? !terms_checkbox.checked : true
 
         progress_payment.classList.add('d-none')
         progress_payment.disabled = true
@@ -465,6 +466,15 @@ if(payment_methods) {
             payment_selected = true
             progress_payment.disabled = false
         })
+    })
+}
+
+// Terms checkbox: enable "Book / Payment" on passenger step only when checked
+const terms_checkbox = document.querySelector('#terms-checkbox')
+if(terms_checkbox) {
+    terms_checkbox.addEventListener('change', function() {
+        const passenger_next_btn = document.querySelector('#progress-next-passenger')
+        if(passenger_next_btn) passenger_next_btn.disabled = !this.checked
     })
 }
 
@@ -755,6 +765,11 @@ function setLitinerary() {
 }
 
 function progressPassenger() {
+    const termsCheckbox = document.querySelector('#terms-checkbox')
+    if(!termsCheckbox || !termsCheckbox.checked) {
+        if(termsCheckbox) termsCheckbox.closest('.form-check')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        return
+    }
     const _passenger = document.querySelector('#booking-route-passenger')
     let _email = document.querySelector('#passenger-email')
     let _cemail = document.querySelector('#passenger-confirm-email')
