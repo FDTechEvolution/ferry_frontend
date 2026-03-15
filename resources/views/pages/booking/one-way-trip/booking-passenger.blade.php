@@ -151,9 +151,9 @@
     <div class="row mt-3">
         <div class="col-12">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="terms-checkbox">
+                <input class="form-check-input form-check-input-success" type="checkbox" value="" id="terms-checkbox">
                 <label class="form-check-label" for="terms-checkbox">
-                    <strong>By completing to this booking, you agree to buy the product and confirm you have read and accept the full<a href="{{ route('term-index', ['type' => 'TERM']) }}" target="_blank"> terms and conditions</a></strong>
+                    By completing to this booking, you agree to buy the product and confirm you have read and accept the full <a href="{{ route('term-index', ['type' => 'TERM']) }}" target="_blank"><u>terms and conditions.</u></a>
                 </label>
             </div>
         </div>
